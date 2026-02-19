@@ -1,0 +1,31 @@
+// ======================
+// Design Tokens
+// ======================
+
+// Typography
+$fontFamilyBase: "Inter", "Segoe UI", Roboto, sans-serif;
+$fontFamilyMono: "Fira Code", "Consolas", monospace;
+
+$fontSizeSmall: 0.75rem;
+$fontSizeBase: 1rem;
+$fontSizeLarge: 1.25rem;
+$fontSizeXLarge: 1.5rem;
+
+// Spacing
+$spacingXSmall: 0.25rem;
+$spacingSmall: 0.5rem;
+$spacingBase: 1rem;
+$spacingLarge: 1.5rem;
+$spacingXLarge: 2rem;
+
+// Breakpoints
+$breakpointMobile: 480px;
+$breakpointTablet: 768px;
+$breakpointDesktop: 1024px;
+$breakpointWide: 1440px;
+
+// Border radius
+$borderRadiusSmall: 4px;
+$borderRadiusBase: 8px;
+$borderRadiusLarge: 12px;
+$borderRadiusRound: 50%;

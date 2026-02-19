@@ -1,0 +1,24 @@
+@use "variables" as *;
+@use "colors" as *;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: $spacingBase;
+  font-family: $fontFamilyBase;
+
+  &__title {
+    font-size: $fontSizeXLarge;
+    color: $textColorPrimary;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: $fontSizeBase;
+    color: $textColorSecondary;
+    margin-top: $spacingSmall;
+  }
+}

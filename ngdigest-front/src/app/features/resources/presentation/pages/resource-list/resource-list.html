@@ -1,0 +1,36 @@
+<section class="resource-list">
+  <h2 class="resource-list__title">Ressources</h2>
+
+  @if (isLoading()) {
+    <p class="resource-list__loading">Chargement...</p>
+  }
+
+  @if (errorMessage(); as error) {
+    <p class="resource-list__error">{{ error }}</p>
+  }
+
+  @if (!isLoading() && resources().length === 0 && !errorMessage()) {
+    <p class="resource-list__empty">Aucune ressource disponible.</p>
+  }
+
+  <ul class="resource-list__items">
+    @for (resource of resources(); track resource._id) {
+      <li class="resource-list__item">
+        <a
+          class="resource-list__link"
+          [href]="resource.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ resource.title }}
+        </a>
+        <span class="resource-list__source">{{ resource.source }}</span>
+        <div class="resource-list__tags">
+          @for (tag of resource.tags; track tag) {
+            <span class="resource-list__tag">{{ tag }}</span>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</section>
