@@ -6,28 +6,28 @@ export type ResourceDocument = HydratedDocument<Resource>;
 @Schema({ timestamps: true })
 export class Resource {
   @Prop({ required: true })
-  title: string;
+  title!: string;
 
   @Prop({ required: true, unique: true })
-  url: string;
+  url!: string;
 
   @Prop({ required: true })
-  source: string;
+  source!: string;
 
   @Prop({ required: true })
-  publishedAt: Date;
+  publishedAt!: Date;
 
   @Prop({ default: 0 })
-  score: number;
+  score!: number;
 
   @Prop({ type: [String], default: [] })
-  tags: string[];
+  tags!: string[];
 
   @Prop({ default: false })
-  isRead: boolean;
+  isRead!: boolean;
 
   @Prop({ default: false })
-  isFavorite: boolean;
+  isFavorite!: boolean;
 }
 
 export const ResourceSchema = SchemaFactory.createForClass(Resource);

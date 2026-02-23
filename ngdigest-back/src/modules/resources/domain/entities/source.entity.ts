@@ -4,26 +4,26 @@ import { HydratedDocument } from 'mongoose';
 export type SourceDocument = HydratedDocument<Source>;
 
 export enum SourceType {
-  API = 'api',
-  RSS = 'rss',
+  API = 'API',
+  RSS = 'RSS',
 }
 
 @Schema({ timestamps: true })
 export class Source {
   @Prop({ required: true })
-  name: string;
+  name!: string;
 
   @Prop({ required: true, enum: SourceType })
-  type: SourceType;
+  type!: SourceType;
 
   @Prop({ required: true })
-  url: string;
+  url!: string;
 
   @Prop({ required: true })
-  language: string;
+  language!: string;
 
   @Prop({ default: true })
-  active: boolean;
+  active!: boolean;
 }
 
 export const SourceSchema = SchemaFactory.createForClass(Source);

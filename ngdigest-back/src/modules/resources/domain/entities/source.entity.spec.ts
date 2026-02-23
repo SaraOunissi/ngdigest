@@ -23,7 +23,7 @@ describe('Source entity', () => {
   });
 
   it('should have correct enum values', () => {
-    expect(SourceType.API).toBe('api');
-    expect(SourceType.RSS).toBe('rss');
+    expect(SourceType.API).toBe('API');
+    expect(SourceType.RSS).toBe('RSS');
   });
 });
