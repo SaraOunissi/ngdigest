@@ -1,42 +1,148 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe } from '@ngx-translate/core';
 
+import { LanguageService } from '@core/services/language.service';
 import { ResourceHttpRepository } from '../../../infrastructure/repositories/resource-http.repository';
 import { Resource } from '../../../domain/models/resource.model';
+import { AngularBanner } from '../../components/angular-banner/angular-banner';
+import { HeroSection } from '../../components/hero-section/hero-section';
+import { ResourceCard } from '../../components/resource-card/resource-card';
+
+interface ResourceGroup {
+  readonly labelKey: string;
+  readonly resources: Resource[];
+}
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+function daysAgo(days: number): Date {
+  return new Date(Date.now() - days * MS_PER_DAY);
+}
 
 @Component({
   selector: 'app-resource-list',
+  imports: [TranslatePipe, HeroSection, ResourceCard, AngularBanner],
   templateUrl: './resource-list.html',
   styleUrl: './resource-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResourceListComponent implements OnInit {
+export class ResourceListComponent {
   private readonly resourceRepository = inject(ResourceHttpRepository);
   private readonly destroyRef = inject(DestroyRef);
+  protected readonly languageService = inject(LanguageService);
 
   protected readonly resources = signal<Resource[]>([]);
   protected readonly isLoading = signal(true);
+  protected readonly isLoadingMore = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
+  protected readonly currentPage = signal(1);
+  protected readonly hasMore = signal(true);
 
-  ngOnInit(): void {
-    this.loadResources();
+  private readonly sentinelRef = viewChild<ElementRef>('sentinel');
+  private intersectionObserver?: IntersectionObserver;
+
+  protected readonly groupedResources = computed<ResourceGroup[]>(() => {
+    const resources = this.resources();
+    const cutoff7d = daysAgo(7);
+    const cutoff30d = daysAgo(30);
+    const cutoff90d = daysAgo(90);
+
+    const groups: ResourceGroup[] = [
+      {
+        labelKey: 'group.lastSevenDays',
+        resources: resources.filter(r => new Date(r.publishedAt) >= cutoff7d),
+      },
+      {
+        labelKey: 'group.lastMonth',
+        resources: resources.filter(r => {
+          const date = new Date(r.publishedAt);
+          return date < cutoff7d && date >= cutoff30d;
+        }),
+      },
+      {
+        labelKey: 'group.lastThreeMonths',
+        resources: resources.filter(r => {
+          const date = new Date(r.publishedAt);
+          return date < cutoff30d && date >= cutoff90d;
+        }),
+      },
+      {
+        labelKey: 'group.older',
+        resources: resources.filter(r => new Date(r.publishedAt) < cutoff90d),
+      },
+    ];
+
+    return groups.filter(group => group.resources.length > 0);
+  });
+
+  constructor() {
+    effect(() => {
+      const lang = this.languageService.lang();
+      this.resources.set([]);
+      this.currentPage.set(1);
+      this.hasMore.set(true);
+      this.loadResources(lang, 1);
+    });
+
+    effect(() => {
+      const sentinel = this.sentinelRef();
+      this.intersectionObserver?.disconnect();
+      if (!sentinel) return;
+
+      this.intersectionObserver = new IntersectionObserver(
+        entries => {
+          if (entries[0].isIntersecting) {
+            this.onSentinelVisible();
+          }
+        },
+        { rootMargin: '200px' },
+      );
+      this.intersectionObserver.observe(sentinel.nativeElement);
+    });
+
+    this.destroyRef.onDestroy(() => this.intersectionObserver?.disconnect());
   }
 
-  private loadResources(): void {
-    this.isLoading.set(true);
+  private onSentinelVisible(): void {
+    if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
+    const nextPage = this.currentPage() + 1;
+    this.currentPage.set(nextPage);
+    this.loadResources(this.languageService.lang(), nextPage);
+  }
+
+  private loadResources(lang: 'fr' | 'en', page: number): void {
+    if (page === 1) {
+      this.isLoading.set(true);
+    } else {
+      this.isLoadingMore.set(true);
+    }
     this.errorMessage.set(null);
 
     this.resourceRepository
-      .getAll()
+      .getAll(lang, page)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (resources) => {
-          this.resources.set(resources);
+        next: ({ resources, total }) => {
+          this.resources.update(prev => page === 1 ? resources : [...prev, ...resources]);
+          this.hasMore.set(this.resources().length < total);
           this.isLoading.set(false);
+          this.isLoadingMore.set(false);
         },
         error: () => {
-          this.errorMessage.set('Impossible de charger les ressources.');
+          this.errorMessage.set('error');
           this.isLoading.set(false);
+          this.isLoadingMore.set(false);
         },
       });
   }

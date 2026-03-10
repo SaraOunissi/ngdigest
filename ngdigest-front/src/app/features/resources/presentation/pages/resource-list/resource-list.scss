@@ -1,65 +1,76 @@
-.resource-list {
-  padding: 1.5rem;
+@use "variables" as *;
+@use "colors" as *;
 
-  &__title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.resource-list {
+  padding: $spacing-xl $spacing-md;
+  background-color: $color-bg;
+  min-height: calc(100vh - 56px);
+
+  &__container {
+    max-width: $content-max-width;
+    margin: 0 auto;
   }
 
   &__loading,
-  &__error,
   &__empty {
-    padding: 1rem 0;
+    padding: $spacing-md 0;
+    color: $color-text-secondary;
     font-style: italic;
   }
 
   &__error {
+    padding: $spacing-md 0;
     color: #d32f2f;
+    font-style: italic;
   }
 
-  &__items {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+  &__group {
+    margin-bottom: $spacing-2xl;
 
-  &__item {
-    padding: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &__link {
-    font-weight: 600;
-    color: #1565c0;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
-  &__source {
-    font-size: 0.85rem;
-    color: #757575;
+  &__group-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $color-border;
   }
 
-  &__tags {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
+
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__grid-item {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
   }
 
-  &__tag {
-    font-size: 0.75rem;
-    padding: 0.2rem 0.5rem;
-    background-color: #e3f2fd;
-    border-radius: 4px;
-    color: #1565c0;
+  &__loading-more {
+    text-align: center;
+    padding: $spacing-lg 0;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    font-style: italic;
+  }
+
+  &__sentinel {
+    height: 1px;
+    width: 100%;
   }
 }
