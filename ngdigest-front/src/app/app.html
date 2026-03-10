@@ -1,6 +1,25 @@
-<main class="app">
-  <h1 class="app__title">NgDigest</h1>
-  <p class="app__subtitle">Content aggregation for developers</p>
-</main>
+<header class="app">
+  <h1 class="app__title">{{ 'nav.title' | translate }}</h1>
+  <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
+
+  <nav class="app__lang-toggle" aria-label="Language selection">
+    <button
+      class="app__lang-btn"
+      [class.app__lang-btn--active]="languageService.lang() === 'fr'"
+      (click)="languageService.setLanguage('fr')"
+      aria-label="Switch to French"
+    >
+      FR
+    </button>
+    <button
+      class="app__lang-btn"
+      [class.app__lang-btn--active]="languageService.lang() === 'en'"
+      (click)="languageService.setLanguage('en')"
+      aria-label="Switch to English"
+    >
+      EN
+    </button>
+  </nav>
+</header>
 
 <router-outlet />

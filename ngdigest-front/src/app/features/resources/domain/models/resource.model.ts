@@ -8,4 +8,8 @@ export interface Resource {
   tags: string[];
   isRead: boolean;
   isFavorite: boolean;
+  pinned: boolean;
+  archivedAt: string | null;
+  language: 'fr' | 'en' | 'unknown';
+  highlighted?: boolean;
 }
