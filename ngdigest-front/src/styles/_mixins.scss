@@ -1,28 +1,42 @@
 @use "variables" as *;
+@use "colors" as *;
 
 // Responsive breakpoints
-@mixin respondTo($breakpoint) {
+@mixin respond-to($breakpoint) {
   @media (min-width: $breakpoint) {
     @content;
   }
 }
 
 // Flexbox shortcuts
-@mixin flexCenter {
+@mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@mixin flexBetween {
+@mixin flex-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 // Truncate text with ellipsis
-@mixin textTruncate {
+@mixin text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+// Card with hover elevation
+@mixin card-elevated {
+  background-color: $color-surface;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+
+  &:hover {
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-2px);
+  }
 }

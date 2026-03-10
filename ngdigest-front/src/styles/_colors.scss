@@ -2,30 +2,27 @@
 // Color Palette
 // ======================
 
-// Brand
-$primaryColor: #3f51b5;
-$primaryColorLight: #757de8;
-$primaryColorDark: #002984;
+// Brand — Angular Red
+$color-primary: #DD0031;
+$color-primary-light: #FFE5EA;
+$color-primary-dark: #B0002A;
 
-$accentColor: #ff4081;
-$accentColorLight: #ff79b0;
-$accentColorDark: #c60055;
+// Backgrounds & Surfaces
+$color-bg: #F7F5F2;
+$color-surface: #FFFFFF;
+$color-border: #EBEBEB;
 
-// Neutral
-$textColorPrimary: #212121;
-$textColorSecondary: #757575;
-$textColorDisabled: #bdbdbd;
+// Text
+$color-text-primary: #1A1A1A;
+$color-text-secondary: #6B6B6B;
+$color-text-muted: #AAAAAA;
 
-$backgroundColorBase: #fafafa;
-$backgroundColorCard: #ffffff;
-$backgroundColorDark: #303030;
+// Language badges
+$color-badge-fr-bg: #3B4D99;
+$color-badge-fr-text: #FFFFFF;
+$color-badge-en-bg: #EEEEEE;
+$color-badge-en-text: #666666;
 
-// Semantic
-$successColor: #4caf50;
-$warningColor: #ff9800;
-$errorColor: #f44336;
-$infoColor: #2196f3;
-
-// Borders
-$borderColorLight: #e0e0e0;
-$borderColorBase: #bdbdbd;
+// Tags
+$color-tag-bg: #F0F0F0;
+$color-tag-text: #444444;

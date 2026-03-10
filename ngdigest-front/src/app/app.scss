@@ -3,22 +3,53 @@
 
 .app {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: $spacingBase;
-  font-family: $fontFamilyBase;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-lg;
+  background-color: $color-surface;
+  border-bottom: 1px solid $color-border;
+  font-family: $font-family;
 
   &__title {
-    font-size: $fontSizeXLarge;
-    color: $textColorPrimary;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
     margin: 0;
+    flex: 1;
+    letter-spacing: -0.3px;
   }
 
   &__subtitle {
-    font-size: $fontSizeBase;
-    color: $textColorSecondary;
-    margin-top: $spacingSmall;
+    display: none;
+  }
+
+  &__lang-toggle {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__lang-btn {
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    background: transparent;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    font-family: $font-family;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+
+    &:hover {
+      background-color: $color-primary-light;
+      color: $color-primary;
+      border-color: $color-primary-light;
+    }
+
+    &--active {
+      background-color: $color-primary;
+      color: #ffffff;
+      border-color: $color-primary;
+    }
   }
 }
