@@ -1,0 +1,14 @@
+<aside class="angular-banner">
+  <span class="angular-banner__icon" aria-hidden="true">🚀</span>
+  <span class="angular-banner__text">{{ 'banner.released' | translate: { version: version() } }}</span>
+  @if (changelogUrl()) {
+    <a
+      class="angular-banner__link"
+      [href]="changelogUrl()"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ 'banner.viewChangelog' | translate }}
+    </a>
+  }
+</aside>

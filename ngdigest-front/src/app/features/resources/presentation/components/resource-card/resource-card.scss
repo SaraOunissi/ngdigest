@@ -1,0 +1,112 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.resource-card {
+  background-color: $color-surface;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+  height: 100%;
+
+  &:hover {
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-2px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    background-color: $color-primary-light;
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    text-decoration: none;
+    line-height: 1.45;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__badge {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    padding: 3px 8px;
+    border-radius: $radius-pill;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    &--fr {
+      background-color: $color-badge-fr-bg;
+      color: $color-badge-fr-text;
+    }
+
+    &--en {
+      background-color: $color-badge-en-bg;
+      color: $color-badge-en-text;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+  }
+
+  &__source {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    white-space: nowrap;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-top: auto;
+    padding-top: $spacing-xs;
+  }
+
+  &__tag {
+    font-size: 11px;
+    padding: 3px $spacing-sm;
+    background-color: $color-tag-bg;
+    color: $color-tag-text;
+    border-radius: $radius-pill;
+  }
+}
