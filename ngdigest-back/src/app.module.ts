@@ -5,12 +5,14 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ResourcesModule } from './modules/resources/resources.module.js';
 import { AggregatorModule } from './modules/aggregator/aggregator.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
+import serpapiConfig from './config/serpapi.config.js';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+      load: [serpapiConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
