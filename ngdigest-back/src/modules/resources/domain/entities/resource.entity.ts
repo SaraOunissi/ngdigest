@@ -3,6 +3,8 @@ import { HydratedDocument } from 'mongoose';
 
 export type ResourceDocument = HydratedDocument<Resource>;
 
+export type ResourceLanguage = 'fr' | 'en' | 'unknown';
+
 @Schema({ timestamps: true })
 export class Resource {
   @Prop({ required: true })
@@ -28,6 +30,18 @@ export class Resource {
 
   @Prop({ default: false })
   isFavorite!: boolean;
+
+  /** Pinned resources are never touched by the retention policy. */
+  @Prop({ default: false })
+  pinned!: boolean;
+
+  /** Set by the retention policy when the article is no longer active. Null means active. */
+  @Prop({ default: null, type: Date })
+  archivedAt!: Date | null;
+
+  /** Detected language of the article content. */
+  @Prop({ default: 'unknown', enum: ['fr', 'en', 'unknown'] })
+  language!: ResourceLanguage;
 }
 
 export const ResourceSchema = SchemaFactory.createForClass(Resource);
