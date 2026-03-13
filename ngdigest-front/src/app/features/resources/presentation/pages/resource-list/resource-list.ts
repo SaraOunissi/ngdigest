@@ -19,8 +19,11 @@ import { LanguageService } from '@core/services/language.service';
 import { ResourceHttpRepository } from '../../../infrastructure/repositories/resource-http.repository';
 import { Resource } from '../../../domain/models/resource.model';
 import { AngularBanner } from '../../components/angular-banner/angular-banner';
+import { FilterBar } from '../../components/filter-bar/filter-bar';
 import { HeroSection } from '../../components/hero-section/hero-section';
 import { ResourceCard } from '../../components/resource-card/resource-card';
+
+type LangFilter = 'all' | 'fr' | 'en';
 
 interface ResourceGroup {
   readonly labelKey: string;
@@ -35,7 +38,7 @@ function daysAgo(days: number): Date {
 
 @Component({
   selector: 'app-resource-list',
-  imports: [TranslatePipe, HeroSection, ResourceCard, AngularBanner],
+  imports: [TranslatePipe, HeroSection, FilterBar, ResourceCard, AngularBanner],
   templateUrl: './resource-list.html',
   styleUrl: './resource-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +57,7 @@ export class ResourceListComponent {
   protected readonly currentPage = signal(1);
   protected readonly hasMore = signal(true);
   protected readonly searchQuery = signal<string>('');
+  protected readonly langFilter = signal<LangFilter>('all');
 
   private readonly sentinelRef = viewChild<ElementRef>('sentinel');
   private intersectionObserver?: IntersectionObserver;
@@ -103,14 +107,15 @@ export class ResourceListComponent {
         error: () => {},
       });
 
-    // Language changes trigger an immediate reset and reload.
+    // UI language or content filter changes trigger an immediate reset and reload.
     // searchQuery is read via untracked() so it doesn't re-trigger this effect.
     effect(() => {
-      const lang = this.languageService.lang();
+      this.languageService.lang();
+      const filter = this.langFilter();
       this.resources.set([]);
       this.currentPage.set(1);
       this.hasMore.set(true);
-      this.loadResources(lang, 1, untracked(this.searchQuery));
+      this.loadResources(1, untracked(this.searchQuery), filter);
     });
 
     // Search changes trigger a debounced reset and reload.
@@ -126,7 +131,7 @@ export class ResourceListComponent {
         this.resources.set([]);
         this.currentPage.set(1);
         this.hasMore.set(true);
-        this.loadResources(this.languageService.lang(), 1, search);
+        this.loadResources(1, search, this.langFilter());
       });
 
     effect(() => {
@@ -152,10 +157,10 @@ export class ResourceListComponent {
     if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
     const nextPage = this.currentPage() + 1;
     this.currentPage.set(nextPage);
-    this.loadResources(this.languageService.lang(), nextPage, this.searchQuery());
+    this.loadResources(nextPage, this.searchQuery(), this.langFilter());
   }
 
-  private loadResources(lang: 'fr' | 'en', page: number, search?: string): void {
+  private loadResources(page: number, search?: string, langFilter: LangFilter = 'all'): void {
     if (page === 1) {
       this.isLoading.set(true);
     } else {
@@ -164,7 +169,7 @@ export class ResourceListComponent {
     this.errorMessage.set(null);
 
     this.resourceRepository
-      .getAll(lang, page, 20, search)
+      .getAll(langFilter, page, 20, search)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ resources, total }) => {

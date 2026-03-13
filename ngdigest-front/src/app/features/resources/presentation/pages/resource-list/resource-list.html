@@ -1,4 +1,5 @@
 <app-hero-section [(searchValue)]="searchQuery" />
+<app-filter-bar (langChange)="langFilter.set($event)" />
 
 <main class="resource-list">
   <div class="resource-list__container">
