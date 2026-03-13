@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://ngdigest-production.up.railway.app/api',
+  apiUrl: 'https://ngdigest.co/api',
 };
