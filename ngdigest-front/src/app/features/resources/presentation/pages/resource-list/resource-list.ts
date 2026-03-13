@@ -16,6 +16,7 @@ import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
+import { SeoService } from '@core/services/seo.service';
 import { ResourceHttpRepository } from '../../../infrastructure/repositories/resource-http.repository';
 import { Resource } from '../../../domain/models/resource.model';
 import { AngularBanner } from '../../components/angular-banner/angular-banner';
@@ -28,6 +29,16 @@ interface ResourceGroup {
 }
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+const SEO_TITLES: Record<'fr' | 'en', string> = {
+  fr: 'NgDigest — Veille Angular FR & EN',
+  en: 'NgDigest — Angular Watch FR & EN',
+};
+
+const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
+  fr: 'NgDigest — votre veille Angular centralisée et curée. Articles FR et EN sélectionnés par pertinence.',
+  en: 'NgDigest — your curated Angular watch. FR and EN articles selected by relevance.',
+};
 
 function daysAgo(days: number): Date {
   return new Date(Date.now() - days * MS_PER_DAY);
@@ -44,6 +55,7 @@ export class ResourceListComponent {
   private readonly resourceRepository = inject(ResourceHttpRepository);
   private readonly destroyRef = inject(DestroyRef);
   private readonly http = inject(HttpClient);
+  private readonly seoService = inject(SeoService);
   protected readonly languageService = inject(LanguageService);
 
   protected readonly angularVersion = signal<string | null>(null);
@@ -107,6 +119,7 @@ export class ResourceListComponent {
     // searchQuery is read via untracked() so it doesn't re-trigger this effect.
     effect(() => {
       const lang = this.languageService.lang();
+      this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
       this.resources.set([]);
       this.currentPage.set(1);
       this.hasMore.set(true);
