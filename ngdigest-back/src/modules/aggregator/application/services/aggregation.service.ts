@@ -57,10 +57,14 @@ export class AggregationService implements OnModuleInit {
     const candidates = [...serpapiResults, ...devtoResults];
 
     const relevant = candidates
-      .map((article) => ({
-        ...article,
-        score: this.relevanceService.scoreArticle(article),
-      }))
+      .map((article) => {
+        const scoreDetails = this.relevanceService.getScoreDetails(article);
+        const score =
+          (scoreDetails.trustedSource ? 3 : 0) +
+          (scoreDetails.angularKeyword ? 2 : 0) +
+          (scoreDetails.isRecent ? 1 : 0);
+        return { ...article, score, scoreDetails };
+      })
       .filter((article) => this.relevanceService.isRelevant(article));
 
     for (const resource of relevant) {

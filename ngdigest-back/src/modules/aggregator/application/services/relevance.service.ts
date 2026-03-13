@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Resource } from '../../../resources/domain/entities/resource.entity.js';
+import { Resource, ScoreDetails } from '../../../resources/domain/entities/resource.entity.js';
 import { TRUSTED_DOMAINS } from '../../infrastructure/config/trusted-sources.js';
 
 const ANGULAR_KEYWORDS: readonly string[] = [
@@ -34,13 +34,18 @@ export class RelevanceService {
    * - +1 if the article was published within the last 7 days
    */
   scoreArticle(article: Partial<Resource>): number {
-    let score = 0;
+    const { trustedSource, angularKeyword, isRecent } =
+      this.getScoreDetails(article);
+    return (trustedSource ? 3 : 0) + (angularKeyword ? 2 : 0) + (isRecent ? 1 : 0);
+  }
 
-    if (this.isFromTrustedDomain(article.url)) score += 3;
-    if (this.hasTitleKeywords(article.title)) score += 2;
-    if (this.isRecent(article.publishedAt)) score += 1;
-
-    return score;
+  /** Returns the individual score criteria for an article. */
+  getScoreDetails(article: Partial<Resource>): ScoreDetails {
+    return {
+      trustedSource: this.isFromTrustedDomain(article.url),
+      angularKeyword: this.hasTitleKeywords(article.title),
+      isRecent: this.isRecent(article.publishedAt),
+    };
   }
 
   isRelevant(article: Partial<Resource>): boolean {
