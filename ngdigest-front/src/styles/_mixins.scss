@@ -31,11 +31,13 @@
 // Card with hover elevation
 @mixin card-elevated {
   background-color: $color-surface;
+  border: 1px solid $color-border;
   border-radius: $radius-md;
   box-shadow: $shadow-card;
-  transition: box-shadow 200ms ease, transform 200ms ease;
+  transition: box-shadow 200ms ease, transform 200ms ease, background-color 200ms ease;
 
   &:hover {
+    background-color: $color-surface-hover;
     box-shadow: $shadow-card-hover;
     transform: translateY(-2px);
   }

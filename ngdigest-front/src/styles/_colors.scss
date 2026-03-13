@@ -1,36 +1,44 @@
 // ======================
-// Color Palette
+// Color Palette — Dark Theme
 // ======================
 
-// Brand — Angular Red
-$color-primary: #DD0031;
-$color-primary-light: #FFE5EA;
-$color-primary-dark: #B0002A;
+// Brand — Angular violet/rose
+$color-primary: #C850C0;
+$color-primary-light: rgba($color-primary, 0.15);
+$color-primary-dark: #A040A0;
+$color-primary-2: #4158D0;
+
+// Gradient
+$gradient-hero: linear-gradient(135deg, #4158D0 0%, #C850C0 50%, #FFCC70 100%);
 
 // Backgrounds & Surfaces
-$color-bg: #F7F5F2;
-$color-surface: #FFFFFF;
-$color-border: #EBEBEB;
+$color-bg: #0F0F1A;
+$color-surface: #1A1A2E;
+$color-surface-hover: #22223A;
+$color-border: #2D2D4E;
 
 // Text
-$color-text-primary: #1A1A1A;
-$color-text-secondary: #6B6B6B;
-$color-text-muted: #AAAAAA;
+$color-text-primary: #F1F1F1;
+$color-text-secondary: #C1C1D0;
+$color-text-muted: #9CA3AF;
 
 // Language badges
-$color-badge-fr-bg: #3B4D99;
+$color-badge-fr-bg: $color-primary-2;
 $color-badge-fr-text: #FFFFFF;
-$color-badge-en-bg: #EEEEEE;
-$color-badge-en-text: #666666;
+$color-badge-en-bg: $color-surface-hover;
+$color-badge-en-text: $color-text-secondary;
 
 // Tags
-$color-tag-bg: #F0F0F0;
-$color-tag-text: #444444;
+$color-tag-bg: $color-border;
+$color-tag-text: $color-text-muted;
 
 // Score badge
 $color-score-high: #22c55e;
-$color-score-high-bg: #dcfce7;
+$color-score-high-bg: rgba(#22c55e, 0.12);
 $color-score-medium: #f97316;
-$color-score-medium-bg: #ffedd5;
-$color-score-low: #AAAAAA;
-$color-score-low-bg: #F0F0F0;
+$color-score-medium-bg: rgba(#f97316, 0.12);
+$color-score-low: $color-text-muted;
+$color-score-low-bg: rgba($color-text-muted, 0.12);
+
+// Error
+$color-error: #f87171;
