@@ -25,4 +25,8 @@ export class GetResourcesQueryDto {
   @IsOptional()
   @IsIn(['fr', 'en', 'all'])
   lang?: 'fr' | 'en' | 'all' = 'all';
+
+  @IsOptional()
+  @IsString()
+  search?: string;
 }

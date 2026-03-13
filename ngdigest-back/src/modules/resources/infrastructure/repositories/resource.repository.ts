@@ -12,6 +12,7 @@ export interface PaginatedQuery {
   source?: string;
   sort: string;
   lang?: 'fr' | 'en' | 'all';
+  search?: string;
 }
 
 @Injectable()
@@ -38,6 +39,13 @@ export class ResourceRepository {
 
     if (query.lang === 'en') {
       filter['language'] = 'en';
+    }
+
+    if (query.search) {
+      filter['$or'] = [
+        { title: { $regex: query.search, $options: 'i' } },
+        { description: { $regex: query.search, $options: 'i' } },
+      ];
     }
 
     const sortField = query.sort.startsWith('-')

@@ -9,6 +9,7 @@ export interface GetResourcesQuery {
   source?: string;
   sort?: string;
   lang?: 'fr' | 'en' | 'all';
+  search?: string;
 }
 
 /** Resource enriched with a `highlighted` flag (not persisted to DB). */
@@ -35,6 +36,7 @@ export class GetResourcesUseCase {
       source: query.source,
       sort: query.sort ?? '-publishedAt',
       lang,
+      search: query.search,
     });
 
     const items: ResourceItem[] = rawItems.map((item) => {
