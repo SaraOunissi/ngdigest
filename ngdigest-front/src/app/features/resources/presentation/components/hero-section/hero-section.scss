@@ -44,6 +44,10 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
 
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
     &::placeholder {
       color: $color-text-muted;
     }
