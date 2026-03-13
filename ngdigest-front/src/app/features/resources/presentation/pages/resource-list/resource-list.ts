@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
@@ -40,8 +41,10 @@ function daysAgo(days: number): Date {
 export class ResourceListComponent {
   private readonly resourceRepository = inject(ResourceHttpRepository);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly http = inject(HttpClient);
   protected readonly languageService = inject(LanguageService);
 
+  protected readonly angularVersion = signal<string | null>(null);
   protected readonly resources = signal<Resource[]>([]);
   protected readonly isLoading = signal(true);
   protected readonly isLoadingMore = signal(false);
@@ -87,6 +90,16 @@ export class ResourceListComponent {
   });
 
   constructor() {
+    this.http
+      .get<{ tag_name: string }>(
+        'https://api.github.com/repos/angular/angular/releases/latest',
+      )
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: ({ tag_name }) => this.angularVersion.set(tag_name),
+        error: () => {},
+      });
+
     effect(() => {
       const lang = this.languageService.lang();
       this.resources.set([]);
@@ -140,7 +153,7 @@ export class ResourceListComponent {
           this.isLoadingMore.set(false);
         },
         error: () => {
-          this.errorMessage.set('error');
+          this.errorMessage.set('resource.error');
           this.isLoading.set(false);
           this.isLoadingMore.set(false);
           if (page > 1) {

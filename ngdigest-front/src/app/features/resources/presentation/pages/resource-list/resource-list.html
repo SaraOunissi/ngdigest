@@ -2,10 +2,12 @@
 
 <main class="resource-list">
   <div class="resource-list__container">
-    <app-angular-banner
-      version="19.2"
-      changelogUrl="https://blog.angular.dev/angular-v19-2-is-now-available-efeb5f98d1b6"
-    />
+    @if (angularVersion()) {
+      <app-angular-banner
+        [version]="angularVersion()!"
+        changelogUrl="https://blog.angular.dev/angular-v19-2-is-now-available-efeb5f98d1b6"
+      />
+    }
 
     @if (isLoading()) {
       <p class="resource-list__loading">{{ 'resource.loading' | translate }}</p>
