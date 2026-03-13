@@ -143,6 +143,10 @@ export class ResourceListComponent {
           this.errorMessage.set('error');
           this.isLoading.set(false);
           this.isLoadingMore.set(false);
+          if (page > 1) {
+            this.currentPage.set(page - 1);
+            this.hasMore.set(false);
+          }
         },
       });
   }

@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(),
-    provideTranslateService({ defaultLanguage: 'en' }),
+    provideTranslateService({ fallbackLang: 'en' }),
     ...provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
   ],
 };
