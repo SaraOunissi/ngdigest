@@ -7,10 +7,12 @@ import {
   effect,
   inject,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
+import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
@@ -51,6 +53,7 @@ export class ResourceListComponent {
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly currentPage = signal(1);
   protected readonly hasMore = signal(true);
+  protected readonly searchQuery = signal<string>('');
 
   private readonly sentinelRef = viewChild<ElementRef>('sentinel');
   private intersectionObserver?: IntersectionObserver;
@@ -100,13 +103,31 @@ export class ResourceListComponent {
         error: () => {},
       });
 
+    // Language changes trigger an immediate reset and reload.
+    // searchQuery is read via untracked() so it doesn't re-trigger this effect.
     effect(() => {
       const lang = this.languageService.lang();
       this.resources.set([]);
       this.currentPage.set(1);
       this.hasMore.set(true);
-      this.loadResources(lang, 1);
+      this.loadResources(lang, 1, untracked(this.searchQuery));
     });
+
+    // Search changes trigger a debounced reset and reload.
+    // skip(1) avoids double-loading on init (lang effect handles the first load).
+    toObservable(this.searchQuery)
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        skip(1),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(search => {
+        this.resources.set([]);
+        this.currentPage.set(1);
+        this.hasMore.set(true);
+        this.loadResources(this.languageService.lang(), 1, search);
+      });
 
     effect(() => {
       const sentinel = this.sentinelRef();
@@ -131,10 +152,10 @@ export class ResourceListComponent {
     if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
     const nextPage = this.currentPage() + 1;
     this.currentPage.set(nextPage);
-    this.loadResources(this.languageService.lang(), nextPage);
+    this.loadResources(this.languageService.lang(), nextPage, this.searchQuery());
   }
 
-  private loadResources(lang: 'fr' | 'en', page: number): void {
+  private loadResources(lang: 'fr' | 'en', page: number, search?: string): void {
     if (page === 1) {
       this.isLoading.set(true);
     } else {
@@ -143,7 +164,7 @@ export class ResourceListComponent {
     this.errorMessage.set(null);
 
     this.resourceRepository
-      .getAll(lang, page)
+      .getAll(lang, page, 20, search)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ resources, total }) => {

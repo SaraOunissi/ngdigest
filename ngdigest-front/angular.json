@@ -110,7 +110,7 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "buildTarget": "ngdigest-app:build"
+            "buildTarget": "ngdigest-app:build:development"
           }
         },
         "lint": {

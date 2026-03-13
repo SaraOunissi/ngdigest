@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -8,4 +8,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './hero-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroSection {}
+export class HeroSection {
+  readonly searchValue = model<string>('');
+}

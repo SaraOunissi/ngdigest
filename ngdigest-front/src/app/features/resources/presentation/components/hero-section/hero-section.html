@@ -8,7 +8,17 @@
         type="search"
         [placeholder]="'hero.searchPlaceholder' | translate"
         [attr.aria-label]="'hero.searchLabel' | translate"
+        [value]="searchValue()"
+        (input)="searchValue.set($any($event.target).value)"
       />
+      @if (searchValue()) {
+        <button
+          class="hero__search-clear"
+          type="button"
+          [attr.aria-label]="'hero.clearSearch' | translate"
+          (click)="searchValue.set('')"
+        >×</button>
+      }
     </div>
   </div>
 </section>

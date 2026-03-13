@@ -12,6 +12,9 @@ describe('Resource model', () => {
       tags: ['angular', 'signals'],
       isRead: false,
       isFavorite: true,
+      pinned: false,
+      archivedAt: null,
+      language: 'en',
     };
 
     expect(resource._id).toBe('507f1f77bcf86cd799439011');
@@ -36,6 +39,9 @@ describe('Resource model', () => {
       tags: [],
       isRead: false,
       isFavorite: false,
+      pinned: false,
+      archivedAt: null,
+      language: 'en',
     };
 
     expect(resource.tags).toEqual([]);
