@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ResourceRepository } from '../../infrastructure/repositories/resource.repository.js';
-import { Resource } from '../../domain/entities/resource.entity.js';
+import { Resource, ScoreDetails } from '../../domain/entities/resource.entity.js';
 import { ApiMeta } from '../../../../common/interfaces/api-response.interface.js';
 
 export interface GetResourcesQuery {
@@ -12,8 +12,17 @@ export interface GetResourcesQuery {
   search?: string;
 }
 
-/** Resource enriched with a `highlighted` flag (not persisted to DB). */
+/** Resource enriched with transient display flags (not persisted to DB). */
 export type ResourceItem = Resource & { highlighted?: boolean };
+
+/** Infers ScoreDetails from the numeric score for legacy documents without stored details. */
+function inferScoreDetails(score: number): ScoreDetails {
+  return {
+    trustedSource: score >= 2,
+    angularKeyword: score >= 4,
+    isRecent: score >= 5,
+  };
+}
 
 @Injectable()
 export class GetResourcesUseCase {
@@ -45,6 +54,7 @@ export class GetResourcesUseCase {
       ).toObject?.() ?? (item as Resource);
       return {
         ...plain,
+        scoreDetails: plain.scoreDetails ?? inferScoreDetails(plain.score),
         highlighted:
           lang === 'fr' && plain.language === 'fr' ? true : undefined,
       };

@@ -25,5 +25,9 @@
   "group.lastMonth": "Mois dernier",
   "group.lastThreeMonths": "3 derniers mois",
   "group.older": "Plus anciens",
-  "resource.loadingMore": "Chargement des ressources suivantes..."
+  "resource.loadingMore": "Chargement des ressources suivantes...",
+  "score.label": "Score de pertinence",
+  "score.trustedSource": "Source fiable",
+  "score.angularKeyword": "Pertinence Angular",
+  "score.isRecent": "Article récent"
 }

@@ -22,6 +22,47 @@
         {{ resource().language.toUpperCase() }}
       </span>
     }
+
+    <div
+      class="resource-card__score-badge"
+      [class.resource-card__score-badge--high]="scoreColorModifier() === 'high'"
+      [class.resource-card__score-badge--medium]="scoreColorModifier() === 'medium'"
+      [class.resource-card__score-badge--low]="scoreColorModifier() === 'low'"
+      [attr.aria-label]="('score.label' | translate) + ': ' + resource().score + '/6'"
+    >
+      <span class="resource-card__score-badge-text" aria-hidden="true">★ {{ resource().score }}/6</span>
+
+      <div class="resource-card__score-tooltip" role="tooltip">
+        <span class="resource-card__score-tooltip-title">{{ 'score.label' | translate }}</span>
+        <ul class="resource-card__score-tooltip-list">
+          <li
+            class="resource-card__score-tooltip-item"
+            [class.resource-card__score-tooltip-item--ok]="resource().scoreDetails?.trustedSource"
+            [class.resource-card__score-tooltip-item--ko]="!resource().scoreDetails?.trustedSource"
+          >
+            {{ resource().scoreDetails?.trustedSource ? '✓' : '✗' }}
+            {{ 'score.trustedSource' | translate }}
+          </li>
+          <li
+            class="resource-card__score-tooltip-item"
+            [class.resource-card__score-tooltip-item--ok]="resource().scoreDetails?.angularKeyword"
+            [class.resource-card__score-tooltip-item--ko]="!resource().scoreDetails?.angularKeyword"
+          >
+            {{ resource().scoreDetails?.angularKeyword ? '✓' : '✗' }}
+            {{ 'score.angularKeyword' | translate }}
+          </li>
+          <li
+            class="resource-card__score-tooltip-item"
+            [class.resource-card__score-tooltip-item--ok]="resource().scoreDetails?.isRecent"
+            [class.resource-card__score-tooltip-item--ko]="!resource().scoreDetails?.isRecent"
+          >
+            {{ resource().scoreDetails?.isRecent ? '✓' : '✗' }}
+            {{ 'score.isRecent' | translate }}
+          </li>
+        </ul>
+        <div class="resource-card__score-tooltip-arrow" aria-hidden="true"></div>
+      </div>
+    </div>
   </div>
 
   <div class="resource-card__meta">

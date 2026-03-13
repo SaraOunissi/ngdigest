@@ -109,4 +109,102 @@
     color: $color-tag-text;
     border-radius: $radius-pill;
   }
+
+  // ── Score badge ──────────────────────────────────────────────────────────────
+
+  &__score-badge {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: default;
+    border-radius: $radius-pill;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    user-select: none;
+
+    &--high {
+      background-color: $color-score-high-bg;
+      color: $color-score-high;
+    }
+
+    &--medium {
+      background-color: $color-score-medium-bg;
+      color: $color-score-medium;
+    }
+
+    &--low {
+      background-color: $color-score-low-bg;
+      color: $color-score-low;
+    }
+
+    // Show tooltip on hover
+    &:hover .resource-card__score-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // ── Score tooltip ─────────────────────────────────────────────────────────────
+
+  &__score-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    background-color: $color-text-primary;
+    color: $color-surface;
+    border-radius: $radius-sm;
+    padding: $spacing-sm $spacing-sm;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+    z-index: 10;
+    white-space: nowrap;
+  }
+
+  &__score-tooltip-title {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-xs;
+    color: $color-text-muted;
+  }
+
+  &__score-tooltip-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__score-tooltip-item {
+    font-size: $font-size-sm;
+
+    &--ok {
+      color: $color-score-high;
+    }
+
+    &--ko {
+      color: $color-score-low;
+    }
+  }
+
+  &__score-tooltip-arrow {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $color-text-primary;
+  }
 }
