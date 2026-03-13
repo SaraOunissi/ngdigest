@@ -7,13 +7,16 @@ import { ApiResponseInterceptor } from './common/interceptors/api-response.inter
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const corsOrigins = process.env.CORS_ORIGIN
-    ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
-    : ['http://localhost:4200'];
+  const allowedOrigins = process.env.CORS_ORIGIN?.split(',').map(o => o.trim()) ?? [];
 
   app.enableCors({
-    origin: corsOrigins,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 
