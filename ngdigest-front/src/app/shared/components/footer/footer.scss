@@ -1,0 +1,63 @@
+@use "variables" as *;
+@use "colors" as *;
+
+$footer-bg: #090912;
+
+.footer {
+  background-color: $footer-bg;
+  border-top: 1px solid $color-border;
+  height: 60px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: $content-max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+  }
+
+  &__brand {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-decoration: none;
+    transition: color 150ms ease;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__separator {
+    color: $color-border;
+    font-size: $font-size-sm;
+    user-select: none;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    white-space: nowrap;
+  }
+
+  &__powered {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+}
