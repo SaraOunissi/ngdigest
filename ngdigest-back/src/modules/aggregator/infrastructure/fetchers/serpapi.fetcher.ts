@@ -1,11 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { getJson } from 'serpapi';
-import {
-  Resource,
-  ResourceLanguage,
-} from '../../../resources/domain/entities/resource.entity.js';
-import { detectLanguageFromUrl } from '../config/language-detector.js';
+import { Resource } from '../../../resources/domain/entities/resource.entity.js';
+import { detectLanguage } from '../config/language-detector.js';
 
 interface OrganicResult {
   title?: string;
@@ -65,17 +62,24 @@ export class SerpapiNewsFetcher {
 
       return items
         .filter((item) => Boolean(item.title) && Boolean(item.link))
-        .map((item) => ({
-          title: item.title ?? '',
-          url: item.link ?? '',
-          source: this.extractDomain(item.link),
-          publishedAt: item.date ? new Date(item.date) : new Date(),
-          tags: ['angular', 'framework'],
-          language: detectLanguageFromUrl(item.link),
-          score: 0,
-          isRead: false,
-          isFavorite: false,
-        }));
+        .map((item) => {
+          if (!item.date) {
+            this.logger.warn(
+              `framework search: no date for "${item.title}" — falling back to current date`,
+            );
+          }
+          return {
+            title: item.title ?? '',
+            url: item.link ?? '',
+            source: this.extractDomain(item.link),
+            publishedAt: item.date ? new Date(item.date) : new Date(),
+            tags: ['angular', 'framework'],
+            language: detectLanguage(item.link, item.title),
+            score: 0,
+            isRead: false,
+            isFavorite: false,
+          };
+        });
     } catch (error) {
       this.logger.error('Failed to fetch framework search', error);
       return [];
@@ -105,17 +109,24 @@ export class SerpapiNewsFetcher {
 
       return items
         .filter((item) => Boolean(item.title) && Boolean(item.link))
-        .map((item) => ({
-          title: item.title ?? '',
-          url: item.link ?? '',
-          source: this.extractDomain(item.link),
-          publishedAt: item.date ? new Date(item.date) : new Date(),
-          tags: ['angular', 'community'],
-          language: detectLanguageFromUrl(item.link),
-          score: 0,
-          isRead: false,
-          isFavorite: false,
-        }));
+        .map((item) => {
+          if (!item.date) {
+            this.logger.warn(
+              `community search: no date for "${item.title}" — falling back to current date`,
+            );
+          }
+          return {
+            title: item.title ?? '',
+            url: item.link ?? '',
+            source: this.extractDomain(item.link),
+            publishedAt: item.date ? new Date(item.date) : new Date(),
+            tags: ['angular', 'community'],
+            language: detectLanguage(item.link, item.title),
+            score: 0,
+            isRead: false,
+            isFavorite: false,
+          };
+        });
     } catch (error) {
       this.logger.error('Failed to fetch community search', error);
       return [];
@@ -148,17 +159,26 @@ export class SerpapiNewsFetcher {
 
       return items
         .filter((item) => Boolean(item.title) && Boolean(item.link))
-        .map((item) => ({
-          title: item.title ?? '',
-          url: item.link ?? '',
-          source: this.extractDomain(item.link),
-          publishedAt: item.date ? new Date(item.date) : new Date(),
-          tags: ['angular', 'french'],
-          language: 'fr' as ResourceLanguage,
-          score: 0,
-          isRead: false,
-          isFavorite: false,
-        }));
+        .map((item) => {
+          if (!item.date) {
+            this.logger.warn(
+              `french community search: no date for "${item.title}" — falling back to current date`,
+            );
+          }
+          // Use combined URL + title detection: articles from dev.to/medium included in
+          // this search may be English even though the search targets French results.
+          return {
+            title: item.title ?? '',
+            url: item.link ?? '',
+            source: this.extractDomain(item.link),
+            publishedAt: item.date ? new Date(item.date) : new Date(),
+            tags: ['angular', 'french'],
+            language: detectLanguage(item.link, item.title),
+            score: 0,
+            isRead: false,
+            isFavorite: false,
+          };
+        });
     } catch (error) {
       this.logger.error('Failed to fetch french community search', error);
       return [];

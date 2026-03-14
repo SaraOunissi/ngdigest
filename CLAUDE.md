@@ -177,7 +177,31 @@
 - **JWT tokens**: store in httpOnly cookies (not localStorage).
 - **Content Security Policy** (CSP) headers configured.
 
+## SEO (MANDATORY for every new page)
+
+Every time a new frontend route/page is added, the following steps are **required**:
+
+1. **Update `ngdigest-front/public/sitemap.xml`** — add a `<url>` entry with `<loc>`, `<changefreq>`, and `<priority>`.
+2. **Call `SeoService.updateMeta()`** in the page component — react to `LanguageService.lang()` changes via an `effect()` to keep the title, description, and `html[lang]` in sync.
+3. **Provide localised SEO strings** — define `SEO_TITLES` and `SEO_DESCRIPTIONS` records keyed by `'fr' | 'en'` at the top of the component file.
+4. **Verify `index.html` static fallbacks** — social crawlers don't execute JS; make sure the static meta tags in `index.html` cover the main page adequately.
+
+Example pattern (copy from `ResourceListComponent` or `SourcesComponent`):
+```typescript
+const SEO_TITLES: Record<'fr' | 'en', string> = {
+  fr: 'Page — NgDigest',
+  en: 'Page — NgDigest',
+};
+
+constructor() {
+  effect(() => {
+    const lang = this.languageService.lang();
+    this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
+  });
+}
+```
+
 ---
 
-**Last updated**: 2025-02-19  
+**Last updated**: 2026-03-14
 **Project**: NgDigest - Tech Watch Platform

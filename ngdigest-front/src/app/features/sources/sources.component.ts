@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GetSourcesUseCase } from './application/use-cases/get-sources.use-case';
 import { SuggestSourceUseCase } from './application/use-cases/suggest-source.use-case';
+import { SeoService } from '@core/services/seo.service';
+import { LanguageService } from '@core/services/language.service';
 
 const URL_PATTERN = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/;
+
+const SEO_TITLES: Record<'fr' | 'en', string> = {
+  fr: 'Sources Angular — NgDigest',
+  en: 'Angular Sources — NgDigest',
+};
+
+const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
+  fr: 'Découvrez les sources Angular de confiance utilisées par NgDigest et suggérez de nouvelles sources à inclure.',
+  en: 'Discover the trusted Angular sources used by NgDigest and suggest new sources to include.',
+};
 
 @Component({
   selector: 'app-sources',
@@ -17,6 +29,15 @@ export class SourcesComponent implements OnInit {
   private readonly getSourcesUseCase = inject(GetSourcesUseCase);
   private readonly suggestSourceUseCase = inject(SuggestSourceUseCase);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly seoService = inject(SeoService);
+  private readonly languageService = inject(LanguageService);
+
+  constructor() {
+    effect(() => {
+      const lang = this.languageService.lang();
+      this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
+    });
+  }
 
   readonly sources = signal<string[]>([]);
   readonly isLoadingSources = signal(true);
