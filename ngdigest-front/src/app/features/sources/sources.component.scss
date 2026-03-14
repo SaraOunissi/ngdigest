@@ -1,0 +1,259 @@
+@use "colors" as *;
+@use "variables" as *;
+@use "mixins" as *;
+
+// ─── Page Layout ───────────────────────────────────────────────────────────────
+
+.sources-page {
+  min-height: 100vh;
+  background-color: $color-bg;
+  color: $color-text-primary;
+  padding: $spacing-xl $spacing-md;
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: $gradient-hero;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__subtitle {
+    color: $color-text-secondary;
+    font-size: $font-size-lg;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__list-section,
+  &__form-section {
+    @include card-elevated;
+    padding: $spacing-lg;
+  }
+
+  &__section-title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    margin: 0 0 $spacing-sm;
+    color: $color-text-primary;
+  }
+
+  &__section-desc {
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+    margin: 0 0 $spacing-lg;
+    line-height: 1.5;
+  }
+
+  &__loading {
+    color: $color-text-muted;
+    font-style: italic;
+    margin: 0;
+  }
+
+  &__success {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    align-items: flex-start;
+    background-color: rgba($color-score-high, 0.1);
+    border: 1px solid rgba($color-score-high, 0.3);
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    color: $color-text-primary;
+
+    strong {
+      display: block;
+      font-size: $font-size-lg;
+      color: $color-score-high;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      margin: 0;
+      color: $color-text-secondary;
+      line-height: 1.5;
+    }
+  }
+
+  &__success-icon {
+    font-size: 1.5rem;
+    color: $color-score-high;
+  }
+
+  &__success-btn {
+    margin-top: $spacing-sm;
+    background: none;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    font-size: $font-size-base;
+    padding: $spacing-sm $spacing-md;
+    transition: border-color 200ms ease, color 200ms ease;
+
+    &:hover {
+      border-color: $color-primary;
+      color: $color-text-primary;
+    }
+  }
+}
+
+// ─── Sources List ──────────────────────────────────────────────────────────────
+
+.sources-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: inline-flex;
+  }
+
+  &__domain {
+    background-color: $color-primary-light;
+    border: 1px solid rgba($color-primary, 0.3);
+    border-radius: $radius-pill;
+    color: $color-text-secondary;
+    font-size: 0.8125rem;
+    font-family: 'Courier New', Courier, monospace;
+    padding: $spacing-xs $spacing-sm;
+    transition: background-color 200ms ease, color 200ms ease;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.25);
+      color: $color-text-primary;
+    }
+  }
+}
+
+// ─── Suggestion Form ───────────────────────────────────────────────────────────
+
+.suggest-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__label {
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $color-text-primary;
+  }
+
+  &__required {
+    color: #f97316;
+    margin-left: 2px;
+  }
+
+  &__optional {
+    color: $color-text-muted;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    margin-left: $spacing-xs;
+  }
+
+  &__input,
+  &__textarea {
+    background-color: darken($color-surface, 3%);
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    outline: none;
+    padding: $spacing-sm $spacing-md;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+    width: 100%;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
+    }
+
+    &--error {
+      border-color: #ef4444;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+      }
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  &__error {
+    color: #ef4444;
+    font-size: 0.8125rem;
+  }
+
+  &__char-count {
+    align-self: flex-end;
+    color: $color-text-muted;
+    font-size: 0.75rem;
+  }
+
+  &__api-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: $radius-sm;
+    color: #fca5a5;
+    font-size: $font-size-base;
+    padding: $spacing-sm $spacing-md;
+  }
+
+  &__submit {
+    align-self: flex-start;
+    background: linear-gradient(135deg, $color-primary-2 0%, $color-primary 100%);
+    border: none;
+    border-radius: $radius-sm;
+    color: #fff;
+    cursor: pointer;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 600;
+    padding: $spacing-sm $spacing-lg;
+    transition: opacity 200ms ease, transform 200ms ease;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    &:disabled,
+    &--loading {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}

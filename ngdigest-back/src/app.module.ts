@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ResourcesModule } from './modules/resources/resources.module.js';
 import { AggregatorModule } from './modules/aggregator/aggregator.module.js';
+import { SourcesModule } from './modules/sources/sources.module.js';
 import serpapiConfig from './config/serpapi.config.js';
 
 @Module({
@@ -26,6 +27,7 @@ import serpapiConfig from './config/serpapi.config.js';
     ScheduleModule.forRoot(),
     ResourcesModule,
     AggregatorModule,
+    SourcesModule,
   ],
 })
 export class AppModule {}

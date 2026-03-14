@@ -1,0 +1,124 @@
+<main class="sources-page">
+  <div class="sources-page__container">
+    <header class="sources-page__header">
+      <h1 class="sources-page__title">Sources Angular</h1>
+      <p class="sources-page__subtitle">
+        Découvrez les domaines de confiance utilisés pour agréger les ressources Angular,
+        et suggérez de nouvelles sources à inclure.
+      </p>
+    </header>
+
+    <section class="sources-page__list-section">
+      <h2 class="sources-page__section-title">Domaines whitelistés</h2>
+      <p class="sources-page__section-desc">
+        Les articles provenant de ces sources reçoivent un bonus de pertinence lors de l'agrégation.
+      </p>
+
+      @if (isLoadingSources()) {
+        <p class="sources-page__loading">Chargement des sources…</p>
+      } @else {
+        <ul class="sources-list">
+          @for (domain of sources(); track domain) {
+            <li class="sources-list__item">
+              <span class="sources-list__domain">{{ domain }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <section class="sources-page__form-section">
+      <h2 class="sources-page__section-title">Suggérer une source</h2>
+      <p class="sources-page__section-desc">
+        Vous connaissez une source de qualité sur Angular non listée ci-dessus ?
+        Proposez-la et elle sera examinée par l'équipe.
+      </p>
+
+      @if (submitSuccess()) {
+        <div class="sources-page__success" role="alert">
+          <span class="sources-page__success-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Suggestion envoyée !</strong>
+            <p>Merci, votre suggestion a bien été enregistrée et sera examinée prochainement.</p>
+          </div>
+          <button class="sources-page__success-btn" type="button" (click)="resetForm()">
+            Faire une autre suggestion
+          </button>
+        </div>
+      } @else {
+        <form class="suggest-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="suggest-form__field">
+            <label class="suggest-form__label" for="source-url">
+              URL de la source <span class="suggest-form__required" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="source-url"
+              class="suggest-form__input"
+              [class.suggest-form__input--error]="urlControl.invalid && urlControl.touched"
+              type="url"
+              formControlName="url"
+              placeholder="https://exemple.com"
+              autocomplete="off"
+              aria-required="true"
+              [attr.aria-describedby]="urlControl.invalid && urlControl.touched ? 'url-error' : null"
+            />
+            @if (urlControl.invalid && urlControl.touched) {
+              <span id="url-error" class="suggest-form__error" role="alert">
+                @if (urlControl.hasError('required')) {
+                  L'URL est obligatoire.
+                } @else if (urlControl.hasError('pattern')) {
+                  L'URL doit commencer par http:// ou https://.
+                } @else if (urlControl.hasError('maxlength')) {
+                  L'URL ne doit pas dépasser 500 caractères.
+                }
+              </span>
+            }
+          </div>
+
+          <div class="suggest-form__field">
+            <label class="suggest-form__label" for="source-reason">
+              Pourquoi cette source ?
+              <span class="suggest-form__optional">(optionnel)</span>
+            </label>
+            <textarea
+              id="source-reason"
+              class="suggest-form__textarea"
+              [class.suggest-form__textarea--error]="reasonControl.invalid && reasonControl.touched"
+              formControlName="reason"
+              rows="4"
+              placeholder="Décrivez en quoi cette source apporte de la valeur à la communauté Angular…"
+              [attr.aria-describedby]="reasonControl.invalid && reasonControl.touched ? 'reason-error' : null"
+            ></textarea>
+            @if (reasonControl.invalid && reasonControl.touched) {
+              <span id="reason-error" class="suggest-form__error" role="alert">
+                La description ne doit pas dépasser 1000 caractères.
+              </span>
+            }
+            <span class="suggest-form__char-count">
+              {{ (reasonControl.value?.length ?? 0) }} / 1000
+            </span>
+          </div>
+
+          @if (submitError()) {
+            <div class="suggest-form__api-error" role="alert">
+              {{ submitError() }}
+            </div>
+          }
+
+          <button
+            class="suggest-form__submit"
+            type="submit"
+            [disabled]="isSubmitting()"
+            [class.suggest-form__submit--loading]="isSubmitting()"
+          >
+            @if (isSubmitting()) {
+              Envoi en cours…
+            } @else {
+              Suggérer
+            }
+          </button>
+        </form>
+      }
+    </section>
+  </div>
+</main>
