@@ -66,6 +66,15 @@ $footer-bg: #090912;
     white-space: nowrap;
   }
 
+  &__credit {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__link--author {
+    color: $color-primary;
+  }
+
   &__powered {
     font-size: $font-size-sm;
     color: $color-text-muted;
