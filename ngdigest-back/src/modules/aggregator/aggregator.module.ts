@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ResourcesModule } from '../resources/resources.module.js';
 import { DevtoFetcher } from './infrastructure/fetchers/devto.fetcher.js';
+import { RssFetcher } from './infrastructure/fetchers/rss.fetcher.js';
 import { SerpapiNewsFetcher } from './infrastructure/fetchers/serpapi.fetcher.js';
 import { AggregationService } from './application/services/aggregation.service.js';
 import { RelevanceService } from './application/services/relevance.service.js';
@@ -10,6 +11,6 @@ import { AggregatorController } from './presentation/controllers/aggregator.cont
 @Module({
   imports: [ResourcesModule],
   controllers: [AggregatorController],
-  providers: [SerpapiNewsFetcher, DevtoFetcher, AggregationService, RelevanceService, RetentionService],
+  providers: [SerpapiNewsFetcher, DevtoFetcher, RssFetcher, AggregationService, RelevanceService, RetentionService],
 })
 export class AggregatorModule {}

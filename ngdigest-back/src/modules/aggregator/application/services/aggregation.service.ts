@@ -4,6 +4,7 @@ import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
 import { ResourceRepository } from '../../../resources/infrastructure/repositories/resource.repository.js';
 import { DevtoFetcher } from '../../infrastructure/fetchers/devto.fetcher.js';
+import { RssFetcher } from '../../infrastructure/fetchers/rss.fetcher.js';
 import { SerpapiNewsFetcher } from '../../infrastructure/fetchers/serpapi.fetcher.js';
 import { RelevanceService } from './relevance.service.js';
 
@@ -20,6 +21,7 @@ export class AggregationService implements OnModuleInit {
     private readonly configService: ConfigService,
     private readonly serpapiNewsFetcher: SerpapiNewsFetcher,
     private readonly devtoFetcher: DevtoFetcher,
+    private readonly rssFetcher: RssFetcher,
     private readonly resourceRepository: ResourceRepository,
     private readonly relevanceService: RelevanceService,
   ) {}
@@ -49,12 +51,13 @@ export class AggregationService implements OnModuleInit {
   async runAggregation(): Promise<void> {
     this.logger.log('Aggregation started');
 
-    const [serpapiResults, devtoResults] = await Promise.all([
+    const [serpapiResults, devtoResults, rssResults] = await Promise.all([
       this.serpapiNewsFetcher.fetch(),
       this.devtoFetcher.fetch(),
+      this.rssFetcher.fetch(),
     ]);
 
-    const allCandidates = [...serpapiResults, ...devtoResults];
+    const allCandidates = [...serpapiResults, ...devtoResults, ...rssResults];
 
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
