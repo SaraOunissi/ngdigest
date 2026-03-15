@@ -177,6 +177,16 @@
 - **JWT tokens**: store in httpOnly cookies (not localStorage).
 - **Content Security Policy** (CSP) headers configured.
 
+## i18n (MANDATORY — no hardcoded strings)
+
+**Every user-visible string must go through `@ngx-translate/core`. No exceptions.**
+
+- **Templates**: always use the `translate` pipe — `{{ 'key' | translate }}` for text content, `[attr]="'key' | translate"` for attributes and placeholders.
+- **TypeScript**: inject `TranslateService` and use `this.translateService.instant('key')` — never hardcode a string that is shown to the user.
+- **Translation files**: add every new key to **both** `public/assets/i18n/en.json` and `public/assets/i18n/fr.json` at the same time. Never add a key to one file without the other.
+- **Key naming**: use dot-notation scoped to the feature — `sources.suggest.url.required`, `hero.clearSearch`, etc.
+- **What is exempt** (never translate): brand name `NgDigest`, language codes `FR`/`EN`, symbols (`©`, `×`, `✓`, `★`), emojis used as decorative icons.
+
 ## SEO (MANDATORY for every new page)
 
 Every time a new frontend route/page is added, the following steps are **required**:
