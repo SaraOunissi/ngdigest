@@ -29,5 +29,6 @@
   "score.label": "Score de pertinence",
   "score.trustedSource": "Source fiable",
   "score.angularKeyword": "Pertinence Angular",
-  "score.isRecent": "Article récent"
+  "score.isRecent": "Article récent",
+  "resource.unknownDate": "Date inconnue"
 }

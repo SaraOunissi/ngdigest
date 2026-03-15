@@ -68,7 +68,7 @@ export class RelevanceService {
     return ANGULAR_KEYWORDS.some((keyword) => lowerTitle.includes(keyword));
   }
 
-  private isRecent(date: Date | undefined): boolean {
+  private isRecent(date: Date | null | undefined): boolean {
     if (!date) return false;
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);

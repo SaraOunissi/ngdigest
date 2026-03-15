@@ -54,7 +54,22 @@ export class AggregationService implements OnModuleInit {
       this.devtoFetcher.fetch(),
     ]);
 
-    const candidates = [...serpapiResults, ...devtoResults];
+    const allCandidates = [...serpapiResults, ...devtoResults];
+
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    const now = new Date();
+
+    const candidates = allCandidates.filter((article) => {
+      if (!article.publishedAt) return false; // reject articles with no date
+      return article.publishedAt >= sixMonthsAgo && article.publishedAt <= now;
+    });
+
+    if (candidates.length < allCandidates.length) {
+      this.logger.log(
+        `Date filter: ${allCandidates.length - candidates.length} article(s) rejected (no date, older than 6 months, or future date)`,
+      );
+    }
 
     const relevant = candidates
       .map((article) => {

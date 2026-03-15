@@ -9,7 +9,7 @@ export interface Resource {
   title: string;
   url: string;
   source: string;
-  publishedAt: string;
+  publishedAt: string | null;
   score: number;
   tags: string[];
   isRead: boolean;

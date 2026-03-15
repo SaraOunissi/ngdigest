@@ -25,8 +25,9 @@ export class Resource {
   @Prop({ required: true })
   source!: string;
 
-  @Prop({ required: true })
-  publishedAt!: Date;
+  /** Publication date of the original article. Null when unknown (SerpAPI returned no date). */
+  @Prop({ default: null, type: Date })
+  publishedAt!: Date | null;
 
   @Prop({ default: 0 })
   score!: number;

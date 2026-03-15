@@ -29,5 +29,6 @@
   "score.label": "Relevance score",
   "score.trustedSource": "Trusted source",
   "score.angularKeyword": "Angular relevance",
-  "score.isRecent": "Recent article"
+  "score.isRecent": "Recent article",
+  "resource.unknownDate": "Unknown date"
 }

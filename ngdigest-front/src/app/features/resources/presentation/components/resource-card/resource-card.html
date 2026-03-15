@@ -67,9 +67,15 @@
 
   <div class="resource-card__meta">
     <span class="resource-card__source">{{ resource().source }}</span>
-    <time class="resource-card__date" [dateTime]="resource().publishedAt">
-      {{ resource().publishedAt | date: 'dd MMM yyyy' }}
-    </time>
+    @if (resource().publishedAt) {
+      <time class="resource-card__date" [dateTime]="resource().publishedAt">
+        {{ resource().publishedAt | date: 'dd MMM yyyy' }}
+      </time>
+    } @else {
+      <span class="resource-card__date resource-card__date--unknown">
+        {{ 'resource.unknownDate' | translate }}
+      </span>
+    }
   </div>
 
   @if (resource().tags.length > 0) {
