@@ -6,10 +6,10 @@ Plateforme d'agrégation et de veille technologique pour la communauté Angular.
 
 | Couche     | Technologie                              |
 | ---------- | ---------------------------------------- |
-| Frontend   | Angular 19, SCSS (BEM), Angular Material |
+| Frontend   | Angular 21, SCSS (BEM), Angular Material |
 | Backend    | NestJS 11, Mongoose, Passport JWT        |
 | Base de données | MongoDB Atlas                       |
-| Agrégation | NestJS Schedule (cron), RSS Parser       |
+| Agrégation | NestJS Schedule (cron), Dev.to API, SerpAPI (Google Search), RSS Parser |
 
 ## Structure du monorepo
 
