@@ -6,6 +6,7 @@ import {
 } from './domain/entities/resource.entity.js';
 import { ResourceRepository } from './infrastructure/repositories/resource.repository.js';
 import { GetResourcesUseCase } from './application/use-cases/get-resources.use-case.js';
+import { RedetectLanguagesUseCase } from './application/use-cases/redetect-languages.use-case.js';
 import { ResourceController } from './presentation/controllers/resource.controller.js';
 
 @Module({
@@ -15,7 +16,7 @@ import { ResourceController } from './presentation/controllers/resource.controll
     ]),
   ],
   controllers: [ResourceController],
-  providers: [ResourceRepository, GetResourcesUseCase],
+  providers: [ResourceRepository, GetResourcesUseCase, RedetectLanguagesUseCase],
   exports: [ResourceRepository],
 })
 export class ResourcesModule {}

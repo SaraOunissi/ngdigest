@@ -4,6 +4,7 @@ import {
   Resource,
   ResourceLanguage,
 } from '../../../resources/domain/entities/resource.entity.js';
+import { detectLanguage } from '../config/language-detector.js';
 
 const DEVTO_API_URL =
   'https://dev.to/api/articles?tag=angular&per_page=20&top=7';
@@ -13,7 +14,10 @@ interface DevtoArticle {
   url: string;
   published_at: string;
   tag_list: string[];
+  /** ISO language tag returned by the Dev.to API (e.g. "en", "fr"). */
   language?: string;
+  /** Alternative language field present on some Dev.to API responses. */
+  language_code?: string;
 }
 
 /**
@@ -60,9 +64,11 @@ export class DevtoFetcher {
             'devto',
             ...article.tag_list.filter((tag) => tag !== 'angular'),
           ],
-          language: (article.language === 'fr'
-            ? 'fr'
-            : 'en') as ResourceLanguage,
+          language: ((): ResourceLanguage => {
+            const declaredLang = article.language_code ?? article.language;
+            if (declaredLang) return declaredLang === 'fr' ? 'fr' : 'en';
+            return detectLanguage(article.url, article.title);
+          })(),
           score: 0,
           isRead: false,
           isFavorite: false,

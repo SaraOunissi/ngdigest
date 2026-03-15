@@ -11,25 +11,19 @@ export const FRENCH_DOMAINS: readonly string[] = [
   'alticreation.com',
 ] as const;
 
+/** Matches common French grammatical function words using word boundaries. */
+const FRENCH_FUNCTION_WORD_RE =
+  /\b(le|la|les|des|du|un|une|et|en|de|pour|par|sur|avec|dans)\b/gi;
+
+/** Matches French-specific accent characters that are strong language indicators. */
+const FRENCH_ACCENT_RE = /[àâäéèêëîïôùûüç]/;
+
 /**
- * French-specific words and substrings that are safe indicators of French language.
- * These are either uniquely French or extremely rare in English tech article titles.
- * Presence of 2+ of these in a title classifies the article as French.
+ * Matches characters that only appear in languages other than French or English.
+ * - Spanish: á í ó ú ñ ¿ ¡  (acute on a/i/o/u is not used in French)
+ * - Arabic, Cyrillic, CJK and other non-Latin scripts
  */
-export const FRENCH_TITLE_INDICATORS: readonly string[] = [
-  'pour ',       // "pour Angular", "pour créer"
-  'avec ',       // "avec Angular"
-  'dans ',       // "dans Angular", "dans ce tutoriel"
-  'votre ',      // "dans votre application"
-  'notre ',      // "dans notre projet"
-  'comprendre',  // French tutorial verb
-  'découvrir',   // French tutorial verb (with accent)
-  'decouvrir',   // French tutorial verb (without accent)
-  'utiliser',    // French tutorial verb
-  'meilleures',  // "les meilleures pratiques"
-  'nouvelle ',   // "nouvelle version" (feminine form, very rare in English titles)
-  'nouvelles ',  // "nouvelles fonctionnalités"
-] as const;
+const OTHER_LANGUAGE_RE = /[áíóúñ¿¡\u0600-\u06FF\u0400-\u04FF\u4E00-\u9FFF]/;
 
 /**
  * Detects the language of an article based on its URL.
@@ -58,45 +52,66 @@ export function detectLanguageFromUrl(
 }
 
 /**
- * Detects language from an article title using French-specific word patterns.
- * Returns 'fr' if 2+ French indicators are found in the title, null otherwise.
- * Intended as a complement for articles on multilingual platforms (dev.to, medium.com…).
+ * Detects language from article text (title + optional snippet).
+ * Priority order:
+ * 1. French accent character (àâäéèêëîïôùûüç) → 'fr'
+ * 2. 2+ French grammatical function words → 'fr'
+ * 3. Clearly non-EN/FR character (Spanish á/ñ, Arabic, Cyrillic, CJK…) → 'unknown'
+ * 4. No signal → null (caller defaults to 'en')
+ */
+export function detectLanguageFromText(
+  title: string | undefined,
+  snippet?: string | undefined,
+): ResourceLanguage | null {
+  if (!title) return null;
+  const combined = snippet ? `${title} ${snippet}` : title;
+
+  if (FRENCH_ACCENT_RE.test(combined)) return 'fr';
+
+  // Check for non-EN/FR characters BEFORE function words:
+  // "diseño en Angular" has "en" (French function word) AND "ñ" (Spanish) —
+  // the other-language signal takes priority over ambiguous function words.
+  if (OTHER_LANGUAGE_RE.test(combined)) return 'unknown';
+
+  const matches = combined.match(FRENCH_FUNCTION_WORD_RE);
+  if (matches && matches.length >= 2) return 'fr';
+
+  return null;
+}
+
+/**
+ * @deprecated Use detectLanguageFromText instead.
+ * Kept for backward compatibility — delegates to detectLanguageFromText(title).
  */
 export function detectLanguageFromTitle(
   title: string | undefined,
 ): ResourceLanguage | null {
-  if (!title) return null;
-  const lower = title.toLowerCase();
-  const matchCount = (FRENCH_TITLE_INDICATORS as readonly string[]).filter(
-    (indicator) => lower.includes(indicator),
-  ).length;
-  return matchCount >= 2 ? 'fr' : null;
+  return detectLanguageFromText(title);
 }
 
 /**
- * Combined language detection using URL (primary) and title (fallback for multilingual domains).
+ * Combined language detection using URL (primary) and text (fallback for multilingual domains).
  * Prefer this over detectLanguageFromUrl when an article title is available.
  *
  * Resolution order:
  * 1. If URL indicates French (.fr TLD or known French domain) → 'fr'
  * 2. If URL is unparseable → 'unknown'
- * 3. If title contains 2+ French indicators → 'fr'
+ * 3. If title/snippet contains a French accent or 2+ French function words → 'fr'
  * 4. Otherwise → 'en'
  */
 export function detectLanguage(
   url: string | undefined,
   title?: string | undefined,
+  snippet?: string | undefined,
 ): ResourceLanguage {
   const urlLang = detectLanguageFromUrl(url);
 
   if (urlLang === 'fr') return 'fr';
   if (urlLang === 'unknown') return 'unknown';
 
-  // URL defaults to 'en' — cross-check with title for multilingual platforms
-  if (title) {
-    const titleLang = detectLanguageFromTitle(title);
-    if (titleLang === 'fr') return 'fr';
-  }
+  // URL defaults to 'en' — cross-check with text for multilingual platforms
+  const textLang = detectLanguageFromText(title, snippet);
+  if (textLang !== null) return textLang;
 
   return 'en';
 }

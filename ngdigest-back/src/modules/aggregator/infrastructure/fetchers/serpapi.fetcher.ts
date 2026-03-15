@@ -78,7 +78,10 @@ function extractDateFromDisplayedLink(displayedLink: string): Date | null {
  * Tries in order: date field → snippet prefix → displayed_link (Medium "N likes · X ago").
  */
 function resolvePublishedAt(item: OrganicResult): Date | null {
-  if (item.date) return parseFlexibleDate(item.date);
+  if (item.date) {
+    const fromDate = parseFlexibleDate(item.date);
+    if (fromDate) return fromDate;
+  }
   if (item.snippet) {
     const fromSnippet = extractDateFromSnippet(item.snippet);
     if (fromSnippet) return fromSnippet;
@@ -139,7 +142,7 @@ export class SerpapiNewsFetcher {
           source: this.extractDomain(item.link),
           publishedAt: resolvePublishedAt(item),
           tags: ['angular', 'framework'],
-          language: detectLanguage(item.link, item.title),
+          language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
           isRead: false,
           isFavorite: false,
@@ -180,7 +183,7 @@ export class SerpapiNewsFetcher {
           source: this.extractDomain(item.link),
           publishedAt: resolvePublishedAt(item),
           tags: ['angular', 'community'],
-          language: detectLanguage(item.link, item.title),
+          language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
           isRead: false,
           isFavorite: false,
@@ -222,7 +225,7 @@ export class SerpapiNewsFetcher {
           source: this.extractDomain(item.link),
           publishedAt: resolvePublishedAt(item),
           tags: ['angular', 'french'],
-          language: detectLanguage(item.link, item.title),
+          language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
           isRead: false,
           isFavorite: false,

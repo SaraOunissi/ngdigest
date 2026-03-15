@@ -4,6 +4,7 @@ import { Model, SortOrder } from 'mongoose';
 import {
   Resource,
   ResourceDocument,
+  ResourceLanguage,
 } from '../../domain/entities/resource.entity.js';
 
 export interface PaginatedQuery {
@@ -39,6 +40,9 @@ export class ResourceRepository {
 
     if (query.lang === 'en') {
       filter['language'] = 'en';
+    } else {
+      // Always exclude non-EN/FR articles regardless of the lang filter
+      filter['language'] = { $ne: 'unknown' };
     }
 
     if (query.search) {
@@ -114,6 +118,30 @@ export class ResourceRepository {
 
   async findById(id: string): Promise<Resource | null> {
     return this.resourceModel.findById(id).exec();
+  }
+
+  /**
+   * Returns all resources (including archived) for bulk operations.
+   */
+  async findAll(): Promise<ResourceDocument[]> {
+    return this.resourceModel.find({}).exec();
+  }
+
+  /**
+   * Bulk-updates the language field for the given resource IDs.
+   */
+  async bulkUpdateLanguages(
+    updates: { id: string; language: ResourceLanguage }[],
+  ): Promise<void> {
+    if (updates.length === 0) return;
+    await this.resourceModel.bulkWrite(
+      updates.map(({ id, language }) => ({
+        updateOne: {
+          filter: { _id: id },
+          update: { $set: { language } },
+        },
+      })),
+    );
   }
 
   /**
