@@ -3,10 +3,20 @@
 
 $footer-bg: #090912;
 
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .footer {
   background-color: $footer-bg;
   border-top: 1px solid $color-border;
   height: 60px;
+  width: 100%;
+  box-sizing: border-box;
 
   &__content {
     display: flex;
@@ -59,5 +69,35 @@ $footer-bg: #090912;
   &__powered {
     font-size: $font-size-sm;
     color: $color-text-muted;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    height: auto;
+    padding: $spacing-md 0;
+
+    &__content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: auto;
+      gap: $spacing-sm;
+      padding: 0 $spacing-md;
+    }
+
+    &__nav {
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-xs;
+    }
+
+    &__separator {
+      display: none;
+    }
+
+    &__right {
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-xs;
+    }
   }
 }

@@ -1,6 +1,14 @@
 @use "variables" as *;
 @use "colors" as *;
 
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .app {
   display: flex;
   align-items: center;
@@ -16,6 +24,7 @@
     color: $color-primary;
     margin: 0;
     flex: 1;
+    min-width: 0;
     letter-spacing: -0.3px;
   }
 
