@@ -21,11 +21,19 @@
   &__title {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
-    color: $color-primary;
     margin: 0;
     flex: 1;
     min-width: 0;
     letter-spacing: -0.3px;
+  }
+
+  &__title-link {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__subtitle {
@@ -98,7 +106,7 @@
 
     &--active {
       background-color: $color-primary;
-      color: #ffffff;
+      color: $color-white;
       border-color: $color-primary;
     }
   }

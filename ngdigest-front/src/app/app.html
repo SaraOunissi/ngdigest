@@ -1,5 +1,7 @@
 <header class="app">
-  <h1 class="app__title">{{ 'nav.title' | translate }}</h1>
+  <h1 class="app__title">
+    <a class="app__title-link" [routerLink]="['/']">{{ 'nav.title' | translate }}</a>
+  </h1>
   <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 
   <nav class="app__nav" aria-label="Main navigation">
