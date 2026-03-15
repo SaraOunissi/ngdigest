@@ -32,9 +32,50 @@
     display: none;
   }
 
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__nav-link {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    text-decoration: none;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    transition: color 150ms ease, background-color 150ms ease;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-primary;
+      background-color: $color-primary-light;
+    }
+
+    &--active {
+      color: $color-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
   &__lang-toggle {
     display: flex;
     gap: $spacing-xs;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+
+    &__nav {
+      gap: $spacing-xs;
+    }
+
+    &__nav-link {
+      font-size: 11px;
+      padding: $spacing-xs 6px;
+    }
   }
 
   &__lang-btn {

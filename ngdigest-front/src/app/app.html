@@ -2,6 +2,11 @@
   <h1 class="app__title">{{ 'nav.title' | translate }}</h1>
   <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 
+  <nav class="app__nav" aria-label="Main navigation">
+    <a class="app__nav-link" [routerLink]="['/about']" routerLinkActive="app__nav-link--active">{{ 'nav.about' | translate }}</a>
+    <a class="app__nav-link" [routerLink]="['/sources']" routerLinkActive="app__nav-link--active">{{ 'nav.sources' | translate }}</a>
+  </nav>
+
   <nav class="app__lang-toggle" aria-label="Language selection">
     <button
       class="app__lang-btn"

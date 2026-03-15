@@ -1,0 +1,57 @@
+@use "variables" as *;
+@use "colors" as *;
+
+.about {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-lg;
+
+  &__content {
+    max-width: 720px;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin: 0 0 $spacing-md;
+  }
+
+  &__lead {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    line-height: 1.6;
+    margin: 0 0 $spacing-xl;
+  }
+
+  &__section {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__section-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__text {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &__link {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: $spacing-lg $spacing-md;
+  }
+}

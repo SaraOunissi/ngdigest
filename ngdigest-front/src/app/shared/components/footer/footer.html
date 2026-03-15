@@ -3,9 +3,9 @@
     <span class="footer__brand">NgDigest &copy; 2026</span>
 
     <nav class="footer__nav" aria-label="Footer navigation">
-      <a class="footer__link" routerLink="/about">À propos</a>
+      <a class="footer__link" routerLink="/about">{{ 'footer.about' | translate }}</a>
       <span class="footer__separator" aria-hidden="true">|</span>
-      <a class="footer__link" routerLink="/sources">Sources</a>
+      <a class="footer__link" routerLink="/sources">{{ 'footer.sources' | translate }}</a>
     </nav>
 
     <div class="footer__right">
@@ -14,10 +14,14 @@
         href="https://github.com/SaraOunissi/ngdigest"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Voir le code source sur GitHub"
-      >GitHub</a>
+      >{{ 'footer.github' | translate }}</a>
       <span class="footer__separator" aria-hidden="true">&middot;</span>
-      <span class="footer__powered">Propulsé par SerpAPI</span>
+      <a
+        class="footer__link"
+        href="https://serpapi.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >{{ 'footer.serpapi' | translate }}</a>
     </div>
   </div>
 </footer>

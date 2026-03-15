@@ -30,5 +30,21 @@
   "score.trustedSource": "Trusted source",
   "score.angularKeyword": "Angular relevance",
   "score.isRecent": "Recent article",
-  "resource.unknownDate": "Unknown date"
+  "resource.unknownDate": "Unknown date",
+  "nav.about": "About",
+  "nav.sources": "Sources",
+  "about.title": "About NgDigest",
+  "about.lead": "NgDigest is an Angular tech watch platform that aggregates the best articles, tutorials and announcements from the community every week.",
+  "about.howItWorks.title": "How does it work?",
+  "about.howItWorks.text": "NgDigest uses SerpAPI to automatically collect the most relevant content published on trusted Angular websites. Articles are filtered by language (French and English) and sorted by publication date.",
+  "about.sources.title": "Sources",
+  "about.sources.text": "You can browse and suggest new sources on the",
+  "about.sources.linkText": "Sources page",
+  "about.openSource.title": "Open source project",
+  "about.openSource.text": "Contributions and feedback are welcome.",
+  "about.openSource.githubLabel": "View source code on GitHub",
+  "footer.about": "About",
+  "footer.sources": "Sources",
+  "footer.github": "GitHub",
+  "footer.serpapi": "Powered by SerpAPI"
 }
