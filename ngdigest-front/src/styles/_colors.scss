@@ -8,6 +8,9 @@ $color-primary-light: rgba($color-primary, 0.15);
 $color-primary-dark: #A040A0;
 $color-primary-2: #4158D0;
 
+// Neutral
+$color-white: #ffffff;
+
 // Gradient
 $gradient-hero: linear-gradient(135deg, #4158D0 0%, #C850C0 50%, #FFCC70 100%);
 
@@ -41,4 +44,5 @@ $color-score-low: $color-text-muted;
 $color-score-low-bg: rgba($color-text-muted, 0.12);
 
 // Error
-$color-error: #f87171;
+$color-error: #ef4444;
+$color-error-light: #fca5a5;

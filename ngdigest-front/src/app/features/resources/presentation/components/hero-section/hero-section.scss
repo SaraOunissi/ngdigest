@@ -3,7 +3,7 @@
 
 .hero {
   background: $gradient-hero;
-  padding: 80px $spacing-md;
+  padding: $spacing-hero $spacing-md;
   text-align: center;
 
   &__content {
@@ -14,33 +14,33 @@
   &__title {
     font-size: $font-size-hero;
     font-weight: $font-weight-bold;
-    color: #ffffff;
+    color: $color-white;
     margin-bottom: $spacing-md;
     letter-spacing: -0.5px;
   }
 
   &__subtitle {
     font-size: $font-size-lg;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba($color-white, 0.75);
     margin: 0 0 $spacing-xl;
   }
 
   &__search {
     position: relative;
-    max-width: 560px;
+    max-width: $search-max-width;
     margin: 0 auto;
   }
 
   &__search-input {
     width: 100%;
-    padding: $spacing-md 40px $spacing-md $spacing-lg;
+    padding: $spacing-md $spacing-xl $spacing-md $spacing-lg;
     font-size: $font-size-lg;
     font-family: $font-family;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba($color-white, 0.3);
     border-radius: $radius-lg;
     outline: none;
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.15);
+    color: $color-white;
+    background-color: rgba($color-white, 0.15);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
 
@@ -49,11 +49,11 @@
     }
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba($color-white, 0.6);
     }
 
     &:focus {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba($color-white, 0.2);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
   }
@@ -61,18 +61,18 @@
   &__search-clear {
     position: absolute;
     top: 50%;
-    right: 16px;
+    right: $spacing-md;
     transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
     font-size: $font-size-lg;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba($color-white, 0.6);
     line-height: 1;
     padding: 0;
 
     &:hover {
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba($color-white, 0.9);
     }
   }
 }

@@ -4,7 +4,7 @@
 .resource-list {
   padding: $spacing-xl $spacing-md;
   background-color: $color-bg;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - #{$header-height});
 
   &__container {
     max-width: $content-max-width;

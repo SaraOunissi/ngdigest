@@ -4,10 +4,14 @@
 
 // Typography
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-size-xs: 11px;
 $font-size-sm: 12px;
+$font-size-caption: 0.8125rem;
 $font-size-base: 14px;
 $font-size-lg: 16px;
 $font-size-xl: 20px;
+$font-size-page-title: 2rem;
+$font-size-icon-lg: 1.5rem;
 $font-size-hero: clamp(2rem, 5vw, 3.5rem);
 
 $font-weight-regular: 400;
@@ -22,6 +26,7 @@ $spacing-md: 16px;
 $spacing-lg: 24px;
 $spacing-xl: 40px;
 $spacing-2xl: 64px;
+$spacing-hero: 80px;
 
 // Border radius
 $radius-sm: 6px;
@@ -37,6 +42,10 @@ $shadow-card-hover: 0 0 20px rgba(200, 80, 192, 0.15);
 $grid-gap: 24px;
 $sidebar-width: 220px;
 $content-max-width: 1200px;
+$header-height: 56px;
+$search-max-width: 560px;
+$page-max-width-narrow: 800px;
+$avatar-size: 32px;
 
 // Breakpoints
 $breakpoint-mobile: 480px;

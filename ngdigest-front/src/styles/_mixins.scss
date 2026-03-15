@@ -28,6 +28,34 @@
   white-space: nowrap;
 }
 
+// Page hero banner (gradient header for inner pages)
+@mixin page-hero {
+  background: $gradient-hero;
+  padding: $spacing-hero $spacing-md;
+  text-align: center;
+
+  &__content {
+    max-width: $content-max-width;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: $font-size-page-title;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    margin: 0 0 $spacing-md;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: rgba($color-white, 0.85);
+    margin: 0 auto;
+    max-width: 640px;
+    line-height: 1.6;
+  }
+}
+
 // Card with hover elevation
 @mixin card-elevated {
   background-color: $color-surface;

@@ -2,6 +2,12 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+// ─── Hero ──────────────────────────────────────────────────────────────────────
+
+.sources-hero {
+  @include page-hero;
+}
+
 // ─── Page Layout ───────────────────────────────────────────────────────────────
 
 .sources-page {
@@ -11,32 +17,11 @@
   padding: $spacing-xl $spacing-md;
 
   &__container {
-    max-width: 800px;
+    max-width: $page-max-width-narrow;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: $spacing-xl;
-  }
-
-  &__header {
-    text-align: center;
-  }
-
-  &__title {
-    font-size: 2rem;
-    font-weight: 700;
-    background: $gradient-hero;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0 0 $spacing-sm;
-  }
-
-  &__subtitle {
-    color: $color-text-secondary;
-    font-size: $font-size-lg;
-    margin: 0;
-    line-height: 1.6;
   }
 
   &__list-section,
@@ -47,7 +32,7 @@
 
   &__section-title {
     font-size: $font-size-xl;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     margin: 0 0 $spacing-sm;
     color: $color-text-primary;
   }
@@ -91,7 +76,7 @@
   }
 
   &__success-icon {
-    font-size: 1.5rem;
+    font-size: $font-size-icon-lg;
     color: $color-score-high;
   }
 
@@ -132,7 +117,7 @@
     border: 1px solid rgba($color-primary, 0.3);
     border-radius: $radius-pill;
     color: $color-text-secondary;
-    font-size: 0.8125rem;
+    font-size: $font-size-caption;
     font-family: 'Courier New', Courier, monospace;
     padding: $spacing-xs $spacing-sm;
     transition: background-color 200ms ease, color 200ms ease;
@@ -159,19 +144,19 @@
 
   &__label {
     font-size: $font-size-base;
-    font-weight: 500;
+    font-weight: $font-weight-medium;
     color: $color-text-primary;
   }
 
   &__required {
-    color: #f97316;
+    color: $color-score-medium;
     margin-left: 2px;
   }
 
   &__optional {
     color: $color-text-muted;
-    font-size: 0.8125rem;
-    font-weight: 400;
+    font-size: $font-size-caption;
+    font-weight: $font-weight-regular;
     margin-left: $spacing-xs;
   }
 
@@ -199,10 +184,10 @@
     }
 
     &--error {
-      border-color: #ef4444;
+      border-color: $color-error;
 
       &:focus {
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.15);
       }
     }
   }
@@ -213,21 +198,21 @@
   }
 
   &__error {
-    color: #ef4444;
-    font-size: 0.8125rem;
+    color: $color-error;
+    font-size: $font-size-caption;
   }
 
   &__char-count {
     align-self: flex-end;
     color: $color-text-muted;
-    font-size: 0.75rem;
+    font-size: $font-size-sm;
   }
 
   &__api-error {
-    background-color: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background-color: rgba($color-error, 0.1);
+    border: 1px solid rgba($color-error, 0.3);
     border-radius: $radius-sm;
-    color: #fca5a5;
+    color: $color-error-light;
     font-size: $font-size-base;
     padding: $spacing-sm $spacing-md;
   }
@@ -237,11 +222,11 @@
     background: linear-gradient(135deg, $color-primary-2 0%, $color-primary 100%);
     border: none;
     border-radius: $radius-sm;
-    color: #fff;
+    color: $color-white;
     cursor: pointer;
     font-family: $font-family;
     font-size: $font-size-base;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     padding: $spacing-sm $spacing-lg;
     transition: opacity 200ms ease, transform 200ms ease;
 

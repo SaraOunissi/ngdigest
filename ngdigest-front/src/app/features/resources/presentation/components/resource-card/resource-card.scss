@@ -32,8 +32,8 @@
 
   &__avatar {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: $avatar-size;
+    height: $avatar-size;
     border-radius: $radius-sm;
     background-color: $color-primary-light;
     color: $color-primary;
@@ -60,7 +60,7 @@
 
   &__badge {
     flex-shrink: 0;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: $font-weight-bold;
     padding: 3px 8px;
     border-radius: $radius-pill;
@@ -105,7 +105,7 @@
   }
 
   &__tag {
-    font-size: 11px;
+    font-size: $font-size-xs;
     padding: 3px $spacing-sm;
     background-color: $color-tag-bg;
     color: $color-tag-text;
@@ -122,7 +122,7 @@
     cursor: default;
     border-radius: $radius-pill;
     padding: 2px 7px;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: $font-weight-bold;
     line-height: 1.6;
     letter-spacing: 0.02em;
