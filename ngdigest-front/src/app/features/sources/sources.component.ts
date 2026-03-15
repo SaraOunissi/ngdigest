@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { GetSourcesUseCase } from './application/use-cases/get-sources.use-case';
 import { SuggestSourceUseCase } from './application/use-cases/suggest-source.use-case';
 import { SeoService } from '@core/services/seo.service';
@@ -20,7 +22,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
 @Component({
   selector: 'app-sources',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './sources.component.html',
   styleUrl: './sources.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +33,8 @@ export class SourcesComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly seoService = inject(SeoService);
   private readonly languageService = inject(LanguageService);
+  private readonly translateService = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     effect(() => {
@@ -51,7 +55,7 @@ export class SourcesComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getSourcesUseCase.execute().subscribe({
+    this.getSourcesUseCase.execute().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (domains) => {
         this.sources.set(domains);
         this.isLoadingSources.set(false);
@@ -71,7 +75,7 @@ export class SourcesComponent implements OnInit {
     const { url, reason } = this.form.value as { url: string; reason: string };
     const suggestion = { url: url.trim(), reason: reason?.trim() || undefined };
 
-    this.suggestSourceUseCase.execute(suggestion).subscribe({
+    this.suggestSourceUseCase.execute(suggestion).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.isSubmitting.set(false);
         this.submitSuccess.set(true);
@@ -80,7 +84,7 @@ export class SourcesComponent implements OnInit {
       error: (error: { error?: { error?: { message?: string } } }) => {
         this.isSubmitting.set(false);
         const message =
-          error?.error?.error?.message ?? 'Une erreur est survenue. Veuillez réessayer.';
+          error?.error?.error?.message ?? this.translateService.instant('sources.suggest.error');
         this.submitError.set(message);
       },
     });
@@ -92,11 +96,11 @@ export class SourcesComponent implements OnInit {
     this.form.reset();
   }
 
-  get urlControl() {
+  get urlControl(): AbstractControl {
     return this.form.get('url')!;
   }
 
-  get reasonControl() {
+  get reasonControl(): AbstractControl {
     return this.form.get('reason')!;
   }
 }
