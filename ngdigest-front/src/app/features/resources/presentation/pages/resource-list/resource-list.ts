@@ -71,7 +71,7 @@ export class ResourceListComponent {
   private intersectionObserver?: IntersectionObserver;
 
   protected readonly groupedResources = computed<ResourceGroup[]>(() => {
-    const resources = this.resources();
+    const resources = this.resources().filter((r): r is Resource & { publishedAt: string } => r.publishedAt !== null);
     const cutoff7d = daysAgo(7);
     const cutoff30d = daysAgo(30);
     const cutoff90d = daysAgo(90);
