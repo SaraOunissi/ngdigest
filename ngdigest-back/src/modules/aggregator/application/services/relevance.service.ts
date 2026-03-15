@@ -56,7 +56,9 @@ export class RelevanceService {
     if (!url) return false;
     try {
       const hostname = new URL(url).hostname.replace(/^www\./, '');
-      return (TRUSTED_DOMAINS as readonly string[]).includes(hostname);
+      return (TRUSTED_DOMAINS as readonly string[]).some(
+        (domain) => hostname === domain || hostname.endsWith(`.${domain}`),
+      );
     } catch {
       return false;
     }

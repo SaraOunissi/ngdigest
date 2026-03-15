@@ -104,24 +104,25 @@ export class SerpapiNewsFetcher {
   async fetch(): Promise<Partial<Resource>[]> {
     const apiKey = this.configService.get<string>('serpapi.apiKey', '');
 
-    const [frameworkResults, communityResults, frenchResults] =
+    const [expertBlogResults, communityResults, frenchResults] =
       await Promise.all([
-        this.fetchRecentFrameworkSearch(apiKey),
+        this.fetchExpertBlogsSearch(apiKey),
         this.fetchCommunitySearch(apiKey),
         this.fetchFrenchCommunitySearch(apiKey),
       ]);
 
-    return [...frameworkResults, ...communityResults, ...frenchResults];
+    return [...expertBlogResults, ...communityResults, ...frenchResults];
   }
 
   /**
-   * Searches for recent Angular framework content from the past week.
+   * Searches Angular expert blogs for recent articles.
+   * Targets Angular-specific authors and official sources — no job boards.
    */
-  private async fetchRecentFrameworkSearch(
+  private async fetchExpertBlogsSearch(
     apiKey: string,
   ): Promise<Partial<Resource>[]> {
-    const currentYear = new Date().getFullYear();
-    const query = `"Angular framework" ${currentYear} -AngularJS`;
+    const query =
+      'Angular site:blog.angular.dev OR site:netbasal.com OR site:ultimatecourses.com OR site:angular-university.io OR site:indepth.dev OR site:ninja-squad.fr';
 
     try {
       const response = (await getJson('google', {
@@ -129,7 +130,7 @@ export class SerpapiNewsFetcher {
         api_key: apiKey,
         hl: 'en',
         gl: 'us',
-        tbs: 'qdr:w',
+        tbs: 'qdr:m',
         num: 10,
       })) as GoogleSearchResponse;
 
@@ -141,28 +142,33 @@ export class SerpapiNewsFetcher {
           url: item.link ?? '',
           source: this.extractDomain(item.link),
           publishedAt: resolvePublishedAt(item),
-          tags: ['angular', 'framework'],
+          tags: ['angular', 'expert'],
           language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
           isRead: false,
           isFavorite: false,
         }));
 
+      const withDate = mapped.filter((item) => item.publishedAt !== null);
+      this.logger.log(
+        `SerpAPI [expert-blogs]: ${mapped.length} results, ${withDate.length} with date`,
+      );
       return mapped;
     } catch (error) {
-      this.logger.error('Failed to fetch framework search', error);
+      this.logger.error('Failed to fetch expert blogs search', error);
       return [];
     }
   }
 
   /**
-   * Searches for Angular content on trusted English community sites.
+   * Searches for Angular content on trusted English community platforms.
+   * Dev.to is intentionally excluded — already covered by DevtoFetcher.
    */
   private async fetchCommunitySearch(
     apiKey: string,
   ): Promise<Partial<Resource>[]> {
     const query =
-      '"Angular" Signals OR SSR OR "standalone" site:dev.to OR site:medium.com OR site:indepth.dev';
+      'Angular Signals OR SSR OR standalone OR zoneless site:medium.com OR site:hashnode.com OR site:betterprogramming.pub OR site:indepth.dev';
 
     try {
       const response = (await getJson('google', {
@@ -189,6 +195,10 @@ export class SerpapiNewsFetcher {
           isFavorite: false,
         }));
 
+      const withDate = mapped.filter((item) => item.publishedAt !== null);
+      this.logger.log(
+        `SerpAPI [community]: ${mapped.length} results, ${withDate.length} with date`,
+      );
       return mapped;
     } catch (error) {
       this.logger.error('Failed to fetch community search', error);
@@ -198,14 +208,17 @@ export class SerpapiNewsFetcher {
 
   /**
    * Searches for Angular content on French community sites.
-   * Uses combined URL + title detection: articles from dev.to/medium included in
-   * this search may be English even though the search targets French results.
+   * Uses tbs:qdr:m to restrict to the last month, so articles without a
+   * parseable date get a fallback of 15 days ago (safe approximation).
    */
   private async fetchFrenchCommunitySearch(
     apiKey: string,
   ): Promise<Partial<Resource>[]> {
     const query =
-      '"Angular" site:dev.to OR site:medium.com OR site:grafikart.fr OR site:jesuisundev.com';
+      'Angular site:grafikart.fr OR site:jesuisundev.com OR site:bonjour-angular.com OR site:devtobecurious.fr OR site:angulardevs.fr OR site:easyangularkit.com';
+
+    const fifteenDaysAgo = new Date();
+    fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
 
     try {
       const response = (await getJson('google', {
@@ -213,6 +226,7 @@ export class SerpapiNewsFetcher {
         api_key: apiKey,
         hl: 'fr',
         gl: 'fr',
+        tbs: 'qdr:m',
         num: 10,
       })) as GoogleSearchResponse;
 
@@ -223,7 +237,7 @@ export class SerpapiNewsFetcher {
           title: item.title ?? '',
           url: item.link ?? '',
           source: this.extractDomain(item.link),
-          publishedAt: resolvePublishedAt(item),
+          publishedAt: resolvePublishedAt(item) ?? fifteenDaysAgo,
           tags: ['angular', 'french'],
           language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
@@ -231,6 +245,12 @@ export class SerpapiNewsFetcher {
           isFavorite: false,
         }));
 
+      const withRealDate = mapped.filter(
+        (item) => item.publishedAt !== fifteenDaysAgo,
+      );
+      this.logger.log(
+        `SerpAPI [french]: ${mapped.length} results, ${withRealDate.length} with real date, ${mapped.length - withRealDate.length} with fallback date`,
+      );
       return mapped;
     } catch (error) {
       this.logger.error('Failed to fetch french community search', error);

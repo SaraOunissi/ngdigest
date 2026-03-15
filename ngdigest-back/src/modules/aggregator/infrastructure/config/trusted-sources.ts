@@ -21,12 +21,17 @@ export const TRUSTED_DOMAINS: readonly string[] = [
   // Ecosystem
   'ngrx.io',
   'ngx-translate.org',
-  // French community
+  // French Angular community
   'grafikart.fr',
   'jesuisundev.com',
   'la-cascade.io',
   'putaindecode.io',
   'alticreation.com',
+  'ninja-squad.fr',
+  'bonjour-angular.com',
+  'devtobecurious.fr',
+  'angulardevs.fr',
+  'easyangularkit.com',
   // General web dev
   'css-tricks.com',
   'smashingmagazine.com',
