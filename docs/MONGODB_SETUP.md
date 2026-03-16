@@ -41,7 +41,7 @@
 4. Remplacer `<username>` et `<password>` par les identifiants créés à l'étape 3
 5. Ajouter le nom de la base de données (`ngdigest`) dans l'URI :
    ```
-   mongodb+srv://monuser:monpassword@cluster0.xxxxx.mongodb.net/ngdigest?retryWrites=true&w=majority
+   mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.xxxxx.mongodb.net/ngdigest?retryWrites=true&w=majority
    ```
 
 ## 5. Configurer le projet
