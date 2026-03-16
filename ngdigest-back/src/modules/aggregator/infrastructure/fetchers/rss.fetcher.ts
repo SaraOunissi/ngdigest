@@ -9,6 +9,12 @@ interface RssFeedConfig {
   readonly url: string;
   readonly source: string;
   readonly language: ResourceLanguage;
+  /**
+   * Optional title filter for multi-topic sites.
+   * When provided, only items whose title matches are kept.
+   * Use for generalist blogs (e.g. grafikart) that mix Angular with other topics.
+   */
+  readonly titleFilter?: RegExp;
 }
 
 /**
@@ -25,9 +31,16 @@ const RSS_FEEDS: readonly RssFeedConfig[] = [
   },
   // Expert blogs EN
   {
-    url: 'https://blog.ninja-squad.fr/atom.xml',
-    source: 'blog.ninja-squad.fr',
+    url: 'https://blog.ninja-squad.com/atom.xml',
+    source: 'blog.ninja-squad.com',
     language: 'en',
+  },
+  // French community — generalist sites filtered to Angular-only articles
+  {
+    url: 'https://grafikart.fr/feed.rss',
+    source: 'grafikart.fr',
+    language: 'fr',
+    titleFilter: /angular/i,
   },
 ];
 
@@ -69,6 +82,7 @@ export class RssFetcher {
     const feed = await this.parser.parseURL(config.url);
     return feed.items
       .filter((item) => Boolean(item.title) && Boolean(item.link))
+      .filter((item) => !config.titleFilter || config.titleFilter.test(item.title ?? ''))
       .map((item) => ({
         title: item.title ?? '',
         url: item.link ?? '',

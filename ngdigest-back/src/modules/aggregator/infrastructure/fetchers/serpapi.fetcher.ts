@@ -74,8 +74,30 @@ function extractDateFromDisplayedLink(displayedLink: string): Date | null {
 }
 
 /**
+ * Tries to extract a publication date from a URL path.
+ * Blog posts commonly embed their date in the path: /2024/05/22/article or /2024/05/article.
+ * Returns null for undated paths like /formations/angularjs or /docs/components.
+ */
+function extractDateFromUrl(url: string): Date | null {
+  try {
+    const pathname = new URL(url).pathname;
+    const match = /\/(\d{4})\/(\d{1,2})(?:\/(\d{1,2}))?(?:\/|$)/.exec(pathname);
+    if (!match) return null;
+    const year = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10);
+    const day = match[3] ? parseInt(match[3], 10) : 1;
+    if (year < 2015 || year > 2030 || month < 1 || month > 12 || day < 1 || day > 31) return null;
+    const date = new Date(Date.UTC(year, month - 1, day));
+    return isNaN(date.getTime()) ? null : date;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Resolves the best available publication date for a SerpAPI organic result.
- * Tries in order: date field → snippet prefix → displayed_link (Medium "N likes · X ago").
+ * Tries in order: date field → snippet prefix → displayed_link → URL path pattern.
+ * Returns null if no date can be determined — callers should reject dateless articles.
  */
 function resolvePublishedAt(item: OrganicResult): Date | null {
   if (item.date) {
@@ -86,7 +108,14 @@ function resolvePublishedAt(item: OrganicResult): Date | null {
     const fromSnippet = extractDateFromSnippet(item.snippet);
     if (fromSnippet) return fromSnippet;
   }
-  if (item.displayed_link) return extractDateFromDisplayedLink(item.displayed_link);
+  if (item.displayed_link) {
+    const fromLink = extractDateFromDisplayedLink(item.displayed_link);
+    if (fromLink) return fromLink;
+  }
+  if (item.link) {
+    const fromUrl = extractDateFromUrl(item.link);
+    if (fromUrl) return fromUrl;
+  }
   return null;
 }
 
@@ -122,7 +151,7 @@ export class SerpapiNewsFetcher {
     apiKey: string,
   ): Promise<Partial<Resource>[]> {
     const query =
-      'Angular site:blog.angular.dev OR site:netbasal.com OR site:ultimatecourses.com OR site:angular-university.io OR site:indepth.dev OR site:ninja-squad.fr';
+      'Angular site:blog.angular.dev OR site:netbasal.com OR site:ultimatecourses.com OR site:angular-university.io OR site:indepth.dev OR site:ninja-squad.com OR site:angular.love';
 
     try {
       const response = (await getJson('google', {
@@ -208,8 +237,10 @@ export class SerpapiNewsFetcher {
 
   /**
    * Searches for Angular content on French community sites.
-   * Uses tbs:qdr:m to restrict to the last month, so articles without a
-   * parseable date get a fallback of 15 days ago (safe approximation).
+   * Uses tbs:qdr:3m (3 months) since small FR sites publish infrequently.
+   * Articles without any parseable date (SerpAPI field, snippet, or URL path) are left
+   * with publishedAt=null and will be rejected by the aggregation date filter — this
+   * prevents stale evergreen content (docs, tutorials, courses) from slipping through.
    */
   private async fetchFrenchCommunitySearch(
     apiKey: string,
@@ -217,17 +248,14 @@ export class SerpapiNewsFetcher {
     const query =
       'Angular site:grafikart.fr OR site:jesuisundev.com OR site:bonjour-angular.com OR site:devtobecurious.fr OR site:angulardevs.fr OR site:easyangularkit.com';
 
-    const fifteenDaysAgo = new Date();
-    fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
-
     try {
       const response = (await getJson('google', {
         q: query,
         api_key: apiKey,
         hl: 'fr',
         gl: 'fr',
-        tbs: 'qdr:m',
-        num: 10,
+        tbs: 'qdr:3m',
+        num: 20,
       })) as GoogleSearchResponse;
 
       const items = response.organic_results ?? [];
@@ -237,7 +265,7 @@ export class SerpapiNewsFetcher {
           title: item.title ?? '',
           url: item.link ?? '',
           source: this.extractDomain(item.link),
-          publishedAt: resolvePublishedAt(item) ?? fifteenDaysAgo,
+          publishedAt: resolvePublishedAt(item),
           tags: ['angular', 'french'],
           language: detectLanguage(item.link, item.title, item.snippet),
           score: 0,
@@ -245,11 +273,9 @@ export class SerpapiNewsFetcher {
           isFavorite: false,
         }));
 
-      const withRealDate = mapped.filter(
-        (item) => item.publishedAt !== fifteenDaysAgo,
-      );
+      const withDate = mapped.filter((item) => item.publishedAt !== null);
       this.logger.log(
-        `SerpAPI [french]: ${mapped.length} results, ${withRealDate.length} with real date, ${mapped.length - withRealDate.length} with fallback date`,
+        `SerpAPI [french]: ${mapped.length} results, ${withDate.length} with date`,
       );
       return mapped;
     } catch (error) {

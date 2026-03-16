@@ -18,6 +18,8 @@ export const TRUSTED_DOMAINS: readonly string[] = [
   'netbasal.com',
   'angular-university.io',
   'ultimatecourses.com',
+  'ninja-squad.com',
+  'angular.love',
   // Ecosystem
   'ngrx.io',
   'ngx-translate.org',
@@ -27,7 +29,6 @@ export const TRUSTED_DOMAINS: readonly string[] = [
   'la-cascade.io',
   'putaindecode.io',
   'alticreation.com',
-  'ninja-squad.fr',
   'bonjour-angular.com',
   'devtobecurious.fr',
   'angulardevs.fr',

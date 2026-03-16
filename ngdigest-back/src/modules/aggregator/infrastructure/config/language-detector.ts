@@ -9,6 +9,8 @@ export const FRENCH_DOMAINS: readonly string[] = [
   'la-cascade.io',
   'putaindecode.io',
   'alticreation.com',
+  'easyangularkit.com',
+  'bonjour-angular.com',
 ] as const;
 
 /** Matches common French grammatical function words using word boundaries. */
