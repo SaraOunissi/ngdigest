@@ -29,7 +29,7 @@ export class AggregationService implements OnModuleInit {
   onModuleInit(): void {
     const cronExpression = this.configService.get<string>(
       'AGGREGATOR_CRON',
-      '0 */6 * * *',
+      '0 */12 * * *',
     );
 
     const job = CronJob.from({

@@ -66,7 +66,7 @@ cp .env.example .env
 | `MONGODB_URI` | `mongodb://localhost:27017/ngdigest` | MongoDB connection string |
 | `JWT_SECRET` | — | JWT signing secret |
 | `JWT_EXPIRES_IN` | `1d` | JWT token expiry |
-| `AGGREGATOR_CRON` | `0 */6 * * *` | Cron schedule for feed aggregation |
+| `AGGREGATOR_CRON` | `0 */12 * * *` | Cron schedule for feed aggregation |
 
 ## Scripts
 
