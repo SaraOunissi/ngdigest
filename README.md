@@ -1,72 +1,102 @@
 # NgDigest
 
-Plateforme d'agrégation et de veille technologique pour la communauté Angular. NgDigest collecte automatiquement des ressources (articles, vidéos, tutoriels) depuis diverses sources et les présente dans une interface moderne.
+**Angular tech-watch aggregator** — automatically collects, scores, and surfaces the best Angular resources from across the web.
 
-## Stack technique
+🌐 **Live at [ngdigest.co](https://ngdigest.co)**
 
-| Couche     | Technologie                              |
-| ---------- | ---------------------------------------- |
-| Frontend   | Angular 21, SCSS (BEM), Angular Material |
-| Backend    | NestJS 11, Mongoose, Passport JWT        |
-| Base de données | MongoDB Atlas                       |
-| Agrégation | NestJS Schedule (cron), Dev.to API, SerpAPI (Google Search), RSS Parser |
+---
 
-## Structure du monorepo
+## What it does
+
+NgDigest runs a content pipeline every 12 hours, pulling articles, tutorials, and announcements from multiple sources, scoring each result for relevance, and presenting them in a clean bilingual (FR/EN) interface.
+
+**Relevance scoring system (0–6 pts)**
+- `+3` — domain is in the curated whitelist (48 trusted sources)
+- `+2` — title contains Angular-related keywords (20 signal words)
+- `+1` — published within the last 7 days
+
+Only resources scoring ≥ 3 are stored and surfaced.
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Angular 21, Signals, @ngx-translate, SCSS (BEM) |
+| Backend | NestJS 11, Mongoose, Clean Architecture (DDD) |
+| Database | MongoDB Atlas |
+| Aggregation | **SerpApi** (Google Search + News), Dev.to API, RSS Parser |
+| Deployment | Railway (API) · Vercel (Frontend) |
+| Domain | Namecheap → ngdigest.co |
+
+---
+
+## Monorepo structure
 
 ```
 ngdigest/
-├── ngdigest-front/          # Application Angular (frontend)
+├── ngdigest-front/          # Angular 21 application
 │   └── src/app/
-│       ├── core/            # Services singleton, guards, interceptors
-│       ├── shared/          # Composants, pipes et directives réutilisables
-│       └── features/        # Modules métier (DDD)
+│       ├── core/            # Singleton services, guards, interceptors
+│       ├── shared/          # Reusable components, pipes, directives
+│       └── features/        # Domain-driven feature modules
 │           └── resources/
 │               ├── domain/
 │               ├── application/
 │               ├── infrastructure/
 │               └── presentation/
-├── ngdigest-back/           # API NestJS (backend)
+├── ngdigest-back/           # NestJS 11 REST API
 │   └── src/
-│       ├── config/          # Configuration (auth, database)
+│       ├── config/          # App configuration (database, env)
 │       ├── common/          # Decorators, filters, interceptors, pipes
 │       └── modules/
-│           ├── resources/   # Gestion des ressources
-│           ├── auth/        # Authentification JWT
-│           └── aggregator/  # Collecte automatique de contenu
-└── docs/                    # Documentation du projet
+│           ├── resources/   # Resource management
+│           ├── aggregator/  # Content collection pipeline
+│           └── sources/     # Source whitelist & suggestions
+└── docs/                    # Architecture documentation
 ```
 
-## Installation
+---
 
-### Prérequis
+## SerpApi integration
 
-- Node.js >= 18
-- npm
-- Un cluster MongoDB Atlas (voir [docs/MONGODB_SETUP.md](docs/MONGODB_SETUP.md))
+NgDigest uses [SerpApi](https://serpapi.com) to run 3 parallel Google Search queries per aggregation cycle:
 
-### Backend
-
-```bash
-cd ngdigest-back
-npm install
-cp .env.example .env
-# Configurer les variables dans .env (MONGODB_URI, JWT_SECRET)
-npm run start:dev
+```
+"Angular expert blogs"        → expert community content
+"Angular community news"      → ecosystem announcements
+"Angular tutorials fr"        → French-language resources
 ```
 
-Le serveur API démarre sur `http://localhost:3000` avec le préfixe `/api`.
+Each query uses `tbs=qdr:w` (past week) with dynamic year injection to maximize signal-to-noise ratio. Results are deduplicated by URL and run through the relevance scoring pipeline before storage.
 
-### Frontend
+→ See [`ngdigest-back/README.md`](./ngdigest-back/README.md) for implementation details.
 
-```bash
-cd ngdigest-front
-npm install
-ng serve
-```
+---
 
-L'application démarre sur `http://localhost:4200`.
+## Getting started
 
-## Documentation
+See individual READMEs:
+- [`ngdigest-front/README.md`](./ngdigest-front/README.md) — Angular frontend setup
+- [`ngdigest-back/README.md`](./ngdigest-back/README.md) — NestJS backend setup
 
-- [Configuration MongoDB Atlas](docs/MONGODB_SETUP.md)
-- [Architecture DDD/Clean](docs/ARCHITECTURE.md)
+---
+
+## Features
+
+- ✅ Real-time search with debounce (300ms)
+- ✅ Infinite scroll with pagination
+- ✅ Relevance score badge + tooltip on each card
+- ✅ Full FR/EN i18n (74 translation keys)
+- ✅ SEO — dynamic meta, og:tags, hreflang, sitemap.xml
+- ✅ Angular version banner (live from GitHub API)
+- ✅ Source suggestion form
+- ✅ Automatic aggregation cron (every 12h)
+- ✅ Weekly retention cleanup (soft-delete by score/age)
+
+---
+
+## Development
+
+Built with [Claude Code](https://claude.ai/code) as AI-assisted development tooling — used for scaffolding and code review, with full architecture ownership.
