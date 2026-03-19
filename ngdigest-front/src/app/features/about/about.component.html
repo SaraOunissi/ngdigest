@@ -8,8 +8,46 @@
 <section class="about">
   <div class="about__content">
     <div class="about__section">
+      <h2 class="about__section-title">{{ 'about.why.title' | translate }}</h2>
+      <p class="about__text">{{ 'about.why.text' | translate }}</p>
+    </div>
+
+    <div class="about__section">
       <h2 class="about__section-title">{{ 'about.howItWorks.title' | translate }}</h2>
       <p class="about__text">{{ 'about.howItWorks.text' | translate }}</p>
+    </div>
+
+    <div class="about__section">
+      <h2 class="about__section-title">{{ 'about.scoring.title' | translate }}</h2>
+      <p class="about__text">{{ 'about.scoring.text' | translate }}</p>
+      <ul class="about__list">
+        <li class="about__list-item">{{ 'about.scoring.trustedSource' | translate: { count: trustedSourceCount() } }}</li>
+        <li class="about__list-item">{{ 'about.scoring.keyword' | translate }}</li>
+        <li class="about__list-item">{{ 'about.scoring.recency' | translate }}</li>
+      </ul>
+      <p class="about__text about__text--muted">{{ 'about.scoring.threshold' | translate }}</p>
+    </div>
+
+    <div class="about__section">
+      <h2 class="about__section-title">{{ 'about.stack.title' | translate }}</h2>
+      <ul class="about__list">
+        <li class="about__list-item">{{ 'about.stack.frontend' | translate }}</li>
+        <li class="about__list-item">{{ 'about.stack.backend' | translate }}</li>
+        <li class="about__list-item">{{ 'about.stack.aggregation' | translate }}</li>
+        <li class="about__list-item">{{ 'about.stack.deployment' | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="about__section">
+      <h2 class="about__section-title">{{ 'about.openSource.title' | translate }}</h2>
+      <p class="about__text">{{ 'about.openSource.text' | translate }}</p>
+      <a
+        class="about__github-link"
+        href="https://github.com/saraouni/ngdigest"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'about.openSource.githubLabel' | translate"
+      >{{ 'about.openSource.githubLabel' | translate }}</a>
     </div>
 
     <div class="about__section">
