@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara Ounissi — SerpApi Application</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #2d333b;
+    --accent: #3fb950;
+    --accent2: #58a6ff;
+    --accent3: #f78166;
+    --accent4: #d2a8ff;
+    --accent5: #ffa657;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --muted2: #484f58;
+    --key: #79c0ff;
+    --string: #a5d6ff;
+    --number: #ffa657;
+    --bool: #ff7b72;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .topbar .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #f78166; }
+  .dot-y { background: #ffa657; }
+  .dot-g { background: #3fb950; }
+  .topbar .title {
+    margin-left: 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .topbar .serpapi-badge {
+    margin-left: auto;
+    background: var(--accent);
+    color: #0d1117;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SEARCH BAR ── */
+  .search-section {
+    margin-bottom: 28px;
+    animation: fadeDown 0.6s ease both;
+  }
+  .search-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .search-icon { color: var(--muted); font-size: 16px; }
+  .search-query { color: var(--accent5); font-weight: 500; }
+  .search-engine {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--muted2);
+  }
+
+  /* ── META ── */
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    animation: fadeDown 0.7s ease both 0.1s;
+  }
+  .meta-row span { display: flex; align-items: center; gap: 6px; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .badge-green { background: rgba(63,185,80,0.12); color: var(--accent); border: 1px solid rgba(63,185,80,0.25); }
+  .badge-blue { background: rgba(88,166,255,0.12); color: var(--accent2); border: 1px solid rgba(88,166,255,0.25); }
+  .badge-purple { background: rgba(210,168,255,0.12); color: var(--accent4); border: 1px solid rgba(210,168,255,0.25); }
+  .badge-orange { background: rgba(255,166,87,0.12); color: var(--accent5); border: 1px solid rgba(255,166,87,0.25); }
+  .badge-red { background: rgba(247,129,102,0.12); color: var(--accent3); border: 1px solid rgba(247,129,102,0.25); }
+
+  /* ── PANEL TITLE ── */
+  .section-title {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--muted2);
+  }
+
+  /* ── JSON BLOCK ── */
+  .json-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    font-size: 13px;
+    line-height: 1.9;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both 0.2s;
+  }
+  .json-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent4));
+  }
+  .json-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--muted2);
+  }
+  .json-file { font-size: 12px; color: var(--muted); }
+  .json-status {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .k { color: var(--key); }
+  .s { color: var(--string); }
+  .n { color: var(--number); }
+  .b { color: var(--bool); }
+  .cm { color: var(--muted); font-style: italic; }
+  .indent-1 { padding-left: 20px; }
+  .indent-2 { padding-left: 40px; }
+  .indent-3 { padding-left: 60px; }
+  .hl { background: rgba(63,185,80,0.15); border-left: 3px solid var(--accent); padding-left: 10px; margin-left: -10px; border-radius: 2px; }
+
+  /* ── ORGANIC RESULT CARD ── */
+  .organic-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 16px 0;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .organic-card:hover { border-color: var(--accent2); }
+  .organic-rank {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--accent);
+    color: #0d1117;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+  .organic-url { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .organic-title { color: var(--accent2); font-size: 15px; font-weight: 600; font-family: 'Syne', sans-serif; margin-bottom: 6px; }
+  .organic-snippet { font-size: 12px; color: #8b949e; line-height: 1.7; }
+
+  /* ── COVER LETTER ── */
+  .letter-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeUp 0.6s ease both 0.4s;
+  }
+  .letter-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent4));
+  }
+  .letter-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .letter-from h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .letter-from .role {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .letter-from .contact {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2;
+  }
+  .letter-from .contact a { color: var(--accent2); text-decoration: none; }
+  .letter-targets {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .letter-targets .target-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+
+  .letter-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: #cdd9e5;
+  }
+  .letter-body p { margin-bottom: 18px; }
+  .letter-body p:last-child { margin-bottom: 0; }
+  .em { color: var(--accent); font-weight: 600; }
+  .em2 { color: var(--accent2); font-weight: 600; }
+  .em3 { color: var(--accent4); font-weight: 600; }
+
+  .letter-sign {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--muted2);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .letter-sign strong { color: var(--text); font-size: 15px; font-family: 'Syne', sans-serif; display: block; margin-top: 8px; font-weight: 700; }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both 0.5s;
+  }
+  @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .skill-card .label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .skill-card .value {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .skill-card .bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .skill-card .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    animation: grow 1.2s ease both 0.8s;
+  }
+  @keyframes grow { from { width: 0; } }
+
+  /* ── FOOTER ── */
+  .footer-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    animation: fadeUp 0.6s ease both 0.6s;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-cta .availability { font-size: 12px; }
+  .footer-cta .availability strong {
+    display: block;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .footer-cta .cta-btn {
+    background: var(--accent);
+    color: #0d1117;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s;
+    display: inline-block;
+  }
+  .footer-cta .cta-btn:hover { opacity: 0.85; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .typing-cursor::after {
+    content: '█';
+    color: var(--accent);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="dot dot-r"></div>
+    <div class="dot dot-y"></div>
+    <div class="dot dot-g"></div>
+    <span class="title">serpapi-candidate-search.json — Response 200 OK</span>
+    <span class="serpapi-badge">SerpApi</span>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div class="search-section">
+    <div class="search-label">▸ GET /search</div>
+    <div class="search-bar">
+      <span class="search-icon">⌕</span>
+      <span class="search-query">q=developer+advocate+french+javascript+arabic+8yrs+experience+tech+blog+lyon</span>
+      <span class="search-engine">engine: talent_pool</span>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="meta-row">
+    <span>⏱ response_time: <strong style="color:var(--accent)">available end of April 2026</strong></span>
+    <span><span class="badge badge-green">🇫🇷 French Native</span></span>
+    <span><span class="badge badge-orange">⬡ JavaScript 8+ yrs</span></span>
+    <span><span class="badge badge-purple">✦ Maghreb market bridge 🇩🇿🇹🇳🇲🇦</span></span>
+    <span><span class="badge badge-blue">✍ TheTrendyCoder</span></span>
+    <span><span class="badge badge-red">⬡ NgDigest — SerpApi in prod</span></span>
+  </div>
+
+  <!-- JSON RESULT BLOCK -->
+  <div class="section-title">// organic_results[0] — score: 1.000</div>
+  <div class="json-block">
+    <div class="json-header">
+      <span class="json-file">📄 candidate.json</span>
+      <span class="json-status">✓ BEST MATCH</span>
+    </div>
+
+    <div>{</div>
+    <div class="indent-1"><span class="k">"search_metadata"</span>: {</div>
+    <div class="indent-2"><span class="k">"status"</span>: <span class="s">"Success"</span>,</div>
+    <div class="indent-2"><span class="k">"positions_targeted"</span>: [<span class="s">"French DA"</span>, <span class="s">"JavaScript DA"</span>, <span class="s">"Arabic DA (Maghreb strategy)"</span>],</div>
+    <div class="indent-2"><span class="k">"unique_candidate"</span>: <span class="b">true</span>, <span class="cm">// covers all 3 roles in a single profile</span></div>
+    <div class="indent-1">},</div>
+
+    <div class="indent-1">&nbsp;</div>
+    <div class="indent-1"><span class="k">"organic_results"</span>: [</div>
+    <div class="indent-2">{</div>
+
+    <div class="organic-card indent-2" style="margin-left: 40px;">
+      <span class="organic-rank">#1 ORGANIC RESULT</span>
+      <div class="organic-url">linkedin.com/in/sara-ounissi · <a href="https://github.com/SaraOunissi/ngdigest" style="color:var(--accent2); text-decoration:none;">github.com/SaraOunissi</a> · thetrendycoder.com · ngdigest.co</div>
+      <div class="organic-title">Sara Ounissi — Senior Frontend Engineer & Developer Advocate</div>
+      <div class="organic-snippet">
+        8+ years JavaScript/TypeScript/Angular · Native French C2 · Arabic background ·
+        Founder of TheTrendyCoder (50+ articles, interviews, mentoring) ·
+        Lyon, France · Available in ~1 month · Remote-first ✓
+      </div>
+    </div>
+
+    <div class="indent-2">&nbsp;</div>
+    <div class="indent-2 hl"><span class="k">"languages"</span>: {</div>
+    <div class="indent-3 hl"><span class="k">"french"</span>: { <span class="k">"level"</span>: <span class="s">"C2 Native"</span>, <span class="k">"priority"</span>: <span class="n">1</span>, <span class="k">"type"</span>: <span class="s">"primary"</span> }, <span class="cm">// ← French DA role ✓</span></div>
+    <div class="indent-3 hl"><span class="k">"arabic"</span>: {</div>
+    <div class="indent-3 hl" style="padding-left:80px;"><span class="k">"literacy"</span>: <span class="s">"reads & writes MSA — comprehension strong, production rusty, not production-ready for professional content"</span>,</div>
+    <div class="indent-3 hl" style="padding-left:80px;"><span class="k">"dialect"</span>: <span class="s">"Algerian native — understands Tunisian & Moroccan naturally"</span>,</div>
+    <div class="indent-3 hl" style="padding-left:80px;"><span class="k">"market_approach"</span>: <span class="s">"Maghreb (DZ/TN/MA) via French + dialect + cultural fluency"</span>,</div>
+    <div class="indent-3 hl" style="padding-left:80px;"><span class="k">"cultural_codes"</span>: <span class="s">"Algerian origins, raised in France — navigates both sides authentically"</span>,</div>
+    <div class="indent-3 hl" style="padding-left:80px;"><span class="k">"role"</span>: <span class="s">"Maghreb market bridge + Arabic DA support if needed"</span></div>
+    <div class="indent-3 hl">}, <span class="cm">// honest framing — market bridge, not MSA content writer ✓</span></div>
+    <div class="indent-3 hl"><span class="k">"english"</span>: { <span class="k">"level"</span>: <span class="s">"C1 Professional"</span>, <span class="k">"experience"</span>: <span class="s">"Montana State University + Sublime New York"</span> }</div>
+    <div class="indent-2 hl">},</div>
+
+    <div class="indent-2">&nbsp;</div>
+    <div class="indent-2"><span class="k">"tech_stack"</span>: {</div>
+    <div class="indent-3"><span class="k">"javascript"</span>: <span class="s">"ES6+, 8+ yrs, Angular v2→21, TypeScript, RxJS, Node.js"</span>, <span class="cm">// ← JavaScript DA role ✓</span></div>
+    <div class="indent-3"><span class="k">"frontend_depth"</span>: <span class="s">"architecture, UI/UX, WCAG, design systems, Figma"</span>,</div>
+    <div class="indent-3"><span class="k">"currently_learning"</span>: <span class="s">"Angular 21 Signals (production), NestJS Clean Architecture, SerpApi advanced querying"</span></div>
+    <div class="indent-2">},</div>
+
+    <div class="indent-2">&nbsp;</div>
+    <div class="indent-2"><span class="k">"content_creation"</span>: {</div>
+    <div class="indent-3"><span class="k">"blog"</span>: <span class="s">"TheTrendyCoder — 50+ tutorials, debug walkthroughs, interviews"</span>,</div>
+    <div class="indent-3"><span class="k">"mentoring"</span>: <span class="b">true</span>,</div>
+    <div class="indent-3"><span class="k">"diversity_advocacy"</span>: <span class="s">"published interviews with female tech experts"</span>,</div>
+    <div class="indent-3"><span class="k">"social_media"</span>: <span class="s">"TikTok personal finance content creator"</span>,</div>
+    <div class="indent-3"><span class="k">"ethics_council"</span>: <span class="b">true</span> <span class="cm">// Norsys Ethics Council since 2022</span></div>
+    <div class="indent-2">},</div>
+
+    <div class="indent-2">&nbsp;</div>
+    <div class="indent-2"><span class="k">"portfolio_project"</span>: {</div>
+    <div class="indent-3"><span class="k">"name"</span>: <span class="s">"NgDigest"</span>, <span class="cm">// ngdigest.co — live in production</span></div>
+    <div class="indent-3"><span class="k">"description"</span>: <span class="s">"Angular 21 tech-watch aggregator powered by SerpApi"</span>,</div>
+    <div class="indent-3"><span class="k">"serpapi_integration"</span>: <span class="b">true</span>, <span class="cm">// 3 parallel SerpApi queries, custom relevance scoring 0-6pts</span></div>
+    <div class="indent-3"><span class="k">"stack"</span>: <span class="s">"Angular 21 Signals + NestJS 11 + MongoDB Atlas + Railway + Vercel"</span>,</div>
+    <div class="indent-3"><span class="k">"features"</span>: [<span class="s">"whitelist domain scoring"</span>, <span class="s">"keyword relevance"</span>, <span class="s">"recency scoring"</span>, <span class="s">"FR/EN i18n"</span>, <span class="s">"SEO"</span>],</div>
+    <div class="indent-3"><span class="k">"source_code"</span>: <span class="s">"github.com/SaraOunissi/ngdigest — public repository"</span>, <span class="cm">// <a href="https://github.com/SaraOunissi/ngdigest" style="color:var(--accent2); text-decoration:none;">github.com/SaraOunissi/ngdigest</a></span></div>
+    <div class="indent-3"><span class="k">"ai_tooling"</span>: <span class="s">"Claude Code (AI-assisted dev) — scaffolding & code review; full architecture ownership"</span>, <span class="cm">// modern dev workflow</span></div>
+    <div class="indent-3"><span class="k">"url"</span>: <span class="s">"https://ngdigest.co"</span></div>
+    <div class="indent-2">},</div>
+
+    <div class="indent-2">&nbsp;</div>
+    <div class="indent-2"><span class="k">"availability"</span>: <span class="s">"end of April 2026"</span>,</div>
+    <div class="indent-2"><span class="k">"remote_ready"</span>: <span class="b">true</span>,</div>
+    <div class="indent-2"><span class="k">"motivation_score"</span>: <span class="n">10</span> <span class="cm">// see cover letter below</span></div>
+
+    <div class="indent-2">}</div>
+    <div class="indent-1">]</div>
+    <div>}</div>
+  </div>
+
+  <!-- COVER LETTER -->
+  <div class="section-title">// cover_letter.txt — parsed content</div>
+  <div class="letter-block">
+    <div class="letter-header">
+      <div class="letter-from">
+        <div class="role">Unsolicited application — 3 roles · 1 profile</div>
+        <h1>Sara Ounissi</h1>
+        <div class="contact">
+          📍 Bron (Lyon), France<br>
+          📱 <a href="tel:+33769162105">+33 7 69 16 21 05</a><br>
+          ✉ <a href="/cdn-cgi/l/email-protection#4a392b382b64253f24233939230a2d272b232664292527"><span class="__cf_email__" data-cfemail="6e1d0f1c0f40011b00071d1d072e09030f0702400d0103">[email&#160;protected]</span></a><br>
+          🔗 <a href="https://linkedin.com/in/sara-ounissi-8b18a9b7">LinkedIn</a> · <a href="#">TheTrendyCoder</a>
+        </div>
+      </div>
+      <div class="letter-targets">
+        <div class="target-label">Roles targeted</div>
+        <span class="badge badge-green">🇫🇷 French Developer Advocate</span>
+        <span class="badge badge-orange">⬡ JavaScript Developer Advocate</span>
+        <span class="badge badge-purple">🇩🇿🇹🇳🇲🇦 Maghreb market expansion</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+
+      <p>Hi SerpApi team,</p>
+
+      <p>
+        I'm applying to three roles at once — and I'll be upfront about why, because your culture deserves that.
+        This isn't opportunism. It's because I genuinely cover two of these roles outright —
+        <span class="em">senior JavaScript developer</span> with 8+ years, <span class="em2">native French speaker (C2)</span> —
+        and on the Arabic DA front, I want to be precise rather than vague. I can read and write Arabic —
+        my comprehension is strong — but my written production is rusty and I've never worked professionally
+        in the language. Typing Arabic for published content isn't something I can do reliably today.
+        What I <em>can</em> offer is something arguably more valuable for a Maghreb-first strategy:
+        I'm a <span class="em3">native Algerian dialect speaker</span>, I understand Tunisian and Moroccan naturally,
+        and I've grown up navigating the cultural codes of <span class="em3">DZ/TN/MA communities</span> from both sides —
+        Algerian origins, raised in France. French is a dominant professional language across the Maghreb,
+        and combined with English, I can own that market authentically. If SerpApi already has or plans to hire
+        a Modern Standard Arabic DA, I'd be a natural complement — not a replacement.
+      </p>
+
+      <p>
+        What genuinely excites me about SerpApi is what you do <em>at the core</em>: making powerful technology
+        <span class="em">accessible and usable</span> for developers. That's exactly what I've been doing since 2021
+        with <span class="em2">TheTrendyCoder</span> — my tech blog where I write tutorials, debug complex problems
+        in public, and interview women in engineering. 50+ articles. Thousands of readers.
+        Not because it was my job. Because I love sharing knowledge.
+      </p>
+
+      <p>
+        To go beyond words, I built <span class="em">NgDigest</span> (<a href="https://ngdigest.co" style="color:var(--accent2); text-decoration:none;">ngdigest.co</a>) —
+        a live Angular 21 tech-watch aggregator that uses <span class="em2">SerpApi in production</span>.
+        Three parallel search queries, a custom relevance scoring system (0–6 points combining domain authority,
+        keyword matching, and recency), full FR/EN i18n, and clean architecture on both ends.
+        It's not a toy project — it's running on Railway + Vercel with a real domain and real traffic.
+        I didn't just read your documentation. I shipped something with it.
+      </p>
+
+      <p>
+        Over 8 years of frontend JavaScript — Angular, TypeScript, RxJS, Node.js — I've been a
+        <span class="em">Tech Lead</span>, a UI referent, and a sole-owner developer on critical applications
+        at RTE. I've also been the engineer who stands up in meetings to explain to Product Owners why
+        a technical constraint changes the entire UX. I've learned to <span class="em2">simplify without dumbing down</span>,
+        to make things understandable without losing precision — which is essentially skill number one
+        for a Developer Advocate.
+      </p>
+
+      <p>
+        Your culture resonates with me: radical transparency, async-first, high trust.
+        I've worked that way for years — in distributed teams, fully remote, with wildly different stakeholders.
+        I'm also a member of the <span class="em3">Norsys Ethics Council</span> since 2022, where I co-designed
+        workshops on responsible AI and helped build ethical frameworks for technology decisions.
+        The way you think about your product — honesty, openness, neurodiversity-first — that's not marketing copy to me.
+      </p>
+
+      <p>
+        I'm available <span class="em">end of April 2026</span> (approximately one month),
+        fully remote-ready, based in France. I'm not telling you I'm perfect —
+        I'm telling you I'm <em>ready</em>, motivated, and that I've already been thinking and operating like a
+        Developer Advocate for years without the title. I just need the environment that makes it official.
+      </p>
+
+      <p>
+        If you have any doubt about my ability to engage a developer community —
+        take a look at <span class="em2">TheTrendyCoder</span>.
+        If you want to see SerpApi integrated in a real production app —
+        take a look at <span class="em">ngdigest.co</span>.
+        Both are my proof of concept.
+      </p>
+
+    </div>
+
+    <div class="letter-sign">
+      With enthusiasm and full transparency,
+      <strong>Sara Ounissi</strong>
+    </div>
+  </div>
+
+  <!-- SKILLS GRID -->
+  <div class="section-title">// key_signals — parsed from experience</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="label">JavaScript / TS</div>
+      <div class="value">Angular v2→21<br>RxJS · Node.js<br>8+ years</div>
+      <div class="bar"><div class="bar-fill" style="width:96%; background: var(--accent5);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">French</div>
+      <div class="value">Native C2<br>Pro writing<br>FR dev community</div>
+      <div class="bar"><div class="bar-fill" style="width:100%; background: var(--accent);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">Maghreb Bridge 🇩🇿🇹🇳🇲🇦</div>
+      <div class="value">Algerian dialect<br>DZ/TN/MA market<br>French + culture</div>
+      <div class="bar"><div class="bar-fill" style="width:72%; background: var(--accent4);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">Content Creation</div>
+      <div class="value">TheTrendyCoder<br>50+ articles<br>TikTok · SEO</div>
+      <div class="bar"><div class="bar-fill" style="width:88%; background: var(--accent2);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">Teaching / Mentoring</div>
+      <div class="value">Tech Lead<br>Code reviews<br>Internal talks</div>
+      <div class="bar"><div class="bar-fill" style="width:92%; background: var(--accent3);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">NgDigest — SerpApi</div>
+      <div class="value">Live production<br>Angular 21 + NestJS<br>Relevance scoring</div>
+      <div class="bar"><div class="bar-fill" style="width:100%; background: var(--accent3);"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="label">Remote / Async</div>
+      <div class="value">8 years remote<br>Long-term Agile<br>Docs-first</div>
+      <div class="bar"><div class="bar-fill" style="width:95%; background: var(--accent);"></div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <div class="availability">
+      <strong>🟢 Available end of April 2026</strong>
+      <span style="color:var(--muted); font-size:12px;">~1 month · Remote ✓ · Based in France</span>
+    </div>
+    <div style="display:flex; gap: 10px; flex-wrap:wrap;">
+      <a href="https://ngdigest.co" class="cta-btn" style="background: var(--accent3);">▸ ngdigest.co</a>
+      <a href="/cdn-cgi/l/email-protection#d4b7b5a6b1b1a6a794a7b1a6a4b5a4bdfab7bbb9eba7a1b6beb1b7a0e995a4a4b8bdb7b5a0bdbbbaf1e6e487b5a6b5f1e6e49ba1babda7a7bdf1e6e4f191e6f1ece4f1ede0f1e6e492a6b1bab7bcf1e6e4f1e696f1e6e49e87f1e6e4f1e696f1e6e495a6b5b6bdb7f1e6e490b1a2b1b8bba4b1a6f1e6e495b0a2bbb7b5a0b1f2b6bbb0ade99cbdf1e697f1e6e4a4b8b1b5a7b1f1e6e4b2bdbab0f1e6e4b5a0a0b5b7bcb1b0f1e6e4b9adf1e6e4b5a4a4b8bdb7b5a0bdbbbaf1e6e4b2bba6f
