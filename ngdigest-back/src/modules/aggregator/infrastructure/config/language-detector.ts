@@ -11,6 +11,8 @@ export const FRENCH_DOMAINS: readonly string[] = [
   'alticreation.com',
   'easyangularkit.com',
   'bonjour-angular.com',
+  'monsieurangular.com',
+  'blog.liksi.io',
 ] as const;
 
 /** Matches common French grammatical function words using word boundaries. */

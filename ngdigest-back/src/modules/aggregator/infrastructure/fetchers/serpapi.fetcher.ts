@@ -28,7 +28,7 @@ function parseFlexibleDate(raw: string): Date | null {
   const direct = new Date(raw);
   if (!isNaN(direct.getTime())) return direct;
 
-  // 2. Relative dates: "N day(s)|week(s)|month(s)|year(s) ago"
+  // 2. Relative dates EN: "N day(s)|week(s)|month(s)|year(s) ago"
   const relativeMatch = /(\d+)\s+(day|week|month|year)s?\s+ago/i.exec(raw);
   if (relativeMatch) {
     const amount = parseInt(relativeMatch[1], 10);
@@ -39,6 +39,21 @@ function parseFlexibleDate(raw: string): Date | null {
       case 'week':  date.setDate(date.getDate() - amount * 7);     break;
       case 'month': date.setMonth(date.getMonth() - amount);       break;
       case 'year':  date.setFullYear(date.getFullYear() - amount); break;
+    }
+    return date;
+  }
+
+  // 3. Relative dates FR: "il y a N jour(s)|semaine(s)|mois|an(s)"
+  const frenchRelativeMatch = /il y a\s+(\d+)\s+(jour|semaine|mois|an)s?/i.exec(raw);
+  if (frenchRelativeMatch) {
+    const amount = parseInt(frenchRelativeMatch[1], 10);
+    const unit = frenchRelativeMatch[2].toLowerCase();
+    const date = new Date();
+    switch (unit) {
+      case 'jour':    date.setDate(date.getDate() - amount);         break;
+      case 'semaine': date.setDate(date.getDate() - amount * 7);     break;
+      case 'mois':    date.setMonth(date.getMonth() - amount);       break;
+      case 'an':      date.setFullYear(date.getFullYear() - amount); break;
     }
     return date;
   }
@@ -236,17 +251,24 @@ export class SerpapiNewsFetcher {
   }
 
   /**
-   * Searches for Angular content on French community sites.
-   * Uses tbs:qdr:3m (3 months) since small FR sites publish infrequently.
+   * Searches for Angular content on active French blog sites.
+   * Uses tbs:qdr:3m (3 months) — active FR blogs publish infrequently, and recent
+   * articles are more likely to carry a date field in SerpAPI results.
    * Articles without any parseable date (SerpAPI field, snippet, or URL path) are left
    * with publishedAt=null and will be rejected by the aggregation date filter — this
    * prevents stale evergreen content (docs, tutorials, courses) from slipping through.
+   *
+   * Sites intentionally excluded:
+   *  - bonjour-angular.com  → learning platform / no articles since Angular 17
+   *  - easyangularkit.com   → formation platform, no dated articles
+   *  - grafikart.fr         → already covered by RSS feed
+   *  - angulardevs.fr       → defunct
    */
   private async fetchFrenchCommunitySearch(
     apiKey: string,
   ): Promise<Partial<Resource>[]> {
     const query =
-      'Angular site:grafikart.fr OR site:jesuisundev.com OR site:bonjour-angular.com OR site:devtobecurious.fr OR site:angulardevs.fr OR site:easyangularkit.com';
+      'Angular site:devtobecurious.fr OR site:angulardev.fr OR site:monsieurangular.com OR site:blog.liksi.io OR site:jesuisundev.com';
 
     try {
       const response = (await getJson('google', {
@@ -259,6 +281,7 @@ export class SerpapiNewsFetcher {
       })) as GoogleSearchResponse;
 
       const items = response.organic_results ?? [];
+
       const mapped = items
         .filter((item) => Boolean(item.title) && Boolean(item.link))
         .map((item) => ({
