@@ -123,7 +123,7 @@ export class ResourceListComponent {
       this.resources.set([]);
       this.currentPage.set(1);
       this.hasMore.set(true);
-      this.loadResources(lang, 1, untracked(this.searchQuery));
+      this.loadResources(1, untracked(this.searchQuery));
     });
 
     // Search changes trigger a debounced reset and reload.
@@ -139,7 +139,7 @@ export class ResourceListComponent {
         this.resources.set([]);
         this.currentPage.set(1);
         this.hasMore.set(true);
-        this.loadResources(this.languageService.lang(), 1, search);
+        this.loadResources(1, search);
       });
 
     effect(() => {
@@ -165,10 +165,10 @@ export class ResourceListComponent {
     if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
     const nextPage = this.currentPage() + 1;
     this.currentPage.set(nextPage);
-    this.loadResources(this.languageService.lang(), nextPage, this.searchQuery());
+    this.loadResources(nextPage, this.searchQuery());
   }
 
-  private loadResources(lang: 'fr' | 'en', page: number, search?: string): void {
+  private loadResources(page: number, search?: string): void {
     if (page === 1) {
       this.isLoading.set(true);
     } else {
@@ -177,7 +177,7 @@ export class ResourceListComponent {
     this.errorMessage.set(null);
 
     this.resourceRepository
-      .getAll(lang, page, 20, search)
+      .getAll('fr', page, 20, search)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ resources, total }) => {
