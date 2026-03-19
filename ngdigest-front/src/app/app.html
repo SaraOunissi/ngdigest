@@ -1,6 +1,9 @@
 <header class="app">
   <h1 class="app__title">
-    <a class="app__title-link" [routerLink]="['/']">{{ 'nav.title' | translate }}</a>
+    <a class="app__title-link" [routerLink]="['/resources']">
+      <img class="app__logo" src="assets/images/ngdigest-logo.png" alt="NgDigest" width="32" height="32">
+      {{ 'nav.title' | translate }}
+    </a>
   </h1>
   <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 

@@ -28,12 +28,22 @@
   }
 
   &__title-link {
-    color: $color-primary;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    color: $color-white;
     text-decoration: none;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__logo {
+    width: $logo-size-md;
+    height: $logo-size-md;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
   }
 
   &__subtitle {

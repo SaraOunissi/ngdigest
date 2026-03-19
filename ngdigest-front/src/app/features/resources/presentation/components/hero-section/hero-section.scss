@@ -12,11 +12,22 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
     font-size: $font-size-hero;
     font-weight: $font-weight-bold;
     color: $color-white;
     margin-bottom: $spacing-md;
     letter-spacing: -0.5px;
+  }
+
+  &__logo {
+    width: $logo-size-lg;
+    height: $logo-size-lg;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
   }
 
   &__subtitle {

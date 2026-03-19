@@ -29,10 +29,20 @@ $footer-bg: #090912;
   }
 
   &__brand {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
     font-size: $font-size-sm;
     color: $color-text-muted;
     font-weight: $font-weight-medium;
     white-space: nowrap;
+  }
+
+  &__logo {
+    width: $logo-size-sm;
+    height: $logo-size-sm;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
   }
 
   &__nav {
