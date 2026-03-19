@@ -3,6 +3,13 @@ import { Resource, ScoreDetails } from '../../../resources/domain/entities/resou
 import { TRUSTED_DOMAINS } from '../../infrastructure/config/trusted-sources.js';
 
 const ANGULAR_KEYWORDS: readonly string[] = [
+  // Angular version releases — "What is new in Angular 21.1", "Angular 20 est là"
+  'what is new',
+  "what's new",
+  'nouveaut',      // covers "nouveautés", "nouveauté" (FR)
+  'angular 1',     // Angular v10–19
+  'angular 2',     // Angular v20–29
+  // Core concepts
   'signal',
   'signals',
   'ssr',
