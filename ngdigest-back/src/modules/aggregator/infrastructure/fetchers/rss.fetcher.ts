@@ -42,6 +42,24 @@ const RSS_FEEDS: readonly RssFeedConfig[] = [
     language: 'fr',
     titleFilter: /angular/i,
   },
+  {
+    url: 'https://www.jesuisundev.com/feed/',
+    source: 'jesuisundev.com',
+    language: 'fr',
+    titleFilter: /angular/i,
+  },
+  {
+    url: 'https://la-cascade.io/rss/feed.xml',
+    source: 'la-cascade.io',
+    language: 'fr',
+    titleFilter: /angular/i,
+  },
+  {
+    url: 'https://putaindecode.io/api/articles/feeds/desc/feed.xml',
+    source: 'putaindecode.io',
+    language: 'fr',
+    titleFilter: /angular/i,
+  },
 ];
 
 /**
