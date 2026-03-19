@@ -31,8 +31,10 @@ export const TRUSTED_DOMAINS: readonly string[] = [
   'alticreation.com',
   'bonjour-angular.com',
   'devtobecurious.fr',
-  'angulardevs.fr',
   'easyangularkit.com',
+  'angulardev.fr',
+  'monsieurangular.com',
+  'blog.liksi.io',
   // General web dev
   'css-tricks.com',
   'smashingmagazine.com',
