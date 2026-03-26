@@ -1,6 +1,6 @@
 <header class="app">
   <h1 class="app__title">
-    <a class="app__title-link" [routerLink]="['/resources']">
+    <a class="app__title-link" [routerLink]="['/', languageService.lang()]">
       <img class="app__logo" src="assets/images/ngdigest-logo.png" alt="NgDigest" width="32" height="32">
       {{ 'nav.title' | translate }}
     </a>
@@ -8,15 +8,15 @@
   <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 
   <nav class="app__nav" aria-label="Main navigation">
-    <a class="app__nav-link" [routerLink]="['/about']" routerLinkActive="app__nav-link--active">{{ 'nav.about' | translate }}</a>
-    <a class="app__nav-link" [routerLink]="['/sources']" routerLinkActive="app__nav-link--active">{{ 'nav.sources' | translate }}</a>
+    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'about']" routerLinkActive="app__nav-link--active">{{ 'nav.about' | translate }}</a>
+    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'sources']" routerLinkActive="app__nav-link--active">{{ 'nav.sources' | translate }}</a>
   </nav>
 
   <nav class="app__lang-toggle" aria-label="Language selection">
     <button
       class="app__lang-btn"
       [class.app__lang-btn--active]="languageService.lang() === 'fr'"
-      (click)="languageService.setLanguage('fr')"
+      (click)="switchLang('fr')"
       aria-label="Switch to French"
     >
       FR
@@ -24,7 +24,7 @@
     <button
       class="app__lang-btn"
       [class.app__lang-btn--active]="languageService.lang() === 'en'"
-      (click)="languageService.setLanguage('en')"
+      (click)="switchLang('en')"
       aria-label="Switch to English"
     >
       EN

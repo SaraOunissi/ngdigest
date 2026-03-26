@@ -3,6 +3,7 @@ import {
   Component,
   DestroyRef,
   ElementRef,
+  PLATFORM_ID,
   computed,
   effect,
   inject,
@@ -10,6 +11,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
@@ -67,6 +69,7 @@ export class ResourceListComponent {
   protected readonly hasMore = signal(true);
   protected readonly searchQuery = signal<string>('');
 
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly sentinelRef = viewChild<ElementRef>('sentinel');
   private intersectionObserver?: IntersectionObserver;
 
@@ -123,7 +126,7 @@ export class ResourceListComponent {
       this.resources.set([]);
       this.currentPage.set(1);
       this.hasMore.set(true);
-      this.loadResources(1, untracked(this.searchQuery));
+      this.loadResources(1, untracked(this.searchQuery), lang);
     });
 
     // Search changes trigger a debounced reset and reload.
@@ -139,13 +142,13 @@ export class ResourceListComponent {
         this.resources.set([]);
         this.currentPage.set(1);
         this.hasMore.set(true);
-        this.loadResources(1, search);
+        this.loadResources(1, search, this.languageService.lang());
       });
 
     effect(() => {
       const sentinel = this.sentinelRef();
       this.intersectionObserver?.disconnect();
-      if (!sentinel) return;
+      if (!sentinel || !isPlatformBrowser(this.platformId)) return;
 
       this.intersectionObserver = new IntersectionObserver(
         entries => {
@@ -165,10 +168,10 @@ export class ResourceListComponent {
     if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
     const nextPage = this.currentPage() + 1;
     this.currentPage.set(nextPage);
-    this.loadResources(nextPage, this.searchQuery());
+    this.loadResources(nextPage, this.searchQuery(), this.languageService.lang());
   }
 
-  private loadResources(page: number, search?: string): void {
+  private loadResources(page: number, search?: string, lang: 'fr' | 'en' | 'all' = 'all'): void {
     if (page === 1) {
       this.isLoading.set(true);
     } else {
@@ -177,7 +180,7 @@ export class ResourceListComponent {
     this.errorMessage.set(null);
 
     this.resourceRepository
-      .getAll('fr', page, 20, search)
+      .getAll(lang, page, 20, search)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ resources, total }) => {

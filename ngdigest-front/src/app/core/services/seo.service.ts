@@ -9,10 +9,8 @@ const BASE_URL = 'https://ngdigest.co';
  * hreflang alternates, and canonical URL.
  * Also keeps the `<html lang>` attribute in sync with the active language.
  *
- * Note: without SSR, meta tags are set via JavaScript after hydration.
- * Googlebot renders JS, so dynamic tags are indexed correctly.
- * Social crawlers (Twitter, LinkedIn, Slack…) typically do NOT execute JS,
- * so the static fallbacks in index.html are used for link previews.
+ * With SSR, all tags are injected into the server-rendered HTML, so they are
+ * visible to Google and social crawlers without JavaScript execution.
  */
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -34,22 +32,29 @@ export class SeoService {
     this.doc.documentElement.lang = lang;
 
     const locale = lang === 'fr' ? 'fr_FR' : 'en_US';
-    const alternateLocale = lang === 'fr' ? 'en_US' : 'fr_FR';
+    const alternateLang: 'fr' | 'en' = lang === 'fr' ? 'en' : 'fr';
     const pageUrl = `${BASE_URL}${this.doc.location.pathname}`;
+
+    // Compute the alternate-language URL by swapping the /fr or /en prefix
+    const alternatePath = this.doc.location.pathname.replace(
+      /^\/(fr|en)(\/|$)/,
+      `/${alternateLang}$2`,
+    );
+    const alternateUrl = `${BASE_URL}${alternatePath}`;
 
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:url', content: pageUrl });
     this.meta.updateTag({ property: 'og:locale', content: locale });
-    this.meta.updateTag({ property: 'og:locale:alternate', content: alternateLocale });
+    this.meta.updateTag({ property: 'og:locale:alternate', content: lang === 'fr' ? 'en_US' : 'fr_FR' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
 
     this.setLinkTag('canonical', pageUrl);
-    this.setLinkTag('alternate', pageUrl, 'fr');
-    this.setLinkTag('alternate', pageUrl, 'en');
-    this.setLinkTag('alternate', pageUrl, 'x-default');
+    this.setLinkTag('alternate', pageUrl, lang);
+    this.setLinkTag('alternate', alternateUrl, alternateLang);
+    this.setLinkTag('alternate', `${BASE_URL}/fr`, 'x-default');
   }
 
   /** Creates or updates a <link> element in <head>. */

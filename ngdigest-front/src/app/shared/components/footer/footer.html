@@ -6,9 +6,9 @@
     </span>
 
     <nav class="footer__nav" aria-label="Footer navigation">
-      <a class="footer__link" routerLink="/about">{{ 'footer.about' | translate }}</a>
+      <a class="footer__link" [routerLink]="['/', languageService.lang(), 'about']">{{ 'footer.about' | translate }}</a>
       <span class="footer__separator" aria-hidden="true">|</span>
-      <a class="footer__link" routerLink="/sources">{{ 'footer.sources' | translate }}</a>
+      <a class="footer__link" [routerLink]="['/', languageService.lang(), 'sources']">{{ 'footer.sources' | translate }}</a>
     </nav>
 
     <div class="footer__right">
