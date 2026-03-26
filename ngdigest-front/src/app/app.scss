@@ -83,16 +83,22 @@
   }
 
   @media (max-width: $breakpoint-mobile) {
-    gap: $spacing-sm;
+    flex-wrap: wrap;
+    gap: $spacing-xs $spacing-sm;
     padding: $spacing-sm $spacing-md;
 
+    // Row 1: title (flex: 1) + lang toggle — both fit comfortably
+    // Row 2: nav links pushed to their own full-width row
     &__nav {
+      order: 4;
+      width: 100%;
+      justify-content: center;
       gap: $spacing-xs;
     }
 
     &__nav-link {
-      font-size: 11px;
-      padding: $spacing-xs 6px;
+      font-size: $font-size-sm;
+      padding: $spacing-xs $spacing-sm;
     }
   }
 
