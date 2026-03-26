@@ -1,0 +1,120 @@
+@use "colors" as *;
+@use "variables" as *;
+@use "mixins" as *;
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
+
+.blog-hero {
+  @include page-hero;
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.blog-list {
+  background-color: $color-bg;
+  min-height: 60vh;
+  padding: $spacing-xl $spacing-md $spacing-2xl;
+
+  &__container {
+    max-width: $page-max-width-narrow;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__empty {
+    text-align: center;
+    color: $color-text-secondary;
+    padding: $spacing-2xl 0;
+  }
+}
+
+// ─── Article card ─────────────────────────────────────────────────────────────
+
+.blog-card {
+  @include card-elevated;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+
+  &__author {
+    &::before {
+      content: "·";
+      margin-right: $spacing-sm;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  &__title-link {
+    color: $color-text-primary;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__description {
+    color: $color-text-secondary;
+    line-height: 1.6;
+    margin: 0;
+    font-size: $font-size-base;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-top: auto;
+  }
+
+  &__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+
+  &__tag {
+    font-size: $font-size-xs;
+    padding: 2px $spacing-xs;
+    border-radius: $radius-sm;
+    background: rgba($color-primary, 0.12);
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__read-more {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

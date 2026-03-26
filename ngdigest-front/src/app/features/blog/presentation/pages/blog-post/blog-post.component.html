@@ -1,0 +1,33 @@
+@if (currentArticle(); as article) {
+  <article class="blog-post">
+    <div class="blog-post__header">
+      <a
+        class="blog-post__back"
+        [routerLink]="['/', languageService.lang(), 'blog']"
+      >
+        ← {{ 'blog.backToList' | translate }}
+      </a>
+
+      <div class="blog-post__meta">
+        <time class="blog-post__date" [dateTime]="article.date">
+          {{ 'blog.publishedOn' | translate }} {{ formatDate(article.date) }}
+        </time>
+        <span class="blog-post__author">{{ 'blog.by' | translate }} {{ article.author }}</span>
+      </div>
+
+      <h1 class="blog-post__title">{{ article.title }}</h1>
+      <p class="blog-post__description">{{ article.description }}</p>
+
+      <ul class="blog-post__tags" aria-label="{{ 'blog.tags' | translate }}">
+        @for (tag of article.tags; track tag) {
+          <li class="blog-post__tag">{{ tag }}</li>
+        }
+      </ul>
+    </div>
+
+    <div
+      class="blog-post__content"
+      [innerHTML]="article.contentHtml"
+    ></div>
+  </article>
+}

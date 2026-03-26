@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "generate:blog": "node scripts/generate-blog-index.mjs",
+    "prebuild": "node scripts/generate-blog-index.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -27,6 +29,10 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "express": "^5.1.0",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "marked": "^17.0.5",
+    "marked-highlight": "^2.2.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

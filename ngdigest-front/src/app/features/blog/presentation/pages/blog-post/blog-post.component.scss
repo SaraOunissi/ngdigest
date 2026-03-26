@@ -1,0 +1,273 @@
+@use "colors" as *;
+@use "variables" as *;
+
+// ─── Article layout ──────────────────────────────────────────────────────────
+// ViewEncapsulation.None is used so that styles reach dynamically injected
+// innerHTML content (rendered Markdown). All selectors are scoped under
+// .blog-post to avoid global leakage.
+
+.blog-post {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md $spacing-2xl;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $color-primary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-xl;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__header {
+    margin-bottom: $spacing-2xl;
+    padding-bottom: $spacing-xl;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__author {
+    &::before {
+      content: "·";
+      margin-right: $spacing-sm;
+    }
+  }
+
+  &__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.25;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+
+  &__description {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    line-height: 1.6;
+    margin: 0 0 $spacing-lg;
+  }
+
+  &__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+
+  &__tag {
+    font-size: $font-size-xs;
+    padding: 3px $spacing-xs;
+    border-radius: $radius-sm;
+    background: rgba($color-primary, 0.12);
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// ─── Markdown content typography ─────────────────────────────────────────────
+
+.blog-post__content {
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  line-height: 1.75;
+
+  h2 {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: $font-weight-bold;
+    margin: $spacing-2xl 0 $spacing-md;
+    color: $color-text-primary;
+    border-bottom: 2px solid rgba($color-primary, 0.3);
+    padding-bottom: $spacing-sm;
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: $font-weight-semibold;
+    margin: $spacing-xl 0 $spacing-sm;
+    color: $color-text-primary;
+  }
+
+  h4 {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    margin: $spacing-lg 0 $spacing-sm;
+    color: $color-text-secondary;
+  }
+
+  p {
+    margin: 0 0 $spacing-md;
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  strong {
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ul,
+  ol {
+    padding-left: $spacing-xl;
+    margin: 0 0 $spacing-md;
+
+    li {
+      margin-bottom: $spacing-xs;
+      line-height: 1.7;
+    }
+  }
+
+  blockquote {
+    margin: $spacing-xl 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $color-primary;
+    background: rgba($color-primary, 0.06);
+    border-radius: 0 $radius-md $radius-md 0;
+    color: $color-text-secondary;
+    font-style: italic;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // ── Tables ──────────────────────────────────────────────────────────────────
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: $spacing-xl 0;
+    font-size: $font-size-sm;
+    display: block;
+    overflow-x: auto;
+  }
+
+  th {
+    background: rgba($color-primary, 0.12);
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+    text-align: left;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 2px solid rgba($color-primary, 0.3);
+  }
+
+  td {
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border;
+    color: $color-text-secondary;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  // ── Inline code ─────────────────────────────────────────────────────────────
+
+  code {
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    font-size: 0.875em;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+    color: #e8c46a;
+  }
+
+  // ── Code blocks ─────────────────────────────────────────────────────────────
+
+  pre {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    overflow-x: auto;
+    margin: $spacing-xl 0;
+
+    code {
+      background: none;
+      padding: 0;
+      color: inherit;
+      font-size: $font-size-sm;
+      line-height: 1.6;
+    }
+  }
+
+  // ── highlight.js tokens (dark theme matching NgDigest palette) ──────────────
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #6a737d;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in {
+    color: $color-primary;
+  }
+
+  .hljs-string,
+  .hljs-attr {
+    color: #98c379;
+  }
+
+  .hljs-number,
+  .hljs-literal {
+    color: #d19a66;
+  }
+
+  .hljs-function,
+  .hljs-title {
+    color: #61aeee;
+  }
+
+  .hljs-variable,
+  .hljs-name,
+  .hljs-tag {
+    color: #e06c75;
+  }
+
+  .hljs-type,
+  .hljs-class {
+    color: #e5c07b;
+  }
+
+  .hljs-operator,
+  .hljs-punctuation {
+    color: #abb2bf;
+  }
+}

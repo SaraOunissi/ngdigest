@@ -8,6 +8,7 @@
   <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 
   <nav class="app__nav" aria-label="Main navigation">
+    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'blog']" routerLinkActive="app__nav-link--active">{{ 'nav.blog' | translate }}</a>
     <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'about']" routerLinkActive="app__nav-link--active">{{ 'nav.about' | translate }}</a>
     <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'sources']" routerLinkActive="app__nav-link--active">{{ 'nav.sources' | translate }}</a>
   </nav>

@@ -55,4 +55,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <!-- Blog list FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/blog</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Blog list EN -->
+  <url>
+    <loc>https://ngdigest.co/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Blog post: TJM Angular 2026 FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/blog/tjm-developpeur-angular-2026</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog/tjm-developpeur-angular-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog/angular-developer-daily-rate-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog/tjm-developpeur-angular-2026"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Blog post: Angular daily rate 2026 EN -->
+  <url>
+    <loc>https://ngdigest.co/en/blog/angular-developer-daily-rate-2026</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog/tjm-developpeur-angular-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog/angular-developer-daily-rate-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog/tjm-developpeur-angular-2026"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

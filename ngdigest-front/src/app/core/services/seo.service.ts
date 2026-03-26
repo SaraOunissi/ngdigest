@@ -23,11 +23,20 @@ export class SeoService {
    * hreflang alternates, and html[lang].
    * Call this from each page component, reacting to language changes.
    *
-   * @param title       - Localised page title
-   * @param description - Localised description
-   * @param lang        - Active language code ('fr' | 'en')
+   * @param title              - Localised page title
+   * @param description        - Localised description
+   * @param lang               - Active language code ('fr' | 'en')
+   * @param explicitAlternateUrl - Full alternate-language URL when the slug
+   *                              differs between languages (e.g. blog posts).
+   *                              When omitted, the alternate URL is derived by
+   *                              swapping the language prefix in the current path.
    */
-  updateMeta(title: string, description: string, lang: 'fr' | 'en'): void {
+  updateMeta(
+    title: string,
+    description: string,
+    lang: 'fr' | 'en',
+    explicitAlternateUrl?: string,
+  ): void {
     this.titleService.setTitle(title);
     this.doc.documentElement.lang = lang;
 
@@ -35,12 +44,11 @@ export class SeoService {
     const alternateLang: 'fr' | 'en' = lang === 'fr' ? 'en' : 'fr';
     const pageUrl = `${BASE_URL}${this.doc.location.pathname}`;
 
-    // Compute the alternate-language URL by swapping the /fr or /en prefix
-    const alternatePath = this.doc.location.pathname.replace(
-      /^\/(fr|en)(\/|$)/,
-      `/${alternateLang}$2`,
-    );
-    const alternateUrl = `${BASE_URL}${alternatePath}`;
+    // Compute the alternate-language URL by swapping the /fr or /en prefix,
+    // unless an explicit alternate URL was provided (e.g. for blog posts).
+    const alternateUrl =
+      explicitAlternateUrl ??
+      `${BASE_URL}${this.doc.location.pathname.replace(/^\/(fr|en)(\/|$)/, `/${alternateLang}$2`)}`;
 
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ property: 'og:title', content: title });
