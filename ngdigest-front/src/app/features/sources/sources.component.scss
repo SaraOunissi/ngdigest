@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "colors" as *;
 @use "variables" as *;
 @use "mixins" as *;
@@ -162,7 +163,7 @@
 
   &__input,
   &__textarea {
-    background-color: darken($color-surface, 3%);
+    background-color: color.adjust($color-surface, $lightness: -3%);
     border: 1px solid $color-border;
     border-radius: $radius-sm;
     color: $color-text-primary;
