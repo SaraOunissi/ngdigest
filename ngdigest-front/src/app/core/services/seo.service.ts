@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
-const BASE_URL = 'https://ngdigest.co';
+const BASE_URL = environment.baseUrl;
 
 /**
  * Centralises all SEO concerns: page title, meta description, OG tags,

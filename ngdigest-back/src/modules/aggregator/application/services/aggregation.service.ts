@@ -85,9 +85,7 @@ export class AggregationService implements OnModuleInit {
       })
       .filter((article) => this.relevanceService.isRelevant(article));
 
-    for (const resource of relevant) {
-      await this.resourceRepository.upsertByUrl(resource);
-    }
+    await this.resourceRepository.upsertManyByUrl(relevant);
 
     this.logger.log(
       `Aggregation complete — ${relevant.length}/${candidates.length} items stored (score >= 3)`,

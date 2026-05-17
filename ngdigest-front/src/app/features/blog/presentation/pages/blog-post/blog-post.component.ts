@@ -14,8 +14,9 @@ import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import { BlogService } from '../../../infrastructure/blog.service';
 import { Article } from '../../../domain/models/article.model';
+import { environment } from '../../../../../../environments/environment';
 
-const BASE_URL = 'https://ngdigest.co';
+const BASE_URL = environment.baseUrl;
 
 @Component({
   selector: 'app-blog-post',

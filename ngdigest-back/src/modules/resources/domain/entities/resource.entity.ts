@@ -66,3 +66,8 @@ export class Resource {
 }
 
 export const ResourceSchema = SchemaFactory.createForClass(Resource);
+
+// Compound indexes for the main paginated queries (always filter archivedAt: null, sort by publishedAt)
+ResourceSchema.index({ archivedAt: 1, publishedAt: -1 });
+ResourceSchema.index({ archivedAt: 1, language: 1, publishedAt: -1 });
+ResourceSchema.index({ archivedAt: 1, source: 1, publishedAt: -1 });

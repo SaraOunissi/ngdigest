@@ -158,6 +158,23 @@ export class ResourceRepository {
   }
 
   /**
+   * Bulk-upserts resources by URL. No-op for each URL that already exists.
+   * Replaces N individual upsertByUrl calls with a single bulkWrite.
+   */
+  async upsertManyByUrl(items: Partial<Resource>[]): Promise<void> {
+    if (items.length === 0) return;
+    await this.resourceModel.bulkWrite(
+      items.map((data) => ({
+        updateOne: {
+          filter: { url: data.url },
+          update: { $setOnInsert: data },
+          upsert: true,
+        },
+      })),
+    );
+  }
+
+  /**
    * Archives resources matching the retention rules by setting archivedAt = now.
    * Never touches pinned resources or those with score >= 5.
    *
