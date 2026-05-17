@@ -8,6 +8,7 @@ import { ResourceRepository } from './infrastructure/repositories/resource.repos
 import { GetResourcesUseCase } from './application/use-cases/get-resources.use-case.js';
 import { RedetectLanguagesUseCase } from './application/use-cases/redetect-languages.use-case.js';
 import { ResourceController } from './presentation/controllers/resource.controller.js';
+import { AdminGuard } from '../../common/guards/admin.guard.js';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ResourceController } from './presentation/controllers/resource.controll
     ]),
   ],
   controllers: [ResourceController],
-  providers: [ResourceRepository, GetResourcesUseCase, RedetectLanguagesUseCase],
+  providers: [ResourceRepository, GetResourcesUseCase, RedetectLanguagesUseCase, AdminGuard],
   exports: [ResourceRepository],
 })
 export class ResourcesModule {}

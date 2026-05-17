@@ -34,12 +34,14 @@
       </section>
     }
 
-    @if (isLoadingMore()) {
-      <p class="resource-list__loading-more">{{ 'resource.loadingMore' | translate }}</p>
-    }
-
     @if (hasMore() && !isLoading()) {
-      <div #sentinel class="resource-list__sentinel" aria-hidden="true"></div>
+      @if (isLoadingMore()) {
+        <p class="resource-list__loading-more">{{ 'resource.loadingMore' | translate }}</p>
+      } @else {
+        <button class="resource-list__load-more" (click)="loadMore()">
+          {{ 'resource.loadMore' | translate }}
+        </button>
+      }
     }
   </div>
 </main>

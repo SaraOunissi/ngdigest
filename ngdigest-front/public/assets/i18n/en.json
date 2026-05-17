@@ -27,6 +27,7 @@
   "group.lastThreeMonths": "Last 3 months",
   "group.older": "Older",
   "resource.loadingMore": "Loading more resources...",
+  "resource.loadMore": "Load more",
   "score.label": "Relevance score",
   "score.trustedSource": "Trusted source",
   "score.angularKeyword": "Angular relevance",

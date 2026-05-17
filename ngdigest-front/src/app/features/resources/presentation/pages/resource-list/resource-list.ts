@@ -2,16 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  ElementRef,
-  PLATFORM_ID,
   computed,
   effect,
   inject,
   signal,
   untracked,
-  viewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
@@ -68,10 +64,6 @@ export class ResourceListComponent {
   protected readonly currentPage = signal(1);
   protected readonly hasMore = signal(true);
   protected readonly searchQuery = signal<string>('');
-
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly sentinelRef = viewChild<ElementRef>('sentinel');
-  private intersectionObserver?: IntersectionObserver;
 
   protected readonly groupedResources = computed<ResourceGroup[]>(() => {
     const resources = this.resources().filter((r): r is Resource & { publishedAt: string } => r.publishedAt !== null);
@@ -145,26 +137,9 @@ export class ResourceListComponent {
         this.loadResources(1, search, this.languageService.lang());
       });
 
-    effect(() => {
-      const sentinel = this.sentinelRef();
-      this.intersectionObserver?.disconnect();
-      if (!sentinel || !isPlatformBrowser(this.platformId)) return;
-
-      this.intersectionObserver = new IntersectionObserver(
-        entries => {
-          if (entries[0].isIntersecting) {
-            this.onSentinelVisible();
-          }
-        },
-        { rootMargin: '200px' },
-      );
-      this.intersectionObserver.observe(sentinel.nativeElement);
-    });
-
-    this.destroyRef.onDestroy(() => this.intersectionObserver?.disconnect());
   }
 
-  private onSentinelVisible(): void {
+  protected loadMore(): void {
     if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) return;
     const nextPage = this.currentPage() + 1;
     this.currentPage.set(nextPage);

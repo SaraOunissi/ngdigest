@@ -69,8 +69,21 @@
     font-style: italic;
   }
 
-  &__sentinel {
-    height: 1px;
-    width: 100%;
+  &__load-more {
+    display: block;
+    margin: $spacing-xl auto 0;
+    padding: $spacing-sm $spacing-xl;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      border-color: $color-text-secondary;
+      color: $color-text-secondary;
+    }
   }
 }

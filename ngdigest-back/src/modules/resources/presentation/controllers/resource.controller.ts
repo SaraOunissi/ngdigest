@@ -1,4 +1,5 @@
-import { Controller, Get, HttpCode, HttpStatus, Post, Query } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 import {
   GetResourcesUseCase,
   ResourceItem,
@@ -6,6 +7,7 @@ import {
 import { RedetectLanguagesUseCase } from '../../application/use-cases/redetect-languages.use-case.js';
 import { GetResourcesQueryDto } from '../dtos/get-resources-query.dto.js';
 import { ApiMeta } from '../../../../common/interfaces/api-response.interface.js';
+import { AdminGuard } from '../../../../common/guards/admin.guard.js';
 
 /**
  * Handles HTTP requests for resource management.
@@ -28,9 +30,12 @@ export class ResourceController {
   /**
    * Admin endpoint: re-runs language detection on all existing resources.
    * Use after updating the detection logic to backfill previously mis-tagged articles.
+   * Requires X-Admin-Key header matching ADMIN_SECRET env var.
    */
   @Post('redetect-languages')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
+  @SkipThrottle()
   async redetectLanguages(): Promise<{ updated: number; total: number }> {
     return this.redetectLanguagesUseCase.execute();
   }
