@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, OnInit,
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { GetSourcesUseCase } from './application/use-cases/get-sources.use-case';
-import { SuggestSourceUseCase } from './application/use-cases/suggest-source.use-case';
+import { SourcesHttpRepository } from './infrastructure/repositories/sources-http.repository';
 import { SeoService } from '@core/services/seo.service';
 import { LanguageService } from '@core/services/language.service';
 
@@ -28,8 +27,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SourcesComponent implements OnInit {
-  private readonly getSourcesUseCase = inject(GetSourcesUseCase);
-  private readonly suggestSourceUseCase = inject(SuggestSourceUseCase);
+  private readonly sourcesRepository = inject(SourcesHttpRepository);
   private readonly formBuilder = inject(FormBuilder);
   private readonly seoService = inject(SeoService);
   private readonly languageService = inject(LanguageService);
@@ -55,7 +53,7 @@ export class SourcesComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getSourcesUseCase.execute().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.sourcesRepository.getSources().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (domains) => {
         this.sources.set(domains);
         this.isLoadingSources.set(false);
@@ -75,7 +73,7 @@ export class SourcesComponent implements OnInit {
     const { url, reason } = this.form.value as { url: string; reason: string };
     const suggestion = { url: url.trim(), reason: reason?.trim() || undefined };
 
-    this.suggestSourceUseCase.execute(suggestion).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.sourcesRepository.suggestSource(suggestion).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.isSubmitting.set(false);
         this.submitSuccess.set(true);

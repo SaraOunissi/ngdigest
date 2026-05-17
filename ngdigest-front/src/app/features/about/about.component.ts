@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SeoService } from '@core/services/seo.service';
 import { LanguageService } from '@core/services/language.service';
-import { GetSourcesUseCase } from '@features/sources/application/use-cases/get-sources.use-case';
+import { SourcesHttpRepository } from '@features/sources/infrastructure/repositories/sources-http.repository';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
   fr: 'À propos — NgDigest',
@@ -27,7 +27,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
 export class AboutComponent implements OnInit {
   private readonly seoService = inject(SeoService);
   private readonly languageService = inject(LanguageService);
-  private readonly getSourcesUseCase = inject(GetSourcesUseCase);
+  private readonly sourcesRepository = inject(SourcesHttpRepository);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly trustedSourceCount = signal<number>(0);
@@ -40,7 +40,7 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSourcesUseCase.execute().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.sourcesRepository.getSources().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (domains) => this.trustedSourceCount.set(domains.length),
     });
   }
