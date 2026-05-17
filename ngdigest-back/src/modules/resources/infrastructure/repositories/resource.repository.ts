@@ -104,7 +104,7 @@ export class ResourceRepository {
               },
             },
           },
-          { $sort: { _langPriority: 1 as 1, [sortField]: sortDirection as 1 | -1 } },
+          { $sort: { [sortField]: sortDirection as 1 | -1, _langPriority: 1 as 1 } },
           { $skip: skip },
           { $limit: limit },
           { $unset: '_langPriority' },
