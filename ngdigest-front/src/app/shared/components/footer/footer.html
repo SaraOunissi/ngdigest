@@ -30,6 +30,10 @@
         target="_blank"
         rel="noopener noreferrer"
       >{{ 'footer.serpapi' | translate }}</a>
+      <span class="footer__separator" aria-hidden="true">&middot;</span>
+      <a class="footer__link" [routerLink]="legalNoticeRoute()">{{ 'footer.legalNotice' | translate }}</a>
+      <span class="footer__separator" aria-hidden="true">&middot;</span>
+      <a class="footer__link" [routerLink]="privacyPolicyRoute()">{{ 'footer.privacyPolicy' | translate }}</a>
     </div>
   </div>
 </footer>

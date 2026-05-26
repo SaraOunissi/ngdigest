@@ -1,0 +1,63 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+.legal-page {
+  max-width: $page-max-width-narrow;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__title {
+    font-size: $font-size-page-title;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__meta {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin: 0;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border;
+  }
+
+  &__heading {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__paragraph {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__list-item {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: 1.7;
+  }
+}
