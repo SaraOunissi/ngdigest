@@ -1,0 +1,71 @@
+@use 'variables' as *;
+@use 'colors' as *;
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: $color-surface;
+  border-top: 1px solid $color-border;
+  padding: $spacing-md $spacing-lg;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &__message {
+    flex: 1;
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+
+    @media (max-width: $breakpoint-mobile) {
+      justify-content: stretch;
+
+      .cookie-banner__btn {
+        flex: 1;
+      }
+    }
+  }
+
+  &__btn {
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 90px;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &--refuse {
+      background: transparent;
+      border: 1px solid $color-border;
+      color: $color-text-secondary;
+    }
+
+    &--accept {
+      background: $color-primary;
+      border: 1px solid $color-primary;
+      color: $color-white;
+    }
+  }
+}

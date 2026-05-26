@@ -1,22 +1,36 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
+import { AnalyticsService } from './core/services/analytics.service';
 import { LanguageService } from './core/services/language.service';
+import { CookieBannerComponent } from './shared/components/cookie-banner/cookie-banner';
 import { FooterComponent } from './shared/components/footer/footer';
 import { BlogService } from './features/blog/infrastructure/blog.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, TranslatePipe, FooterComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, TranslatePipe, FooterComponent, CookieBannerComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   protected readonly languageService = inject(LanguageService);
+  protected readonly analyticsService = inject(AnalyticsService);
   private readonly router = inject(Router);
   private readonly blogService = inject(BlogService);
+
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(e => this.analyticsService.trackPageView(e.urlAfterRedirects));
+  }
 
   switchLang(targetLang: 'fr' | 'en'): void {
     const currentUrl = this.router.url;

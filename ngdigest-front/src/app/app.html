@@ -36,3 +36,7 @@
 <router-outlet />
 
 <app-footer />
+
+@if (analyticsService.consentStatus() === 'pending') {
+  <app-cookie-banner />
+}

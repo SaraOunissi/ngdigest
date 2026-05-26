@@ -95,5 +95,21 @@
   "sources.suggest.reason.maxlength": "La description ne doit pas dépasser 1000 caractères.",
   "sources.suggest.submitting": "Envoi en cours…",
   "sources.suggest.submit": "Suggérer",
-  "sources.suggest.error": "Une erreur est survenue. Veuillez réessayer."
+  "sources.suggest.error": "Une erreur est survenue. Veuillez réessayer.",
+  "nav.jobs": "Offres",
+  "footer.jobs": "Offres",
+  "jobs.list.title": "Offres Angular curated",
+  "jobs.list.subtitle": "Sélection bi-mensuelle d'offres front pur (pas de fullstack déguisé), curated par Sara.",
+  "jobs.viewDetails": "Voir l'offre",
+  "jobs.apply": "Postuler",
+  "jobs.empty": "Aucune offre active pour le moment. Reviens dans deux semaines pour la prochaine pépite.",
+  "jobs.backToList": "Retour aux offres",
+  "jobs.scannedOn": "Scannée le",
+  "jobs.similar": "Offres similaires",
+  "jobs.badge.remote100": "Remote 100%",
+  "jobs.badge.hybrid": "Hybride",
+  "jobs.badge.onsite": "Sur site",
+  "cookies.message": "NgDigest utilise Google Analytics pour mesurer l'audience. Aucune donnée personnelle n'est partagée sans votre accord.",
+  "cookies.accept": "Accepter",
+  "cookies.refuse": "Refuser"
 }

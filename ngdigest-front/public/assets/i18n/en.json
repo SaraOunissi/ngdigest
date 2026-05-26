@@ -95,5 +95,21 @@
   "sources.suggest.reason.maxlength": "Description must not exceed 1000 characters.",
   "sources.suggest.submitting": "Sending…",
   "sources.suggest.submit": "Suggest",
-  "sources.suggest.error": "An error occurred. Please try again."
+  "sources.suggest.error": "An error occurred. Please try again.",
+  "nav.jobs": "Jobs",
+  "footer.jobs": "Jobs",
+  "jobs.list.title": "Curated Angular Jobs",
+  "jobs.list.subtitle": "Bi-monthly hand-picked Angular frontend roles (no disguised fullstack), reviewed by Sara.",
+  "jobs.viewDetails": "View job",
+  "jobs.apply": "Apply",
+  "jobs.empty": "No active jobs right now. Check back in two weeks for the next pépite.",
+  "jobs.backToList": "Back to jobs",
+  "jobs.scannedOn": "Scanned on",
+  "jobs.similar": "Similar jobs",
+  "jobs.badge.remote100": "100% Remote",
+  "jobs.badge.hybrid": "Hybrid",
+  "jobs.badge.onsite": "On-site",
+  "cookies.message": "NgDigest uses Google Analytics to measure traffic. No personal data is shared without your consent.",
+  "cookies.accept": "Accept",
+  "cookies.refuse": "Decline"
 }

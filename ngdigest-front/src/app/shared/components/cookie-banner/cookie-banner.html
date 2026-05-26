@@ -1,0 +1,11 @@
+<div class="cookie-banner" role="dialog" aria-live="polite">
+  <p class="cookie-banner__message">{{ 'cookies.message' | translate }}</p>
+  <div class="cookie-banner__actions">
+    <button class="cookie-banner__btn cookie-banner__btn--refuse" type="button" (click)="onRefuse()">
+      {{ 'cookies.refuse' | translate }}
+    </button>
+    <button class="cookie-banner__btn cookie-banner__btn--accept" type="button" (click)="onAccept()">
+      {{ 'cookies.accept' | translate }}
+    </button>
+  </div>
+</div>
