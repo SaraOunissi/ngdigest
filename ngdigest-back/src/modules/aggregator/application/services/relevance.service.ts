@@ -9,7 +9,7 @@ const ANGULAR_KEYWORDS: readonly string[] = [
   'nouveaut',      // covers "nouveautés", "nouveauté" (FR)
   'angular 1',     // Angular v10–19
   'angular 2',     // Angular v20–29
-  // Core concepts
+  // Core concepts (EN)
   'signal',
   'signals',
   'ssr',
@@ -24,6 +24,22 @@ const ANGULAR_KEYWORDS: readonly string[] = [
   'change detection',
   'control flow',
   'httpresource',
+  // Core concepts (FR) — many FR Angular articles miss the +2 keyword bonus
+  // because they use French equivalents in their titles
+  'composant',           // "composants standalone", "nouveau composant"
+  'autonome',            // FR for "standalone"
+  'détection de changement',
+  'flux de contrôle',
+  'paresseux',           // "chargement paresseux" = lazy
+  'chargement différé',
+  'hydratation',
+  'injection',           // "injection de dépendance"
+  'gabarit',             // FR for "template"
+  'formulaire réactif',
+  'pipe',
+  'migration',
+  'sans zone',           // FR for "zoneless"
+  'rendu côté serveur',  // FR for "SSR"
 ] as const;
 
 const MIN_RELEVANCE_SCORE = 3;

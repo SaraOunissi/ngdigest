@@ -18,6 +18,16 @@ interface RssFeedConfig {
 }
 
 /**
+ * Loose Angular-ecosystem matcher for generalist FR tech blogs.
+ * Includes Angular core concepts that strongly imply Angular content even
+ * when the word "angular" isn't in the title (e.g. "Découvrir les Signals").
+ * Accepts a bit of cross-contamination (Signals exist in SolidJS/Vue 3.5+) in
+ * exchange for catching articles that the strict /angular/ filter would drop.
+ */
+const ANGULAR_ECOSYSTEM_RE =
+  /\b(angular|signals?|rxjs|standalone|zoneless|ng[\s-]?rx|nx workspace)\b/i;
+
+/**
  * List of RSS/Atom feeds to poll.
  * These provide accurate publication dates unlike Google Search indexing.
  * Add new feeds here as you discover them — failed feeds are skipped silently.
@@ -35,30 +45,45 @@ const RSS_FEEDS: readonly RssFeedConfig[] = [
     source: 'blog.ninja-squad.com',
     language: 'en',
   },
-  // French community — generalist sites filtered to Angular-only articles
+  // French community — generalist sites filtered to Angular-ecosystem articles
   {
     url: 'https://grafikart.fr/feed.rss',
     source: 'grafikart.fr',
     language: 'fr',
-    titleFilter: /angular/i,
+    titleFilter: ANGULAR_ECOSYSTEM_RE,
   },
   {
     url: 'https://www.jesuisundev.com/feed/',
     source: 'jesuisundev.com',
     language: 'fr',
-    titleFilter: /angular/i,
+    titleFilter: ANGULAR_ECOSYSTEM_RE,
   },
   {
     url: 'https://la-cascade.io/rss/feed.xml',
     source: 'la-cascade.io',
     language: 'fr',
-    titleFilter: /angular/i,
+    titleFilter: ANGULAR_ECOSYSTEM_RE,
   },
   {
     url: 'https://putaindecode.io/api/articles/feeds/desc/feed.xml',
     source: 'putaindecode.io',
     language: 'fr',
-    titleFilter: /angular/i,
+    titleFilter: ANGULAR_ECOSYSTEM_RE,
+  },
+  // Liksi tech blog — multi-topic, filter to Angular ecosystem
+  {
+    url: 'https://blog.liksi.io/index.xml',
+    source: 'blog.liksi.io',
+    language: 'fr',
+    titleFilter: ANGULAR_ECOSYSTEM_RE,
+  },
+  // angulardev.fr — 100% Angular, WordPress /feed/ pattern guessed.
+  // Homepage returns 429 anti-bot from our IP, so unverifiable from local.
+  // If the URL is wrong or blocked in prod, Promise.allSettled drops it silently.
+  {
+    url: 'https://angulardev.fr/feed/',
+    source: 'angulardev.fr',
+    language: 'fr',
   },
 ];
 
