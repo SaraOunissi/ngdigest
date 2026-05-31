@@ -18,7 +18,7 @@ import { SeoService } from '@core/services/seo.service';
 import { ResourceHttpRepository } from '../../../infrastructure/repositories/resource-http.repository';
 import { Resource } from '../../../domain/models/resource.model';
 import { AngularBanner } from '../../components/angular-banner/angular-banner';
-import { HeroSection } from '../../components/hero-section/hero-section';
+import { HeroSection, HeroStats } from '../../components/hero-section/hero-section';
 import { ResourceCard } from '../../components/resource-card/resource-card';
 
 interface ResourceGroup {
@@ -27,6 +27,8 @@ interface ResourceGroup {
 }
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
+const TRUSTED_SOURCES_COUNT = 35;
+const AGGREGATION_FREQUENCY_HOURS = 12;
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
   fr: 'NgDigest — Veille Angular FR & EN',
@@ -97,6 +99,28 @@ export class ResourceListComponent {
     ];
 
     return groups.filter(group => group.resources.length > 0);
+  });
+
+  protected readonly heroStats = computed<HeroStats>(() => ({
+    resources: this.resources().length,
+    sources: TRUSTED_SOURCES_COUNT,
+    frequencyHours: AGGREGATION_FREQUENCY_HOURS,
+  }));
+
+  // Top-scoring resource from the last 7 days (fallback : highest score overall).
+  protected readonly weeklyPick = computed<Resource | null>(() => {
+    const search = this.searchQuery();
+    if (search.trim().length > 0) return null;
+
+    const dated = this.resources()
+      .filter((r): r is Resource & { publishedAt: string } => r.publishedAt !== null);
+    if (dated.length === 0) return null;
+
+    const cutoff7d = daysAgo(7);
+    const recent = dated.filter(r => new Date(r.publishedAt) >= cutoff7d);
+    const pool = recent.length > 0 ? recent : dated;
+
+    return pool.reduce((best, current) => current.score > best.score ? current : best);
   });
 
   constructor() {

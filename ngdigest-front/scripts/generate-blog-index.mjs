@@ -53,6 +53,15 @@ for (const lang of ['fr', 'en']) {
     const raw = await readFile(join(langDir, file), 'utf-8');
     const { data: frontmatter, content: mdContent } = matter(raw);
 
+    // Skip drafts and WIP articles: a publishable article must have all required fields.
+    // Sara's working drafts in src/content/blog/ live alongside published ones.
+    const required = ['slug', 'title', 'description', 'date', 'author', 'lang', 'alternate'];
+    const missing = required.filter((key) => frontmatter[key] === undefined || frontmatter[key] === null || frontmatter[key] === '');
+    if (missing.length > 0) {
+      console.warn(`Skipping blog draft ${lang}/${file} — missing frontmatter: ${missing.join(', ')}`);
+      continue;
+    }
+
     // marked.parse returns string synchronously when no async hooks are used
     const contentHtml = /** @type {string} */ (marked.parse(mdContent));
 

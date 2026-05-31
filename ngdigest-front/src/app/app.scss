@@ -10,32 +10,42 @@
 }
 
 .app {
-  display: flex;
-  align-items: center;
-  gap: $spacing-md;
-  padding: $spacing-sm $spacing-lg;
-  background-color: $color-surface;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  height: $header-height;
+  background: rgba(10, 10, 17, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid $color-border;
   font-family: $font-family;
 
-  &__title {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
-    margin: 0;
-    flex: 1;
-    min-width: 0;
-    letter-spacing: -0.3px;
+  // Fallback si backdrop-filter non supporté
+  @supports not (backdrop-filter: blur(14px)) {
+    background: rgba(10, 10, 17, 0.96);
   }
 
-  &__title-link {
+  &__inner {
+    max-width: $content-max-width;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 28px;
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
-    color: $color-white;
+    gap: 28px;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+    color: $color-text-primary;
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
@@ -44,86 +54,128 @@
     height: $logo-size-md;
     border-radius: $radius-sm;
     flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(200, 80, 192, 0.4));
   }
 
-  &__subtitle {
-    display: none;
+  &__brand-name {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 21px;
+    letter-spacing: -0.02em;
+    color: $color-text-primary;
   }
 
   &__nav {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: 4px;
+    margin-left: 8px;
   }
 
   &__nav-link {
-    font-size: $font-size-sm;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border-radius: $radius-pill;
+    font-size: $font-size-base;
     font-weight: $font-weight-medium;
     color: $color-text-secondary;
     text-decoration: none;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $radius-sm;
-    transition: color 150ms ease, background-color 150ms ease;
+    transition: color 0.18s ease, background-color 0.18s ease;
     white-space: nowrap;
 
     &:hover {
-      color: $color-primary;
-      background-color: $color-primary-light;
+      color: $color-text-primary;
+      background-color: rgba(255, 255, 255, 0.05);
+      text-decoration: none;
     }
 
     &--active {
-      color: $color-primary;
-      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 13px;
+        right: 13px;
+        bottom: 2px;
+        height: 2px;
+        border-radius: 2px;
+        background: $gradient-hero;
+      }
     }
+  }
+
+  &__nav-badge {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.08em;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: $color-primary-light;
+    color: $color-primary;
+    vertical-align: middle;
   }
 
   &__lang-toggle {
+    margin-left: auto;
     display: flex;
-    gap: $spacing-xs;
-  }
-
-  @media (max-width: $breakpoint-mobile) {
-    flex-wrap: wrap;
-    gap: $spacing-xs $spacing-sm;
-    padding: $spacing-sm $spacing-md;
-
-    // Row 1: title (flex: 1) + lang toggle — both fit comfortably
-    // Row 2: nav links pushed to their own full-width row
-    &__nav {
-      order: 4;
-      width: 100%;
-      justify-content: center;
-      gap: $spacing-xs;
-    }
-
-    &__nav-link {
-      font-size: $font-size-sm;
-      padding: $spacing-xs $spacing-sm;
-    }
+    background: $color-surface-hover;
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    padding: 3px;
+    gap: 0;
   }
 
   &__lang-btn {
-    padding: $spacing-xs $spacing-sm;
-    border: 1px solid $color-border;
-    border-radius: $radius-pill;
+    border: none;
     background: transparent;
-    color: $color-text-secondary;
+    color: $color-text-muted;
+    font-family: $font-family-mono;
     font-size: $font-size-sm;
     font-weight: $font-weight-bold;
-    font-family: $font-family;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
     cursor: pointer;
-    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+    transition: color 0.15s ease, background 0.15s ease;
 
     &:hover {
-      background-color: $color-primary-light;
-      color: $color-primary;
-      border-color: $color-primary;
+      color: $color-text-primary;
     }
 
     &--active {
-      background-color: $color-primary;
+      background: $gradient-hero;
       color: $color-white;
-      border-color: $color-primary;
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    height: auto;
+
+    &__inner {
+      flex-wrap: wrap;
+      padding: $spacing-sm $spacing-md;
+      gap: $spacing-sm $spacing-md;
+    }
+
+    &__nav {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+      margin-left: 0;
+      flex-wrap: wrap;
+    }
+
+    &__nav-link {
+      padding: 6px 10px;
+      font-size: $font-size-sm;
+    }
+
+    &__lang-toggle {
+      margin-left: auto;
     }
   }
 }

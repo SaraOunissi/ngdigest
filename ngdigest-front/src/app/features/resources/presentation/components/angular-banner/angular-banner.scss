@@ -4,16 +4,18 @@
 .angular-banner {
   display: flex;
   align-items: center;
-  gap: $spacing-sm;
+  gap: 14px;
   background-color: $color-surface;
   border: 1px solid $color-border;
-  border-left: 3px solid $color-primary;
+  // Bordure gauche 3px en dégradé via border-image (signature marque)
+  border-left: 3px solid transparent;
+  border-image: $gradient-hero 1;
   border-radius: $radius-md;
-  padding: $spacing-md;
-  margin-bottom: $spacing-lg;
+  padding: 16px 20px;
+  margin-bottom: 14px;
 
   &__icon {
-    font-size: $font-size-lg;
+    font-size: 20px;
     line-height: 1;
   }
 
@@ -21,18 +23,36 @@
     flex: 1;
     color: $color-text-primary;
     font-size: $font-size-base;
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-semibold;
+
+    // Numéro de version en mono pour la crédibilité dev
+    :where(b, strong) {
+      font-family: $font-family-mono;
+      font-weight: $font-weight-bold;
+    }
   }
 
   &__link {
+    margin-left: auto;
     color: $color-primary;
-    font-size: $font-size-sm;
+    font-size: $font-size-base;
     font-weight: $font-weight-semibold;
     text-decoration: none;
     white-space: nowrap;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+
+    &__link {
+      margin-left: 0;
+      width: 100%;
     }
   }
 }

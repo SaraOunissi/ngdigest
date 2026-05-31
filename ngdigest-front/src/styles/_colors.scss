@@ -1,48 +1,60 @@
 // ======================
-// Color Palette — Dark Theme
+// Color Palette — Dark Theme (refresh 2026-05)
 // ======================
+// Le dégradé marque devient une signature (accents, hairlines, halos)
+// et non plus un fond plein. Voir design_handoff/README.md §3.
 
-// Brand — Angular violet/rose
+// — Brand / accents — Angular violet + bleu + or —
 $color-primary: #C850C0;
-$color-primary-light: rgba($color-primary, 0.15);
+$color-primary-light: rgba($color-primary, 0.14);
 $color-primary-dark: #A040A0;
-$color-primary-2: #4158D0;
+$color-primary-2: #4E6BF0;
+$color-accent-gold: #FFB454;
 
-// Neutral
+// Dégradé marque (signature) — accents uniquement, pas en fond plein
+$gradient-hero: linear-gradient(115deg, #4E6BF0 0%, #C850C0 52%, #FFB454 100%);
+$gradient-hero-soft: linear-gradient(115deg,
+  rgba(78, 107, 240, 0.18),
+  rgba(200, 80, 192, 0.18) 52%,
+  rgba(255, 180, 84, 0.18));
+
+// — Neutres —
 $color-white: #ffffff;
 
-// Gradient
-$gradient-hero: linear-gradient(135deg, #4158D0 0%, #C850C0 50%, #FFCC70 100%);
+// — Fonds & surfaces (near-black légèrement violet) —
+$color-bg: #0A0A11;
+$color-bg-2: #0E0E18;
+$color-surface: #15151F;
+$color-surface-hover: #1C1C2A;
+$color-surface-3: #232336;
 
-// Backgrounds & Surfaces
-$color-bg: #0F0F1A;
-$color-surface: #1A1A2E;
-$color-surface-hover: #22223A;
-$color-border: #2D2D4E;
+// — Bordures en hairlines —
+$color-border: rgba(255, 255, 255, 0.07);
+$color-hairline-strong: rgba(255, 255, 255, 0.12);
 
-// Text
-$color-text-primary: #F1F1F1;
-$color-text-secondary: #C1C1D0;
-$color-text-muted: #9CA3AF;
+// — Texte —
+$color-text-primary: #F4F4F8;
+$color-text-secondary: #B6B6C6;
+$color-text-muted: #7C7C92;
 
-// Language badges
+// — Badges langue (logique inchangée) —
 $color-badge-fr-bg: $color-primary-2;
 $color-badge-fr-text: #FFFFFF;
-$color-badge-en-bg: $color-surface-hover;
+$color-badge-en-bg: $color-surface-3;
 $color-badge-en-text: $color-text-secondary;
 
-// Tags
-$color-tag-bg: $color-border;
+// — Tags —
+$color-tag-bg: rgba(255, 255, 255, 0.04);
 $color-tag-text: $color-text-muted;
 
-// Score badge
-$color-score-high: #22c55e;
-$color-score-high-bg: rgba(#22c55e, 0.12);
-$color-score-medium: #f97316;
-$color-score-medium-bg: rgba(#f97316, 0.12);
+// — Score (seuils métier inchangés : haut ≥5, moyen ≥3, sinon bas) —
+$color-score-high: #34d27b;
+$color-score-high-bg: rgba(#34d27b, 0.13);
+$color-score-medium: #ff9d42;
+$color-score-medium-bg: rgba(#ff9d42, 0.13);
 $color-score-low: $color-text-muted;
-$color-score-low-bg: rgba($color-text-muted, 0.12);
+$color-score-low-bg: rgba($color-text-muted, 0.13);
 
-// Error
+// — Erreur —
 $color-error: #ef4444;
 $color-error-light: #fca5a5;

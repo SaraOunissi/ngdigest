@@ -1,4 +1,8 @@
-<app-hero-section [(searchValue)]="searchQuery" />
+<app-hero-section
+  [(searchValue)]="searchQuery"
+  [stats]="heroStats()"
+  [weeklyPick]="weeklyPick()"
+/>
 
 <main class="resource-list">
   <div class="resource-list__container">

@@ -1,8 +1,6 @@
 @use "variables" as *;
 @use "colors" as *;
 
-$footer-bg: #090912;
-
 :host {
   display: block;
   width: 100%;
@@ -12,9 +10,12 @@ $footer-bg: #090912;
 }
 
 .footer {
-  background-color: $footer-bg;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
   border-top: 1px solid $color-border;
-  height: 60px;
+  padding: 32px 0;
+  margin-top: 80px;
   width: 100%;
   box-sizing: border-box;
 
@@ -22,19 +23,21 @@ $footer-bg: #090912;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    gap: 18px;
     max-width: $content-max-width;
     margin: 0 auto;
-    padding: 0 $spacing-lg;
+    padding: 0 28px;
+    flex-wrap: wrap;
   }
 
   &__brand {
     display: flex;
     align-items: center;
-    gap: $spacing-xs;
-    font-size: $font-size-sm;
-    color: $color-text-muted;
-    font-weight: $font-weight-medium;
+    gap: 9px;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    color: $color-text-primary;
     white-space: nowrap;
   }
 
@@ -48,65 +51,73 @@ $footer-bg: #090912;
   &__nav {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: 18px;
   }
 
   &__link {
-    font-size: $font-size-sm;
+    font-family: $font-family-mono;
+    font-size: 13px;
     color: $color-text-muted;
     text-decoration: none;
     transition: color 150ms ease;
 
     &:hover {
-      color: $color-primary;
+      color: $color-text-primary;
       text-decoration: none;
+    }
+  }
+
+  &__link--author {
+    color: $color-primary;
+    font-family: $font-family;
+    font-weight: $font-weight-semibold;
+
+    &:hover {
+      color: $color-primary;
+      filter: brightness(1.1);
     }
   }
 
   &__separator {
     color: $color-border;
-    font-size: $font-size-sm;
+    font-size: 13px;
     user-select: none;
   }
 
   &__right {
+    margin-left: auto;
     display: flex;
     align-items: center;
     gap: $spacing-sm;
-    white-space: nowrap;
-  }
-
-  &__credit {
-    font-size: $font-size-sm;
+    flex-wrap: wrap;
+    font-family: $font-family-mono;
+    font-size: 13px;
     color: $color-text-muted;
   }
 
-  &__link--author {
-    color: $color-primary;
-  }
-
-  &__powered {
-    font-size: $font-size-sm;
+  &__credit {
+    font-family: $font-family;
+    font-size: 13px;
     color: $color-text-muted;
   }
 
   @media (max-width: $breakpoint-tablet) {
-    height: auto;
-    padding: $spacing-md 0;
+    padding: $spacing-lg 0;
+    margin-top: 56px;
 
     &__content {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      height: auto;
-      gap: $spacing-sm;
+      gap: $spacing-md;
       padding: 0 $spacing-md;
     }
 
     &__nav {
-      flex-direction: column;
-      align-items: center;
-      gap: $spacing-xs;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: $spacing-md;
     }
 
     &__separator {
@@ -114,6 +125,7 @@ $footer-bg: #090912;
     }
 
     &__right {
+      margin-left: 0;
       flex-direction: column;
       align-items: center;
       gap: $spacing-xs;

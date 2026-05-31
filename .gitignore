@@ -141,3 +141,11 @@ vite.config.ts.timestamp-*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local working folders (briefs, drafts, design handoffs, marketing notes)
+/design_handoff_ngdigest_refresh/
+/_briefs/
+/_drafts/
+/_brainstorms-anciennes-sessions/
+/_lead-magnets/
+

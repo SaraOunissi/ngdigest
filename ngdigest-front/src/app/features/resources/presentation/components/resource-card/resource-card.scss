@@ -4,41 +4,48 @@
 :host {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
 .resource-card {
+  position: relative;
   background-color: $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-md;
-  box-shadow: $shadow-card;
-  padding: $spacing-md;
+  padding: $spacing-md $spacing-md 14px;
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
-  transition: box-shadow 200ms ease, transform 200ms ease, background-color 200ms ease;
+  gap: 11px;
   height: 100%;
+  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
 
   &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
     background-color: $color-surface-hover;
-    box-shadow: $shadow-card-hover;
-    transform: translateY(-2px);
+  }
+
+  // Le titre devient accent au hover de la carte entière, pas juste du lien
+  &:hover &__title {
+    color: $color-primary;
   }
 
   &__header {
     display: flex;
     align-items: flex-start;
-    gap: $spacing-sm;
+    gap: 11px;
   }
 
   &__avatar {
     flex-shrink: 0;
-    width: $avatar-size;
-    height: $avatar-size;
+    width: 32px;
+    height: 32px;
     border-radius: $radius-sm;
     background-color: $color-primary-light;
     color: $color-primary;
+    font-family: $font-family-display;
     font-weight: $font-weight-bold;
-    font-size: $font-size-sm;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,24 +54,26 @@
 
   &__title {
     flex: 1;
-    font-size: $font-size-base;
+    font-size: 15px;
     font-weight: $font-weight-semibold;
-    color: $color-primary;
+    color: $color-text-primary;
     text-decoration: none;
-    line-height: 1.45;
+    line-height: 1.32;
+    transition: color 0.15s ease;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
   &__badge {
     flex-shrink: 0;
-    font-size: $font-size-xs;
+    font-family: $font-family-mono;
+    font-size: 10px;
     font-weight: $font-weight-bold;
-    padding: 3px 8px;
+    padding: 3px 7px;
     border-radius: $radius-pill;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 
     &--fr {
@@ -83,14 +92,17 @@
     align-items: center;
     justify-content: space-between;
     gap: $spacing-sm;
+    margin-top: auto;
   }
 
   &__source {
-    font-size: $font-size-sm;
+    font-family: $font-family-mono;
+    font-size: 11.5px;
     color: $color-text-muted;
   }
 
   &__date {
+    font-family: $font-family;
     font-size: $font-size-sm;
     color: $color-text-muted;
     white-space: nowrap;
@@ -99,20 +111,21 @@
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-xs;
-    margin-top: auto;
+    gap: 6px;
     padding-top: $spacing-xs;
   }
 
   &__tag {
-    font-size: $font-size-xs;
-    padding: 3px $spacing-sm;
+    font-family: $font-family-mono;
+    font-size: 10.5px;
+    padding: 3px 8px;
     background-color: $color-tag-bg;
+    border: 1px solid $color-border;
     color: $color-tag-text;
     border-radius: $radius-pill;
   }
 
-  // ── Score badge ──────────────────────────────────────────────────────────────
+  // ── Score badge ─────────────────────────────────────────────────────────────
 
   &__score-badge {
     position: relative;
@@ -121,8 +134,9 @@
     align-items: center;
     cursor: default;
     border-radius: $radius-pill;
-    padding: 2px 7px;
-    font-size: $font-size-xs;
+    padding: 3px 8px;
+    font-family: $font-family-mono;
+    font-size: 11px;
     font-weight: $font-weight-bold;
     line-height: 1.6;
     letter-spacing: 0.02em;
@@ -143,25 +157,24 @@
       color: $color-score-low;
     }
 
-    // Show tooltip on hover
     &:hover .resource-card__score-tooltip {
       opacity: 1;
       pointer-events: auto;
     }
   }
 
-  // ── Score tooltip ─────────────────────────────────────────────────────────────
+  // ── Score tooltip ────────────────────────────────────────────────────────────
 
   &__score-tooltip {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
-    min-width: 180px;
+    min-width: 200px;
     background-color: $color-text-primary;
     color: $color-surface;
     border-radius: $radius-sm;
-    padding: $spacing-sm $spacing-sm;
+    padding: $spacing-sm;
     opacity: 0;
     pointer-events: none;
     transition: opacity 180ms ease;

@@ -1,0 +1,233 @@
+// ======================================================================
+// _utilities.scss — Primitives globales de la refonte
+// ----------------------------------------------------------------------
+// - .grad-text       : applique le dégradé marque sur 1–2 mots de titre.
+// - .kicker          : label mono majuscule (au-dessus de chaque titre de section).
+// - .toprail         : rail dégradé animé 3px tout en haut de la page.
+// - .ambient-halos   : halos radiaux fixes en fond (intensité pilotable).
+// - .section-head    : bloc kicker + titre display + sous-titre.
+// - .phero           : page hero compact (remplace les bandeaux dégradé plein-écran).
+// - .grad-card       : carte « featured » avec liseré dégradé 1px au hover.
+// - .grad-btn / .ghost-btn : boutons signature.
+//
+// Voir design_handoff_ngdigest_refresh/prototype/styles.css pour la version
+// de référence (intensités exactes).
+// ======================================================================
+
+@use "variables" as *;
+@use "colors" as *;
+
+// Strength du halo (pilotable depuis un futur theming)
+:root {
+  --grad-strength: 1;
+}
+
+// — Texte en dégradé (1–2 mots max par titre) —
+.grad-text {
+  background: $gradient-hero;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  // Fallback couleur unie (a11y : le dégradé ne porte jamais une info seule)
+  @supports not (background-clip: text) {
+    color: $color-primary;
+    background: none;
+  }
+}
+
+// — Kicker (label mono au-dessus des titres) —
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+
+  &::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: $gradient-hero;
+  }
+}
+
+// — Rail dégradé animé 3px (signature en haut de page) —
+.toprail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  background: $gradient-hero;
+  background-size: 220% 100%;
+  animation: ngd-railshift 9s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ngd-railshift {
+  to { background-position: 220% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toprail { animation: none; }
+}
+
+// — Halos d'ambiance (à appliquer sur body via styles.scss) —
+@mixin ambient-halos {
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(900px 520px at 12% -8%,
+        rgba(78, 107, 240, calc(0.16 * var(--grad-strength))),
+        transparent 60%),
+      radial-gradient(820px 520px at 92% 4%,
+        rgba(200, 80, 192, calc(0.14 * var(--grad-strength))),
+        transparent 58%);
+  }
+}
+
+// — Section head : kicker + titre display + sous-titre —
+.section-head {
+  margin: 0 0 $spacing-lg;
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-section-title;
+    line-height: 1.05;
+    letter-spacing: $letter-spacing-display;
+    margin: 12px 0 8px;
+  }
+
+  &__sub {
+    margin: 0;
+    color: $color-text-secondary;
+    font-size: $font-size-lg;
+    max-width: 600px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+}
+
+// — Page hero compact (.phero) : remplace les bandeaux dégradé plein-écran —
+// Usage : <section class="phero"><span class="kicker">…</span><h1 class="phero__title">…</h1>…</section>
+.phero {
+  padding: 48px 0 8px;
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-page-title;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 14px 0 14px;
+  }
+
+  &__sub {
+    margin: 0;
+    color: $color-text-secondary;
+    font-size: 17px;
+    max-width: 620px;
+    line-height: 1.55;
+  }
+}
+
+// — Wrap utilitaire (containement de page) —
+.wrap {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+// — Carte de base (réutilisable) + liseré dégradé au hover —
+.grad-card {
+  position: relative;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
+    background: $color-surface-hover;
+  }
+
+  &--glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: $gradient-hero;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &--glow:hover::before { opacity: 0.9; }
+}
+
+// — Boutons signature —
+.grad-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  padding: 11px 20px;
+  border-radius: $radius-pill;
+  border: 1px solid transparent;
+  background: $gradient-hero;
+  color: $color-white;
+  cursor: pointer;
+  transition: filter 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+}
+
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  padding: 11px 20px;
+  border-radius: $radius-pill;
+  border: 1px solid $color-border;
+  background: $color-surface-hover;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+
+  &:hover {
+    border-color: $color-hairline-strong;
+    background: $color-surface-3;
+    text-decoration: none;
+  }
+}

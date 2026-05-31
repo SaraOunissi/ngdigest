@@ -1,25 +1,34 @@
 // ======================
-// Design Tokens
+// Design Tokens (refresh 2026-05)
 // ======================
 
-// Typography
+// — Typographie —
+// Inter pour corps / UI, Space Grotesk pour les titres display,
+// JetBrains Mono pour les métadonnées (sources, tags, kickers).
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-display: 'Space Grotesk', 'Inter', sans-serif;
+$font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+
 $font-size-xs: 11px;
 $font-size-sm: 12px;
 $font-size-caption: 0.8125rem;
 $font-size-base: 14px;
 $font-size-lg: 16px;
 $font-size-xl: 20px;
-$font-size-page-title: 2rem;
+$font-size-hero: clamp(38px, 5.4vw, 64px);
+$font-size-page-title: clamp(34px, 5vw, 56px);
+$font-size-section-title: clamp(26px, 3vw, 38px);
 $font-size-icon-lg: 1.5rem;
-$font-size-hero: clamp(2rem, 5vw, 3.5rem);
 
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-// Spacing
+// Resserrement des titres display
+$letter-spacing-display: -0.025em;
+
+// — Espacements —
 $spacing-xs: 4px;
 $spacing-sm: 8px;
 $spacing-md: 16px;
@@ -28,30 +37,36 @@ $spacing-xl: 40px;
 $spacing-2xl: 64px;
 $spacing-hero: 80px;
 
-// Border radius
-$radius-sm: 6px;
-$radius-md: 12px;
-$radius-lg: 20px;
+// — Rayons (adoucis) —
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 22px;
 $radius-pill: 999px;
 
-// Shadows
-$shadow-card: 0 2px 8px rgba(0, 0, 0, 0.4);
-$shadow-card-hover: 0 0 20px rgba(200, 80, 192, 0.15);
+// — Ombres (on s'appuie surtout sur les bordures hairline) —
+$shadow-card: 0 2px 10px rgba(0, 0, 0, 0.45);
+// Plus de glow magenta au hover : on éclaire la bordure ($color-hairline-strong).
+// Conservé pour rétro-compat — vaut "none" car remplacé par border-color hover.
+$shadow-card-hover: none;
 
-// Layout
-$grid-gap: 24px;
+// — Layout —
+$grid-gap: 18px;
 $sidebar-width: 220px;
-$content-max-width: 1200px;
-$header-height: 56px;
+$content-max-width: 1180px;
+$header-height: 64px;
 $search-max-width: 560px;
-$page-max-width-narrow: 800px;
-$avatar-size: 32px;
+$page-max-width-narrow: 820px;
+$avatar-size: 34px;
 $logo-size-sm: 24px;
-$logo-size-md: 32px;
+$logo-size-md: 34px;
 $logo-size-lg: 64px;
 
-// Breakpoints
+// — Breakpoints —
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1024px;
 $breakpoint-wide: 1440px;
+
+// — Transitions —
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;

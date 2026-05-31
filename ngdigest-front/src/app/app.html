@@ -1,36 +1,39 @@
+<div class="toprail" aria-hidden="true"></div>
+
 <header class="app">
-  <h1 class="app__title">
-    <a class="app__title-link" [routerLink]="['/', languageService.lang()]">
-      <img class="app__logo" src="assets/images/ngdigest-logo.png" alt="NgDigest" width="32" height="32">
-      {{ 'nav.title' | translate }}
+  <div class="app__inner">
+    <a class="app__brand" [routerLink]="['/', languageService.lang()]">
+      <img class="app__logo" src="assets/images/ngdigest-logo.png" alt="" width="34" height="34">
+      <span class="app__brand-name">{{ 'nav.title' | translate }}</span>
     </a>
-  </h1>
-  <p class="app__subtitle">{{ 'nav.latest' | translate }}</p>
 
-  <nav class="app__nav" aria-label="Main navigation">
-    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'blog']" routerLinkActive="app__nav-link--active">{{ 'nav.blog' | translate }}</a>
-    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'about']" routerLinkActive="app__nav-link--active">{{ 'nav.about' | translate }}</a>
-    <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'sources']" routerLinkActive="app__nav-link--active">{{ 'nav.sources' | translate }}</a>
-  </nav>
+    <nav class="app__nav" aria-label="Main navigation">
+      <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'blog']" routerLinkActive="app__nav-link--active">
+        {{ 'nav.blog' | translate }}
+      </a>
+      <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'sources']" routerLinkActive="app__nav-link--active">
+        {{ 'nav.sources' | translate }}
+      </a>
+      <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'about']" routerLinkActive="app__nav-link--active">
+        {{ 'nav.about' | translate }}
+      </a>
+    </nav>
 
-  <nav class="app__lang-toggle" aria-label="Language selection">
-    <button
-      class="app__lang-btn"
-      [class.app__lang-btn--active]="languageService.lang() === 'fr'"
-      (click)="switchLang('fr')"
-      aria-label="Switch to French"
-    >
-      FR
-    </button>
-    <button
-      class="app__lang-btn"
-      [class.app__lang-btn--active]="languageService.lang() === 'en'"
-      (click)="switchLang('en')"
-      aria-label="Switch to English"
-    >
-      EN
-    </button>
-  </nav>
+    <nav class="app__lang-toggle" aria-label="Language selection">
+      <button
+        class="app__lang-btn"
+        [class.app__lang-btn--active]="languageService.lang() === 'fr'"
+        (click)="switchLang('fr')"
+        aria-label="Switch to French"
+      >FR</button>
+      <button
+        class="app__lang-btn"
+        [class.app__lang-btn--active]="languageService.lang() === 'en'"
+        (click)="switchLang('en')"
+        aria-label="Switch to English"
+      >EN</button>
+    </nav>
+  </div>
 </header>
 
 <router-outlet />

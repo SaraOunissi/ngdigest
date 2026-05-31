@@ -1,27 +1,74 @@
 <section class="hero">
-  <div class="hero__content">
-    <h1 class="hero__title">
-      <img class="hero__logo" src="assets/images/ngdigest-logo-white.png" alt="" width="64" height="64">
-      NgDigest
-    </h1>
-    <p class="hero__subtitle">{{ 'hero.subtitle' | translate }}</p>
-    <div class="hero__search">
-      <input
-        class="hero__search-input"
-        type="search"
-        [placeholder]="'hero.searchPlaceholder' | translate"
-        [attr.aria-label]="'hero.searchLabel' | translate"
-        [value]="searchValue()"
-        (input)="searchValue.set($any($event.target).value)"
-      />
-      @if (searchValue()) {
-        <button
-          class="hero__search-clear"
-          type="button"
-          [attr.aria-label]="'hero.clearSearch' | translate"
-          (click)="searchValue.set('')"
-        >×</button>
+  <div class="hero__container" [class.hero__container--single]="!weeklyPick()">
+    <div class="hero__lead">
+      <span class="kicker">{{ 'hero.kicker' | translate }}</span>
+
+      <h1 class="hero__title">
+        {{ 'hero.titleBefore' | translate }}<span class="grad-text">{{ 'hero.titleGrad' | translate }}</span>{{ 'hero.titleAfter' | translate }}
+      </h1>
+
+      <p class="hero__subtitle">{{ 'hero.subtitle' | translate }}</p>
+
+      <div class="hero__search">
+        <span class="hero__search-icon" aria-hidden="true">🔍</span>
+        <input
+          class="hero__search-input"
+          type="search"
+          [placeholder]="'hero.searchPlaceholder' | translate"
+          [attr.aria-label]="'hero.searchLabel' | translate"
+          [value]="searchValue()"
+          (input)="searchValue.set($any($event.target).value)"
+        />
+        @if (searchValue()) {
+          <button
+            class="hero__search-clear"
+            type="button"
+            [attr.aria-label]="'hero.clearSearch' | translate"
+            (click)="searchValue.set('')"
+          >×</button>
+        }
+      </div>
+
+      @if (stats(); as s) {
+        <ul class="hero__stats" aria-label="Statistiques NgDigest">
+          <li class="hero__stat">
+            <span class="hero__stat-num grad-text">{{ s.resources }}+</span>
+            <span class="hero__stat-label">{{ 'hero.stats.resources' | translate }}</span>
+          </li>
+          <li class="hero__stat">
+            <span class="hero__stat-num grad-text">{{ s.sources }}</span>
+            <span class="hero__stat-label">{{ 'hero.stats.sources' | translate }}</span>
+          </li>
+          <li class="hero__stat">
+            <span class="hero__stat-num grad-text">{{ s.frequencyHours }}h</span>
+            <span class="hero__stat-label">{{ 'hero.stats.frequency' | translate }}</span>
+          </li>
+        </ul>
       }
     </div>
+
+    @if (weeklyPick(); as pick) {
+      <article class="hero__pick" aria-label="La pépite de la semaine">
+        <span class="kicker hero__pick-kicker">{{ 'hero.pick.kicker' | translate }}</span>
+        <p class="hero__pick-by">
+          {{ 'hero.pick.by' | translate }} <b>Sara</b> · <span class="hero__pick-source">{{ pick.source }}</span>
+        </p>
+        <h2 class="hero__pick-title">{{ pick.title }}</h2>
+        <div class="hero__pick-foot">
+          <span
+            class="hero__pick-score"
+            [class.hero__pick-score--high]="scoreModifier(pick.score) === 'high'"
+            [class.hero__pick-score--medium]="scoreModifier(pick.score) === 'medium'"
+            [class.hero__pick-score--low]="scoreModifier(pick.score) === 'low'"
+          >★ {{ pick.score }}/6</span>
+          @if (pick.publishedAt) {
+            <time class="hero__pick-date" [dateTime]="pick.publishedAt">{{ pick.publishedAt | date: 'dd MMM yyyy' }}</time>
+          }
+          <a class="hero__pick-cta" [href]="pick.url" target="_blank" rel="noopener noreferrer">
+            {{ 'hero.pick.readCta' | translate }} →
+          </a>
+        </div>
+      </article>
+    }
   </div>
 </section>
