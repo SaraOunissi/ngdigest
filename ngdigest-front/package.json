@@ -28,6 +28,7 @@
     "@angular/ssr": "^21.2.3",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@vercel/analytics": "^2.0.1",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -43,6 +44,7 @@
     "eslint-config-prettier": "^10.1.8",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
+    "jsdom": "^29.1.1",
     "marked": "^17.0.5",
     "marked-highlight": "^2.2.3",
     "prettier": "^3.8.1",
