@@ -1,5 +1,6 @@
 import { inject, Injectable, PLATFORM_ID, Signal, signal, WritableSignal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 const CONSENT_KEY = 'cookie_consent';
 const GA_ID = 'G-6MGV02JE0R';
@@ -15,6 +16,7 @@ interface GtagWindow extends Window {
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   private readonly _consentStatus: WritableSignal<ConsentStatus>;
@@ -36,6 +38,7 @@ export class AnalyticsService {
     localStorage.setItem(CONSENT_KEY, 'accepted');
     this._consentStatus.set('accepted');
     this.loadGtag();
+    this.trackPageView(this.router.url);
   }
 
   refuse(): void {
@@ -59,7 +62,9 @@ export class AnalyticsService {
     win.dataLayer = win.dataLayer ?? [];
     win.gtag = (...args: unknown[]) => win.dataLayer.push(args);
     win.gtag('js', new Date());
-    win.gtag('config', GA_ID);
+    // send_page_view: false → router NavigationEnd is the single source of truth
+    // for page_view events; without this, pre-consented sessions would get a duplicate.
+    win.gtag('config', GA_ID, { send_page_view: false });
 
     const script = document.createElement('script');
     script.id = GTAG_SCRIPT_ID;
