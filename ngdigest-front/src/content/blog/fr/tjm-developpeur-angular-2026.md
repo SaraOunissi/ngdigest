@@ -1,13 +1,17 @@
 ---
 title: "TJM Développeur Angular en France : Combien Facturer en Freelance en 2026 ?"
 slug: "tjm-developpeur-angular-2026"
-description: "Guide complet des tarifs freelance Angular en France en 2026. TJM par niveau, par ville, calcul du tarif idéal, statuts juridiques et plateformes."
+description: "Guide complet des tarifs freelance Angular en France en 2026. TJM par niveau, par ville, calcul du tarif idéal, statuts juridiques et plateformes. Mise à jour mai 2026 avec barème actualisé Silkhom + Malt + Free-Work."
 date: "2026-03-26"
 author: "Sara Ounissi"
 tags: ["freelance", "angular", "tjm", "france"]
 lang: "fr"
 alternate: "angular-developer-daily-rate-2026"
 ---
+
+<!-- Update mai 2026 : section "Barème 2026 actualisé" + Paris vs régions vs remote + sources fraîches. by project-worker 2026-05-22 (q017) -->
+
+> **🔄 Mise à jour mai 2026** — Cet article a été enrichi en mai 2026 avec un barème actualisé (fourchettes basses / médianes / hautes par niveau), une comparaison Paris vs régions vs remote rafraîchie sur les données 2026, et un focus sectoriel (e-commerce / SaaS). [Aller directement à la section actualisée](#mise-a-jour-mai-2026-bareme-actualise).
 
 Cette année, j'ai décidé de me lancer en freelance. Enfin, "décidé" est un grand mot. Disons que je suis en plein dedans : la prospection, les questions administratives, les doutes. Après des années en ESN, je suis en train de préparer le saut vers une activité de développeuse Angular indépendante. Et honnêtement ? C'est vraiment pas facile.
 
@@ -49,6 +53,55 @@ Ces chiffres correspondent à des missions en **régie** (temps passé), qui rep
 **Tendance 2026** : le TJM moyen des développeurs freelance en France a progressé de 5 à 8% par rapport à 2025, porté par la demande croissante en compétences front-end modernes et la pénurie de profils Angular seniors.
 
 **Pour revenir à mon exemple** : j'étais vendue 450€/jour en région lyonnaise avec un profil confirmé Angular + UX/UI, 5 ans d'expérience, placée chez un grand compte (RTE), pour un salaire de 2 300€ net/mois. En regardant les fourchettes marché, un profil comme le mien devrait se situer entre 480€ et 550€ en direct. Toute la différence entre ce qu'on me facturait et ce que je touchais, c'est la marge des intermédiaires. Et c'est pour ça qu'il faut connaître ces chiffres : pour ne pas te sous-vendre.
+
+## Mise à jour mai 2026 — Barème actualisé {#mise-a-jour-mai-2026-bareme-actualise}
+
+J'ai rouvert cet article en mai 2026 pour le recroiser avec les baromètres fraîchement publiés : **Malt baromètre des tarifs 2026** (mis à jour en continu sur 767 profils AngularJS référencés), **Silkhom baromètre TJM 2025** (référence terrain ESN/cabinets), **Free-Work** (grille front-end JS/Angular/React/Vue), **codeur.com** (tarif Angular mai 2026), **embarq.fr** (guide TJM Angular), et **TJMètre.fr** (12 347 observations agrégées sur les 12 derniers mois, dont des imports Silkhom et France Travail).
+
+La photo de mai 2026 confirme la tendance haussière : le TJM médian d'un développeur freelance en France toutes spécialités confondues s'établit à **520-535€/jour** (selon Malt et TJMètre). Sur Angular spécifiquement, voici les fourchettes basses / médianes / hautes que je retiens.
+
+### Barème Angular freelance France — mai 2026
+
+| Niveau | Fourchette basse | Médian | Fourchette haute |
+|--------|-----------------:|-------:|-----------------:|
+| **Junior** (0-2 ans) | 250€ | 350€ | 450€ |
+| **Confirmé / Intermédiaire** (3-5 ans) | 400€ | 480€ | 600€ |
+| **Senior** (5-8 ans) | 500€ | 580€ | 700€ |
+| **Senior secteur premium** (e-commerce, SaaS, fintech) | 600€ | 700€ | 800€+ |
+| **Expert / Lead / Architecte** (8+ ans) | 650€ | 720€ | 900€+ |
+
+Deux choses à savoir lire dans ce tableau :
+
+1. **La fourchette basse n'est pas le marché — c'est le plancher des intermédiaires les plus marges-pressed.** Si tu te retrouves proposé à la fourchette basse en tant que confirmé Angular en 2026, c'est qu'il y a au moins une ESN qui prend une commission à deux chiffres au-dessus de toi. Tu peux refuser sans culpabilité.
+2. **La fourchette haute n'est pas un fantasme.** Les profils senior Angular qui maîtrisent en plus NestJS + cloud (AWS/GCP) + un secteur métier (banque, santé, e-commerce gros volume) se placent au-dessus de 700€/j en direct dès qu'ils sortent du sillon des intermédiaires.
+
+### Le saut sectoriel e-commerce / SaaS
+
+Free-Work et codeur.com séparent désormais les TJM front-end par secteur. Sur Angular en mai 2026 :
+
+- **E-commerce gros trafic / SaaS B2B / fintech** : Senior à **700€+** systématiquement, l'expert atteint **800-900€/j**. La demande pour la perf front (Core Web Vitals, SSR, Signals + zoneless) tire les tarifs vers le haut depuis 6-12 mois.
+- **Grands groupes industriels / banque / assurance** : Confirmé 500-580€, Senior 600-700€. Stable.
+- **Startups early-stage / agences web** : Confirmé 400-480€, Senior 500-580€. Plus serré, mais souvent missions courtes haut intérêt technique.
+- **ESN intermédiaire pure** : 350-450€ pour un confirmé. C'est là que la marge intermédiaire mange ton TJM.
+
+### Encadré — Paris vs régions vs remote (mai 2026)
+
+> **Paris** : médian Angular confirmé **538€/j** (Malt), senior **650€+**. Écart de +10 à +20% vs régions sur les profils confirmés/seniors.
+>
+> **Lyon / Bordeaux / Toulouse / Nantes** : médian Angular confirmé **470-490€/j**. Le rattrapage par le remote post-2020 a été partiellement annulé en 2025-2026 par les retours sur site.
+>
+> **Full remote** : **400-550€/j** pour un confirmé, mais avec un **biais à la baisse de 30-80€** quand le client présente le remote comme "un avantage qui se paie" (voir section ci-dessus). À surveiller : certains clients commencent à inverser et **majorer** le full remote quand ils recrutent à l'échelle nationale sans bureau.
+>
+> **Hybride (2-3j/semaine sur site Paris)** : c'est aujourd'hui le sweet spot tarifaire. Tu accèdes au pricing parisien sans habiter Paris. Confirmé 500-580€, Senior 620-700€.
+
+### Ce qui a vraiment bougé depuis mars 2026
+
+- **+5 à +8%** sur les TJM seniors Angular toutes localisations confondues (porté par la demande Signals + zoneless + SSR — voir [retour d'expérience zoneless en production](./draft-angular-21-zoneless-retour-experience.md) à paraître).
+- **Resserrement du delta Paris/régions** sur les profils confirmés (le remote hybride parisien grignote le différentiel pur géographique).
+- **Apparition d'une prime "perf front"** : maîtrise SSR + Signals + audit Lighthouse = +50 à +100€/j sur les missions SaaS B2C à fort trafic.
+- **Plafond micro-entreprise saturé plus vite** : à 480€/j médian confirmé sur 180j facturés, on atteint 86 400€ de CA — soit ~9 000€ au-dessus du plafond BNC de 77 700€. La bascule SASU devient quasi mécanique en année 2 pour un confirmé qui tient sa cadence.
+
+**Sources mai 2026** : [Malt — Baromètre tarifs 2026 AngularJS](https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend/developpeur-angularjs), [Silkhom — Baromètre TJM 2025](https://www.silkhom.com/barometre-des-tjm-informatique-electronique-digital/), [Free-Work — Grille front-end JS/Angular/React/Vue](https://www.free-work.com/fr/tech-it/developpeur-front-end-javascript-node-react-angular-vue/rate-tjm-freelance), [codeur.com — Tarif Angular mai 2026](https://www.codeur.com/developpeur/angular/tarif), [embarq.fr — Guide TJM Angular](https://www.embarq.fr/tjm/tjm-angular), [TJMètre.fr — Baromètre 2026 (12 347 obs.)](https://tjmetre.fr/barometre).
 
 ## Paris vs Province : quel écart en 2026 ?
 
@@ -284,6 +337,6 @@ Se lancer en freelance c'est flippant, surtout quand on vient du monde des ESN o
 
 ---
 
-*Cet article est mis à jour régulièrement avec les dernières données du marché. Dernière mise à jour : mars 2026.*
+*Cet article est mis à jour régulièrement avec les dernières données du marché. **Dernière mise à jour : mai 2026** (publication initiale : mars 2026).*
 
-*Sources : Malt (Baromètre des tarifs 2026), Free-Work, Freelance-Informatique, Silkhom (Baromètre TJM 2025), Portail Auto-Entrepreneur, economie.gouv.fr*
+*Sources : Malt (Baromètre des tarifs 2026 — AngularJS, Front-End, Fullstack), Free-Work (Grille TJM front-end JS/Angular/React/Vue), Freelance-Informatique, Silkhom (Baromètre TJM 2025), codeur.com (Tarif Angular mai 2026), embarq.fr (Guide TJM Angular), TJMètre.fr (Baromètre 2026, 12 347 observations), Portail Auto-Entrepreneur, economie.gouv.fr.*
