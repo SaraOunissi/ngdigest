@@ -8,6 +8,10 @@
     </a>
 
     <nav class="app__nav" aria-label="Main navigation">
+      <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'jobs']" routerLinkActive="app__nav-link--active">
+        {{ 'nav.jobs' | translate }}
+        <span class="app__nav-badge">{{ 'nav.new' | translate }}</span>
+      </a>
       <a class="app__nav-link" [routerLink]="['/', languageService.lang(), 'blog']" routerLinkActive="app__nav-link--active">
         {{ 'nav.blog' | translate }}
       </a>

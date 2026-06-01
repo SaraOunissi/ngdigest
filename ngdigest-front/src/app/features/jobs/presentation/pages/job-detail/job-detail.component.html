@@ -1,0 +1,86 @@
+@if (currentJob(); as job) {
+  <article class="job-detail">
+    <a
+      class="job-detail__back"
+      [routerLink]="['/', languageService.lang(), 'jobs']"
+    >
+      ← {{ 'jobs.backToList' | translate }}
+    </a>
+
+    <header class="job-detail__head">
+      <div class="job-detail__logo" aria-hidden="true">{{ initials(job.company) }}</div>
+      <div class="job-detail__heading">
+        <span class="job-detail__co">{{ job.company }}</span>
+        <h1 class="job-detail__title">{{ job.title }}</h1>
+      </div>
+      <span
+        class="job-detail__type"
+        [class.job-detail__type--cdi]="job.type === 'CDI'"
+        [class.job-detail__type--freelance]="job.type === 'Freelance'"
+      >
+        {{ job.type }}
+      </span>
+    </header>
+
+    <div class="job-facts">
+      <div class="job-fact">
+        <span class="job-fact__lab">{{ compensationKindKey(job) | translate }}</span>
+        <div class="job-fact__val grad-text">{{ compensationLabel(job) }}</div>
+      </div>
+      <div class="job-fact">
+        <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
+        <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
+        @if (job.location) {
+          <div class="job-fact__sub">{{ job.location }} · {{ job.zone }}</div>
+        } @else {
+          <div class="job-fact__sub">{{ job.zone }}</div>
+        }
+      </div>
+    </div>
+
+    <ul class="job-detail__stack" aria-label="Stack">
+      @for (tech of job.stack; track tech) {
+        <li class="job-detail__tech">{{ tech }}</li>
+      }
+    </ul>
+
+    <blockquote class="job-detail__editorial">
+      <p>{{ job.editorialNote }}</p>
+      <footer>— Sara, ngdigest</footer>
+    </blockquote>
+
+    <div class="job-detail__actions">
+      <time class="job-detail__scanned" [dateTime]="job.scannedAt">
+        {{ 'jobs.verifiedOn' | translate }} {{ formatDate(job.scannedAt) }}
+      </time>
+      <a
+        class="grad-btn job-detail__apply"
+        [href]="job.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ 'jobs.apply' | translate }}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    @if (similarJobs().length > 0) {
+      <aside class="job-detail__similar">
+        <h2 class="job-detail__similar-title">
+          {{ 'jobs.similar' | translate }}
+        </h2>
+        <ul class="job-detail__similar-list">
+          @for (similar of similarJobs(); track similar.slug) {
+            <li>
+              <a
+                [routerLink]="['/', languageService.lang(), 'jobs', similar.slug]"
+              >
+                {{ similar.title }} — {{ similar.company }}
+              </a>
+            </li>
+          }
+        </ul>
+      </aside>
+    }
+  </article>
+}

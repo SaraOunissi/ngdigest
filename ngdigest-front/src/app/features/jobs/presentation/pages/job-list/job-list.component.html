@@ -1,0 +1,82 @@
+<div class="jobs-page">
+  <section class="jobs-hero">
+    <span class="kicker">{{ 'jobs.list.kicker' | translate }}</span>
+    <h1 class="jobs-hero__title">
+      {{ 'jobs.list.titleBefore' | translate }}
+      <span class="grad-text">{{ 'jobs.list.titleAccent' | translate }}</span>
+    </h1>
+    <p class="jobs-hero__subtitle">{{ 'jobs.list.subtitle' | translate }}</p>
+  </section>
+
+  <app-job-filters />
+
+  <main class="jobs-grid">
+    @for (job of store.filteredJobs(); track job.slug) {
+      <article class="job-card grad-card grad-card--glow">
+        <header class="job-card__head">
+          <div class="job-card__logo" aria-hidden="true">{{ initials(job.company) }}</div>
+          <div class="job-card__heading">
+            <span class="job-card__co">{{ job.company }}</span>
+            <h2 class="job-card__title">
+              <a
+                class="job-card__title-link"
+                [routerLink]="['/', languageService.lang(), 'jobs', job.slug]"
+              >
+                {{ job.title }}
+              </a>
+            </h2>
+          </div>
+          <span
+            class="job-card__type"
+            [class.job-card__type--cdi]="job.type === 'CDI'"
+            [class.job-card__type--freelance]="job.type === 'Freelance'"
+          >
+            {{ job.type }}
+          </span>
+        </header>
+
+        <div class="job-facts">
+          <div class="job-fact">
+            <span class="job-fact__lab">{{ compensationKindKey(job) | translate }}</span>
+            <div class="job-fact__val grad-text">{{ compensationLabel(job) }}</div>
+          </div>
+          <div class="job-fact">
+            <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
+            <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
+            @if (job.location) {
+              <div class="job-fact__sub">{{ job.location }} · {{ job.zone }}</div>
+            } @else {
+              <div class="job-fact__sub">{{ job.zone }}</div>
+            }
+          </div>
+        </div>
+
+        <p class="job-card__hook">{{ job.editorialHook }}</p>
+
+        <ul class="job-card__stack" aria-label="Stack">
+          @for (tech of job.stack; track tech) {
+            <li class="job-card__tech">{{ tech }}</li>
+          }
+        </ul>
+
+        <footer class="job-card__foot">
+          <time class="job-card__scanned" [dateTime]="job.scannedAt">
+            {{ 'jobs.verifiedOn' | translate }} {{ formatDate(job.scannedAt) }}
+          </time>
+          <a
+            class="grad-btn job-card__apply"
+            [href]="job.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ 'jobs.apply' | translate }}
+            <span aria-hidden="true">→</span>
+          </a>
+        </footer>
+      </article>
+    }
+    @empty {
+      <p class="jobs-grid__empty">{{ 'jobs.empty' | translate }}</p>
+    }
+  </main>
+</div>

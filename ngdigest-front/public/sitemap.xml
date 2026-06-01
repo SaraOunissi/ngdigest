@@ -126,57 +126,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Job: Qonto (FR + EN) -->
-  <url>
-    <loc>https://ngdigest.co/fr/jobs/qonto-senior-frontend-paris</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/qonto-senior-frontend-paris"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/qonto-senior-frontend-paris"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/qonto-senior-frontend-paris"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ngdigest.co/en/jobs/qonto-senior-frontend-paris</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/qonto-senior-frontend-paris"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/qonto-senior-frontend-paris"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/qonto-senior-frontend-paris"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Job: Malt freelance (FR + EN) -->
-  <url>
-    <loc>https://ngdigest.co/fr/jobs/malt-freelance-angular-mission</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/malt-freelance-angular-mission"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/malt-freelance-angular-mission"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/malt-freelance-angular-mission"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ngdigest.co/en/jobs/malt-freelance-angular-mission</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/malt-freelance-angular-mission"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/malt-freelance-angular-mission"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/malt-freelance-angular-mission"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Job: Doctolib (FR + EN) -->
-  <url>
-    <loc>https://ngdigest.co/fr/jobs/doctolib-angular-staff-engineer</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/doctolib-angular-staff-engineer"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/doctolib-angular-staff-engineer"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/doctolib-angular-staff-engineer"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ngdigest.co/en/jobs/doctolib-angular-staff-engineer</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/jobs/doctolib-angular-staff-engineer"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/jobs/doctolib-angular-staff-engineer"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/jobs/doctolib-angular-staff-engineer"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Mentions légales FR -->
   <url>
     <loc>https://ngdigest.co/fr/mentions-legales</loc>

@@ -1,0 +1,239 @@
+@use "colors" as *;
+@use "variables" as *;
+@use "mixins" as *;
+
+// ─── Page container ──────────────────────────────────────────────────────────
+
+.jobs-page {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md $spacing-2xl;
+}
+
+// ─── Editorial hero ──────────────────────────────────────────────────────────
+
+.jobs-hero {
+  padding: 16px 0 32px;
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-page-title;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: $color-text-primary;
+    margin: 14px 0;
+  }
+
+  &__subtitle {
+    font-size: 17px;
+    color: $color-text-secondary;
+    margin: 0;
+    max-width: 620px;
+    line-height: 1.55;
+  }
+}
+
+// ─── Grid 2 columns ──────────────────────────────────────────────────────────
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: $color-text-secondary;
+    padding: $spacing-2xl 0;
+  }
+}
+
+// ─── Job card ────────────────────────────────────────────────────────────────
+
+.job-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  &__logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    background: $color-surface-3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 18px;
+    color: $color-text-primary;
+  }
+
+  &__heading {
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__co {
+    display: block;
+    font-family: $font-family-mono;
+    font-size: 12px;
+    color: $color-text-muted;
+    margin-bottom: 3px;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  &__title-link {
+    color: $color-text-primary;
+    text-decoration: none;
+    transition: color 0.18s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__type {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+
+    &--cdi {
+      background: $color-primary-light;
+      color: $color-primary;
+    }
+
+    &--freelance {
+      background: rgba(78, 107, 240, 0.16);
+      color: #8ea2ff;
+    }
+  }
+
+  &__hook {
+    position: relative;
+    font-size: 14px;
+    color: $color-text-secondary;
+    padding-left: 16px;
+    line-height: 1.5;
+    margin: 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 3px;
+      bottom: 3px;
+      width: 3px;
+      border-radius: 3px;
+      background: $gradient-hero;
+    }
+  }
+
+  &__stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__tech {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: $radius-pill;
+    background: $color-tag-bg;
+    border: 1px solid $color-border;
+    color: $color-text-secondary;
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  &__scanned {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-text-muted;
+  }
+
+  &__apply {
+    padding: 9px 18px;
+    font-size: 14px;
+  }
+}
+
+// ─── Two-fact strip (salary + remote/location) ───────────────────────────────
+
+.job-facts {
+  display: flex;
+  gap: 12px;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+  }
+}
+
+.job-fact {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: 12px 14px;
+  min-width: 0;
+
+  &__lab {
+    display: block;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    margin-bottom: 5px;
+  }
+
+  &__val {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  &__sub {
+    font-size: 11.5px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+}

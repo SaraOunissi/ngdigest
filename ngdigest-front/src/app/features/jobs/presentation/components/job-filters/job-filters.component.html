@@ -1,0 +1,13 @@
+<div class="job-filters" role="toolbar" [attr.aria-label]="'jobs.filters.all' | translate">
+  @for (chip of chips; track chip.key) {
+    <button
+      type="button"
+      class="job-filters__chip"
+      [class.job-filters__chip--active]="activeKey() === chip.key"
+      [attr.aria-pressed]="activeKey() === chip.key"
+      (click)="select(chip.key)"
+    >
+      {{ chip.labelKey | translate }}
+    </button>
+  }
+</div>

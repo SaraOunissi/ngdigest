@@ -1,0 +1,236 @@
+@use "colors" as *;
+@use "variables" as *;
+
+.job-detail {
+  max-width: $page-max-width-narrow;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md $spacing-2xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  &__back {
+    display: inline-block;
+    color: $color-text-muted;
+    font-family: $font-family-mono;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.18s ease;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    background: $color-surface-3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 22px;
+    color: $color-text-primary;
+  }
+
+  &__heading {
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__co {
+    display: block;
+    font-family: $font-family-mono;
+    font-size: 13px;
+    color: $color-text-muted;
+    margin-bottom: 6px;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(24px, 3.6vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: $color-text-primary;
+  }
+
+  &__type {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    padding: 5px 12px;
+    border-radius: $radius-pill;
+
+    &--cdi {
+      background: $color-primary-light;
+      color: $color-primary;
+    }
+
+    &--freelance {
+      background: rgba(78, 107, 240, 0.16);
+      color: #8ea2ff;
+    }
+  }
+
+  &__stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__tech {
+    font-family: $font-family-mono;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    background: $color-tag-bg;
+    border: 1px solid $color-border;
+    color: $color-text-secondary;
+  }
+
+  &__editorial {
+    position: relative;
+    margin: 0;
+    padding: $spacing-lg $spacing-lg $spacing-lg 28px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    line-height: 1.7;
+    color: $color-text-secondary;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      border-radius: 3px;
+      background: $gradient-hero;
+    }
+
+    > p {
+      margin: 0 0 $spacing-sm;
+      white-space: pre-line;
+      font-size: 15px;
+    }
+
+    > footer {
+      font-family: $font-family-mono;
+      font-size: 12px;
+      color: $color-text-muted;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__scanned {
+    font-family: $font-family-mono;
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+
+  &__apply {
+    padding: 11px 22px;
+  }
+
+  &__similar {
+    margin-top: $spacing-md;
+    border-top: 1px solid $color-border;
+    padding-top: $spacing-lg;
+  }
+
+  &__similar-title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+
+  &__similar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    > li > a {
+      color: $color-text-secondary;
+      text-decoration: none;
+      font-size: $font-size-base;
+      transition: color 0.18s ease;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+// Shared facts strip (reused from job-list)
+.job-facts {
+  display: flex;
+  gap: 12px;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+  }
+}
+
+.job-fact {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: 14px 16px;
+  min-width: 0;
+
+  &__lab {
+    display: block;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    margin-bottom: 6px;
+  }
+
+  &__val {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  &__sub {
+    font-size: 12px;
+    color: $color-text-muted;
+    margin-top: 3px;
+  }
+}

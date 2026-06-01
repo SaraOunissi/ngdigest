@@ -1,0 +1,38 @@
+@use "colors" as *;
+@use "variables" as *;
+
+.job-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+
+  &__chip {
+    font-family: $font-family;
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    padding: 7px 14px;
+    border-radius: $radius-pill;
+    background: $color-surface-hover;
+    border: 1px solid $color-border;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+
+    &:hover {
+      border-color: $color-hairline-strong;
+      color: $color-text-primary;
+    }
+
+    &--active {
+      background: $gradient-hero;
+      color: $color-white;
+      border-color: transparent;
+
+      &:hover {
+        color: $color-white;
+        filter: brightness(1.05);
+      }
+    }
+  }
+}
