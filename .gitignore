@@ -149,3 +149,13 @@ Thumbs.db
 /_brainstorms-anciennes-sessions/
 /_lead-magnets/
 
+# Local working docs (private — not part of the public repo)
+/PLAN.md
+/FEATURE_IDEAS.md
+/CONTENT_IDEAS.md
+/MARKETING.md
+/POSITIONING.md
+
+# Claude Code local config / session state
+/.claude/
+
