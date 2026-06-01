@@ -237,3 +237,52 @@
     margin-top: 2px;
   }
 }
+
+// ─── Archived offers section ─────────────────────────────────────────────────
+
+.jobs-archive {
+  margin-top: $spacing-2xl;
+  padding-top: $spacing-xl;
+  border-top: 1px solid $color-border;
+
+  &__head {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 22px;
+    color: $color-text-secondary;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+
+  &__subtitle {
+    font-size: 13px;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}
+
+.job-card--archived {
+  pointer-events: none;
+  user-select: none;
+  filter: grayscale(0.85);
+  opacity: 0.55;
+
+  .job-card__expired {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    background: rgba(255, 255, 255, 0.04);
+    color: $color-text-muted;
+    border: 1px solid $color-border;
+  }
+}

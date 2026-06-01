@@ -43,7 +43,7 @@ for (const file of files.filter((f) => f.endsWith('.md') && !f.startsWith('_')))
   const raw = await readFile(join(CONTENT_DIR, file), 'utf-8');
   const { data: frontmatter } = matter(raw);
 
-  jobs.push({
+  const entry = {
     slug: frontmatter['slug'],
     title: frontmatter['title'],
     company: frontmatter['company'],
@@ -62,7 +62,14 @@ for (const file of files.filter((f) => f.endsWith('.md') && !f.startsWith('_')))
     tags: frontmatter['tags'] ?? [],
     editorialHook: frontmatter['editorialHook'] ?? '',
     editorialNote: frontmatter['editorialNote'] ?? '',
-  });
+  };
+
+  if (frontmatter['editorialHookEn']) entry.editorialHookEn = frontmatter['editorialHookEn'];
+  if (frontmatter['editorialNoteEn']) entry.editorialNoteEn = frontmatter['editorialNoteEn'];
+  if (frontmatter['locationEn']) entry.locationEn = frontmatter['locationEn'];
+  if (frontmatter['salaryEn']) entry.salaryEn = frontmatter['salaryEn'];
+
+  jobs.push(entry);
 }
 
 // Sort jobs: most recently scanned first

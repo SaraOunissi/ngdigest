@@ -43,15 +43,15 @@
           <div class="job-fact">
             <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
             <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
-            @if (job.location) {
-              <div class="job-fact__sub">{{ job.location }} · {{ job.zone }}</div>
+            @if (locationFor(job); as loc) {
+              <div class="job-fact__sub">{{ loc }} · {{ job.zone }}</div>
             } @else {
               <div class="job-fact__sub">{{ job.zone }}</div>
             }
           </div>
         </div>
 
-        <p class="job-card__hook">{{ job.editorialHook }}</p>
+        <p class="job-card__hook">{{ editorialHookFor(job) }}</p>
 
         <ul class="job-card__stack" aria-label="Stack">
           @for (tech of job.stack; track tech) {
@@ -79,4 +79,38 @@
       <p class="jobs-grid__empty">{{ 'jobs.empty' | translate }}</p>
     }
   </main>
+
+  @if (store.archivedJobs().length > 0) {
+    <section class="jobs-archive" aria-labelledby="jobs-archive-title">
+      <header class="jobs-archive__head">
+        <h2 id="jobs-archive-title" class="jobs-archive__title">
+          {{ 'jobs.archive.title' | translate }}
+        </h2>
+        <p class="jobs-archive__subtitle">{{ 'jobs.archive.subtitle' | translate }}</p>
+      </header>
+
+      <div class="jobs-grid jobs-grid--archived">
+        @for (job of store.archivedJobs(); track job.slug) {
+          <article class="job-card job-card--archived grad-card" aria-disabled="true">
+            <header class="job-card__head">
+              <div class="job-card__logo" aria-hidden="true">{{ initials(job.company) }}</div>
+              <div class="job-card__heading">
+                <span class="job-card__co">{{ job.company }}</span>
+                <h3 class="job-card__title">{{ job.title }}</h3>
+              </div>
+              <span class="job-card__expired">{{ 'jobs.archive.expired' | translate }}</span>
+            </header>
+
+            <p class="job-card__hook">{{ editorialHookFor(job) }}</p>
+
+            <ul class="job-card__stack" aria-label="Stack">
+              @for (tech of job.stack; track tech) {
+                <li class="job-card__tech">{{ tech }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </section>
+  }
 </div>

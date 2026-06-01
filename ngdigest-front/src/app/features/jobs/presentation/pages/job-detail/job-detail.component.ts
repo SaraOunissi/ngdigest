@@ -72,7 +72,23 @@ export class JobDetailComponent {
   }
 
   protected compensationLabel(job: Job): string {
-    return job.type === 'CDI' ? (job.salary ?? '') : (job.tjm ?? '');
+    const isEn = this.languageService.lang() === 'en';
+    if (job.type === 'CDI') {
+      return (isEn && job.salaryEn) ? job.salaryEn : (job.salary ?? '');
+    }
+    return job.tjm ?? '';
+  }
+
+  protected editorialNoteFor(job: Job): string {
+    return this.languageService.lang() === 'en' && job.editorialNoteEn
+      ? job.editorialNoteEn
+      : job.editorialNote;
+  }
+
+  protected locationFor(job: Job): string | null {
+    return this.languageService.lang() === 'en' && job.locationEn
+      ? job.locationEn
+      : job.location;
   }
 
   protected compensationKindKey(job: Job): string {

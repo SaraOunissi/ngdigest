@@ -38,4 +38,9 @@ export interface Job {
   readonly editorialHook: string;
   /** Full editorial note (verbatim from the bi-monthly pépites). */
   readonly editorialNote: string;
+  /** Optional English translations — fall back to the default fields when absent. */
+  readonly editorialHookEn?: string;
+  readonly editorialNoteEn?: string;
+  readonly locationEn?: string;
+  readonly salaryEn?: string;
 }

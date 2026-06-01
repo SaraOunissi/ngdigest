@@ -4,7 +4,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { DEFAULT_JOB_FILTER, JobFilter } from '../../../domain/models/job-filter.model';
 import { JobsStore } from '../../../application/jobs.store';
 
-type ChipKey = 'all' | 'cdi' | 'freelance' | 'remote100' | 'hybrid';
+type ChipKey = 'all' | 'cdi' | 'freelance' | 'remote100';
 
 interface Chip {
   readonly key: ChipKey;
@@ -16,7 +16,6 @@ const CHIPS: readonly Chip[] = [
   { key: 'cdi', labelKey: 'jobs.filters.cdi' },
   { key: 'freelance', labelKey: 'jobs.filters.freelance' },
   { key: 'remote100', labelKey: 'jobs.filters.remote100' },
-  { key: 'hybrid', labelKey: 'jobs.filters.hybrid' },
 ];
 
 @Component({
@@ -45,8 +44,6 @@ export class JobFiltersComponent {
         return { ...DEFAULT_JOB_FILTER, type: 'Freelance' };
       case 'remote100':
         return { ...DEFAULT_JOB_FILTER, remote: '100' };
-      case 'hybrid':
-        return { ...DEFAULT_JOB_FILTER, remote: 'hybride' };
       case 'all':
       default:
         return DEFAULT_JOB_FILTER;
@@ -57,7 +54,6 @@ export class JobFiltersComponent {
     if (filter.type === 'CDI') return 'cdi';
     if (filter.type === 'Freelance') return 'freelance';
     if (filter.remote === '100') return 'remote100';
-    if (filter.remote === 'hybride') return 'hybrid';
     return 'all';
   }
 }

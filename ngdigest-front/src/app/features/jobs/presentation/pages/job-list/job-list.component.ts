@@ -15,11 +15,11 @@ const SEO_TITLES: Record<'fr' | 'en', string> = {
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   fr:
-    'Sélection bi-mensuelle d’offres Angular front pur, remote ou hybride, ' +
+    'Sélection bi-mensuelle d’offres front et DevRel 100% remote (FR/EU friendly), ' +
     'curated humainement par Sara Ounissi — pas de fullstack déguisé.',
   en:
-    'Bi-monthly hand-picked Angular frontend jobs (remote or hybrid), reviewed ' +
-    'by Sara Ounissi — no disguised fullstack.',
+    'Bi-monthly hand-picked frontend & DevRel jobs, 100% remote (FR/EU friendly), ' +
+    'reviewed by Sara Ounissi — no disguised fullstack.',
 };
 
 @Component({
@@ -52,7 +52,23 @@ export class JobListComponent {
   }
 
   protected compensationLabel(job: Job): string {
-    return job.type === 'CDI' ? (job.salary ?? '') : (job.tjm ?? '');
+    const isEn = this.languageService.lang() === 'en';
+    if (job.type === 'CDI') {
+      return (isEn && job.salaryEn) ? job.salaryEn : (job.salary ?? '');
+    }
+    return job.tjm ?? '';
+  }
+
+  protected editorialHookFor(job: Job): string {
+    return this.languageService.lang() === 'en' && job.editorialHookEn
+      ? job.editorialHookEn
+      : job.editorialHook;
+  }
+
+  protected locationFor(job: Job): string | null {
+    return this.languageService.lang() === 'en' && job.locationEn
+      ? job.locationEn
+      : job.location;
   }
 
   protected compensationKindKey(job: Job): string {

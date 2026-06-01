@@ -30,8 +30,8 @@
       <div class="job-fact">
         <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
         <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
-        @if (job.location) {
-          <div class="job-fact__sub">{{ job.location }} · {{ job.zone }}</div>
+        @if (locationFor(job); as loc) {
+          <div class="job-fact__sub">{{ loc }} · {{ job.zone }}</div>
         } @else {
           <div class="job-fact__sub">{{ job.zone }}</div>
         }
@@ -45,7 +45,7 @@
     </ul>
 
     <blockquote class="job-detail__editorial">
-      <p>{{ job.editorialNote }}</p>
+      <p>{{ editorialNoteFor(job) }}</p>
       <footer>— Sara, ngdigest</footer>
     </blockquote>
 

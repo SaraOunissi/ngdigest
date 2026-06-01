@@ -16,7 +16,7 @@ stack:
   - GraphQL
 url: "https://aircall.welcometothejungle.com/"
 scannedAt: 2026-05-16
-status: active
+status: expired
 tags:
   - angular
   - remote-france
