@@ -16,10 +16,21 @@ function dataLayer(): unknown[] {
   return (window as GtagTestWindow).dataLayer ?? [];
 }
 
+// gtag.js pushes the `arguments` object (array-like), NOT a real Array -- which is
+// exactly what loadGtag now does (see the analytics.service.ts fix). We normalize
+// each entry to a real array before filtering, instead of requiring Array.isArray
+// (which would reject the `arguments` objects and hide the real runtime behaviour).
+function asArrayLike(entry: unknown): unknown[] | null {
+  if (entry === null || typeof entry !== 'object') return null;
+  const length = (entry as { length?: unknown }).length;
+  if (typeof length !== 'number') return null;
+  return Array.from(entry as ArrayLike<unknown>);
+}
+
 function eventsOfType(predicate: (entry: unknown[]) => boolean): unknown[][] {
-  return dataLayer().filter(
-    (entry): entry is unknown[] => Array.isArray(entry) && predicate(entry),
-  );
+  return dataLayer()
+    .map(asArrayLike)
+    .filter((entry): entry is unknown[] => entry !== null && predicate(entry));
 }
 
 function configEvents(): unknown[][] {

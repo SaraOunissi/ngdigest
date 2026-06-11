@@ -60,11 +60,19 @@ export class AnalyticsService {
 
     const win = window as unknown as GtagWindow;
     win.dataLayer = win.dataLayer ?? [];
-    win.gtag = (...args: unknown[]) => win.dataLayer.push(args);
-    win.gtag('js', new Date());
-    // send_page_view: false → router NavigationEnd is the single source of truth
+    // IMPORTANT: gtag MUST push the `arguments` object (NOT an array).
+    // gtag.js only interprets a command in this form; pushing an array
+    // (`(...args) => push(args)`) is silently ignored -> no hit sent, no error.
+    // Same root-cause as the orogramme bug fixed on 2026-06-08 (0 GA4 data since
+    // go-live). It was never ported here, so ngdigest reported nothing either.
+    // Official snippet: `function gtag(){dataLayer.push(arguments);}`.
+    // eslint-disable-next-line prefer-rest-params, @typescript-eslint/no-unused-vars
+    function gtag(...args: unknown[]): void { win.dataLayer.push(arguments); }
+    win.gtag = gtag;
+    gtag('js', new Date());
+    // send_page_view: false -> router NavigationEnd is the single source of truth
     // for page_view events; without this, pre-consented sessions would get a duplicate.
-    win.gtag('config', GA_ID, { send_page_view: false });
+    gtag('config', GA_ID, { send_page_view: false });
 
     const script = document.createElement('script');
     script.id = GTAG_SCRIPT_ID;
