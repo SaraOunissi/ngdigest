@@ -4,12 +4,15 @@ import { BLOG_DATA } from './features/blog/infrastructure/blog-data.generated';
 import { JOBS_DATA } from './features/jobs/infrastructure/jobs-data.generated';
 
 export const serverRoutes: ServerRoute[] = [
-  // Static pages — prerendered at build time (both languages)
+  // Resource list (home) — server-rendered per request so the Angular watch
+  // always reflects the live API (resources are aggregated every ~12h).
+  // Prerendering froze the list at build time, so removed/archived items kept
+  // showing until the next front deploy.
   {
     path: ':lang',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+    renderMode: RenderMode.Server,
   },
+  // Static pages — prerendered at build time (both languages)
   {
     path: ':lang/sources',
     renderMode: RenderMode.Prerender,
