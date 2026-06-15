@@ -7,6 +7,7 @@ import {
 import { ResourceRepository } from './infrastructure/repositories/resource.repository.js';
 import { GetResourcesUseCase } from './application/use-cases/get-resources.use-case.js';
 import { RedetectLanguagesUseCase } from './application/use-cases/redetect-languages.use-case.js';
+import { PurgeNonArticlesUseCase } from './application/use-cases/purge-non-articles.use-case.js';
 import { ResourceController } from './presentation/controllers/resource.controller.js';
 import { AdminGuard } from '../../common/guards/admin.guard.js';
 
@@ -17,7 +18,13 @@ import { AdminGuard } from '../../common/guards/admin.guard.js';
     ]),
   ],
   controllers: [ResourceController],
-  providers: [ResourceRepository, GetResourcesUseCase, RedetectLanguagesUseCase, AdminGuard],
+  providers: [
+    ResourceRepository,
+    GetResourcesUseCase,
+    RedetectLanguagesUseCase,
+    PurgeNonArticlesUseCase,
+    AdminGuard,
+  ],
   exports: [ResourceRepository],
 })
 export class ResourcesModule {}

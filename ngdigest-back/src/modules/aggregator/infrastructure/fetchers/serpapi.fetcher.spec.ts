@@ -82,7 +82,7 @@ describe('SerpapiNewsFetcher', () => {
       title: 'Angular framework 2026 best practices',
       url: 'https://angular.dev/guide/best-practices',
       source: 'angular.dev',
-      tags: ['angular', 'framework'],
+      tags: ['angular', 'expert'],
       language: 'en',
       score: 0,
       isRead: false,
@@ -171,9 +171,9 @@ describe('SerpapiNewsFetcher', () => {
     // Act
     const results = await fetcher.fetch();
 
-    // Assert — framework results still returned
+    // Assert — expert-blog results still returned
     expect(results.length).toBe(1);
-    expect(results[0]?.tags).toContain('framework');
+    expect(results[0]?.tags).toContain('expert');
   });
 
   it('should return [] when all calls throw', async () => {

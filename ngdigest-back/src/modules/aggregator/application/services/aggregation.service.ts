@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
 import { ResourceRepository } from '../../../resources/infrastructure/repositories/resource.repository.js';
+import { isLikelyArticle } from '../../infrastructure/config/is-article-candidate.js';
 import { DevtoFetcher } from '../../infrastructure/fetchers/devto.fetcher.js';
 import { RssFetcher } from '../../infrastructure/fetchers/rss.fetcher.js';
 import { SerpapiNewsFetcher } from '../../infrastructure/fetchers/serpapi.fetcher.js';
@@ -59,18 +60,31 @@ export class AggregationService implements OnModuleInit {
 
     const allCandidates = [...serpapiResults, ...devtoResults, ...rssResults];
 
+    // Drop listing / navigation pages (e.g. the Angular blog "Latest" tag) that
+    // sources index alongside real articles. They sit on a trusted domain and
+    // would otherwise pass the relevance score despite not being an article.
+    const articleCandidates = allCandidates.filter((article) =>
+      isLikelyArticle(article.url, article.title),
+    );
+
+    if (articleCandidates.length < allCandidates.length) {
+      this.logger.log(
+        `Article filter: ${allCandidates.length - articleCandidates.length} non-article page(s) rejected (listing/tag/author/homepage)`,
+      );
+    }
+
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
     const now = new Date();
 
-    const candidates = allCandidates.filter((article) => {
+    const candidates = articleCandidates.filter((article) => {
       if (!article.publishedAt) return false; // reject articles with no date
       return article.publishedAt >= sixMonthsAgo && article.publishedAt <= now;
     });
 
-    if (candidates.length < allCandidates.length) {
+    if (candidates.length < articleCandidates.length) {
       this.logger.log(
-        `Date filter: ${allCandidates.length - candidates.length} article(s) rejected (no date, older than 6 months, or future date)`,
+        `Date filter: ${articleCandidates.length - candidates.length} article(s) rejected (no date, older than 6 months, or future date)`,
       );
     }
 

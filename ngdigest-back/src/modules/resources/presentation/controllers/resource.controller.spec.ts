@@ -1,12 +1,14 @@
 import { ResourceController } from './resource.controller.js';
 import { GetResourcesUseCase } from '../../application/use-cases/get-resources.use-case.js';
 import { RedetectLanguagesUseCase } from '../../application/use-cases/redetect-languages.use-case.js';
+import { PurgeNonArticlesUseCase } from '../../application/use-cases/purge-non-articles.use-case.js';
 import { Resource } from '../../domain/entities/resource.entity.js';
 
 describe('ResourceController', () => {
   let controller: ResourceController;
   let mockUseCase: jest.Mocked<GetResourcesUseCase>;
   let mockRedetectUseCase: jest.Mocked<RedetectLanguagesUseCase>;
+  let mockPurgeUseCase: jest.Mocked<PurgeNonArticlesUseCase>;
 
   beforeEach(() => {
     mockUseCase = {
@@ -17,7 +19,15 @@ describe('ResourceController', () => {
       execute: jest.fn(),
     } as unknown as jest.Mocked<RedetectLanguagesUseCase>;
 
-    controller = new ResourceController(mockUseCase, mockRedetectUseCase);
+    mockPurgeUseCase = {
+      execute: jest.fn(),
+    } as unknown as jest.Mocked<PurgeNonArticlesUseCase>;
+
+    controller = new ResourceController(
+      mockUseCase,
+      mockRedetectUseCase,
+      mockPurgeUseCase,
+    );
   });
 
   describe('findAll', () => {

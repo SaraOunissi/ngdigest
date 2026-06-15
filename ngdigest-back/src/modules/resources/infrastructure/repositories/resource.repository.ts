@@ -175,6 +175,24 @@ export class ResourceRepository {
   }
 
   /**
+   * Archives the given active resources by id (sets archivedAt = now).
+   * Used to retire listing/navigation pages that were stored before the
+   * non-article guard existed. Reversible — the rows keep their data.
+   *
+   * @returns Number of archived documents.
+   */
+  async archiveByIds(ids: string[]): Promise<number> {
+    if (ids.length === 0) return 0;
+    const result = await this.resourceModel
+      .updateMany(
+        { _id: { $in: ids }, archivedAt: null },
+        { $set: { archivedAt: new Date() } },
+      )
+      .exec();
+    return result.modifiedCount;
+  }
+
+  /**
    * Archives resources matching the retention rules by setting archivedAt = now.
    * Never touches pinned resources or those with score >= 5.
    *
