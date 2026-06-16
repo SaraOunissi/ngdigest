@@ -5,7 +5,11 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withHttpTransferCacheOptions,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +18,15 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideTranslateService({ fallbackLang: 'fr' }),
     ...provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
-    provideClientHydration(withEventReplay()),
+    // The resource list page is prerendered (static). Exclude the resources API
+    // from the hydration transfer cache so the client re-fetches the live list
+    // after hydration instead of replaying the build-time snapshot — keeps the
+    // digest up to date without redeploying. Other requests stay cached.
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({
+        filter: (req) => !req.url.includes('/resources'),
+      }),
+    ),
   ],
 };
