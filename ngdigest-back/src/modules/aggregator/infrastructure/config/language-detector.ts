@@ -102,6 +102,9 @@ export function detectLanguageFromTitle(
  * 2. If URL is unparseable → 'unknown'
  * 3. If title/snippet contains a French accent or 2+ French function words → 'fr'
  * 4. Otherwise → 'en'
+ *
+ * Note: this title-based heuristic is a fallback. When a source declares the
+ * article language (e.g. the Dev.to API), trust that instead — see DevtoFetcher.
  */
 export function detectLanguage(
   url: string | undefined,

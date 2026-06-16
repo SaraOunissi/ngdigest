@@ -66,7 +66,14 @@ export class DevtoFetcher {
           ],
           language: ((): ResourceLanguage => {
             const declaredLang = article.language_code ?? article.language;
-            if (declaredLang) return declaredLang === 'fr' ? 'fr' : 'en';
+            // Trust Dev.to's declared language: keep fr/en, route every other
+            // language (pt, es, de…) to 'unknown' so it is filtered out.
+            // Previously any non-'fr' language was coerced to 'en', which let
+            // Portuguese/Spanish articles leak into the digest.
+            if (declaredLang === 'fr') return 'fr';
+            if (declaredLang === 'en') return 'en';
+            if (declaredLang) return 'unknown';
+            // Dev.to declared nothing — fall back to the title heuristic.
             return detectLanguage(article.url, article.title);
           })(),
           score: 0,

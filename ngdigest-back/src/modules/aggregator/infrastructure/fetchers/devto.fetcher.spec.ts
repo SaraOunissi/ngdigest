@@ -87,6 +87,44 @@ describe('DevtoFetcher', () => {
     expect(results[0]?.publishedAt).toBeInstanceOf(Date);
   });
 
+  it('should respect Dev.to declared language and route non-fr/en to unknown', async () => {
+    // Arrange
+    const fetcher = await buildModule('true');
+    const articles = [
+      {
+        title: 'Migrando um YMS de 5 anos',
+        url: 'https://dev.to/erick/migrando-um-yms',
+        published_at: '2026-03-01T10:00:00.000Z',
+        tag_list: ['angular'],
+        language: 'pt',
+      },
+      {
+        title: 'Comprendre les Signals',
+        url: 'https://dev.to/marie/comprendre-les-signals',
+        published_at: '2026-03-01T10:00:00.000Z',
+        tag_list: ['angular'],
+        language: 'fr',
+      },
+      {
+        title: 'Angular Signals deep dive',
+        url: 'https://dev.to/john/angular-signals-deep-dive',
+        published_at: '2026-03-01T10:00:00.000Z',
+        tag_list: ['angular'],
+        language: 'en',
+      },
+    ];
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValueOnce(articles),
+    });
+
+    // Act
+    const results = await fetcher.fetch();
+
+    // Assert — Portuguese is routed to 'unknown' (filtered later), fr/en kept
+    expect(results.map((r) => r.language)).toEqual(['unknown', 'fr', 'en']);
+  });
+
   it('should filter out articles with no title', async () => {
     // Arrange
     const fetcher = await buildModule('true');
