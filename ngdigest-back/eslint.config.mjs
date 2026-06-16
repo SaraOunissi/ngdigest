@@ -33,11 +33,17 @@ export default tseslint.config(
     },
   },
   {
-    // Passing a jest mock method to expect() (e.g. expect(mock.method)) trips
-    // unbound-method even though there is no real `this` binding concern in tests.
+    // Test code leans on jest mocks and asymmetric matchers (jest.fn(),
+    // expect.arrayContaining(), mockResolvedValue(), …) which are typed `any`,
+    // so the type-aware safety rules fire everywhere with no real value in tests.
+    // (no-explicit-any is already off globally.)
     files: ['**/*.spec.ts'],
     rules: {
       '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
     },
   },
 );
