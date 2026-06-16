@@ -131,7 +131,8 @@ export class ResourceListComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ tag_name }) => this.angularVersion.set(tag_name),
-        error: () => {},
+        // Version badge is best-effort — ignore failures (offline, rate limit).
+        error: () => undefined,
       });
 
     // Language changes trigger an immediate reset and reload.
