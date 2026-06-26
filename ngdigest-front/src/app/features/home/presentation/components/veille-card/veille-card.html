@@ -1,0 +1,35 @@
+<a
+  class="veille-card"
+  [class.veille-card--featured]="featured()"
+  [href]="resource().url"
+  target="_blank"
+  rel="noopener"
+>
+  <div class="veille-card__top">
+    <span class="veille-card__score">★ {{ resource().score }}/6</span>
+    @if (featured()) {
+      <span class="veille-card__label">{{ 'home.veille.pick' | translate }}</span>
+    } @else if (publishedLabel()) {
+      <span class="veille-card__meta">{{ publishedLabel() }}</span>
+    }
+  </div>
+
+  @if (featured()) {
+    <div class="veille-card__by">
+      {{ 'home.veille.pickedBy' | translate }} <b>Sara</b> · {{ resource().source }}
+    </div>
+  }
+
+  <div class="veille-card__title" [class.veille-card__title--featured]="featured()">
+    {{ resource().title }}
+  </div>
+
+  @if (featured()) {
+    <span class="veille-card__cta">
+      {{ 'home.veille.read' | translate }}
+      <app-icon name="arrow-up-right" [size]="13" />
+    </span>
+  } @else {
+    <span class="veille-card__src">{{ resource().source }} ↗</span>
+  }
+</a>

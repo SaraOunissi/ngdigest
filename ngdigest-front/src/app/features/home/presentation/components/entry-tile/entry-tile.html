@@ -1,0 +1,28 @@
+@if (clickable()) {
+  <a class="entry-tile" [routerLink]="entry().route">
+    <ng-container [ngTemplateOutlet]="body" />
+  </a>
+} @else {
+  <div class="entry-tile entry-tile--soon">
+    <ng-container [ngTemplateOutlet]="body" />
+  </div>
+}
+
+<ng-template #body>
+  <span class="entry-tile__ic">
+    <app-icon [name]="entry().icon" [size]="22" />
+  </span>
+  <div class="entry-tile__head">
+    <span class="entry-tile__title">{{ entry().titleKey | translate }}</span>
+    @if (entry().status; as status) {
+      <app-status-chip [status]="status" />
+    }
+  </div>
+  <p class="entry-tile__desc">{{ entry().descKey | translate }}</p>
+  @if (clickable()) {
+    <span class="entry-tile__go">
+      {{ 'home.entries.open' | translate }}
+      <app-icon name="arrow-up-right" [size]="13" />
+    </span>
+  }
+</ng-template>

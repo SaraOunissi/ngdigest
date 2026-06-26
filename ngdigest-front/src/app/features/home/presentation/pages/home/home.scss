@@ -1,0 +1,161 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+}
+
+.home {
+  &__hero {
+    text-align: center;
+    padding: 64px 28px 8px;
+  }
+
+  &__hero-kicker {
+    justify-content: center;
+  }
+
+  &__hero-title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(38px, 6vw, 60px);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin: 18px auto 16px;
+    max-width: 17ch;
+  }
+
+  &__hero-sub {
+    color: $color-text-secondary;
+    font-size: clamp(15px, 2.2vw, 18px);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+
+  &__cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 38px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__stat {
+    b {
+      display: block;
+      font-family: $font-family-display;
+      font-size: 24px;
+      font-weight: $font-weight-bold;
+      letter-spacing: -0.02em;
+    }
+
+    span {
+      font-family: $font-family-mono;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+  }
+
+  &__block {
+    padding-top: 54px;
+  }
+
+  &__sh {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__sh-title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(22px, 2.6vw, 28px);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  &__sh-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  &__veille {
+    margin-top: 54px;
+    padding-top: 42px;
+    border-top: 1px solid $color-border;
+  }
+
+  &__vgrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 780px) {
+    &__hero {
+      padding: 44px 18px 4px;
+    }
+
+    &__tiles {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__vgrid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__vgrid app-veille-card:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    &__tiles {
+      grid-template-columns: 1fr;
+    }
+
+    &__vgrid {
+      grid-template-columns: 1fr;
+    }
+
+    &__stats {
+      gap: 18px 26px;
+    }
+
+    &__cta {
+      .grad-btn,
+      .ghost-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}

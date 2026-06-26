@@ -1,0 +1,67 @@
+<header class="wrap home__hero">
+  <span class="kicker home__hero-kicker">{{ 'home.hero.kicker' | translate }}</span>
+  <h1 class="home__hero-title">
+    {{ 'home.hero.titleBefore' | translate
+    }}<span class="grad-text">{{ 'home.hero.titleGrad' | translate }}</span
+    >{{ 'home.hero.titleAfter' | translate }}
+  </h1>
+  <p class="home__hero-sub">{{ 'home.hero.subtitle' | translate }}</p>
+
+  <div class="home__cta">
+    <a class="grad-btn" [routerLink]="careerRoute()">
+      {{ 'home.hero.ctaCareer' | translate }}
+      <app-icon name="arrow-right" [size]="15" />
+    </a>
+    <a class="ghost-btn" [routerLink]="jobsRoute()">{{ 'home.hero.ctaJobs' | translate }}</a>
+  </div>
+
+  <div class="home__stats">
+    <div class="home__stat">
+      <b class="grad-text">{{ stats.questions }}</b>
+      <span>{{ 'home.stats.questions' | translate }}</span>
+    </div>
+    <div class="home__stat">
+      <b class="grad-text">{{ stats.certLevels }}</b>
+      <span>{{ 'home.stats.certLevels' | translate }}</span>
+    </div>
+    <div class="home__stat">
+      <b class="grad-text">{{ stats.catalog }}</b>
+      <span>{{ 'home.stats.catalog' | translate }}</span>
+    </div>
+    <div class="home__stat">
+      <b class="grad-text">{{ stats.freshness }}</b>
+      <span>{{ 'home.stats.freshness' | translate }}</span>
+    </div>
+  </div>
+</header>
+
+<section class="wrap home__block">
+  <div class="home__sh">
+    <h2 class="home__sh-title">{{ 'home.entries.title' | translate }}</h2>
+  </div>
+  <div class="home__tiles">
+    @for (entry of entries(); track entry.id) {
+      <app-entry-tile [entry]="entry" />
+    }
+  </div>
+</section>
+
+@if (featuredPick(); as featured) {
+  <section class="wrap">
+    <div class="home__veille">
+      <div class="home__sh">
+        <h2 class="home__sh-title">{{ 'home.veille.title' | translate }}</h2>
+        <a class="home__sh-link" [routerLink]="['/', languageService.lang(), 'veille']">
+          {{ 'home.veille.all' | translate }}
+          <app-icon name="arrow-right" [size]="13" />
+        </a>
+      </div>
+      <div class="home__vgrid">
+        <app-veille-card [resource]="featured" [featured]="true" />
+        @for (item of secondaryPicks(); track item._id) {
+          <app-veille-card [resource]="item" />
+        }
+      </div>
+    </div>
+  </section>
+}
