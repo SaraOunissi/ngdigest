@@ -1,0 +1,168 @@
+<header class="wrap">
+  <nav class="iv-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="learnRoute()">{{ 'interview.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="iv-crumb__current">{{ 'interview.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'interview.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'interview.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'interview.hero.titleAccent' | translate }}</span
+      >{{ 'interview.hero.titleAfter' | translate }}
+    </h1>
+    <p class="phero__sub">{{ 'interview.hero.subtitle' | translate }}</p>
+
+    <div class="iv-meta">
+      <div class="iv-meta__item"><b>{{ totalQuestions }}</b><span>{{ 'interview.meta.questions' | translate }}</span></div>
+      <div class="iv-meta__item"><b>{{ totalThemes }}</b><span>{{ 'interview.meta.themes' | translate }}</span></div>
+      <div class="iv-meta__item"><b>FR · EN</b><span>{{ 'interview.meta.bilingual' | translate }}</span></div>
+      <div class="iv-meta__item"><b>Angular 22</b><span>{{ 'interview.meta.upToDate' | translate }}</span></div>
+    </div>
+  </div>
+
+  <div class="iv-voice">
+    <span class="iv-voice__av" aria-hidden="true">SO</span>
+    <div>
+      <p>{{ 'interview.voice.text' | translate }}</p>
+      <cite>{{ 'interview.voice.cite' | translate }}</cite>
+    </div>
+  </div>
+</header>
+
+<div class="iv-filters">
+  <div class="wrap">
+    <div class="iv-filters__row">
+      <label class="iv-search">
+        <span class="iv-search__icon" aria-hidden="true"></span>
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="search()"
+          [attr.placeholder]="'interview.filters.searchPlaceholder' | translate"
+          [attr.aria-label]="'interview.filters.searchPlaceholder' | translate"
+          (input)="onSearch($event)"
+        />
+      </label>
+
+      <button
+        type="button"
+        class="iv-toggle"
+        [class.iv-toggle--on]="modernOnly()"
+        [attr.aria-pressed]="modernOnly()"
+        (click)="modernOnly.set(!modernOnly())"
+      >
+        <span class="iv-toggle__sw" aria-hidden="true"></span>
+        {{ 'interview.filters.modern' | translate }}
+      </button>
+
+      <div class="iv-seg" role="group" [attr.aria-label]="'interview.filters.answerLang' | translate">
+        <button type="button" class="iv-seg__btn" [class.iv-seg__btn--on]="answerLang() === 'fr'" (click)="answerLang.set('fr')">FR</button>
+        <button type="button" class="iv-seg__btn" [class.iv-seg__btn--on]="answerLang() === 'en'" (click)="answerLang.set('en')">EN</button>
+      </div>
+    </div>
+
+    <div class="iv-filters__row">
+      <div class="iv-chips">
+        <button type="button" class="iv-chip" [class.iv-chip--on]="theme() === 'all'" (click)="theme.set('all')">
+          {{ 'interview.themeAll' | translate }}
+          <span class="iv-chip__count">{{ chipCount('all') }}</span>
+        </button>
+        @for (themeItem of themes; track themeItem.id) {
+          <button type="button" class="iv-chip" [class.iv-chip--on]="theme() === themeItem.id" (click)="theme.set(themeItem.id)">
+            {{ themeItem.label[languageService.lang()] }}
+            <span class="iv-chip__count">{{ chipCount(themeItem.id) }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="iv-filter-actions">
+        <button type="button" class="iv-expandall" (click)="toggleExpandAll()">
+          {{ (allVisibleOpen() ? 'interview.filters.collapseAll' : 'interview.filters.expandAll') | translate }}
+        </button>
+        <span class="iv-count">
+          <b>{{ resultCount() }}</b>
+          {{ (resultCount() > 1 ? 'interview.filters.countPlural' : 'interview.filters.countSingular') | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap iv-results">
+  @if (resultCount() === 0) {
+    <div class="iv-empty">
+      <h3>{{ 'interview.empty.title' | translate }}</h3>
+      <p>{{ 'interview.empty.subtitle' | translate }}</p>
+      <button type="button" class="ghost-btn" (click)="reset()">{{ 'interview.empty.reset' | translate }}</button>
+    </div>
+  } @else if (theme() === 'all') {
+    @for (group of groups(); track group.theme.id) {
+      <section class="iv-section">
+        <div class="iv-section__head">
+          <h2 class="iv-section__title">{{ group.theme.label[languageService.lang()] }}</h2>
+          <span class="iv-section__hint">{{ group.questions.length }}</span>
+        </div>
+        <div class="iv-section__list">
+          @for (question of group.questions; track question.id) {
+            <app-interview-accordion-item
+              [question]="question"
+              [answerLang]="answerLang()"
+              [displayIndex]="displayIndex(question.id)"
+              [open]="isOpen(question.id)"
+              (toggled)="toggle(question.id)"
+            />
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="iv-section">
+      <div class="iv-section__list">
+        @for (question of filtered(); track question.id) {
+          <app-interview-accordion-item
+            [question]="question"
+            [answerLang]="answerLang()"
+            [displayIndex]="displayIndex(question.id)"
+            [open]="isOpen(question.id)"
+            (toggled)="toggle(question.id)"
+          />
+        }
+      </div>
+    </section>
+  }
+</main>
+
+<section class="wrap">
+  <div class="iv-lead">
+    <div class="iv-lead__txt">
+      <div class="iv-lead__kicker-row">
+        <span class="kicker">{{ 'interview.lead.kicker' | translate }}</span>
+        <app-status-chip status="soon" />
+      </div>
+      <h2>{{ 'interview.lead.title' | translate }}</h2>
+      <p>{{ 'interview.lead.text' | translate }}</p>
+    </div>
+    <div class="iv-lead__form-wrap">
+      <form class="iv-lead__form" (submit)="$event.preventDefault()">
+        <input
+          type="email"
+          disabled
+          [attr.placeholder]="'interview.lead.emailPlaceholder' | translate"
+          [attr.aria-label]="'interview.lead.emailPlaceholder' | translate"
+        />
+        <button class="grad-btn" type="submit" disabled>{{ 'interview.lead.soonCta' | translate }}</button>
+      </form>
+      <p class="iv-lead__note">{{ 'interview.lead.soonNote' | translate }}</p>
+    </div>
+  </div>
+
+  <a class="iv-xlink" [routerLink]="learnRoute()">
+    <div class="iv-xlink__txt">
+      <h3>{{ 'interview.cross.title' | translate }}</h3>
+      <p>{{ 'interview.cross.text' | translate }}</p>
+    </div>
+    <span class="iv-xlink__go">{{ 'interview.cross.cta' | translate }}</span>
+  </a>
+</section>

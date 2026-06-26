@@ -1,0 +1,34 @@
+<div class="qa" [class.qa--open]="open()">
+  <button class="qa__btn" type="button" [attr.aria-expanded]="open()" (click)="toggled.emit()">
+    <span class="qa__num">{{ paddedIndex() }}</span>
+    <span class="qa__q">
+      {{ questionText() }}
+      @if (question().modern) {
+        <span class="qa__tag qa__tag--modern">{{ 'interview.tag.modern' | translate }}</span>
+      }
+      @if (question().seed) {
+        <span class="qa__tag qa__tag--seed">{{ 'interview.tag.senior' | translate }}</span>
+      }
+    </span>
+    <span class="qa__right">
+      <span class="qa__diff" [attr.aria-label]="'interview.difficulty' | translate">
+        @for (dot of dots; track dot) {
+          <span class="qa__dot" [class.qa__dot--on]="dot <= question().diff"></span>
+        }
+      </span>
+      <span class="qa__chev" aria-hidden="true"></span>
+    </span>
+  </button>
+
+  <div class="qa__panel">
+    <div class="qa__panelin">
+      <div class="qa__a" [innerHTML]="mainHtml()"></div>
+      @if (noteHtml(); as note) {
+        <div class="qa__note">
+          <span class="qa__note-label">{{ 'interview.note.label' | translate }}</span>
+          <span [innerHTML]="note"></span>
+        </div>
+      }
+    </div>
+  </div>
+</div>
