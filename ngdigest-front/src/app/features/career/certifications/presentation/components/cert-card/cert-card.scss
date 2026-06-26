@@ -1,0 +1,180 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.cert-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 20px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  border-top: 3px solid $color-border;
+
+  &--top {
+    border-top-color: $color-score-high;
+  }
+
+  &--good {
+    border-top-color: $color-primary;
+  }
+
+  &--opt {
+    border-top-color: $color-score-medium;
+  }
+
+  &--skip {
+    border-top-color: $color-text-muted;
+  }
+
+  &__level {
+    align-self: flex-start;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: $radius-pill;
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+
+  &__full {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-top: 3px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__verdict {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: $color-text-secondary;
+  }
+
+  &__detail {
+    margin: 0;
+    font-family: $font-family-mono;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: $color-text-muted;
+  }
+
+  &__specs {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid $color-border;
+  }
+}
+
+.cert-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  &--cost {
+    grid-column: 1 / -1;
+  }
+
+  &__key {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__val {
+    font-size: 13px;
+    color: $color-text-secondary;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+
+    b {
+      color: $color-text-primary;
+      font-weight: $font-weight-semibold;
+    }
+
+    small {
+      font-size: 11px;
+      color: $color-text-muted;
+    }
+  }
+}
+
+.cert-mini {
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
+  background: $color-tag-bg;
+  color: $color-text-secondary;
+
+  &--lang {
+    background: $color-surface-3;
+    color: $color-text-secondary;
+  }
+
+  &--aff {
+    background: rgba($color-accent-gold, 0.16);
+    color: $color-accent-gold;
+  }
+}
+
+.cert-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &--y {
+    background: $color-score-high;
+  }
+
+  &--v {
+    background: $color-score-medium;
+  }
+
+  &--n {
+    background: $color-text-muted;
+  }
+}

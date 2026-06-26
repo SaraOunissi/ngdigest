@@ -1,0 +1,54 @@
+<article class="cert-card cert-card--{{ cert().roi }}">
+  @if (level()) {
+    <span class="cert-card__level">{{ level() }}</span>
+  }
+
+  <div class="cert-card__top">
+    <div class="cert-card__main">
+      <div class="cert-card__name">{{ name() }}</div>
+      <div class="cert-card__full">{{ full() }} · {{ cert().org }}</div>
+    </div>
+    <app-roi-badge [roi]="cert().roi" />
+  </div>
+
+  <div class="cert-card__tags">
+    @if (cert().lang !== '—') {
+      <span class="cert-mini cert-mini--lang">{{ cert().lang }}</span>
+    }
+    <span class="cert-mini cert-mini--who">{{ who() }}</span>
+    @if (affLabelKey(); as affKey) {
+      <span class="cert-mini cert-mini--aff">{{ affKey | translate }}</span>
+    }
+  </div>
+
+  <p class="cert-card__verdict">{{ verdict() }}</p>
+  @if (detail()) {
+    <p class="cert-card__detail">{{ detail() }}</p>
+  }
+
+  <div class="cert-card__specs">
+    <div class="cert-spec cert-spec--cost">
+      <span class="cert-spec__key">{{ 'certifications.spec.cost' | translate }}</span>
+      <span class="cert-spec__val"><b>{{ cost() }}</b>
+        @if (costNote()) {
+          <small>{{ costNote() }}</small>
+        }
+      </span>
+    </div>
+    <div class="cert-spec">
+      <span class="cert-spec__key">{{ 'certifications.spec.validity' | translate }}</span>
+      <span class="cert-spec__val">{{ validity() }}</span>
+    </div>
+    <div class="cert-spec">
+      <span class="cert-spec__key">{{ 'certifications.spec.cpf' | translate }}</span>
+      <span class="cert-spec__val">
+        <span class="cert-dot cert-dot--{{ cpfDotModifier() }}" aria-hidden="true"></span>
+        {{ cpfLabelKey() | translate }}
+      </span>
+    </div>
+    <div class="cert-spec">
+      <span class="cert-spec__key">{{ 'certifications.spec.who' | translate }}</span>
+      <span class="cert-spec__val">{{ who() }}</span>
+    </div>
+  </div>
+</article>

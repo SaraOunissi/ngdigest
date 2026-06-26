@@ -1,0 +1,122 @@
+<header class="wrap">
+  <nav class="cert-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="careerRoute()">{{ 'certifications.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="cert-crumb__current">{{ 'certifications.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'certifications.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'certifications.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'certifications.hero.titleAccent' | translate }}</span
+      >{{ 'certifications.hero.titleAfter' | translate }}
+    </h1>
+    <p class="phero__sub">{{ 'certifications.hero.subtitle' | translate }}</p>
+  </div>
+
+  <div class="cert-truth">
+    <div class="cert-truth__card cert-truth__card--good">
+      <div class="cert-truth__label">{{ 'certifications.truth.good.label' | translate }}</div>
+      <p>{{ 'certifications.truth.good.text' | translate }}</p>
+    </div>
+    <div class="cert-truth__card cert-truth__card--info">
+      <div class="cert-truth__label">{{ 'certifications.truth.info.label' | translate }}</div>
+      <p>{{ 'certifications.truth.info.text' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="cert-voice">
+    <span class="cert-voice__av" aria-hidden="true">SO</span>
+    <div>
+      <p>{{ 'certifications.voice.text' | translate }}</p>
+      <cite>{{ 'certifications.voice.cite' | translate }}</cite>
+    </div>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="cert-verdict">
+    <span class="kicker">{{ 'certifications.verdict.kicker' | translate }}</span>
+    <h2 class="cert-verdict__title">{{ 'certifications.verdict.title' | translate }}</h2>
+    <p class="cert-verdict__hint">{{ 'certifications.verdict.hint' | translate }}</p>
+    <div class="cert-podium">
+      @for (row of podium(); track row.rank) {
+        <div class="cert-podium-row">
+          <div class="cert-podium-row__rank">{{ row.rank }}</div>
+          <div class="cert-podium-row__body">
+            <div class="cert-podium-row__name">{{ row.name }} <span>{{ row.org }}</span></div>
+            <div class="cert-podium-row__line">{{ row.line }}</div>
+          </div>
+          <div class="cert-podium-row__cost">{{ row.cost }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  @for (section of sections(); track section.category.id) {
+    <section class="cert-section" [class.cert-section--feat]="section.category.featured">
+      <div class="cert-section__head">
+        <div class="cert-section__tag">{{ section.category.tag[languageService.lang()] }}</div>
+        <h2 class="cert-section__title">{{ section.category.title[languageService.lang()] }}</h2>
+        <p class="cert-section__intro">{{ section.category.intro[languageService.lang()] }}</p>
+        @if (section.category.provider; as provider) {
+          <div class="cert-section__provider">{{ provider[languageService.lang()] }}</div>
+        }
+      </div>
+
+      <div class="cert-grid" [class.cert-grid--3]="section.category.id === 'angular'">
+        @for (cert of section.certs; track cert.id) {
+          <app-cert-card [cert]="cert" />
+        }
+      </div>
+
+      @if (section.category.prep; as prep) {
+        <div class="cert-prep">
+          <div class="cert-prep__head">
+            <span>{{ 'certifications.section.prepTitle' | translate }}</span>
+            <b>{{ 'certifications.section.prepSubtitle' | translate }}</b>
+          </div>
+          <div class="cert-prep__grid">
+            @for (option of prep; track option.title.en) {
+              <div class="cert-prep__item">
+                <b>{{ option.title[languageService.lang()] }}</b>
+                <p>{{ option.desc[languageService.lang()] }}</p>
+              </div>
+            }
+          </div>
+          @if (section.category.prepNote; as prepNote) {
+            <p class="cert-prep__note">{{ prepNote[languageService.lang()] }}</p>
+          }
+          <a class="grad-btn cert-prep__cta" [href]="certificatesDevUrl" target="_blank" [attr.rel]="certificatesDevRel">
+            {{ 'certifications.section.certCta' | translate }}
+          </a>
+        </div>
+      }
+    </section>
+  }
+</main>
+
+<section class="wrap">
+  <div class="cert-disclosure">
+    <span class="cert-disclosure__ic" aria-hidden="true">€</span>
+    <p><b>{{ 'certifications.disclosure.title' | translate }}</b> {{ 'certifications.disclosure.text' | translate }}</p>
+  </div>
+
+  <div class="cert-cross">
+    <a class="cert-xlink" [routerLink]="careerRoute()">
+      <div class="cert-xlink__txt">
+        <h3>{{ 'certifications.cross.prepTitle' | translate }}</h3>
+        <p>{{ 'certifications.cross.prepText' | translate }}</p>
+      </div>
+    </a>
+    <a class="cert-xlink" [routerLink]="catalogRoute()">
+      <div class="cert-xlink__txt">
+        <h3>{{ 'certifications.cross.learnTitle' | translate }}</h3>
+        <p>{{ 'certifications.cross.learnText' | translate }}</p>
+      </div>
+    </a>
+  </div>
+</section>
