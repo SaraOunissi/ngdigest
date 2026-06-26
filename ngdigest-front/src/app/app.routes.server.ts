@@ -11,6 +11,53 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
   },
   {
+    path: ':lang/veille',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  // Catalog (FR + EN slugs)
+  {
+    path: ':lang/ressources',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/resources',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  // Career hub + sub-pages (FR + EN slugs)
+  {
+    path: ':lang/carriere',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/career',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/carriere/certifications',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/career/certifications',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/carriere/entretien',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/career/interview',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
     path: ':lang/sources',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),

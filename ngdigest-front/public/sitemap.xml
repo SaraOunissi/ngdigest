@@ -19,6 +19,96 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- Veille (tech-watch feed) FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/veille</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/veille"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/veille"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/veille"/>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Veille EN -->
+  <url>
+    <loc>https://ngdigest.co/en/veille</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/veille"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/veille"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/veille"/>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Catalog FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/ressources</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/ressources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/ressources"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Catalog EN -->
+  <url>
+    <loc>https://ngdigest.co/en/resources</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/ressources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/ressources"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Career hub FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Career hub EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Certifications FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/certifications</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/certifications"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/certifications"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/certifications"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Certifications EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/certifications</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/certifications"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/certifications"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/certifications"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Interview prep FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/entretien</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/entretien"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/interview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/entretien"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Interview prep EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/interview</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/entretien"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/interview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/entretien"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- Sources FR -->
   <url>
     <loc>https://ngdigest.co/fr/sources</loc>
