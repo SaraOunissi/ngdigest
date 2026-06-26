@@ -1,0 +1,76 @@
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" [routerLink]="homeRoute()" (click)="closeMenu()">
+      <img class="nav__logo" src="assets/images/ngdigest-logo.png" alt="" width="34" height="34">
+      <span class="nav__brand-name">{{ 'nav.title' | translate }}</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Main navigation">
+      <a class="nav__link" [routerLink]="veilleRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.veille' | translate }}
+      </a>
+      <a class="nav__link" [routerLink]="jobsRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.jobs' | translate }}<span class="nav__new">{{ 'nav.new' | translate }}</span>
+      </a>
+      <a class="nav__link" [routerLink]="careerRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.career' | translate }}
+      </a>
+      <a class="nav__link" [routerLink]="catalogRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.resources' | translate }}
+      </a>
+      <a class="nav__link" [routerLink]="blogRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.blog' | translate }}
+      </a>
+    </nav>
+
+    <div class="nav__right">
+      <nav class="nav__lang" aria-label="Language selection">
+        <button
+          class="nav__lang-btn"
+          [class.nav__lang-btn--active]="languageService.lang() === 'fr'"
+          (click)="switchLang('fr')"
+          aria-label="Switch to French"
+        >FR</button>
+        <button
+          class="nav__lang-btn"
+          [class.nav__lang-btn--active]="languageService.lang() === 'en'"
+          (click)="switchLang('en')"
+          aria-label="Switch to English"
+        >EN</button>
+      </nav>
+
+      <span class="nav__avatar" aria-hidden="true">SO</span>
+
+      <button
+        class="nav__burger"
+        type="button"
+        [class.nav__burger--open]="menuOpen()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Menu"
+        (click)="toggleMenu()"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav class="nav__mobile" aria-label="Mobile navigation">
+      <a class="nav__mobile-link" [routerLink]="veilleRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.veille' | translate }}
+      </a>
+      <a class="nav__mobile-link" [routerLink]="jobsRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.jobs' | translate }}
+      </a>
+      <a class="nav__mobile-link" [routerLink]="careerRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.career' | translate }}
+      </a>
+      <a class="nav__mobile-link" [routerLink]="catalogRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.resources' | translate }}
+      </a>
+      <a class="nav__mobile-link" [routerLink]="blogRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.blog' | translate }}
+      </a>
+    </nav>
+  }
+</header>

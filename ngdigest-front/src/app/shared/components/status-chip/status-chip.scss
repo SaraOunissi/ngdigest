@@ -1,0 +1,29 @@
+@use "variables" as *;
+@use "colors" as *;
+
+.status-chip {
+  display: inline-block;
+  font-family: $font-family-mono;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+
+  &--new {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  &--soon {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text-muted;
+  }
+
+  &--online {
+    background: $color-score-high-bg;
+    color: $color-score-high;
+  }
+}

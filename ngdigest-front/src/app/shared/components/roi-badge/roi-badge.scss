@@ -1,0 +1,34 @@
+@use "variables" as *;
+@use "colors" as *;
+
+.roi-badge {
+  display: inline-block;
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+
+  &--top {
+    background: $color-score-high-bg;
+    color: $color-score-high;
+  }
+
+  &--good {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  &--opt {
+    background: $color-score-medium-bg;
+    color: $color-score-medium;
+  }
+
+  &--skip {
+    background: $color-tag-bg;
+    color: $color-text-muted;
+  }
+}

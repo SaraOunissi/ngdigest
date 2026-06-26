@@ -66,6 +66,24 @@ export class SeoService {
     this.setLinkTag('alternate', `${BASE_URL}/fr`, 'x-default');
   }
 
+  /**
+   * Injects or updates a JSON-LD `<script>` in `<head>` with the given id.
+   * With SSR the structured data is part of the server-rendered HTML, so it is
+   * crawlable without JavaScript (e.g. QAPage for the interview page).
+   */
+  setJsonLd(id: string, data: unknown): void {
+    let script = this.doc.head.querySelector<HTMLScriptElement>(
+      `script#${id}[type="application/ld+json"]`,
+    );
+    if (!script) {
+      script = this.doc.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = id;
+      this.doc.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(data);
+  }
+
   /** Creates or updates a <link> element in <head>. */
   private setLinkTag(rel: string, href: string, hreflang?: string): void {
     const selector = hreflang
