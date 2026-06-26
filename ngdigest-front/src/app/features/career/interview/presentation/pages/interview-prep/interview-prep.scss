@@ -346,6 +346,12 @@
     font-size: 11px;
     color: $color-text-muted;
   }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 .iv-empty {

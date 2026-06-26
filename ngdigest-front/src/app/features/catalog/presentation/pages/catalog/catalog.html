@@ -59,12 +59,6 @@
             <option [value]="option">{{ 'catalog.level.' + option | translate }}</option>
           }
         </select>
-        <select class="catalog-select" [value]="priceFilter()" (change)="onPriceChange($event)" [attr.aria-label]="'catalog.filters.price' | translate">
-          <option value="">{{ 'catalog.filters.price' | translate }}</option>
-          @for (option of priceOptions; track option) {
-            <option [value]="option">{{ 'catalog.price.' + option | translate }}</option>
-          }
-        </select>
         <button type="button" class="catalog-reset" (click)="reset()">{{ 'catalog.filters.reset' | translate }}</button>
       </div>
 

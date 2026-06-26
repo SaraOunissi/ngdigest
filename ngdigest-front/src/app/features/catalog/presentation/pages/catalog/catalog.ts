@@ -6,7 +6,6 @@ import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import {
   CatalogLevel,
-  CatalogPrice,
   CatalogResource,
   CatalogResourceType,
   CatalogTier,
@@ -58,12 +57,10 @@ export class CatalogComponent {
   protected readonly group = signal<GroupFilter>('all');
   protected readonly typeFilter = signal<'' | CatalogResourceType>('');
   protected readonly levelFilter = signal<'' | CatalogLevel>('');
-  protected readonly priceFilter = signal<'' | CatalogPrice>('');
 
   protected readonly chips: readonly GroupFilter[] = ['all', 'officiel', 'gros', 'solo'];
   protected readonly typeOptions: readonly CatalogResourceType[] = ['doc', 'blog', 'youtube', 'newsletter'];
   protected readonly levelOptions: readonly CatalogLevel[] = ['debutant', 'intermediaire', 'avance', 'tous'];
-  protected readonly priceOptions: readonly CatalogPrice[] = ['gratuit', 'freemium', 'prix-libre', 'payant'];
 
   /** Resources matching every active filter, ordered by calibre then name. */
   protected readonly filtered = computed<CatalogResource[]>(() => {
@@ -119,17 +116,12 @@ export class CatalogComponent {
     this.levelFilter.set((event.target as HTMLSelectElement).value as '' | CatalogLevel);
   }
 
-  protected onPriceChange(event: Event): void {
-    this.priceFilter.set((event.target as HTMLSelectElement).value as '' | CatalogPrice);
-  }
-
   protected reset(): void {
     this.search.set('');
     this.langFilter.set('all');
     this.group.set('all');
     this.typeFilter.set('');
     this.levelFilter.set('');
-    this.priceFilter.set('');
   }
 
   private matches(resource: CatalogResource, lang: 'fr' | 'en'): boolean {
@@ -147,9 +139,6 @@ export class CatalogComponent {
       return false;
     }
     if (this.levelFilter() && resource.level !== this.levelFilter()) {
-      return false;
-    }
-    if (this.priceFilter() && resource.price !== this.priceFilter()) {
       return false;
     }
     const query = this.search().trim().toLowerCase();

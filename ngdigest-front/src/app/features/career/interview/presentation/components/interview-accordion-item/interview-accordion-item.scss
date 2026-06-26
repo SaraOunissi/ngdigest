@@ -11,10 +11,6 @@
   background: $color-surface;
   overflow: hidden;
 
-  & + & {
-    margin-top: 8px;
-  }
-
   &--open {
     border-color: $color-hairline-strong;
   }

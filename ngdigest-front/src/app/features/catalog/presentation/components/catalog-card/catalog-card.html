@@ -14,9 +14,6 @@
     <span class="catalog-badge catalog-badge--{{ resource().tier }}">
       {{ 'catalog.tierBadge.' + resource().tier | translate }}
     </span>
-    <span class="catalog-badge catalog-badge--price">
-      {{ 'catalog.price.' + resource().price | translate }}
-    </span>
     @if (resource().cpf === 'oui') {
       <span class="catalog-badge catalog-badge--cpf">{{ 'catalog.badge.cpf' | translate }}</span>
     }
