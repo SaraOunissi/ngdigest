@@ -1,0 +1,34 @@
+<div class="career-step" [class.career-step--soon]="!step().clickable">
+  <div class="career-step__node">{{ step().nodeLabel }}</div>
+
+  @if (step().clickable && step().route) {
+    <a class="career-step__card" [routerLink]="step().route">
+      <ng-container [ngTemplateOutlet]="body" />
+    </a>
+  } @else {
+    <div class="career-step__card">
+      <ng-container [ngTemplateOutlet]="body" />
+    </div>
+  }
+</div>
+
+<ng-template #body>
+  <span class="career-step__ic">
+    <app-icon [name]="step().icon" [size]="24" />
+  </span>
+  <div class="career-step__content">
+    <div class="career-step__th">
+      <span class="career-step__title">{{ step().titleKey | translate }}</span>
+      <app-status-chip [status]="step().status" />
+    </div>
+    <p class="career-step__desc">
+      <b>{{ step().journeyKey | translate }}.</b> {{ step().descKey | translate }}
+    </p>
+  </div>
+  @if (step().clickable) {
+    <span class="career-step__go">
+      {{ 'career.go' | translate }}
+      <app-icon name="arrow-right" [size]="14" />
+    </span>
+  }
+</ng-template>

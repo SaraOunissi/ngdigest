@@ -1,0 +1,107 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+}
+
+.career-crumb {
+  padding: 22px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-family-mono;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: $color-text-muted;
+
+  a {
+    color: $color-text-muted;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__current {
+    color: $color-text-secondary;
+  }
+}
+
+.career-hero {
+  padding: 26px 0 6px;
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(34px, 5vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin: 14px 0 16px;
+    max-width: 16ch;
+  }
+
+  &__sub {
+    color: $color-text-secondary;
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  &__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    b {
+      font-family: $font-family-display;
+      font-size: 24px;
+      font-weight: $font-weight-bold;
+      letter-spacing: -0.02em;
+    }
+
+    span {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+  }
+}
+
+.career-path {
+  position: relative;
+  margin-top: 42px;
+  padding-left: 4px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 18px;
+    bottom: 46px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient($color-primary-2, $color-primary 50%, $color-accent-gold);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    padding-left: 0;
+
+    &::before {
+      left: 18px;
+    }
+  }
+}

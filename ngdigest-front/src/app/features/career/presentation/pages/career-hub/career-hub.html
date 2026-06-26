@@ -1,0 +1,40 @@
+<header class="wrap">
+  <nav class="career-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="homeRoute()">{{ 'career.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="career-crumb__current">{{ 'career.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="career-hero">
+    <span class="kicker">{{ 'career.hero.kicker' | translate }}</span>
+    <h1 class="career-hero__title">
+      {{ 'career.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'career.hero.titleAccent' | translate }}</span
+      >{{ 'career.hero.titleAfter' | translate }}
+    </h1>
+    <p class="career-hero__sub">{{ 'career.hero.subtitle' | translate }}</p>
+
+    <div class="career-hero__meta">
+      <div class="career-hero__meta-item">
+        <b>{{ meta.spaces }}</b>
+        <span>{{ 'career.meta.spaces' | translate }}</span>
+      </div>
+      <div class="career-hero__meta-item">
+        <b>{{ meta.questions }}</b>
+        <span>{{ 'career.meta.questions' | translate }}</span>
+      </div>
+      <div class="career-hero__meta-item">
+        <b>{{ meta.certLevels }}</b>
+        <span>{{ 'career.meta.certLevels' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="career-path">
+    @for (step of steps(); track step.id) {
+      <app-career-step [step]="step" />
+    }
+  </div>
+</main>
