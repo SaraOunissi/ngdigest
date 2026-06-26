@@ -1,0 +1,124 @@
+<header class="wrap phero">
+  <span class="kicker">{{ 'catalog.hero.kicker' | translate }}</span>
+  <h1 class="phero__title">
+    {{ 'catalog.hero.titleBefore' | translate
+    }}<span class="grad-text">{{ 'catalog.hero.titleAccent' | translate }}</span
+    >{{ 'catalog.hero.titleAfter' | translate }}
+  </h1>
+  <p class="phero__sub">{{ 'catalog.hero.subtitle' | translate }}</p>
+</header>
+
+<div class="catalog-filters">
+  <div class="wrap">
+    <div class="catalog-filters__row">
+      <label class="catalog-search">
+        <span class="catalog-search__icon" aria-hidden="true"></span>
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="search()"
+          [attr.placeholder]="'catalog.filters.searchPlaceholder' | translate"
+          [attr.aria-label]="'catalog.filters.searchPlaceholder' | translate"
+          (input)="onSearch($event)"
+        />
+      </label>
+      <div class="catalog-seg" role="group" [attr.aria-label]="'catalog.filters.langLabel' | translate">
+        <button type="button" [class.catalog-seg__btn--on]="langFilter() === 'all'" class="catalog-seg__btn" (click)="langFilter.set('all')">
+          {{ 'catalog.filters.langAll' | translate }}
+        </button>
+        <button type="button" [class.catalog-seg__btn--on]="langFilter() === 'fr'" class="catalog-seg__btn" (click)="langFilter.set('fr')">FR</button>
+        <button type="button" [class.catalog-seg__btn--on]="langFilter() === 'en'" class="catalog-seg__btn" (click)="langFilter.set('en')">EN</button>
+      </div>
+    </div>
+
+    <div class="catalog-filters__row">
+      <div class="catalog-chips">
+        @for (chip of chips; track chip) {
+          <button
+            type="button"
+            class="catalog-chip"
+            [class.catalog-chip--on]="group() === chip"
+            (click)="group.set(chip)"
+          >
+            {{ 'catalog.chip.' + chip | translate }}
+            <span class="catalog-chip__count">{{ chipCount(chip) }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="catalog-selects">
+        <select class="catalog-select" [value]="typeFilter()" (change)="onTypeChange($event)" [attr.aria-label]="'catalog.filters.type' | translate">
+          <option value="">{{ 'catalog.filters.type' | translate }}</option>
+          @for (option of typeOptions; track option) {
+            <option [value]="option">{{ 'catalog.type.' + option | translate }}</option>
+          }
+        </select>
+        <select class="catalog-select" [value]="levelFilter()" (change)="onLevelChange($event)" [attr.aria-label]="'catalog.filters.level' | translate">
+          <option value="">{{ 'catalog.filters.level' | translate }}</option>
+          @for (option of levelOptions; track option) {
+            <option [value]="option">{{ 'catalog.level.' + option | translate }}</option>
+          }
+        </select>
+        <select class="catalog-select" [value]="priceFilter()" (change)="onPriceChange($event)" [attr.aria-label]="'catalog.filters.price' | translate">
+          <option value="">{{ 'catalog.filters.price' | translate }}</option>
+          @for (option of priceOptions; track option) {
+            <option [value]="option">{{ 'catalog.price.' + option | translate }}</option>
+          }
+        </select>
+        <button type="button" class="catalog-reset" (click)="reset()">{{ 'catalog.filters.reset' | translate }}</button>
+      </div>
+
+      <span class="catalog-count">
+        <b>{{ resultCount() }}</b>
+        {{ (resultCount() > 1 ? 'catalog.filters.countPlural' : 'catalog.filters.countSingular') | translate }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap catalog-results">
+  @if (resultCount() === 0) {
+    <div class="catalog-empty">
+      <h3>{{ 'catalog.empty.title' | translate }}</h3>
+      <p>{{ 'catalog.empty.subtitle' | translate }}</p>
+      <button type="button" class="ghost-btn" (click)="reset()">{{ 'catalog.empty.reset' | translate }}</button>
+    </div>
+  } @else if (group() === 'all') {
+    @for (groupSection of groups(); track groupSection.tier) {
+      <section class="catalog-section">
+        <div class="catalog-section__head">
+          <h2 class="catalog-section__title">{{ 'catalog.group.' + groupSection.tier + '.title' | translate }}</h2>
+          <span class="catalog-section__hint">{{ 'catalog.group.' + groupSection.tier + '.hint' | translate }}</span>
+        </div>
+        <div class="catalog-grid">
+          @for (resource of groupSection.resources; track resource.id) {
+            <app-catalog-card [resource]="resource" />
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="catalog-section catalog-section--single">
+      <div class="catalog-grid">
+        @for (resource of filtered(); track resource.id) {
+          <app-catalog-card [resource]="resource" />
+        }
+      </div>
+    </section>
+  }
+</main>
+
+<section class="wrap">
+  <div class="catalog-contrib">
+    <span class="kicker">{{ 'catalog.contrib.kicker' | translate }}</span>
+    <h2 class="catalog-contrib__title">{{ 'catalog.contrib.title' | translate }}</h2>
+    <p class="catalog-contrib__text">{{ 'catalog.contrib.text' | translate }}</p>
+    <a class="grad-btn" [routerLink]="['/', languageService.lang(), 'sources']">
+      {{ 'catalog.contrib.cta' | translate }}
+    </a>
+  </div>
+
+  <p class="catalog-disclosure">
+    <b>{{ 'catalog.disclosure.title' | translate }}</b> {{ 'catalog.disclosure.text' | translate }}
+  </p>
+</section>

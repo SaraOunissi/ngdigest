@@ -1,0 +1,167 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 18px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
+    background: $color-surface-hover;
+    text-decoration: none;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: $radius-sm;
+    background: $color-primary-light;
+    color: $color-primary;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 14px;
+  }
+
+  &__head {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  &__author {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: $color-text-secondary;
+  }
+
+  &__value {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  &__foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  &__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__pill {
+    font-family: $font-family-mono;
+    font-size: 10px;
+    color: $color-tag-text;
+    background: $color-tag-bg;
+    padding: 3px 8px;
+    border-radius: $radius-pill;
+  }
+
+  &__visit {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  &:hover &__visit {
+    color: $color-primary;
+  }
+}
+
+.catalog-badge {
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
+
+  &--officiel {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  &--gros {
+    background: rgba($color-primary-2, 0.16);
+    color: #8aa2ff;
+  }
+
+  &--solo {
+    background: $color-score-high-bg;
+    color: $color-score-high;
+  }
+
+  &--price {
+    background: $color-tag-bg;
+    color: $color-text-secondary;
+  }
+
+  &--cpf {
+    background: rgba($color-accent-gold, 0.16);
+    color: $color-accent-gold;
+  }
+
+  &--aff {
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text-muted;
+    cursor: help;
+  }
+}

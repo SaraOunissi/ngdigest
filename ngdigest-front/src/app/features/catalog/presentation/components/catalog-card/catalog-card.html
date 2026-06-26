@@ -1,0 +1,43 @@
+<a class="catalog-card" [href]="href()" target="_blank" [attr.rel]="rel()">
+  <div class="catalog-card__top">
+    <span class="catalog-card__avatar" aria-hidden="true">{{ initials() }}</span>
+    <div class="catalog-card__head">
+      <div class="catalog-card__name">{{ resource().name }}</div>
+      @if (resource().author) {
+        <div class="catalog-card__author">{{ resource().author }}</div>
+      }
+    </div>
+    <app-lang-badge [lang]="resource().lang" [origin]="resource().origin" />
+  </div>
+
+  <div class="catalog-card__badges">
+    <span class="catalog-badge catalog-badge--{{ resource().tier }}">
+      {{ 'catalog.tierBadge.' + resource().tier | translate }}
+    </span>
+    <span class="catalog-badge catalog-badge--price">
+      {{ 'catalog.price.' + resource().price | translate }}
+    </span>
+    @if (resource().cpf === 'oui') {
+      <span class="catalog-badge catalog-badge--cpf">{{ 'catalog.badge.cpf' | translate }}</span>
+    }
+    @if (resource().affiliable) {
+      <span class="catalog-badge catalog-badge--aff" [title]="'catalog.badge.affTitle' | translate">
+        {{ 'catalog.badge.aff' | translate }}
+      </span>
+    }
+  </div>
+
+  <p class="catalog-card__desc">{{ shortDesc() }}</p>
+  <p class="catalog-card__value">{{ value() }}</p>
+
+  <div class="catalog-card__foot">
+    <div class="catalog-card__pills">
+      <span class="catalog-card__pill">{{ 'catalog.type.' + resource().type | translate }}</span>
+      <span class="catalog-card__pill">{{ 'catalog.level.' + resource().level | translate }}</span>
+    </div>
+    <span class="catalog-card__visit">
+      {{ 'catalog.card.visit' | translate }}
+      <app-icon name="arrow-up-right" [size]="13" />
+    </span>
+  </div>
+</a>
