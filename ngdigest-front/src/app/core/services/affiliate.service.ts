@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 /**
  * Friend/referral code for the Certificates.dev partner program.
- * TODO: replace with the real code once NgDigest is registered at
- * partners.certificates.dev/program (~200 $/sale).
+ * Registered affiliate code (accepted 2026-07-01) — builds links as
+ * `certificates.dev?friend=Ounissi`.
  */
-const CERTIFICATES_DEV_FRIEND_CODE = 'NGDIGEST';
+const CERTIFICATES_DEV_FRIEND_CODE = 'Ounissi';
 
 /** Identifier of an affiliate network, as stored on catalog/cert data. */
 export type AffiliateNetwork = 'certificates-dev' | (string & {});
