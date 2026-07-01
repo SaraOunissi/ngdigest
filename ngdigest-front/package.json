@@ -11,6 +11,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:watch": "ng test --watch",
+    "test:scripts": "node --test \"scripts/**/*.test.mjs\"",
+    "check:jobs-links": "node scripts/check-jobs-links.mjs",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,scss}\"",
