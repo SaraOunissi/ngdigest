@@ -87,7 +87,7 @@
     flex: 1;
   }
 
-  &__co {
+  &__company {
     display: block;
     font-family: $font-family-mono;
     font-size: 12px;
@@ -214,7 +214,7 @@
   padding: 12px 14px;
   min-width: 0;
 
-  &__lab {
+  &__label {
     display: block;
     font-family: $font-family-mono;
     font-size: 10px;
@@ -224,14 +224,14 @@
     margin-bottom: 5px;
   }
 
-  &__val {
+  &__value {
     font-family: $font-family-display;
     font-weight: $font-weight-bold;
     font-size: 17px;
     line-height: 1.2;
   }
 
-  &__sub {
+  &__subtext {
     font-size: 11.5px;
     color: $color-text-muted;
     margin-top: 2px;
