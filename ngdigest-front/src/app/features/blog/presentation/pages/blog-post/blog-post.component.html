@@ -1,33 +1,109 @@
-@if (currentArticle(); as article) {
-  <article class="blog-post">
-    <div class="blog-post__header">
-      <a
-        class="blog-post__back"
-        [routerLink]="['/', languageService.lang(), 'blog']"
-      >
+<div class="blog-view">
+  <div class="readbar" aria-hidden="true"></div>
+
+  @if (currentArticle(); as article) {
+    <div class="post-wrap">
+      <a class="post-back" [routerLink]="['/', languageService.lang(), 'blog']">
         ← {{ 'blog.backToList' | translate }}
       </a>
 
-      <div class="blog-post__meta">
-        <time class="blog-post__date" [dateTime]="article.date">
-          {{ 'blog.publishedOn' | translate }} {{ formatDate(article.date) }}
-        </time>
-        <span class="blog-post__author">{{ 'blog.by' | translate }} {{ article.author }}</span>
+      <header class="post-head">
+        <span class="kicker">{{ 'blog.post.kicker' | translate }}</span>
+        <h1 class="post-head__title">{{ article.title }}</h1>
+        <p class="post-head__deck">{{ article.description }}</p>
+
+        <div class="post-meta">
+          <span class="byline">
+            <span class="byline__av">{{ authorInitials(article.author) }}</span>
+            <span>
+              <span class="byline__name">{{ article.author }}</span><br />
+              <span class="byline__sub">{{ 'blog.post.authorRole' | translate }}</span>
+            </span>
+          </span>
+          <span class="post-meta__dot" aria-hidden="true"></span>
+          <time class="post-meta__item" [dateTime]="article.date">{{ formatDate(article.date) }}</time>
+          <span class="post-meta__dot" aria-hidden="true"></span>
+          <span class="post-meta__item">
+            {{ 'blog.post.readingTime' | translate: { min: article.readingMinutes } }}
+          </span>
+          <span class="post-meta__tags">
+            @for (tag of article.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </span>
+        </div>
+      </header>
+
+      <div class="post-grid">
+        @if (article.toc.length) {
+          <aside class="toc" [attr.aria-label]="'blog.post.toc' | translate">
+            <div class="toc__label">{{ 'blog.post.toc' | translate }}</div>
+            <ul class="toc__list">
+              @for (heading of article.toc; track heading.id) {
+                <li>
+                  <a
+                    class="toc__link"
+                    [class.toc__link--active]="activeTocId() === heading.id"
+                    [href]="'#' + heading.id"
+                  >
+                    {{ heading.text }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </aside>
+        }
+
+        <article class="prose" [innerHTML]="safeContent()"></article>
       </div>
 
-      <h1 class="blog-post__title">{{ article.title }}</h1>
-      <p class="blog-post__description">{{ article.description }}</p>
+      <div class="author">
+        <div class="author__av" aria-hidden="true">{{ authorInitials(article.author) }}</div>
+        <div class="author__body">
+          <div class="author__eyebrow">{{ 'blog.post.writtenBy' | translate }}</div>
+          <div class="author__name">{{ article.author }}</div>
+          <p class="author__bio">{{ 'blog.post.authorBio' | translate }}</p>
+          <div class="author__links">
+            <a class="author__link" [href]="linkedinUrl" target="_blank" rel="noopener">
+              {{ 'blog.post.authorLinkedin' | translate }} →
+            </a>
+            <a class="author__link" [routerLink]="['/', languageService.lang(), 'veille']">
+              {{ 'blog.post.authorVeille' | translate }} →
+            </a>
+          </div>
+        </div>
+      </div>
 
-      <ul class="blog-post__tags" aria-label="{{ 'blog.tags' | translate }}">
-        @for (tag of article.tags; track tag) {
-          <li class="blog-post__tag">{{ tag }}</li>
-        }
-      </ul>
+      @if (relatedArticles().length) {
+        <section class="related" [attr.aria-label]="'blog.post.related' | translate">
+          <div class="related__label">{{ 'blog.post.related' | translate }}</div>
+          <div class="related__grid">
+            @for (related of relatedArticles(); track related.slug) {
+              <a
+                class="rel-card"
+                [routerLink]="['/', languageService.lang(), 'blog', related.slug]"
+                [attr.aria-label]="related.title"
+              >
+                <div class="rel-card__visual">
+                  @if (related.tags.length) {
+                    <span>{{ related.tags[0] }}</span>
+                  }
+                </div>
+                <div class="rel-card__body">
+                  @if (related.tags.length) {
+                    <div class="rel-card__kicker">{{ related.tags[0] }}</div>
+                  }
+                  <h3 class="rel-card__title">{{ related.title }}</h3>
+                  <p class="rel-card__desc">{{ related.description }}</p>
+                  <div class="rel-card__foot">
+                    {{ 'blog.post.readingTime' | translate: { min: related.readingMinutes } }}
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </section>
+      }
     </div>
-
-    <div
-      class="blog-post__content"
-      [innerHTML]="article.contentHtml"
-    ></div>
-  </article>
-}
+  }
+</div>

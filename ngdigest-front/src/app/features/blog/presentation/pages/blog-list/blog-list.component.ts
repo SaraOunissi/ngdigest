@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -17,6 +17,9 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   en: 'Articles about Angular, frontend development and freelancing in France.',
 };
 
+/** Max number of tag pills shown per row/card (charte). */
+const MAX_TAGS = 3;
+
 @Component({
   selector: 'app-blog-list',
   standalone: true,
@@ -30,23 +33,47 @@ export class BlogListComponent {
   private readonly seoService = inject(SeoService);
   private readonly blogService = inject(BlogService);
 
+  /** All articles for the current language (newest-first). */
   protected readonly articles = signal<Article[]>([]);
+
+  /** The featured article (pinned via `featured: true`, else most recent). */
+  protected readonly featured = signal<Article | null>(null);
+
+  /** Every article except the featured one, for the editorial rows. */
+  protected readonly otherArticles = computed(() => {
+    const featuredSlug = this.featured()?.slug;
+    return this.articles().filter((article) => article.slug !== featuredSlug);
+  });
 
   constructor() {
     effect(() => {
       const lang = this.languageService.lang();
       this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
       this.articles.set(this.blogService.getArticles(lang));
+      this.featured.set(this.blogService.getFeatured(lang) ?? null);
     });
   }
 
   protected formatDate(isoDate: string): string {
-    const date = new Date(isoDate);
     const lang = this.languageService.lang();
-    return date.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+    return new Date(isoDate).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
+  }
+
+  /** Uppercase initials derived from the author's name (e.g. "Sara Ounissi" → "SO"). */
+  protected authorInitials(author: string): string {
+    return author
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join('');
+  }
+
+  protected visibleTags(tags: readonly string[]): readonly string[] {
+    return tags.slice(0, MAX_TAGS);
   }
 }

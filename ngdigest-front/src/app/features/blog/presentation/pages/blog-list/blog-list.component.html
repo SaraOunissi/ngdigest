@@ -1,53 +1,90 @@
-<section class="blog-hero">
-  <div class="blog-hero__content">
-    <span class="kicker">{{ 'blog.hero.kicker' | translate }}</span>
-    <h1 class="blog-hero__title">{{ 'blog.title' | translate }}</h1>
-    <p class="blog-hero__subtitle">{{ 'blog.subtitle' | translate }}</p>
-  </div>
-</section>
+<div class="blog-view">
+  <div class="list-wrap">
+    <header class="list-head">
+      <span class="kicker">{{ 'blog.hero.kicker' | translate }}</span>
+      <h1 class="list-head__title">
+        {{ 'blog.title' | translate }} <span class="grad-text">{{ 'blog.titleAccent' | translate }}</span>
+      </h1>
+      <p class="list-head__intro">{{ 'blog.subtitle' | translate }}</p>
+    </header>
 
-<main class="blog-list">
-  <div class="blog-list__container">
-    @for (article of articles(); track article.slug) {
-      <article class="blog-card">
-        <div class="blog-card__meta">
-          <time class="blog-card__date" [dateTime]="article.date">
-            {{ formatDate(article.date) }}
-          </time>
-          <span class="blog-card__author">{{ article.author }}</span>
+    @if (featured(); as article) {
+      <a
+        class="featured"
+        [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
+        [attr.aria-label]="article.title"
+      >
+        <div class="featured__visual">
+          <span class="featured__badge">{{ 'blog.list.featured' | translate }}</span>
+          @if (article.highlight; as highlight) {
+            <div class="featured__highlight">
+              <b>{{ highlight.value }}</b>
+              <span>{{ highlight.label }}</span>
+            </div>
+          } @else if (article.cover) {
+            <img class="featured__img" [src]="article.cover" [alt]="article.title" />
+          }
         </div>
 
-        <h2 class="blog-card__title">
-          <a
-            class="blog-card__title-link"
-            [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
-          >
-            {{ article.title }}
-          </a>
-        </h2>
+        <div class="featured__body">
+          @if (article.tags.length) {
+            <span class="featured__kicker">{{ article.tags[0] }}</span>
+          }
+          <h2 class="featured__title">{{ article.title }}</h2>
+          <p class="featured__desc">{{ article.description }}</p>
 
-        <p class="blog-card__description">{{ article.description }}</p>
-
-        <div class="blog-card__footer">
-          <ul class="blog-card__tags" aria-label="Tags">
-            @for (tag of article.tags; track tag) {
-              <li class="blog-card__tag">{{ tag }}</li>
-            }
-          </ul>
-
-          <a
-            class="blog-card__read-more"
-            [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
-            [attr.aria-label]="('blog.readMore' | translate) + ': ' + article.title"
-          >
-            {{ 'blog.readMore' | translate }} →
-          </a>
+          <div class="featured__foot">
+            <span class="byline">
+              <span class="byline__av">{{ authorInitials(article.author) }}</span>
+              <span>
+                <span class="byline__name">{{ article.author }}</span><br />
+                <span class="byline__sub">
+                  {{ formatDate(article.date) }} ·
+                  {{ article.readingMinutes }} {{ 'blog.post.minShort' | translate }}
+                </span>
+              </span>
+            </span>
+            <span class="featured__read">{{ 'blog.readMore' | translate }} →</span>
+          </div>
         </div>
-      </article>
+      </a>
     }
 
-    @empty {
+    @if (otherArticles().length) {
+      <div class="section-label">{{ 'blog.list.allArticles' | translate }}</div>
+
+      <ul class="rows">
+        @for (article of otherArticles(); track article.slug) {
+          <li>
+            <a
+              class="post-row"
+              [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
+              [attr.aria-label]="article.title"
+            >
+              <span>
+                <h3 class="post-row__title">{{ article.title }}</h3>
+                <p class="post-row__desc">{{ article.description }}</p>
+                <span class="post-row__tags">
+                  @for (tag of visibleTags(article.tags); track tag) {
+                    <span class="tag">{{ tag }}</span>
+                  }
+                </span>
+              </span>
+              <span class="post-row__meta">
+                <time class="post-row__date" [dateTime]="article.date">{{ formatDate(article.date) }}</time>
+                <span class="post-row__time">
+                  {{ article.readingMinutes }} {{ 'blog.post.minShort' | translate }}
+                </span>
+                <span class="post-row__arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+
+    @if (!featured() && !otherArticles().length) {
       <p class="blog-list__empty">{{ 'blog.noArticles' | translate }}</p>
     }
   </div>
-</main>
+</div>

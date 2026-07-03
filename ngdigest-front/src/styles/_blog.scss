@@ -1,0 +1,1331 @@
+// ======================================================================
+// _blog.scss — Charte éditoriale du blog (liste + thème article)
+// ----------------------------------------------------------------------
+// La prose de l'article est injectée via [innerHTML] → les nœuds ne
+// reçoivent PAS l'attribut _ngcontent scopé d'Angular. Ces styles doivent
+// donc être GLOBAUX. Ils sont émis via `@use "blog";` dans styles.scss.
+//
+// Tout est confiné sous `.blog-view` (présent sur la racine de blog-list
+// et blog-post) pour éviter toute fuite globale (.tag, .author, .related…).
+//
+// Source de vérité visuelle : blog/NgDigest Blog.html (prototype refresh).
+// Charte d'écriture : src/content/blog/README.md.
+// ======================================================================
+
+@use "variables" as *;
+@use "colors" as *;
+@use "mixins" as *;
+
+.blog-view {
+  position: relative;
+  z-index: 1;
+
+  // ── Kicker (repris du .kicker global, décliné accent marque) ────────────
+  .featured__kicker,
+  .rel-card__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+
+  .featured__kicker::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-primary;
+  }
+
+  // ── Byline (avatar dégradé + auteur) ────────────────────────────────────
+  .byline {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    &__av {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: $gradient-hero;
+      display: grid;
+      place-items: center;
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 15px;
+      color: $color-white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    &__name {
+      font-weight: $font-weight-semibold;
+      font-size: 14px;
+      color: $color-text-primary;
+    }
+
+    &__sub {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      color: $color-text-muted;
+    }
+  }
+
+  // ── Tag pill ────────────────────────────────────────────────────────────
+  .tag {
+    font-family: $font-family-mono;
+    font-size: 10.5px;
+    padding: 4px 9px;
+    background: $color-tag-bg;
+    border: 1px solid $color-border;
+    color: $color-tag-text;
+    border-radius: $radius-pill;
+  }
+}
+
+// ======================================================================
+// LISTE — page hero + article vedette + rangées éditoriales
+// ======================================================================
+
+.blog-view {
+  .list-wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px 96px;
+  }
+
+  .list-head {
+    max-width: 760px;
+    padding: 56px 0 6px;
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: clamp(40px, 6vw, 66px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 16px 0 0;
+    }
+
+    &__intro {
+      color: $color-text-secondary;
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.55;
+      margin: 18px 0 0;
+      max-width: 56ch;
+    }
+  }
+
+  // ── Article vedette (à la une) ──────────────────────────────────────────
+  .featured {
+    position: relative;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: $color-surface;
+    border: 1px solid $color-hairline-strong;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    @include respond-to($breakpoint-tablet) {
+      grid-template-columns: 1.02fr 0.98fr;
+    }
+
+    &__visual {
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.028) 0 12px, transparent 12px 24px),
+        $gradient-hero-soft;
+      border-bottom: 1px solid $color-border;
+
+      @include respond-to($breakpoint-tablet) {
+        border-bottom: none;
+        border-right: 1px solid $color-border;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -30%;
+        right: -15%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(200, 80, 192, 0.22), transparent 65%);
+        pointer-events: none;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      font-family: $font-family-mono;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+      color: $color-white;
+      padding: 6px 12px;
+      border-radius: $radius-pill;
+      background: rgba(10, 10, 17, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid $color-hairline-strong;
+    }
+
+    &__highlight {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+
+      b {
+        display: block;
+        font-family: $font-family-display;
+        font-weight: $font-weight-bold;
+        font-size: clamp(44px, 7vw, 72px);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        background: $gradient-hero;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      span {
+        display: block;
+        margin-top: 12px;
+        font-family: $font-family-mono;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $color-text-secondary;
+        max-width: 24ch;
+      }
+    }
+
+    &__body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: clamp(24px, 3vw, 33px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 14px 0 10px;
+      color: $color-text-primary;
+    }
+
+    &__desc {
+      color: $color-text-secondary;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    &__foot {
+      margin-top: auto;
+      padding-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &__read {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: $font-weight-semibold;
+      color: $color-primary;
+      transition: gap 0.2s ease;
+    }
+
+    &:hover &__read {
+      gap: 11px;
+    }
+  }
+
+  // ── Label de section ────────────────────────────────────────────────────
+  .section-label {
+    margin: 52px 0 4px;
+    font-family: $font-family-mono;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: $color-border;
+    }
+  }
+
+  // ── Rangées de liste éditoriale ─────────────────────────────────────────
+  .rows {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+
+    li:last-child .post-row {
+      border-bottom: 1px solid $color-border;
+    }
+  }
+
+  .post-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 26px 16px;
+    border-top: 1px solid $color-border;
+    border-radius: $radius-md;
+    transition: background 0.25s ease;
+
+    @include respond-to($breakpoint-tablet) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+    }
+
+    &:hover {
+      background: linear-gradient(90deg, rgba(200, 80, 192, 0.07), transparent 70%);
+    }
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: clamp(20px, 2.4vw, 25px);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin: 0;
+      color: $color-text-primary;
+      transition: color 0.18s ease;
+    }
+
+    &:hover &__title {
+      color: $color-primary;
+    }
+
+    &__desc {
+      margin: 6px 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: $color-text-secondary;
+      max-width: 66ch;
+    }
+
+    &__tags {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    &__meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      @include respond-to($breakpoint-tablet) {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+        white-space: nowrap;
+      }
+    }
+
+    &__date {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+
+    &__time {
+      font-family: $font-family-mono;
+      font-size: 12px;
+      color: $color-text-muted;
+    }
+
+    &__arrow {
+      color: $color-primary;
+      font-size: 19px;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover &__arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  .blog-list__empty {
+    text-align: center;
+    color: $color-text-secondary;
+    padding: $spacing-2xl 0;
+  }
+}
+
+// ======================================================================
+// ARTICLE — chrome de lecture
+// ======================================================================
+
+.blog-view {
+  .post-wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px 40px;
+  }
+
+  .post-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 32px 0 0;
+    font-size: 14px;
+    color: $color-text-secondary;
+    transition: gap 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+      gap: 11px;
+      text-decoration: none;
+    }
+  }
+
+  .post-head {
+    max-width: 760px;
+    margin: 28px auto 0;
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: clamp(34px, 5.2vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+      margin: 18px 0 0;
+      color: $color-text-primary;
+    }
+
+    &__deck {
+      font-family: $font-family-display;
+      font-style: italic;
+      font-weight: $font-weight-regular;
+      font-size: clamp(19px, 2.3vw, 24px);
+      line-height: 1.5;
+      color: $color-text-secondary;
+      margin: 20px 0 0;
+      max-width: 56ch;
+      text-wrap: pretty;
+    }
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid $color-border;
+
+    &__dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: $color-text-muted;
+    }
+
+    &__item {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+
+    &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-left: auto;
+    }
+  }
+
+  // ── Barre de progression de lecture ─────────────────────────────────────
+  .readbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    z-index: 101;
+    background: $gradient-hero;
+    box-shadow: 0 0 12px rgba(200, 80, 192, 0.6);
+    transition: width 0.08s linear;
+  }
+
+  // ── Grille corps + sommaire ─────────────────────────────────────────────
+  .post-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
+    margin: 0 auto;
+
+    @media (min-width: 1000px) {
+      grid-template-columns: 220px minmax(0, 1fr);
+      column-gap: 56px;
+      max-width: 1040px;
+    }
+  }
+
+  // ── Sommaire (TOC) sticky ───────────────────────────────────────────────
+  .toc {
+    display: none;
+
+    @media (min-width: 1000px) {
+      display: block;
+      position: sticky;
+      top: calc(#{$header-height} + 28px);
+      align-self: start;
+      padding-top: 52px;
+    }
+
+    &__label {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+      margin-bottom: 16px;
+    }
+
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    &__link {
+      display: block;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: $color-text-muted;
+      padding: 7px 0 7px 14px;
+      border-left: 2px solid $color-border;
+      transition: color 0.2s ease, border-color 0.2s ease;
+
+      &:hover {
+        color: $color-text-primary;
+        text-decoration: none;
+      }
+
+      &--active {
+        color: $color-text-primary;
+        border-left-color: $color-primary;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+
+  // ── Bloc auteur ─────────────────────────────────────────────────────────
+  .author {
+    max-width: 760px;
+    margin: 56px auto 0;
+    padding: 26px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    flex-wrap: wrap;
+
+    &__av {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: $gradient-hero;
+      display: grid;
+      place-items: center;
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 22px;
+      color: $color-white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    &__body {
+      flex: 1 1 320px;
+    }
+
+    &__eyebrow {
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+
+    &__name {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 20px;
+      margin: 4px 0 8px;
+    }
+
+    &__bio {
+      color: $color-text-secondary;
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 0 0 14px;
+    }
+
+    &__links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    &__link {
+      font-size: 13px;
+      font-weight: $font-weight-semibold;
+      color: $color-primary;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: $radius-pill;
+      border: 1px solid $color-border;
+      background: $color-surface-hover;
+      transition: border-color 0.18s ease, color 0.18s ease;
+
+      &:hover {
+        border-color: $color-hairline-strong;
+        color: $color-primary-light;
+        text-decoration: none;
+      }
+    }
+  }
+
+  // ── Articles liés ───────────────────────────────────────────────────────
+  .related {
+    max-width: 1040px;
+    margin: 64px auto 0;
+    padding-top: 36px;
+    border-top: 1px solid $color-border;
+
+    &__label {
+      font-family: $font-family-mono;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+      margin-bottom: 20px;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+
+      @include respond-to($breakpoint-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  .rel-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: $color-hairline-strong;
+    }
+
+    &__visual {
+      height: 120px;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid $color-border;
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.028) 0 12px, transparent 12px 24px),
+        $gradient-hero-soft;
+
+      span {
+        font-family: $font-family-mono;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $color-text-secondary;
+      }
+    }
+
+    &__body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    &__kicker {
+      margin-bottom: 8px;
+    }
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -0.012em;
+      color: $color-text-primary;
+      margin: 0;
+      transition: color 0.18s ease;
+    }
+
+    &:hover &__title {
+      color: $color-primary;
+    }
+
+    &__desc {
+      margin: 8px 0 0;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: $color-text-secondary;
+    }
+
+    &__foot {
+      margin-top: auto;
+      padding-top: 14px;
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+    }
+  }
+}
+
+// ======================================================================
+// PROSE — corps de l'article rendu depuis le Markdown ([innerHTML])
+// ======================================================================
+
+.blog-view .prose {
+  font-size: 18px;
+  line-height: 1.78;
+  color: $color-text-primary;
+  padding-top: 44px;
+  max-width: 720px;
+
+  > p {
+    margin: 0 0 22px;
+  }
+
+  // Lettrine sur le 1er paragraphe du corps
+  > p:first-of-type::first-letter {
+    font-family: $font-family-display;
+    float: left;
+    font-size: 4.6em;
+    line-height: 0.82;
+    font-weight: $font-weight-bold;
+    padding: 6px 14px 0 0;
+    background: $gradient-hero;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  // Titre de section + filet dégradé
+  h2 {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(25px, 3vw, 32px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin: 48px 0 18px;
+    scroll-margin-top: calc(#{$header-height} + 24px);
+
+    &::before {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 3px;
+      border-radius: 3px;
+      background: $gradient-hero;
+      margin-bottom: 18px;
+    }
+  }
+
+  h3 {
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: clamp(19px, 2.2vw, 23px);
+    margin: 34px 0 12px;
+    color: $color-text-primary;
+  }
+
+  strong {
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(200, 80, 192, 0.45);
+    word-break: break-word;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+
+  // ── Listes : puces dégradé & pastilles numérotées ─────────────────────
+  ul,
+  ol {
+    margin: 0 0 22px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  ul > li {
+    padding-left: 28px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 0.7em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: $gradient-hero;
+    }
+  }
+
+  ol {
+    counter-reset: olist;
+  }
+
+  ol > li {
+    counter-increment: olist;
+    padding-left: 40px;
+
+    &::before {
+      content: counter(olist);
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: $color-primary-light;
+      color: $color-primary;
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid $color-border;
+    margin: 48px 0;
+  }
+
+  // ── Pull-quote ────────────────────────────────────────────────────────
+  blockquote {
+    margin: 40px 0;
+    padding: 4px 0 4px 26px;
+    border-left: 3px solid transparent;
+    border-image: $gradient-hero 1;
+
+    p {
+      font-family: $font-family-display;
+      font-style: italic;
+      font-size: clamp(21px, 2.7vw, 27px);
+      line-height: 1.34;
+      letter-spacing: -0.01em;
+      color: $color-text-primary;
+      margin: 0 0 10px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+
+  // ── Code inline ───────────────────────────────────────────────────────
+  code {
+    font-family: $font-family-mono;
+    font-size: 0.86em;
+    background: $color-surface-3;
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #e6b3ff;
+  }
+
+  // ── Bloc de code ──────────────────────────────────────────────────────
+  pre {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 32px 0;
+    font-size: 14px;
+    line-height: 1.65;
+
+    code {
+      background: none;
+      padding: 0;
+      color: #c7c7d6;
+      font-size: 14px;
+    }
+  }
+
+  // ── Tableau (wrappé dans .table-wrap au build) ────────────────────────
+  .table-wrap {
+    margin: 32px 0;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      background: transparent;
+    }
+
+    thead {
+      background: rgba(200, 80, 192, 0.08);
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 18px;
+      font-family: $font-family-mono;
+      font-weight: $font-weight-medium;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $color-primary;
+      border-bottom: 1px solid $color-border;
+      vertical-align: bottom;
+    }
+
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid $color-border;
+      vertical-align: top;
+      line-height: 1.5;
+      color: $color-text-secondary;
+
+      strong {
+        color: $color-text-primary;
+      }
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.018);
+    }
+  }
+
+  // ── Encadré chiffres-clés (:::keyfigures) ─────────────────────────────
+  .keyfigures {
+    margin: 36px 0;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    overflow: hidden;
+
+    &__head {
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid $color-border;
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: $font-weight-medium;
+      color: $color-text-muted;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .keyfigure {
+    padding: 22px 20px;
+    border-right: 1px solid $color-border;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    @media (max-width: 640px) {
+      border-right: none;
+      border-bottom: 1px solid $color-border;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &__num {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      color: $color-text-primary;
+    }
+
+    &__label {
+      margin-top: 10px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: $color-text-secondary;
+    }
+
+    &--gold &__num {
+      color: $color-accent-gold;
+    }
+
+    &--bad &__num {
+      color: $color-error-light;
+    }
+
+    &--good &__num {
+      color: $color-score-high;
+    }
+  }
+
+  // ── Callout (:::note / :::warn / :::tip) ──────────────────────────────
+  .callout {
+    position: relative;
+    margin: 32px 0;
+    padding: 18px 20px 18px 52px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: $color-text-secondary;
+
+    &::before {
+      position: absolute;
+      left: 18px;
+      top: 17px;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    &__title {
+      display: block;
+      font-family: $font-family-mono;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &--info {
+      border-left: 3px solid $color-primary-2;
+
+      &::before {
+        content: "\203A"; // ›
+        color: $color-primary-2;
+        font-weight: $font-weight-bold;
+        font-size: 22px;
+      }
+
+      .callout__title {
+        color: #8ea2ff;
+      }
+    }
+
+    &--warn {
+      border-left: 3px solid $color-accent-gold;
+
+      &::before {
+        content: "!";
+        color: $color-accent-gold;
+        font-weight: $font-weight-bold;
+        font-size: 20px;
+      }
+
+      .callout__title {
+        color: $color-accent-gold;
+      }
+    }
+
+    &--tip {
+      border-left: 3px solid $color-score-high;
+
+      &::before {
+        content: "\2713"; // ✓
+        color: $color-score-high;
+        font-size: 15px;
+        top: 19px;
+      }
+
+      .callout__title {
+        color: $color-score-high;
+      }
+    }
+  }
+
+  // ── CTA de fin d'article (:::cta) ─────────────────────────────────────
+  .cta-card {
+    margin: 48px 0 8px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(150deg, #16121f 0%, #1c1430 60%, #191225 100%);
+    border: 1px solid $color-hairline-strong;
+    border-radius: $radius-lg;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(200, 80, 192, 0.2), transparent 65%);
+      pointer-events: none;
+    }
+
+    &__text {
+      flex: 1 1 300px;
+      position: relative;
+      z-index: 1;
+    }
+
+    &__title {
+      font-family: $font-family-display;
+      font-weight: $font-weight-bold;
+      font-size: 23px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: $color-text-primary;
+
+      em {
+        font-style: italic;
+        background: $gradient-hero;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+    }
+
+    &__sub {
+      margin: 8px 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: $color-text-secondary;
+    }
+
+    &__btn {
+      position: relative;
+      z-index: 1;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: $gradient-hero;
+      color: $color-white;
+      font-weight: $font-weight-semibold;
+      font-size: 14px;
+      padding: 13px 24px;
+      border-radius: $radius-pill;
+      transition: filter 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+    }
+  }
+
+  // ── Bloc « Sources » dé-emphasé (après le dernier <hr>) ───────────────
+  .sources {
+    max-width: 760px;
+    margin: 0 auto;
+
+    &__title {
+      font-weight: $font-weight-bold;
+      color: $color-text-secondary;
+      font-size: 15px;
+      margin: 0 0 14px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 9px;
+      font-size: 14px;
+      color: $color-text-muted;
+      line-height: 1.5;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 0.62em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: $color-text-muted;
+      }
+    }
+
+    a {
+      color: $color-text-secondary;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: $color-hairline-strong;
+      font-size: inherit;
+
+      &:hover {
+        color: $color-text-primary;
+      }
+    }
+  }
+}
+
+// ── highlight.js tokens (repris du thème existant) ──────────────────────
+.blog-view .prose {
+  .hljs-comment,
+  .hljs-quote {
+    color: #6a737d;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in {
+    color: $color-primary;
+  }
+
+  .hljs-string,
+  .hljs-attr {
+    color: #98c379;
+  }
+
+  .hljs-number,
+  .hljs-literal {
+    color: #d19a66;
+  }
+
+  .hljs-function,
+  .hljs-title {
+    color: #61aeee;
+  }
+
+  .hljs-variable,
+  .hljs-name,
+  .hljs-tag {
+    color: #e06c75;
+  }
+
+  .hljs-type,
+  .hljs-class {
+    color: #e5c07b;
+  }
+
+  .hljs-operator,
+  .hljs-punctuation {
+    color: #abb2bf;
+  }
+}
