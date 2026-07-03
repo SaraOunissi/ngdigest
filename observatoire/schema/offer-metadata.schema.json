@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ngdigest.dev/schemas/offer-metadata.schema.json",
+  "title": "ObserveOffer",
+  "description": "Schéma de métadonnées d'offre d'emploi — couche LARGE (observatoire) ET, filtré, couche SÉLECTIVE (pépites publiées). Source de vérité = ngdigest/WORKERS_PEPITES_OBSERVATOIRE_CADRAGE.md §4/§8/§9. by project-worker 2026-06-14",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fingerprint",
+    "source",
+    "scannedAt",
+    "firstSeen",
+    "lastSeen",
+    "techno",
+    "posteType",
+    "seniority",
+    "remote",
+    "contractType",
+    "typeRecruteur",
+    "isDevRel"
+  ],
+  "properties": {
+    "fingerprint": {
+      "type": "string",
+      "description": "Empreinte unique : id source si dispo, sinon sha1(entreprise|intitule|lieu). Sert au dedup multi-semaines."
+    },
+    "sourceId": {
+      "type": ["string", "null"],
+      "description": "Identifiant natif de l'offre côté plateforme (France Travail = id stable). null si absent."
+    },
+    "source": {
+      "type": "string",
+      "enum": ["france-travail", "free-work", "apec", "wttj", "linkedin", "autre"],
+      "description": "Plateforme d'origine. France Travail = socle (officiel, gratuit, légal)."
+    },
+    "scannedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "Date du run de scan (AAAA-MM-DD)."
+    },
+    "firstSeen": {
+      "type": "string",
+      "format": "date",
+      "description": "1ère fois que cette empreinte est vue."
+    },
+    "lastSeen": {
+      "type": "string",
+      "format": "date",
+      "description": "Dernière fois vue en ligne. Permet stock vs flux + durée moyenne en ligne."
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Intitulé du poste (affichage / audit)."
+    },
+    "company": {
+      "type": ["string", "null"],
+      "description": "Nom de l'entreprise (sert à déduire typeRecruteur)."
+    },
+    "techno": {
+      "type": "string",
+      "enum": ["angular", "react", "vue", "autre"],
+      "description": "Techno front principale demandée. Extrait du texte (aujourd'hui noyé dans stack[])."
+    },
+    "posteType": {
+      "type": "string",
+      "enum": ["front", "fullstack", "back", "inconnu"],
+      "description": "Front pur vs fullstack vs back. Narration clé Sara : front ↓ / fullstack ↑."
+    },
+    "seniority": {
+      "type": "string",
+      "enum": ["junior", "confirme", "senior", "lead", "inconnu"],
+      "description": "Niveau de séniorité."
+    },
+    "remote": {
+      "type": "string",
+      "enum": ["full", "hybride", "onsite", "inconnu"],
+      "description": "Mode de travail. % de chaque + tendance (érosion du TT)."
+    },
+    "officeDaysPerWeek": {
+      "type": ["number", "null"],
+      "description": "Jours bureau/semaine pour les offres hybrides (ex. 2.6). null si non hybride ou non précisé."
+    },
+    "zone": {
+      "type": "string",
+      "enum": ["FR", "EU", "WW", "inconnu"],
+      "description": "Zone géographique de l'offre."
+    },
+    "city": {
+      "type": ["string", "null"],
+      "description": "Ville normalisée (Paris, Lyon, Remote FR…). Pour la répartition géo."
+    },
+    "contractType": {
+      "type": "string",
+      "enum": ["cdi", "freelance", "autre", "inconnu"],
+      "description": "% CDI vs freelance."
+    },
+    "salaryMin": {
+      "type": ["number", "null"],
+      "description": "Salaire annuel min normalisé en € (null si absent / freelance pur)."
+    },
+    "salaryMax": {
+      "type": ["number", "null"],
+      "description": "Salaire annuel max normalisé en € (null si absent)."
+    },
+    "tjmMin": {
+      "type": ["number", "null"],
+      "description": "TJM min normalisé en €/jour (null si CDI / absent)."
+    },
+    "tjmMax": {
+      "type": ["number", "null"],
+      "description": "TJM max normalisé en €/jour (null si absent)."
+    },
+    "typeRecruteur": {
+      "type": "string",
+      "enum": ["esn", "cabinet-recrutement", "client-final", "inconnu"],
+      "description": "Déduit du nom d'entreprise (liste ESN + mots-clés recrutement/staffing). Angle éditorial FR fort."
+    },
+    "isDevRel": {
+      "type": "boolean",
+      "description": "Opportunité DevRel / Developer Advocacy (peu connue, souvent remote/bien payée)."
+    },
+    "raw": {
+      "type": ["string", "null"],
+      "description": "Texte source concaténé (intitulé + description) pour audit / re-classification."
+    }
+  }
+}

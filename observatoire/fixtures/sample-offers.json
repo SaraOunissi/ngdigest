@@ -1,0 +1,74 @@
+[
+  {
+    "id": "FT-0001",
+    "intitule": "Développeur Angular Senior (H/F)",
+    "entreprise": { "nom": "Norsys" },
+    "description": "Rejoignez notre équipe en CDI. Stack Angular 18, TypeScript, RxJS. 100% télétravail possible. 5 ans d'expérience minimum. Rémunération 55k-70k€ selon profil.",
+    "salaire": { "libelle": "55k-70k€ annuel" },
+    "lieuTravail": { "libelle": "Lille" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0002",
+    "intitule": "Développeur Fullstack React / Node",
+    "entreprise": { "nom": "Doctolib" },
+    "description": "Full-stack developer, React + Node.js. Hybride, 2 jours sur site à Paris. CDI. 3 ans d'expérience. 50000 - 65000 €.",
+    "salaire": { "libelle": "50 000 - 65 000 €" },
+    "lieuTravail": { "libelle": "Paris" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0003",
+    "intitule": "Freelance Développeur Front-end Vue.js",
+    "entreprise": { "nom": "Cabinet de recrutement TechStaff" },
+    "description": "Mission freelance Vue.js 3. TJM 550-650€/jour. Remote France. Confirmé.",
+    "salaire": { "libelle": "TJM 550-650€/j" },
+    "lieuTravail": { "libelle": "Remote FR" },
+    "typeContrat": "LIB"
+  },
+  {
+    "id": "FT-0004",
+    "intitule": "Lead Developer Angular",
+    "entreprise": { "nom": "Capgemini" },
+    "description": "Tech Lead Angular, encadrement d'équipe. CDI. Présentiel Lyon. 8 ans d'expérience. 70k-85k€.",
+    "salaire": { "libelle": "70k-85k€" },
+    "lieuTravail": { "libelle": "Lyon" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0005",
+    "intitule": "Developer Advocate / DevRel Angular",
+    "entreprise": { "nom": "Algolia" },
+    "description": "Developer Relations role. Full remote Europe. Angular & web ecosystem. Senior. 75k-95k€.",
+    "salaire": { "libelle": "75k-95k€" },
+    "lieuTravail": { "libelle": "Remote EU" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0006",
+    "intitule": "Développeur Front-end Junior Angular",
+    "entreprise": { "nom": "Sopra Steria" },
+    "description": "Jeune diplômé bienvenu, Angular. Hybride 3 jours présentiel Toulouse. CDI. 1 an d'expérience. 34000-40000€.",
+    "salaire": { "libelle": "34000-40000€" },
+    "lieuTravail": { "libelle": "Toulouse" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0007",
+    "intitule": "Développeur Backend Java",
+    "entreprise": { "nom": "BNP Paribas" },
+    "description": "Backend Java/Spring. Présentiel Paris. CDI. Confirmé. 48k-58k€.",
+    "salaire": { "libelle": "48k-58k€" },
+    "lieuTravail": { "libelle": "Paris" },
+    "typeContrat": "CDI"
+  },
+  {
+    "id": "FT-0008",
+    "intitule": "Développeur React Senior - Freelance",
+    "entreprise": { "nom": "Octo Technology" },
+    "description": "Mission React.js senior. TJM 600-750. Hybride 2 jours sur site Paris. 6 ans d'expérience.",
+    "salaire": { "libelle": "TJM 600-750€/jour" },
+    "lieuTravail": { "libelle": "Paris" },
+    "typeContrat": "LIB"
+  }
+]
