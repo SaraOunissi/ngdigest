@@ -10,7 +10,7 @@
     <header class="job-detail__head">
       <div class="job-detail__logo" aria-hidden="true">{{ initials(job.company) }}</div>
       <div class="job-detail__heading">
-        <span class="job-detail__co">{{ job.company }}</span>
+        <span class="job-detail__company">{{ job.company }}</span>
         <h1 class="job-detail__title">{{ job.title }}</h1>
       </div>
       <span
@@ -24,16 +24,16 @@
 
     <div class="job-facts">
       <div class="job-fact">
-        <span class="job-fact__lab">{{ compensationKindKey(job) | translate }}</span>
-        <div class="job-fact__val grad-text">{{ compensationLabel(job) }}</div>
+        <span class="job-fact__label">{{ compensationKindKey(job) | translate }}</span>
+        <div class="job-fact__value grad-text">{{ compensationLabel(job) }}</div>
       </div>
       <div class="job-fact">
-        <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
-        <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
+        <span class="job-fact__label">{{ 'jobs.fact.remote' | translate }}</span>
+        <div class="job-fact__value">{{ remoteLabelKey(job.remote) | translate }}</div>
         @if (locationFor(job); as loc) {
-          <div class="job-fact__sub">{{ loc }} · {{ job.zone }}</div>
+          <div class="job-fact__subtext">{{ loc }} · {{ job.zone }}</div>
         } @else {
-          <div class="job-fact__sub">{{ job.zone }}</div>
+          <div class="job-fact__subtext">{{ job.zone }}</div>
         }
       </div>
     </div>

@@ -36,8 +36,8 @@
 </header>
 
 <section class="wrap home__block">
-  <div class="home__sh">
-    <h2 class="home__sh-title">{{ 'home.entries.title' | translate }}</h2>
+  <div class="home__section-header">
+    <h2 class="home__section-header-title">{{ 'home.entries.title' | translate }}</h2>
   </div>
   <div class="home__tiles">
     @for (entry of entries(); track entry.id) {
@@ -49,14 +49,14 @@
 @if (featuredPick(); as featured) {
   <section class="wrap">
     <div class="home__veille">
-      <div class="home__sh">
-        <h2 class="home__sh-title">{{ 'home.veille.title' | translate }}</h2>
-        <a class="home__sh-link" [routerLink]="['/', languageService.lang(), 'veille']">
+      <div class="home__section-header">
+        <h2 class="home__section-header-title">{{ 'home.veille.title' | translate }}</h2>
+        <a class="home__section-header-link" [routerLink]="['/', languageService.lang(), 'veille']">
           {{ 'home.veille.all' | translate }}
           <app-icon name="arrow-right" [size]="13" />
         </a>
       </div>
-      <div class="home__vgrid">
+      <div class="home__veille-grid">
         <app-veille-card [resource]="featured" [featured]="true" />
         @for (item of secondaryPicks(); track item._id) {
           <app-veille-card [resource]="item" />

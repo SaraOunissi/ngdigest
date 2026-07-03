@@ -42,11 +42,11 @@ export class CertCardComponent {
   protected readonly cpfDotModifier = computed(() => {
     switch (this.cert().cpf) {
       case 'oui':
-        return 'y';
+        return 'yes';
       case 'verifier':
-        return 'v';
+        return 'voucher';
       default:
-        return 'n';
+        return 'no';
     }
   });
 }

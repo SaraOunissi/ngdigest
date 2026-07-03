@@ -17,7 +17,7 @@
     }
     <span class="cert-mini cert-mini--who">{{ who() }}</span>
     @if (affLabelKey(); as affKey) {
-      <span class="cert-mini cert-mini--aff">{{ affKey | translate }}</span>
+      <span class="cert-mini cert-mini--affiliate">{{ affKey | translate }}</span>
     }
   </div>
 
@@ -29,7 +29,7 @@
   <div class="cert-card__specs">
     <div class="cert-spec cert-spec--cost">
       <span class="cert-spec__key">{{ 'certifications.spec.cost' | translate }}</span>
-      <span class="cert-spec__val"><b>{{ cost() }}</b>
+      <span class="cert-spec__value"><b>{{ cost() }}</b>
         @if (costNote()) {
           <small>{{ costNote() }}</small>
         }
@@ -37,18 +37,18 @@
     </div>
     <div class="cert-spec">
       <span class="cert-spec__key">{{ 'certifications.spec.validity' | translate }}</span>
-      <span class="cert-spec__val">{{ validity() }}</span>
+      <span class="cert-spec__value">{{ validity() }}</span>
     </div>
     <div class="cert-spec">
       <span class="cert-spec__key">{{ 'certifications.spec.cpf' | translate }}</span>
-      <span class="cert-spec__val">
+      <span class="cert-spec__value">
         <span class="cert-dot cert-dot--{{ cpfDotModifier() }}" aria-hidden="true"></span>
         {{ cpfLabelKey() | translate }}
       </span>
     </div>
     <div class="cert-spec">
       <span class="cert-spec__key">{{ 'certifications.spec.who' | translate }}</span>
-      <span class="cert-spec__val">{{ who() }}</span>
+      <span class="cert-spec__value">{{ who() }}</span>
     </div>
   </div>
 </article>

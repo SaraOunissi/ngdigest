@@ -9,13 +9,13 @@ import {
   untracked,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { HttpClient } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import { ResourceHttpRepository } from '../../../infrastructure/repositories/resource-http.repository';
+import { AngularVersionService } from '../../../infrastructure/services/angular-version.service';
 import { Resource } from '../../../domain/models/resource.model';
 import { AngularBanner } from '../../components/angular-banner/angular-banner';
 import { HeroSection, HeroStats } from '../../components/hero-section/hero-section';
@@ -54,7 +54,7 @@ function daysAgo(days: number): Date {
 export class ResourceListComponent {
   private readonly resourceRepository = inject(ResourceHttpRepository);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly http = inject(HttpClient);
+  private readonly angularVersionService = inject(AngularVersionService);
   private readonly seoService = inject(SeoService);
   protected readonly languageService = inject(LanguageService);
 
@@ -124,16 +124,11 @@ export class ResourceListComponent {
   });
 
   constructor() {
-    this.http
-      .get<{ tag_name: string }>(
-        'https://api.github.com/repos/angular/angular/releases/latest',
-      )
+    // Version badge is best-effort — the service degrades failures to null.
+    this.angularVersionService
+      .getLatestVersion()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: ({ tag_name }) => this.angularVersion.set(tag_name),
-        // Version badge is best-effort — ignore failures (offline, rate limit).
-        error: () => undefined,
-      });
+      .subscribe(version => this.angularVersion.set(version));
 
     // Language changes trigger an immediate reset and reload.
     // searchQuery is read via untracked() so it doesn't re-trigger this effect.

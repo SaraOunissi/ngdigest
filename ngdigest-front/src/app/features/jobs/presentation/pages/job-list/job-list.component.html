@@ -16,7 +16,7 @@
         <header class="job-card__head">
           <div class="job-card__logo" aria-hidden="true">{{ initials(job.company) }}</div>
           <div class="job-card__heading">
-            <span class="job-card__co">{{ job.company }}</span>
+            <span class="job-card__company">{{ job.company }}</span>
             <h2 class="job-card__title">
               <a
                 class="job-card__title-link"
@@ -37,16 +37,16 @@
 
         <div class="job-facts">
           <div class="job-fact">
-            <span class="job-fact__lab">{{ compensationKindKey(job) | translate }}</span>
-            <div class="job-fact__val grad-text">{{ compensationLabel(job) }}</div>
+            <span class="job-fact__label">{{ compensationKindKey(job) | translate }}</span>
+            <div class="job-fact__value grad-text">{{ compensationLabel(job) }}</div>
           </div>
           <div class="job-fact">
-            <span class="job-fact__lab">{{ 'jobs.fact.remote' | translate }}</span>
-            <div class="job-fact__val">{{ remoteLabelKey(job.remote) | translate }}</div>
+            <span class="job-fact__label">{{ 'jobs.fact.remote' | translate }}</span>
+            <div class="job-fact__value">{{ remoteLabelKey(job.remote) | translate }}</div>
             @if (locationFor(job); as loc) {
-              <div class="job-fact__sub">{{ loc }} · {{ job.zone }}</div>
+              <div class="job-fact__subtext">{{ loc }} · {{ job.zone }}</div>
             } @else {
-              <div class="job-fact__sub">{{ job.zone }}</div>
+              <div class="job-fact__subtext">{{ job.zone }}</div>
             }
           </div>
         </div>
@@ -95,7 +95,7 @@
             <header class="job-card__head">
               <div class="job-card__logo" aria-hidden="true">{{ initials(job.company) }}</div>
               <div class="job-card__heading">
-                <span class="job-card__co">{{ job.company }}</span>
+                <span class="job-card__company">{{ job.company }}</span>
                 <h3 class="job-card__title">{{ job.title }}</h3>
               </div>
               <span class="job-card__expired">{{ 'jobs.archive.expired' | translate }}</span>
