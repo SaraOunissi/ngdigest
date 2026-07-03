@@ -181,6 +181,24 @@
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Blog post: Front vs fullstack market 2026 FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/blog/angular-front-fullstack-marche-2026</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog/angular-front-fullstack-marche-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog/angular-frontend-fullstack-market-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog/angular-front-fullstack-marche-2026"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Blog post: Front vs fullstack market 2026 EN -->
+  <url>
+    <loc>https://ngdigest.co/en/blog/angular-frontend-fullstack-market-2026</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/blog/angular-front-fullstack-marche-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/blog/angular-frontend-fullstack-market-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/blog/angular-front-fullstack-marche-2026"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- Jobs list FR -->
   <url>
     <loc>https://ngdigest.co/fr/jobs</loc>
