@@ -59,7 +59,7 @@ export class CatalogComponent {
   protected readonly levelFilter = signal<'' | CatalogLevel>('');
 
   protected readonly chips: readonly GroupFilter[] = ['all', 'officiel', 'gros', 'solo'];
-  protected readonly typeOptions: readonly CatalogResourceType[] = ['doc', 'blog', 'youtube', 'newsletter'];
+  protected readonly typeOptions: readonly CatalogResourceType[] = ['doc', 'blog', 'youtube', 'podcast', 'newsletter', 'community'];
   protected readonly levelOptions: readonly CatalogLevel[] = ['debutant', 'intermediaire', 'avance', 'tous'];
 
   /** Resources matching every active filter, ordered by calibre then name. */

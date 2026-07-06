@@ -261,6 +261,8 @@
   "catalog.type.blog": "Blog",
   "catalog.type.youtube": "YouTube",
   "catalog.type.newsletter": "Newsletter",
+  "catalog.type.podcast": "Podcast",
+  "catalog.type.community": "Community",
   "catalog.level.debutant": "Beginner",
   "catalog.level.intermediaire": "Intermediate",
   "catalog.level.avance": "Advanced",

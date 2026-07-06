@@ -1,12 +1,13 @@
 import { LocalizedText } from '@shared/models/localized-text';
 
 /**
- * The /ressources catalog lists creators · blogs · channels · newsletters only.
+ * The /ressources catalog lists creators · blogs · channels · newsletters ·
+ * podcasts · communities only.
  * Courses & training platforms live under /carriere/formations, not here.
  * Pure domain model — no Angular imports.
  */
 export type CatalogTier = 'officiel' | 'gros' | 'solo';
-export type CatalogResourceType = 'doc' | 'blog' | 'youtube' | 'newsletter';
+export type CatalogResourceType = 'doc' | 'blog' | 'youtube' | 'newsletter' | 'podcast' | 'community';
 export type CatalogLevel = 'debutant' | 'intermediaire' | 'avance' | 'tous';
 export type CatalogCpf = 'oui' | 'non' | 'na' | 'a-verifier';
 export type CatalogOrigin = 'FR' | 'EN' | 'INTL';
