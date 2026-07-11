@@ -5,96 +5,77 @@ import {
 } from '../domain/models/certification.model';
 
 /**
- * Certifications data — verified on the web 2026-06-26 (certificates.dev,
- * angulartraining.com, blog.angularacademy.ca). FR copy is the original;
- * EN copy was authored for the bilingual site.
+ * Certifications data — verified on the web 2026-07-03 (certificates.dev,
+ * angulartraining.com, IAAP, Scrum.org, AWS, Microsoft Learn, Linux Foundation).
+ * FR copy is the original; EN copy was authored for the bilingual site.
+ * Prices/statuses to re-confirm at registration — they move fast.
+ *
+ * Cards are grouped on the page by ROI tier (see `roi`), not by category:
+ *   top          → "Fort ROI pour un profil front"
+ *   good         → "Situationnel"
+ *   opt | skip   → "Faible ROI"
  *
  * IMPORTANT: only ONE credible Angular certification exists — the
  * Certificates.dev × Angular Training program (Alain Chautard, GDE), in 3 levels.
+ * The OpenJS Node certs (JSNAD/JSNSD) were retired on 2025-09-30 and no longer
+ * appear as an option.
  */
-export const CERT_CATEGORIES: readonly CertCategory[] = [
-  {
-    id: 'angular',
-    featured: true,
-    title: { fr: 'Les certifications Angular', en: 'Angular certifications' },
-    tag: {
-      fr: 'La seule qui teste vraiment Angular',
-      en: 'The only one that truly tests Angular',
-    },
-    intro: {
-      fr: 'Une seule certif Angular crédible existe : le programme Certificates.dev, créé en partenariat avec Angular Training (Alain Chautard, Google Developer Expert). Trois niveaux, un examen en ligne surveillé mêlant QCM et vrais challenges de code. Ce n’est pas une certif « officielle Google » — il n’en existe pas — mais c’est LA référence Angular reconnue par la communauté.',
-      en: 'There is only one credible Angular certification: the Certificates.dev program, built in partnership with Angular Training (Alain Chautard, Google Developer Expert). Three levels, a proctored online exam mixing MCQs and real code challenges. It is not an “official Google” certification — none exists — but it is THE community-recognised Angular reference.',
-    },
-    provider: {
-      fr: 'Certificates.dev × Angular Training · examen proctored · QCM + code',
-      en: 'Certificates.dev × Angular Training · proctored exam · MCQ + code',
-    },
-    prep: [
-      {
-        title: { fr: 'Assessment gratuit', en: 'Free assessment' },
-        desc: {
-          fr: 'Un test offert pour situer ton niveau et choisir Junior, Mid ou Senior.',
-          en: 'A free test to gauge your level and choose Junior, Mid or Senior.',
-        },
-      },
-      {
-        title: { fr: 'Self-study officiel', en: 'Official self-study' },
-        desc: {
-          fr: 'Support d’auto-formation par niveau, en option payante.',
-          en: 'Per-level self-study material, as a paid option.',
-        },
-      },
-      {
-        title: { fr: 'Bootcamps live', en: 'Live bootcamps' },
-        desc: {
-          fr: 'Sessions intensives Mid & Senior menées par des GDE.',
-          en: 'Intensive Mid & Senior sessions led by GDEs.',
-        },
-      },
-      {
-        title: { fr: 'Cheat sheets & free weekends', en: 'Cheat sheets & free weekends' },
-        desc: {
-          fr: 'Ressources gratuites (Signals, template syntax) + week-ends de training offerts.',
-          en: 'Free resources (Signals, template syntax) + free training weekends.',
-        },
-      },
-    ],
-    prepNote: {
-      fr: 'Côté formateurs, Angular Training et Angular Academy proposent des cours qui préparent l’examen. Des créateurs FR commencent aussi à publier de la prépa — à confirmer avant de t’engager. À noter : réductions PPP (selon ton pays) et coupons périodiques sur certificates.dev.',
-      en: 'On the training side, Angular Training and Angular Academy offer courses that prepare for the exam. French creators are also starting to publish prep content — to confirm before you commit. Note: PPP discounts (depending on your country) and periodic coupons on certificates.dev.',
-    },
+
+/**
+ * The Angular program's prep block — kept as a standalone element on the page
+ * (the cards themselves are distributed across the ROI tiers).
+ */
+export const ANGULAR_PREP: CertCategory = {
+  id: 'angular',
+  featured: true,
+  title: { fr: 'Les certifications Angular', en: 'Angular certifications' },
+  tag: {
+    fr: 'La seule qui teste vraiment Angular',
+    en: 'The only one that truly tests Angular',
   },
-  {
-    id: 'a11y',
-    title: { fr: 'Accessibilité', en: 'Accessibility' },
-    tag: { fr: 'Le booster le plus crédible', en: 'The most credible booster' },
-    intro: {
-      fr: 'WCAG/RGAA est devenu une exigence légale (FR/EU) et un vrai marqueur de séniorité front. Le complément le plus pertinent à une certif Angular.',
-      en: 'WCAG/RGAA has become a legal requirement (FR/EU) and a real marker of frontend seniority. The most relevant complement to an Angular certification.',
-    },
+  intro: {
+    fr: 'Une seule certif Angular crédible existe : le programme Certificates.dev, créé en partenariat avec Angular Training (Alain Chautard, Google Developer Expert). Trois niveaux, un examen en ligne surveillé mêlant QCM et vrais challenges de code.',
+    en: 'There is only one credible Angular certification: the Certificates.dev program, built in partnership with Angular Training (Alain Chautard, Google Developer Expert). Three levels, a proctored online exam mixing MCQs and real code challenges.',
   },
-  {
-    id: 'scrum',
-    title: { fr: 'Agilité & Scrum', en: 'Agility & Scrum' },
-    tag: {
-      fr: 'Le volet « équipe » attendu en senior',
-      en: 'The “team” dimension expected at senior level',
-    },
-    intro: {
-      fr: 'Une certif agile crédible rassure côté collaboration. Une seule vaut vraiment le coup pour un profil dev.',
-      en: 'A credible agile certification reassures on the collaboration side. Only one is really worth it for a dev profile.',
-    },
+  provider: {
+    fr: 'Certificates.dev × Angular Training · examen proctored · QCM + code',
+    en: 'Certificates.dev × Angular Training · proctored exam · MCQ + code',
   },
-  {
-    id: 'autres',
-    title: { fr: 'Renforcer un profil front / fullstack', en: 'Strengthen a front / fullstack profile' },
-    tag: { fr: 'Élargir le profil', en: 'Broaden the profile' },
-    intro: {
-      fr: 'UX, cloud, déploiement : des certifs qui complètent utilement un profil Angular front ou front/fullstack, selon la direction visée.',
-      en: 'UX, cloud, deployment: certifications that usefully complement an Angular front or front/fullstack profile, depending on the direction you aim for.',
+  prep: [
+    {
+      title: { fr: 'Assessment gratuit', en: 'Free assessment' },
+      desc: {
+        fr: 'Un test offert pour situer ton niveau et choisir Junior, Mid ou Senior.',
+        en: 'A free test to gauge your level and choose Junior, Mid or Senior.',
+      },
     },
+    {
+      title: { fr: 'Self-study officiel', en: 'Official self-study' },
+      desc: {
+        fr: 'Support d’auto-formation par niveau, en option payante.',
+        en: 'Per-level self-study material, as a paid option.',
+      },
+    },
+    {
+      title: { fr: 'Bootcamps live', en: 'Live bootcamps' },
+      desc: {
+        fr: 'Sessions intensives Mid & Senior menées par des GDE.',
+        en: 'Intensive Mid & Senior sessions led by GDEs.',
+      },
+    },
+    {
+      title: { fr: 'Cheat sheets & free weekends', en: 'Cheat sheets & free weekends' },
+      desc: {
+        fr: 'Ressources gratuites (Signals, template syntax) + week-ends de training offerts.',
+        en: 'Free resources (Signals, template syntax) + free training weekends.',
+      },
+    },
+  ],
+  prepNote: {
+    fr: 'Côté formateurs, Angular Training et Angular Academy proposent des cours qui préparent l’examen. Des créateurs FR commencent aussi à publier de la prépa — à confirmer avant de t’engager. À noter : réductions PPP (selon ton pays) et coupons périodiques sur certificates.dev.',
+    en: 'On the training side, Angular Training and Angular Academy offer courses that prepare for the exam. French creators are also starting to publish prep content — to confirm before you commit. Note: PPP discounts (depending on your country) and periodic coupons on certificates.dev.',
   },
-];
+};
 
 export const CERTIFICATIONS: readonly Certification[] = [
   // ---------- Angular (one program · 3 levels) ----------
@@ -114,8 +95,8 @@ export const CERTIFICATIONS: readonly Certification[] = [
     aff: 'oui',
     who: { fr: 'Premier poste Angular', en: 'First Angular role' },
     verdict: {
-      fr: 'La porte d’entrée : QCM sur les fondamentaux (composants, services, binding, routing). Idéale pour valider tes bases et crédibiliser un premier rôle Angular.',
-      en: 'The entry point: MCQs on the fundamentals (components, services, binding, routing). Ideal to validate your basics and add credibility to a first Angular role.',
+      fr: 'La porte d’entrée : QCM sur les fondamentaux (composants, services, binding, routing). Idéale pour valider tes bases et crédibiliser un premier rôle Angular, ou poser un jalon avant le Mid.',
+      en: 'The entry point: MCQs on the fundamentals (components, services, binding, routing). Ideal to validate your basics and add credibility to a first Angular role, or as a milestone before the Mid level.',
     },
     detail: {
       fr: '40 min · 50 QCM · en ligne surveillé.',
@@ -138,8 +119,8 @@ export const CERTIFICATIONS: readonly Certification[] = [
     aff: 'oui',
     who: { fr: 'Dev Angular confirmé', en: 'Experienced Angular dev' },
     verdict: {
-      fr: 'Le sweet spot : QCM avancés + 105 min de vrai code. Le signal le plus utile pour un·e dev Angular confirmé·e qui veut le prouver, pas juste l’affirmer.',
-      en: 'The sweet spot: advanced MCQs + 105 min of real code. The most useful signal for an experienced Angular dev who wants to prove it, not just claim it.',
+      fr: 'Le sweet spot : QCM avancés + du vrai code testé. La seule certif « front » où le signal dépasse le portfolio, parce qu’elle prouve ton niveau Angular au lieu de l’affirmer.',
+      en: 'The sweet spot: advanced MCQs + real code that is actually tested. The one “front” cert where the signal beats a portfolio, because it proves your Angular level instead of claiming it.',
     },
     detail: {
       fr: '135 min · 40 QCM + challenges de code · proctored.',
@@ -156,7 +137,7 @@ export const CERTIFICATIONS: readonly Certification[] = [
     org: 'Certificates.dev',
     lang: 'EN',
     cost: { fr: 'Tarif premium', en: 'Premium pricing' },
-    costNote: { fr: 'exam + training · bundles', en: 'exam + training · bundles' },
+    costNote: { fr: 'exam + training · à confirmer', en: 'exam + training · to confirm' },
     validity: { fr: 'Sans expiration', en: 'No expiry' },
     cpf: 'verifier',
     aff: 'oui',
@@ -180,19 +161,19 @@ export const CERTIFICATIONS: readonly Certification[] = [
     full: { fr: 'Web Accessibility Specialist', en: 'Web Accessibility Specialist' },
     org: 'IAAP',
     lang: 'EN',
-    cost: { fr: '530 $', en: '$530' },
-    costNote: { fr: '410-430 $ membre', en: '$410-430 for members' },
-    validity: { fr: 'Recert. périodique', en: 'Periodic recert.' },
+    cost: { fr: '~ 530 $', en: '~ $530' },
+    costNote: { fr: '~ 430 $ membre', en: '~ $430 for members' },
+    validity: { fr: 'Recert. tous les 3 ans', en: 'Recert. every 3 years' },
     cpf: 'non',
     aff: 'non',
     who: { fr: 'Devs & QA front', en: 'Front devs & QA' },
     verdict: {
-      fr: 'LA certif a11y technique pour un·e dev front : WCAG, ARIA, tests d’accessibilité. Le meilleur complément « front senior » à une certif Angular.',
-      en: 'THE technical a11y certification for a frontend dev: WCAG, ARIA, accessibility testing. The best “senior frontend” complement to an Angular certification.',
+      fr: 'LE différenciateur a11y d’un·e front senior : WCAG, ARIA, tests d’accessibilité, aligné sur l’obligation légale RGAA/EAA (FR/EU). Peu de devs l’ont — tu sors du lot.',
+      en: 'THE a11y differentiator of a senior frontend dev: WCAG, ARIA, accessibility testing, aligned with the RGAA/EAA legal requirement (FR/EU). Few devs hold it — you stand out.',
     },
     detail: {
-      fr: '75 questions · 70 % pour réussir (~59 % de réussite).',
-      en: '75 questions · 70% to pass (~59% pass rate).',
+      fr: '75 questions · 70 % pour réussir · proctored · recert 3 ans (points de formation continue).',
+      en: '75 questions · 70% to pass · proctored · 3-year recert (continuing-education points).',
     },
   },
   {
@@ -229,19 +210,19 @@ export const CERTIFICATIONS: readonly Certification[] = [
     full: { fr: 'Core Competencies in Accessibility', en: 'Core Competencies in Accessibility' },
     org: 'IAAP',
     lang: 'EN',
-    cost: { fr: '510 $', en: '$510' },
-    costNote: { fr: '410 $ membre · 170 $ pays EDE', en: '$410 members · $170 EDE countries' },
-    validity: { fr: 'Recert. périodique', en: 'Periodic recert.' },
+    cost: { fr: '485 $', en: '$485' },
+    costNote: { fr: '385 $ membre', en: '$385 for members' },
+    validity: { fr: 'Recert. tous les 3 ans', en: 'Recert. every 3 years' },
     cpf: 'non',
     aff: 'non',
     who: { fr: 'Transverse (PO, QA, dev)', en: 'Cross-role (PO, QA, dev)' },
     verdict: {
-      fr: 'Base conceptuelle de l’accessibilité. Utile, mais moins « dev » que la WAS.',
-      en: 'Conceptual foundation of accessibility. Useful, but less “dev” than the WAS.',
+      fr: 'Base conceptuelle de l’accessibilité, transverse. Utile, mais moins « dev » que la WAS (ou en marche vers le CPWA = CPACC + WAS).',
+      en: 'Conceptual, cross-role foundation of accessibility. Useful, but less “dev” than the WAS (or a step toward CPWA = CPACC + WAS).',
     },
     detail: {
-      fr: '100 questions · 66 % pour réussir.',
-      en: '100 questions · 66% to pass.',
+      fr: '100 questions · 66 % pour réussir · recert 3 ans.',
+      en: '100 questions · 66% to pass · 3-year recert.',
     },
   },
 
@@ -261,12 +242,12 @@ export const CERTIFICATIONS: readonly Certification[] = [
     aff: 'non',
     who: { fr: 'Tout dev en équipe agile', en: 'Any dev in an agile team' },
     verdict: {
-      fr: 'Le meilleur rapport crédibilité / prix : aucune formation obligatoire, tu révises seul (Scrum Guide + practice tests) et tu passes l’examen. Reconnu mondialement.',
-      en: 'The best credibility/price ratio: no mandatory training, you study on your own (Scrum Guide + practice tests) and take the exam. Recognised worldwide.',
+      fr: 'Le meilleur rapport crédibilité / prix : aucune formation obligatoire, tu révises seul (Scrum Guide + practice tests) et tu passes l’examen. À vie, reconnu mondialement.',
+      en: 'The best credibility/price ratio: no mandatory training, you study on your own (Scrum Guide + practice tests) and take the exam. Lifetime, recognised worldwide.',
     },
     detail: {
-      fr: 'CPF possible via des organismes FR qui packagent l’examen ; l’exam direct est hors CPF.',
-      en: 'CPF possible via French providers that bundle the exam; the direct exam is not CPF-eligible.',
+      fr: '80 questions · 60 min · 85 % pour réussir. CPF possible via un organisme FR qui packages l’examen ; l’exam direct est hors CPF.',
+      en: '80 questions · 60 min · 85% to pass. CPF possible via a French provider that bundles the exam; the direct exam is not CPF-eligible.',
     },
   },
   {
@@ -299,18 +280,18 @@ export const CERTIFICATIONS: readonly Certification[] = [
     lang: 'EN',
     cost: { fr: '1 175 – 1 800 $', en: '$1,175 – $1,800' },
     costNote: { fr: 'cours inclus', en: 'course included' },
-    validity: { fr: '2 ans', en: '2 years' },
+    validity: { fr: '2 ans (renouvellement payant)', en: '2 years (paid renewal)' },
     cpf: 'non',
     aff: 'non',
     who: { fr: 'Si l’employeur l’impose', en: 'If your employer requires it' },
     verdict: {
-      fr: 'Plus chère et « course-gated » que la PSM, avec un renouvellement payant. À éviter sauf exigence explicite.',
-      en: 'Pricier and “course-gated” versus PSM, with paid renewal. Avoid unless explicitly required.',
+      fr: 'Plus chère et « course-gated » que la PSM, avec un renouvellement payant. À éviter sauf exigence explicite : préfère la PSM I.',
+      en: 'Pricier and “course-gated” versus PSM, with paid renewal. Avoid unless explicitly required: prefer PSM I.',
     },
     detail: { fr: '', en: '' },
   },
 
-  // ---------- Others ----------
+  // ---------- Others (front / fullstack) ----------
   {
     id: 'google-ux',
     cat: 'autres',
@@ -343,17 +324,14 @@ export const CERTIFICATIONS: readonly Certification[] = [
     org: 'Amazon',
     lang: 'EN',
     cost: { fr: '150 $', en: '$150' },
-    costNote: {
-      fr: 'Cloud Practitioner ~100 $ pour démarrer',
-      en: 'Cloud Practitioner ~$100 to start',
-    },
+    costNote: { fr: 'DVA-C02', en: 'DVA-C02' },
     validity: { fr: '3 ans', en: '3 years' },
     cpf: 'verifier',
     aff: 'indirecte',
     who: { fr: 'Front qui touche au déploiement', en: 'Front devs who touch deployment' },
     verdict: {
-      fr: 'Utile pour le volet « fullstack / déploiement » d’un profil front senior : serverless, CI/CD.',
-      en: 'Useful for the “fullstack / deployment” side of a senior frontend profile: serverless, CI/CD.',
+      fr: 'Utile pour le volet « fullstack / déploiement » d’un profil front senior : serverless, CI/CD. Solide sur le marché FR (démarre par le Cloud Practitioner).',
+      en: 'Useful for the “fullstack / deployment” side of a senior frontend profile: serverless, CI/CD. Solid on the French market (start with the Cloud Practitioner).',
     },
     detail: {
       fr: 'Pas de programme d’affiliation grand public ; les cours de prép (Pluralsight/Udemy/Coursera) sont affiliables.',
@@ -361,11 +339,92 @@ export const CERTIFICATIONS: readonly Certification[] = [
     },
   },
   {
+    id: 'aws-ccp',
+    cat: 'autres',
+    roi: 'good',
+    name: { fr: 'AWS Cloud Practitioner', en: 'AWS Cloud Practitioner' },
+    full: { fr: 'AWS Certified Cloud Practitioner', en: 'AWS Certified Cloud Practitioner' },
+    org: 'Amazon',
+    lang: 'EN',
+    cost: { fr: '100 $', en: '$100' },
+    costNote: { fr: 'CLF-C02 · marche d’entrée', en: 'CLF-C02 · entry step' },
+    validity: { fr: '3 ans', en: '3 years' },
+    cpf: 'verifier',
+    aff: 'indirecte',
+    who: { fr: 'Front curieux du cloud', en: 'Front devs curious about cloud' },
+    verdict: {
+      fr: 'La porte d’entrée cloud, peu chère : crédibilise le volet déploiement d’un profil front avant de viser le Developer Associate.',
+      en: 'The cheap cloud entry point: adds deployment credibility to a front profile before targeting the Developer Associate.',
+    },
+    detail: {
+      fr: 'Pas d’affiliation grand public ; cours de prép (Udemy/Coursera) affiliables.',
+      en: 'No public affiliate program; prep courses (Udemy/Coursera) are affiliable.',
+    },
+  },
+  {
+    id: 'az-900',
+    cat: 'autres',
+    roi: 'good',
+    name: { fr: 'Azure Fundamentals', en: 'Azure Fundamentals' },
+    full: {
+      fr: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
+      en: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
+    },
+    org: 'Microsoft',
+    lang: 'EN/FR',
+    cost: { fr: '~ 99 $', en: '~ $99' },
+    costNote: {
+      fr: 'souvent gratuit via Virtual Training Day',
+      en: 'often free via Virtual Training Day',
+    },
+    validity: { fr: 'Ne périme pas', en: 'No expiry' },
+    cpf: 'verifier',
+    aff: 'non',
+    who: { fr: 'Front sur écosystème Azure', en: 'Front devs on Azure stack' },
+    verdict: {
+      fr: 'Pertinente uniquement si ta cible est Microsoft/Azure : peu chère, parfois offerte, ne périme pas. Sinon, préfère AWS.',
+      en: 'Relevant only if your target is Microsoft/Azure: cheap, sometimes free, never expires. Otherwise prefer AWS.',
+    },
+    detail: {
+      fr: 'Examen offert après un Microsoft Virtual Training Day éligible.',
+      en: 'Exam voucher available after an eligible Microsoft Virtual Training Day.',
+    },
+  },
+  {
+    id: 'ts-certdev',
+    cat: 'autres',
+    roi: 'good',
+    name: { fr: 'TypeScript Developer', en: 'TypeScript Developer' },
+    full: {
+      fr: 'Certified TypeScript Developer (Certificates.dev)',
+      en: 'Certified TypeScript Developer (Certificates.dev)',
+    },
+    org: 'Certificates.dev',
+    lang: 'EN',
+    cost: { fr: 'À venir', en: 'TBA' },
+    costNote: { fr: 'lancement imminent — prix non publié', en: 'launching soon — price TBA' },
+    validity: { fr: 'Sans expiration (à confirmer)', en: 'No expiry (to confirm)' },
+    cpf: 'non',
+    aff: 'oui',
+    who: { fr: 'Front qui veut prouver son TS', en: 'Front devs proving their TS' },
+    verdict: {
+      fr: 'Par l’éditeur de la certif Angular : la première certif TypeScript vraiment crédible (challenges de code réels). À surveiller dès l’ouverture des inscriptions.',
+      en: 'From the makers of the Angular cert: the first genuinely credible TypeScript certification (real code challenges). Watch for registration opening.',
+    },
+    detail: {
+      fr: 'Deux niveaux annoncés (Developer / Senior). Statut « launching soon » au 03/07/2026.',
+      en: 'Two announced levels (Developer / Senior). “Launching soon” as of 2026-07-03.',
+    },
+  },
+  {
     id: 'ts-js',
     cat: 'autres',
     roi: 'skip',
-    name: { fr: 'Certifs JS / TS génériques', en: 'Generic JS / TS certs' },
-    full: { fr: 'Badges « langage » divers', en: 'Various “language” badges' },
+    name: { fr: 'Certifs JS / Node génériques', en: 'Generic JS / Node certs' },
+    full: {
+      fr: 'Badges « langage » divers + OpenJS retirés',
+      en: 'Various “language” badges + retired OpenJS',
+    },
     org: '—',
     lang: '—',
     cost: { fr: '—', en: '—' },
@@ -375,10 +434,13 @@ export const CERTIFICATIONS: readonly Certification[] = [
     aff: 'non',
     who: { fr: 'À zapper', en: 'Skip it' },
     verdict: {
-      fr: 'Les badges génériques « JavaScript » ou « TypeScript » ne valent pas leur prix : sur ces langages, ton code et ton portfolio parlent bien plus fort qu’un certificat.',
-      en: 'Generic “JavaScript” or “TypeScript” badges aren’t worth the price: on these languages, your code and portfolio speak far louder than a certificate.',
+      fr: 'Les badges génériques « JavaScript » ne valent pas leur prix — ton code parle plus fort. Et les certifs Node OpenJS (JSNAD/JSNSD) ont été retirées fin septembre 2025 : elles ne sont plus une option.',
+      en: 'Generic “JavaScript” badges aren’t worth it — your code speaks louder. And the OpenJS Node certs (JSNAD/JSNSD) were retired end of September 2025: no longer an option.',
     },
-    detail: { fr: '', en: '' },
+    detail: {
+      fr: 'Pour TypeScript, guetter plutôt la future certif Certificates.dev.',
+      en: 'For TypeScript, watch the upcoming Certificates.dev cert instead.',
+    },
   },
 ];
 
@@ -396,16 +458,16 @@ export const CERT_VERDICT: readonly CertVerdictEntry[] = [
     rank: '2',
     certId: 'iaap-was',
     line: {
-      fr: 'Le différenciateur a11y d’un profil front senior.',
-      en: 'The a11y differentiator of a senior frontend profile.',
+      fr: 'Le différenciateur a11y d’un profil front senior (RGAA/EAA = exigence légale).',
+      en: 'The a11y differentiator of a senior frontend profile (RGAA/EAA = legal requirement).',
     },
   },
   {
     rank: '3',
     certId: 'psm-i',
     line: {
-      fr: 'Crédibilité agile à coût mini, validité à vie.',
-      en: 'Agile credibility at minimal cost, lifetime validity.',
+      fr: 'Le bonus si le budget suit : crédibilité agile à coût mini, validité à vie.',
+      en: 'The bonus if budget allows: agile credibility at minimal cost, lifetime validity.',
     },
   },
 ];

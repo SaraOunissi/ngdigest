@@ -5,8 +5,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import { AffiliateService } from '@core/services/affiliate.service';
-import { Certification } from '../../../domain/models/certification.model';
-import { CERTIFICATIONS, CERT_CATEGORIES, CERT_VERDICT } from '../../../infrastructure/certifications.data';
+import { Certification, Roi } from '../../../domain/models/certification.model';
+import { ANGULAR_PREP, CERTIFICATIONS, CERT_VERDICT } from '../../../infrastructure/certifications.data';
 import { CertCardComponent } from '../../components/cert-card/cert-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
@@ -21,8 +21,19 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
 
 const CERTIFICATES_DEV_URL = 'https://certificates.dev/angular';
 
-interface CertSection {
-  readonly category: (typeof CERT_CATEGORIES)[number];
+/** ROI tiers the cards are grouped under on the page, most valuable first. */
+const CERT_TIERS: readonly { readonly id: string; readonly rois: readonly Roi[]; readonly featured?: boolean }[] = [
+  { id: 'strong', rois: ['top'], featured: true },
+  { id: 'situational', rois: ['good'] },
+  { id: 'low', rois: ['opt', 'skip'] },
+];
+
+interface CertTierSection {
+  readonly id: string;
+  readonly featured: boolean;
+  readonly tagKey: string;
+  readonly titleKey: string;
+  readonly introKey: string;
   readonly certs: Certification[];
 }
 
@@ -46,12 +57,19 @@ export class CertificationsComponent {
   private readonly seoService = inject(SeoService);
   private readonly affiliate = inject(AffiliateService);
 
-  protected readonly sections = computed<CertSection[]>(() =>
-    CERT_CATEGORIES.map((category) => ({
-      category,
-      certs: CERTIFICATIONS.filter((cert) => cert.cat === category.id),
-    })).filter((section) => section.certs.length > 0),
+  protected readonly tiers = computed<CertTierSection[]>(() =>
+    CERT_TIERS.map((tier) => ({
+      id: tier.id,
+      featured: tier.featured ?? false,
+      tagKey: `certifications.tier.${tier.id}.tag`,
+      titleKey: `certifications.tier.${tier.id}.title`,
+      introKey: `certifications.tier.${tier.id}.intro`,
+      certs: CERTIFICATIONS.filter((cert) => tier.rois.includes(cert.roi)),
+    })).filter((tier) => tier.certs.length > 0),
   );
+
+  /** The Angular program's prep block, kept as a standalone element. */
+  protected readonly angularPrep = ANGULAR_PREP;
 
   protected readonly podium = computed<PodiumRow[]>(() => {
     const lang = this.languageService.lang();

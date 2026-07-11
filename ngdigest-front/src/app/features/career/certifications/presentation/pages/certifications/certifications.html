@@ -56,46 +56,43 @@
 </section>
 
 <main class="wrap">
-  @for (section of sections(); track section.category.id) {
-    <section class="cert-section" [class.cert-section--feat]="section.category.featured">
+  @for (tier of tiers(); track tier.id) {
+    <section class="cert-section" [class.cert-section--feat]="tier.featured">
       <div class="cert-section__head">
-        <div class="cert-section__tag">{{ section.category.tag[languageService.lang()] }}</div>
-        <h2 class="cert-section__title">{{ section.category.title[languageService.lang()] }}</h2>
-        <p class="cert-section__intro">{{ section.category.intro[languageService.lang()] }}</p>
-        @if (section.category.provider; as provider) {
-          <div class="cert-section__provider">{{ provider[languageService.lang()] }}</div>
-        }
+        <div class="cert-section__tag">{{ tier.tagKey | translate }}</div>
+        <h2 class="cert-section__title">{{ tier.titleKey | translate }}</h2>
+        <p class="cert-section__intro">{{ tier.introKey | translate }}</p>
       </div>
 
-      <div class="cert-grid" [class.cert-grid--3]="section.category.id === 'angular'">
-        @for (cert of section.certs; track cert.id) {
+      <div class="cert-grid">
+        @for (cert of tier.certs; track cert.id) {
           <app-cert-card [cert]="cert" />
         }
       </div>
-
-      @if (section.category.prep; as prep) {
-        <div class="cert-prep">
-          <div class="cert-prep__head">
-            <span>{{ 'certifications.section.prepTitle' | translate }}</span>
-            <b>{{ 'certifications.section.prepSubtitle' | translate }}</b>
-          </div>
-          <div class="cert-prep__grid">
-            @for (option of prep; track option.title.en) {
-              <div class="cert-prep__item">
-                <b>{{ option.title[languageService.lang()] }}</b>
-                <p>{{ option.desc[languageService.lang()] }}</p>
-              </div>
-            }
-          </div>
-          @if (section.category.prepNote; as prepNote) {
-            <p class="cert-prep__note">{{ prepNote[languageService.lang()] }}</p>
-          }
-          <a class="grad-btn cert-prep__cta" [href]="certificatesDevUrl" target="_blank" [attr.rel]="certificatesDevRel">
-            {{ 'certifications.section.certCta' | translate }}
-          </a>
-        </div>
-      }
     </section>
+  }
+
+  @if (angularPrep.prep; as prep) {
+    <div class="cert-prep cert-prep--standalone">
+      <div class="cert-prep__head">
+        <span>{{ 'certifications.section.prepTitle' | translate }}</span>
+        <b>{{ 'certifications.section.prepSubtitle' | translate }}</b>
+      </div>
+      <div class="cert-prep__grid">
+        @for (option of prep; track option.title.en) {
+          <div class="cert-prep__item">
+            <b>{{ option.title[languageService.lang()] }}</b>
+            <p>{{ option.desc[languageService.lang()] }}</p>
+          </div>
+        }
+      </div>
+      @if (angularPrep.prepNote; as prepNote) {
+        <p class="cert-prep__note">{{ prepNote[languageService.lang()] }}</p>
+      }
+      <a class="grad-btn cert-prep__cta" [href]="certificatesDevUrl" target="_blank" [attr.rel]="certificatesDevRel">
+        {{ 'certifications.section.certCta' | translate }}
+      </a>
+    </div>
   }
 </main>
 

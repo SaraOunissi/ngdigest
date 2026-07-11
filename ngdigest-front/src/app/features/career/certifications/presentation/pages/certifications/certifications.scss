@@ -263,6 +263,10 @@
   border: 1px solid $color-border;
   background: $color-surface;
 
+  &--standalone {
+    margin-top: 44px;
+  }
+
   &__head {
     display: flex;
     flex-direction: column;
