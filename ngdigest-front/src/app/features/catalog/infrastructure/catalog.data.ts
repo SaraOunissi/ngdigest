@@ -387,6 +387,28 @@ export const CATALOG_RESOURCES: readonly CatalogResource[] = [
     affiliable: false,
     affiliateNetwork: null,
   },
+  {
+    id: 'angular-fr',
+    name: 'angular.fr',
+    author: 'Samuel Ronce',
+    lang: 'fr',
+    origin: 'FR',
+    type: 'blog',
+    level: 'tous',
+    tier: 'gros',
+    shortDesc: {
+      fr: 'La plus grande ressource FR : guides, tutos et news, à jour version après version.',
+      en: 'The largest French Angular resource: guides, tutorials and news, kept current release after release.',
+    },
+    value: {
+      fr: 'Tout Angular expliqué en français, régulièrement mis à jour — pour apprendre et se référer.',
+      en: 'All of Angular explained in French, regularly updated — to learn from and reference.',
+    },
+    url: 'https://angular.fr',
+    cpf: 'na',
+    affiliable: false,
+    affiliateNetwork: null,
+  },
 
   // ---------- Pépites & créateurs solo ----------
   {
