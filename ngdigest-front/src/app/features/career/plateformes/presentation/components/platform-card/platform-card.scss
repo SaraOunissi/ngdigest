@@ -1,0 +1,231 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.platform-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 18px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
+    background: $color-surface-hover;
+    text-decoration: none;
+  }
+
+  &--featured {
+    border-color: $color-hairline-strong;
+    background: $gradient-hero-soft, $color-surface;
+  }
+
+  &__pick {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $color-accent-gold;
+  }
+
+  &__pick-star {
+    color: $color-accent-gold;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: $radius-sm;
+    background: $color-primary-light;
+    color: $color-primary;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 14px;
+  }
+
+  &__head {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  &__cat {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__blurb {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: $color-text-secondary;
+  }
+
+  &__foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1px solid $color-border;
+  }
+
+  &__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  &__fee {
+    font-family: $font-family-mono;
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+
+    &--gratuit {
+      color: $color-score-high;
+    }
+
+    &--commission {
+      color: $color-text-primary;
+    }
+
+    &--forfait,
+    &--frais-gestion {
+      color: $color-accent-gold;
+    }
+  }
+
+  &__partner {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: $radius-pill;
+    background: rgba($color-white, 0.06);
+    color: $color-text-muted;
+    cursor: help;
+    white-space: nowrap;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &:hover &__cta {
+    color: $color-primary;
+  }
+}
+
+// — Badge géo (FR / Intl) —
+.platform-geo {
+  flex-shrink: 0;
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
+
+  &--fr {
+    background: $color-badge-fr-bg;
+    color: $color-badge-fr-text;
+  }
+
+  &--intl {
+    background: $color-badge-en-bg;
+    color: $color-badge-en-text;
+  }
+}
+
+// — Badges (remote, pépite) —
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
+
+  &--remote-oui {
+    background: $color-score-high-bg;
+    color: $color-score-high;
+  }
+
+  &--remote-hybride {
+    background: rgba($color-accent-gold, 0.16);
+    color: $color-accent-gold;
+  }
+
+  &--remote-non {
+    background: $color-tag-bg;
+    color: $color-text-muted;
+  }
+
+  &--pepite {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+}

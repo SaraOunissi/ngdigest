@@ -1,0 +1,180 @@
+<header class="wrap">
+  <nav class="pf-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="careerRoute()">{{ 'platforms.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="pf-crumb__current">{{ 'platforms.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'platforms.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'platforms.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'platforms.hero.titleAccent' | translate }}</span
+      >{{ 'platforms.hero.titleAfter' | translate }}
+    </h1>
+    <p class="phero__subtitle">{{ 'platforms.hero.subtitle' | translate }}</p>
+  </div>
+
+  <div class="pf-banner" role="note">
+    <span class="pf-banner__ic" aria-hidden="true">€</span>
+    <p>
+      <b>{{ 'platforms.banner.title' | translate }}</b> {{ 'platforms.banner.text' | translate }}
+    </p>
+  </div>
+</header>
+
+<div class="pf-filters">
+  <div class="wrap">
+    <div class="pf-filters__row">
+      <label class="pf-search">
+        <span class="pf-search__icon" aria-hidden="true"></span>
+        <input
+          type="search"
+          autocomplete="off"
+          [value]="search()"
+          [attr.placeholder]="'platforms.filters.searchPlaceholder' | translate"
+          [attr.aria-label]="'platforms.filters.searchPlaceholder' | translate"
+          (input)="onSearch($event)"
+        />
+      </label>
+      <div class="pf-seg" role="group" [attr.aria-label]="'platforms.filters.geoLabel' | translate">
+        <button
+          type="button"
+          class="pf-seg__btn"
+          [class.pf-seg__btn--on]="geoFilter() === 'all'"
+          [attr.aria-pressed]="geoFilter() === 'all'"
+          (click)="geoFilter.set('all')"
+        >
+          {{ 'platforms.filters.geoAll' | translate }}
+        </button>
+        <button
+          type="button"
+          class="pf-seg__btn"
+          [class.pf-seg__btn--on]="geoFilter() === 'fr'"
+          [attr.aria-pressed]="geoFilter() === 'fr'"
+          (click)="geoFilter.set('fr')"
+        >
+          FR
+        </button>
+        <button
+          type="button"
+          class="pf-seg__btn"
+          [class.pf-seg__btn--on]="geoFilter() === 'intl'"
+          [attr.aria-pressed]="geoFilter() === 'intl'"
+          (click)="geoFilter.set('intl')"
+        >
+          {{ 'platforms.geo.intl' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="pf-filters__row">
+      <div class="pf-chips" role="group" [attr.aria-label]="'platforms.filters.chipLabel' | translate">
+        @for (chipItem of chips; track chipItem) {
+          <button
+            type="button"
+            class="pf-chip"
+            [class.pf-chip--on]="chip() === chipItem"
+            [attr.aria-pressed]="chip() === chipItem"
+            (click)="chip.set(chipItem)"
+          >
+            {{ 'platforms.chip.' + chipItem | translate }}
+            <span class="pf-chip__count">{{ chipCount(chipItem) }}</span>
+          </button>
+        }
+      </div>
+
+      <button type="button" class="pf-reset" (click)="reset()">
+        {{ 'platforms.filters.reset' | translate }}
+      </button>
+
+      <span class="pf-count" aria-live="polite">
+        <b>{{ resultCount() }}</b>
+        {{ (resultCount() > 1 ? 'platforms.filters.countPlural' : 'platforms.filters.countSingular') | translate }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap pf-results">
+  @if (loading()) {
+    <div class="pf-grid" aria-hidden="true">
+      @for (skeleton of skeletons; track skeleton) {
+        <div class="pf-skeleton">
+          <div class="pf-skeleton__top">
+            <span class="pf-skeleton__avatar"></span>
+            <span class="pf-skeleton__lines"></span>
+          </div>
+          <span class="pf-skeleton__bar pf-skeleton__bar--sm"></span>
+          <span class="pf-skeleton__bar"></span>
+          <span class="pf-skeleton__bar pf-skeleton__bar--wide"></span>
+        </div>
+      }
+    </div>
+  } @else if (resultCount() === 0) {
+    <div class="pf-empty">
+      <h3>{{ 'platforms.empty.title' | translate }}</h3>
+      <p>{{ 'platforms.empty.subtitle' | translate }}</p>
+      <button type="button" class="ghost-btn" (click)="reset()">{{ 'platforms.empty.reset' | translate }}</button>
+    </div>
+  } @else {
+    @for (family of families(); track family.id) {
+      <section class="pf-family" [class.pf-family--status]="family.id === 'status'">
+        <div class="pf-family__head">
+          <span class="kicker">{{ 'platforms.family.' + family.id + '.kicker' | translate }}</span>
+          <h2 class="pf-family__title">{{ 'platforms.family.' + family.id + '.title' | translate }}</h2>
+          <p class="pf-family__intro">{{ 'platforms.family.' + family.id + '.intro' | translate }}</p>
+        </div>
+
+        @if (family.id === 'status') {
+          <aside class="pf-edu" aria-labelledby="pf-edu-title">
+            <div class="pf-edu__ic" aria-hidden="true">🛟</div>
+            <div class="pf-edu__body">
+              <h3 class="pf-edu__title" id="pf-edu-title">{{ 'platforms.edu.title' | translate }}</h3>
+              <p class="pf-edu__text">{{ 'platforms.edu.text' | translate }}</p>
+              <p class="pf-edu__for">
+                <b>{{ 'platforms.edu.forWho.label' | translate }}</b> {{ 'platforms.edu.forWho.text' | translate }}
+              </p>
+            </div>
+          </aside>
+        }
+
+        @for (group of family.categories; track group.category) {
+          <section class="pf-cat">
+            <div class="pf-cat__head">
+              <h3 class="pf-cat__title">{{ 'platforms.section.' + group.category + '.title' | translate }}</h3>
+              <span class="pf-cat__count">{{ group.platforms.length }}</span>
+              <p class="pf-cat__intro">{{ 'platforms.section.' + group.category + '.intro' | translate }}</p>
+            </div>
+            <div class="pf-grid">
+              @for (platform of group.platforms; track platform.id) {
+                <app-platform-card [platform]="platform" />
+              }
+            </div>
+          </section>
+        }
+      </section>
+    }
+  }
+</main>
+
+<section class="wrap">
+  <p class="pf-disclosure">
+    <b>{{ 'platforms.disclosure.title' | translate }}</b> {{ 'platforms.disclosure.text' | translate }}
+  </p>
+
+  <div class="pf-cross">
+    <a class="pf-xlink" [routerLink]="jobsRoute()">
+      <div class="pf-xlink__txt">
+        <h3>{{ 'platforms.cross.jobsTitle' | translate }}</h3>
+        <p>{{ 'platforms.cross.jobsText' | translate }}</p>
+      </div>
+    </a>
+    <a class="pf-xlink" [routerLink]="careerRoute()">
+      <div class="pf-xlink__txt">
+        <h3>{{ 'platforms.cross.careerTitle' | translate }}</h3>
+        <p>{{ 'platforms.cross.careerText' | translate }}</p>
+      </div>
+    </a>
+  </div>
+</section>

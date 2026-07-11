@@ -1,0 +1,63 @@
+<a
+  class="platform-card"
+  [class.platform-card--featured]="platform().featured"
+  [href]="href()"
+  target="_blank"
+  [attr.rel]="rel()"
+>
+  @if (platform().featured) {
+    <div class="platform-card__pick">
+      <span class="platform-card__pick-star" aria-hidden="true">★</span>
+      <span>{{ 'platforms.card.pick' | translate }}</span>
+    </div>
+  }
+
+  <div class="platform-card__top">
+    <span class="platform-card__avatar" aria-hidden="true">{{ initials() }}</span>
+    <div class="platform-card__head">
+      <div class="platform-card__name">{{ platform().name }}</div>
+      <div class="platform-card__cat">{{ 'platforms.category.' + platform().category | translate }}</div>
+    </div>
+    <span class="platform-geo platform-geo--{{ platform().geo }}">
+      {{ 'platforms.geo.' + platform().geo | translate }}
+    </span>
+  </div>
+
+  <div class="platform-card__badges">
+    @if (remoteKey(); as key) {
+      <span class="platform-badge platform-badge--remote-{{ platform().remoteFriendly }}">
+        {{ key | translate }}
+      </span>
+    }
+    @if (platform().pepite) {
+      <span class="platform-badge platform-badge--pepite">
+        <span aria-hidden="true">◆</span> {{ 'platforms.card.pepite' | translate }}
+      </span>
+    }
+  </div>
+
+  <p class="platform-card__blurb">{{ blurb() }}</p>
+
+  <div class="platform-card__foot">
+    <div class="platform-card__meta">
+      @if (feeLabel(); as fee) {
+        <span
+          class="platform-card__fee platform-card__fee--{{ platform().model }}"
+          [title]="'platforms.card.feeTitle' | translate"
+        >
+          {{ fee.key | translate: fee.params }}
+        </span>
+      }
+      @if (affiliateKey(); as key) {
+        <span class="platform-card__partner" [title]="'platforms.card.partnerTitle' | translate">
+          {{ key | translate }}
+        </span>
+      }
+    </div>
+
+    <span class="platform-card__cta">
+      {{ 'platforms.card.cta' | translate }}
+      <app-icon name="arrow-up-right" [size]="13" />
+    </span>
+  </div>
+</a>

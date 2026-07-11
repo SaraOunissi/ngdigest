@@ -58,6 +58,16 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
   },
   {
+    path: ':lang/carriere/plateformes',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/career/platforms',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
     path: ':lang/carriere/entretien',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),

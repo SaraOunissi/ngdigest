@@ -50,7 +50,12 @@ const STEP_DEFINITIONS: readonly StepDefinition[] = [
     status: 'new',
     route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'entretien' : 'interview'],
   },
-  { id: 'plateformes', icon: 'plateformes', status: 'soon', route: () => null },
+  {
+    id: 'plateformes',
+    icon: 'plateformes',
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'plateformes' : 'platforms'],
+  },
   { id: 'observatoire', icon: 'observatoire', status: 'soon', route: () => null },
   { id: 'toolkit', icon: 'toolkit', status: 'soon', route: () => null },
 ];

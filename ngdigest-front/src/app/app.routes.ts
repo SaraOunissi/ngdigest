@@ -5,6 +5,7 @@ import { CatalogComponent } from './features/catalog/presentation/pages/catalog/
 import { CareerHubComponent } from './features/career/presentation/pages/career-hub/career-hub';
 import { CertificationsComponent } from './features/career/certifications/presentation/pages/certifications/certifications';
 import { FormationsComponent } from './features/career/formations/presentation/pages/formations/formations';
+import { PlateformesComponent } from './features/career/plateformes/presentation/pages/plateformes/plateformes';
 import { InterviewPrepComponent } from './features/career/interview/presentation/pages/interview-prep/interview-prep';
 import { SourcesComponent } from './features/sources/sources.component';
 import { AboutComponent } from './features/about/about.component';
@@ -42,6 +43,8 @@ export const routes: Routes = [
       { path: 'career/certifications', component: CertificationsComponent },
       { path: 'carriere/formations', component: FormationsComponent },
       { path: 'career/trainings', component: FormationsComponent },
+      { path: 'carriere/plateformes', component: PlateformesComponent },
+      { path: 'career/platforms', component: PlateformesComponent },
       { path: 'carriere/entretien', component: InterviewPrepComponent },
       { path: 'career/interview', component: InterviewPrepComponent },
       { path: 'sources', component: SourcesComponent },

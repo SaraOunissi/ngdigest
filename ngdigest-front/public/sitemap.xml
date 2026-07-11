@@ -109,6 +109,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Plateformes & statut FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/plateformes</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/plateformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/platforms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/plateformes"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Platforms & status EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/platforms</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/plateformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/platforms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/plateformes"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Interview prep FR -->
   <url>
     <loc>https://ngdigest.co/fr/carriere/entretien</loc>
