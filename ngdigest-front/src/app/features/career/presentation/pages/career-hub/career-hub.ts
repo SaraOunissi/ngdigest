@@ -28,11 +28,16 @@ interface StepDefinition {
 }
 
 /**
- * Guided path (direction B). Formations & Plateformes are deferred until their
- * data is ready, so they are marked "soon" and not clickable yet.
+ * Guided path (direction B). Plateformes, Observatoire & Toolkit are deferred
+ * until their data is ready, so they are marked "soon" and not clickable yet.
  */
 const STEP_DEFINITIONS: readonly StepDefinition[] = [
-  { id: 'formations', icon: 'formations', status: 'soon', route: () => null },
+  {
+    id: 'formations',
+    icon: 'formations',
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'formations' : 'trainings'],
+  },
   {
     id: 'certifications',
     icon: 'certifications',

@@ -1,0 +1,67 @@
+<a
+  class="formation-card"
+  [class.formation-card--featured]="formation().featured"
+  [href]="href()"
+  target="_blank"
+  [attr.rel]="rel()"
+>
+  @if (formation().featured) {
+    <div class="formation-card__pick">
+      <span class="formation-card__pick-star" aria-hidden="true">★</span>
+      <span>{{ 'formations.card.pick' | translate }}</span>
+      @if (pickKey(); as key) {
+        <span class="formation-card__pick-cat">· {{ key | translate }}</span>
+      }
+    </div>
+  }
+
+  <div class="formation-card__top">
+    <span class="formation-card__avatar" aria-hidden="true">{{ initials() }}</span>
+    <div class="formation-card__head">
+      <div class="formation-card__title">{{ formation().title }}</div>
+      <div class="formation-card__author">{{ formation().author }}</div>
+    </div>
+    <app-lang-badge [lang]="formation().lang" />
+  </div>
+
+  <div class="formation-card__badges">
+    <span class="formation-badge formation-badge--{{ formation().pricing }}">
+      {{ 'formations.pricing.' + formation().pricing | translate }}
+    </span>
+    <span class="formation-badge formation-badge--level">
+      {{ 'formations.level.' + formation().level | translate }}
+    </span>
+    <span class="formation-badge formation-badge--format">
+      {{ 'formations.format.' + formation().format | translate }}
+    </span>
+  </div>
+
+  <p class="formation-card__blurb">{{ blurb() }}</p>
+
+  <div class="formation-card__price">
+    @if (formation().pricing === 'free') {
+      <span class="formation-card__price-free">{{ priceLabel() ?? ('formations.card.free' | translate) }}</span>
+    } @else {
+      @if (priceLabel(); as label) {
+        <span class="formation-card__price-value">{{ label }}</span>
+      }
+      @if (!formation().priceVerified) {
+        <span class="formation-card__price-tbc" [title]="'formations.card.tbcTitle' | translate">
+          {{ 'formations.card.tbc' | translate }}
+        </span>
+      }
+    }
+  </div>
+
+  <div class="formation-card__foot">
+    @if (formation().affiliable) {
+      <span class="formation-card__partner" [title]="'formations.card.partnerTitle' | translate">
+        {{ 'formations.card.partner' | translate }}
+      </span>
+    }
+    <span class="formation-card__cta">
+      {{ 'formations.card.cta' | translate }}
+      <app-icon name="arrow-up-right" [size]="13" />
+    </span>
+  </div>
+</a>

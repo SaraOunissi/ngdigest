@@ -91,6 +91,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Formations (training) FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/formations</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/formations"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/trainings"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/formations"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Formations (training) EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/trainings</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/formations"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/trainings"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/formations"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Interview prep FR -->
   <url>
     <loc>https://ngdigest.co/fr/carriere/entretien</loc>

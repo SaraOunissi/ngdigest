@@ -1,0 +1,220 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.formation-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 18px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
+    background: $color-surface-hover;
+    text-decoration: none;
+  }
+
+  &--featured {
+    border-color: $color-hairline-strong;
+    background: $gradient-hero-soft, $color-surface;
+  }
+
+  &__pick {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    font-family: $font-family-mono;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $color-accent-gold;
+  }
+
+  &__pick-star {
+    color: $color-accent-gold;
+  }
+
+  &__pick-cat {
+    color: $color-text-muted;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: $radius-sm;
+    background: $color-primary-light;
+    color: $color-primary;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 14px;
+  }
+
+  &__head {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  &__author {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__blurb {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: $color-text-secondary;
+  }
+
+  // Price sits on its own line and is pushed to the bottom of the card,
+  // so a long label never collides with the action row below it.
+  &__price {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  &__price-free {
+    font-family: $font-family-mono;
+    font-size: 13px;
+    font-weight: $font-weight-bold;
+    color: $color-score-high;
+  }
+
+  &__price-value {
+    min-width: 0;
+    font-family: $font-family-mono;
+    font-size: 13px;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    overflow-wrap: anywhere;
+  }
+
+  &__price-tbc {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.03em;
+    padding: 2px 6px;
+    border-radius: $radius-pill;
+    background: rgba($color-accent-gold, 0.16);
+    color: $color-accent-gold;
+    cursor: help;
+    white-space: nowrap;
+  }
+
+  // Action row: partner flag (optional, left) + CTA (always right).
+  &__foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid $color-border;
+  }
+
+  &__partner {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: $radius-pill;
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text-muted;
+    cursor: help;
+    white-space: nowrap;
+  }
+
+  &__cta {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  &:hover &__cta {
+    color: $color-primary;
+  }
+}
+
+.formation-badge {
+  font-family: $font-family-mono;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
+
+  &--free {
+    background: $color-score-high-bg;
+    color: $color-score-high;
+  }
+
+  &--paid {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  &--level {
+    background: rgba($color-primary-2, 0.16);
+    color: #8aa2ff;
+  }
+
+  &--format {
+    background: $color-tag-bg;
+    color: $color-text-secondary;
+  }
+}
