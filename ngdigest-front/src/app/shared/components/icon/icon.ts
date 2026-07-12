@@ -7,6 +7,7 @@ export type IconName =
   | 'jobs'
   | 'formations'
   | 'ressources'
+  | 'guide'
   | 'observatoire'
   | 'plateformes'
   | 'toolkit'

@@ -1,0 +1,31 @@
+<div class="rcheck" [class.rcheck--open]="open()">
+  <button class="rcheck__btn" type="button" [attr.aria-expanded]="open()" (click)="toggled.emit()">
+    <span class="rcheck__num">{{ paddedIndex() }}</span>
+    <span class="rcheck__title">{{ title() }}</span>
+    <span class="rcheck__chev" aria-hidden="true"></span>
+  </button>
+
+  <div class="rcheck__panel">
+    <div class="rcheck__panelin">
+      <div class="rcheck__body">
+        @for (paragraph of paragraphs(); track $index) {
+          <p [innerHTML]="paragraph"></p>
+        }
+
+        @if (sources().length > 0) {
+          <p class="rcheck__sources">
+            <span class="rcheck__sources-label">{{ 'guide.truths.sourcesLabel' | translate }}</span>
+            @for (source of sources(); track source.url) {
+              <a
+                class="rcheck__source"
+                [href]="source.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{ source.label }}</a>
+            }
+          </p>
+        }
+      </div>
+    </div>
+  </div>
+</div>

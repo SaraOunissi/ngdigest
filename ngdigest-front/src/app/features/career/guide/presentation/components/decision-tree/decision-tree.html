@@ -1,0 +1,61 @@
+<div class="dtree">
+  @if (path().length > 0) {
+    <ol class="dtree__path" [attr.aria-label]="'guide.tree.pathLabel' | translate">
+      @for (step of path(); track step.question.id) {
+        <li class="dtree__crumb">
+          <span class="dtree__crumb-label">{{ step.question.stepLabel[languageService.lang()] }}</span>
+          <span class="dtree__crumb-value">{{ step.option.label[languageService.lang()] }}</span>
+        </li>
+      }
+    </ol>
+  }
+
+  <div class="dtree__stage" #stage aria-live="polite">
+    @if (currentQuestion(); as question) {
+      <fieldset class="dtree__q">
+        <legend class="dtree__q-title" tabindex="-1" data-focus-target>
+          <span class="dtree__q-step">{{ 'guide.tree.stepPrefix' | translate }} {{ path().length + 1 }}</span>
+          {{ question.title[languageService.lang()] }}
+        </legend>
+        <div class="dtree__options">
+          @for (option of question.options; track option.id) {
+            <button type="button" class="dtree__option" (click)="select(question, option)">
+              <span class="dtree__option-main">
+                <span class="dtree__option-label">{{ option.label[languageService.lang()] }}</span>
+                @if (option.hint) {
+                  <span class="dtree__option-hint">{{ option.hint[languageService.lang()] }}</span>
+                }
+              </span>
+              <app-icon name="arrow-right" [size]="16" />
+            </button>
+          }
+        </div>
+      </fieldset>
+    } @else if (outcome(); as result) {
+      <div class="dtree__outcome" role="group" [attr.aria-label]="'guide.tree.outcomeLabel' | translate">
+        <span class="dtree__outcome-kicker">{{ 'guide.tree.outcomeKicker' | translate }}</span>
+        <h3 class="dtree__outcome-title" tabindex="-1" data-focus-target>{{ result.title[languageService.lang()] }}</h3>
+        <p class="dtree__outcome-summary">{{ result.summary[languageService.lang()] }}</p>
+        <div class="dtree__outcome-links">
+          @for (link of result.links; track link.target) {
+            <a class="dtree__outcome-link" [routerLink]="linkRoute(link.target)">
+              {{ link.labelKey | translate }}
+              <app-icon name="arrow-right" [size]="14" />
+            </a>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (started()) {
+    <div class="dtree__controls">
+      <button type="button" class="dtree__ctrl" (click)="back()">
+        {{ 'guide.tree.back' | translate }}
+      </button>
+      <button type="button" class="dtree__ctrl dtree__ctrl--reset" (click)="reset()">
+        {{ 'guide.tree.restart' | translate }}
+      </button>
+    </div>
+  }
+</div>

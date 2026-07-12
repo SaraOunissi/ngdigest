@@ -28,10 +28,17 @@ interface StepDefinition {
 }
 
 /**
- * Guided path (direction B). Plateformes, Observatoire & Toolkit are deferred
- * until their data is ready, so they are marked "soon" and not clickable yet.
+ * Guided path (direction B). The Guide is the entry step ("start here").
+ * Observatoire & Toolkit are deferred until their data is ready, so they are
+ * marked "soon" and not clickable yet.
  */
 const STEP_DEFINITIONS: readonly StepDefinition[] = [
+  {
+    id: 'guide',
+    icon: 'guide',
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', 'guide'],
+  },
   {
     id: 'formations',
     icon: 'formations',

@@ -36,6 +36,12 @@
       <path d="M16 16l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
     </svg>
   }
+  @case ('guide') {
+    <svg class="icon" [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" />
+      <path d="M15.5 8.5l-2.2 4.8L8.5 15.5l2.2-4.8L15.5 8.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+    </svg>
+  }
   @case ('observatoire') {
     <svg class="icon" [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M3 14l4-5 4 3 4-7 3 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />

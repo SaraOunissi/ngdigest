@@ -73,6 +73,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Career guide FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/guide</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/guide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/guide"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Career guide EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/guide</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/guide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/guide"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Certifications FR -->
   <url>
     <loc>https://ngdigest.co/fr/carriere/certifications</loc>

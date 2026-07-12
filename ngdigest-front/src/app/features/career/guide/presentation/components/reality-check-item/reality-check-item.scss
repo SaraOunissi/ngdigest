@@ -1,0 +1,148 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+}
+
+.rcheck {
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface;
+  overflow: hidden;
+
+  &--open {
+    border-color: $color-hairline-strong;
+  }
+
+  &__btn {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: 44px;
+    padding: 16px 18px;
+    border: none;
+    background: transparent;
+    color: $color-text-primary;
+    text-align: left;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: -2px;
+    }
+  }
+
+  &__num {
+    flex-shrink: 0;
+    font-family: $font-family-mono;
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+    color: $color-text-muted;
+    padding-top: 2px;
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    font-family: $font-family-display;
+    font-weight: $font-weight-semibold;
+    font-size: 15.5px;
+    line-height: 1.4;
+  }
+
+  &__chev {
+    flex-shrink: 0;
+    margin-top: 6px;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid $color-text-muted;
+    border-bottom: 2px solid $color-text-muted;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  &--open &__chev {
+    transform: rotate(-135deg);
+  }
+
+  &__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+  }
+
+  &--open &__panel {
+    grid-template-rows: 1fr;
+  }
+
+  &__panelin {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__body {
+    padding: 0 18px 4px 46px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: $color-text-secondary;
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    strong {
+      color: $color-text-primary;
+      font-weight: $font-weight-semibold;
+    }
+
+    em {
+      color: $color-text-secondary;
+    }
+  }
+
+  &__sources {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    margin: 4px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid $color-border;
+  }
+
+  &__sources-label {
+    font-family: $font-family-mono;
+    font-size: 9px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__source {
+    font-size: 12.5px;
+    color: $color-text-secondary;
+    text-decoration: underline;
+    text-decoration-color: $color-hairline-strong;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration-color: $color-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    &__body {
+      padding-left: 18px;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+<header class="wrap">
+  <nav class="guide-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="careerRoute()">{{ 'guide.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="guide-crumb__current">{{ 'guide.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'guide.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'guide.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'guide.hero.titleAccent' | translate }}</span
+      >{{ 'guide.hero.titleAfter' | translate }}
+    </h1>
+    <p class="phero__subtitle">{{ 'guide.hero.subtitle' | translate }}</p>
+
+    <div class="guide-meta">
+      <div class="guide-meta__item">
+        <b>{{ questionSteps }}</b>
+        <span>{{ 'guide.meta.questions' | translate }}</span>
+      </div>
+      <div class="guide-meta__item">
+        <b>{{ truthsCount }}</b>
+        <span>{{ 'guide.meta.truths' | translate }}</span>
+      </div>
+      <div class="guide-meta__item">
+        <b>FR · EN</b>
+        <span>{{ 'guide.meta.bilingual' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Decision tree -->
+  <section class="guide-section" aria-labelledby="guide-tree-title">
+    <div class="guide-section__head">
+      <span class="kicker">{{ 'guide.tree.kicker' | translate }}</span>
+      <h2 class="guide-section__title" id="guide-tree-title">{{ 'guide.tree.title' | translate }}</h2>
+      <p class="guide-section__intro">{{ 'guide.tree.intro' | translate }}</p>
+    </div>
+
+    <app-decision-tree [tree]="tree" />
+  </section>
+
+  <!-- Reality checks -->
+  <section class="guide-section" aria-labelledby="guide-truths-title">
+    <div class="guide-section__head">
+      <span class="kicker">{{ 'guide.truths.kicker' | translate }}</span>
+      <h2 class="guide-section__title" id="guide-truths-title">{{ 'guide.truths.title' | translate }}</h2>
+      <p class="guide-section__intro">{{ 'guide.truths.intro' | translate }}</p>
+    </div>
+
+    <div class="guide-checks">
+      @for (check of realityChecks; track check.id; let i = $index) {
+        <app-reality-check-item
+          [check]="check"
+          [displayIndex]="i + 1"
+          [open]="isOpen(check.id)"
+          (toggled)="toggle(check.id)"
+        />
+      }
+    </div>
+  </section>
+
+  <!-- Coming-from-abroad callout -->
+  <aside class="guide-callout" aria-labelledby="guide-callout-title">
+    <div class="guide-callout__ic" aria-hidden="true">🌍</div>
+    <div class="guide-callout__body">
+      <span class="guide-callout__kicker">{{ 'guide.callout.kicker' | translate }}</span>
+      <h2 class="guide-callout__title" id="guide-callout-title">{{ callout.title[languageService.lang()] }}</h2>
+      @for (paragraph of calloutParagraphs(); track $index) {
+        <p class="guide-callout__text" [innerHTML]="paragraph"></p>
+      }
+    </div>
+  </aside>
+
+  <!-- Observatory CTA (deferred until its data lands) -->
+  <div class="guide-obs">
+    <div class="guide-obs__txt">
+      <div class="guide-obs__kicker-row">
+        <span class="kicker">{{ 'guide.obs.kicker' | translate }}</span>
+        <app-status-chip status="soon" />
+      </div>
+      <h2 class="guide-obs__title">{{ 'guide.obs.title' | translate }}</h2>
+      <p class="guide-obs__text">{{ 'guide.obs.text' | translate }}</p>
+    </div>
+  </div>
+</main>

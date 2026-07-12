@@ -3,6 +3,7 @@ import { HomeComponent } from './features/home/presentation/pages/home/home';
 import { ResourceListComponent } from './features/resources/presentation/pages/resource-list/resource-list';
 import { CatalogComponent } from './features/catalog/presentation/pages/catalog/catalog';
 import { CareerHubComponent } from './features/career/presentation/pages/career-hub/career-hub';
+import { GuideComponent } from './features/career/guide/presentation/pages/guide/guide';
 import { CertificationsComponent } from './features/career/certifications/presentation/pages/certifications/certifications';
 import { FormationsComponent } from './features/career/formations/presentation/pages/formations/formations';
 import { PlateformesComponent } from './features/career/plateformes/presentation/pages/plateformes/plateformes';
@@ -39,6 +40,8 @@ export const routes: Routes = [
       // Career hub + sub-pages (FR + EN slugs).
       { path: 'carriere', component: CareerHubComponent },
       { path: 'career', component: CareerHubComponent },
+      { path: 'carriere/guide', component: GuideComponent },
+      { path: 'career/guide', component: GuideComponent },
       { path: 'carriere/certifications', component: CertificationsComponent },
       { path: 'career/certifications', component: CertificationsComponent },
       { path: 'carriere/formations', component: FormationsComponent },
