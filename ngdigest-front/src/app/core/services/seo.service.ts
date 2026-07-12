@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
+import { translateRoutePath } from '../i18n/route-slugs';
 
 const BASE_URL = environment.baseUrl;
 
@@ -27,10 +28,12 @@ export class SeoService {
    * @param title              - Localised page title
    * @param description        - Localised description
    * @param lang               - Active language code ('fr' | 'en')
-   * @param explicitAlternateUrl - Full alternate-language URL when the slug
-   *                              differs between languages (e.g. blog posts).
-   *                              When omitted, the alternate URL is derived by
-   *                              swapping the language prefix in the current path.
+   * @param explicitAlternateUrl - Full alternate-language URL for dynamic slugs
+   *                              that cannot be derived statically (e.g. blog
+   *                              posts). When omitted, the alternate URL is
+   *                              derived from the current path via the shared
+   *                              slug map, which also translates the slug (e.g.
+   *                              /fr/carriere/guide → /en/career/guide).
    */
   updateMeta(
     title: string,
@@ -45,11 +48,12 @@ export class SeoService {
     const alternateLang: 'fr' | 'en' = lang === 'fr' ? 'en' : 'fr';
     const pageUrl = `${BASE_URL}${this.doc.location.pathname}`;
 
-    // Compute the alternate-language URL by swapping the /fr or /en prefix,
-    // unless an explicit alternate URL was provided (e.g. for blog posts).
+    // Derive the alternate-language URL from the current path, translating the
+    // slug when it differs between languages (carriere↔career, ressources↔
+    // resources, …). An explicit URL wins for dynamic slugs (e.g. blog posts).
     const alternateUrl =
       explicitAlternateUrl ??
-      `${BASE_URL}${this.doc.location.pathname.replace(/^\/(fr|en)(\/|$)/, `/${alternateLang}$2`)}`;
+      `${BASE_URL}${translateRoutePath(this.doc.location.pathname, alternateLang)}`;
 
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ property: 'og:title', content: title });

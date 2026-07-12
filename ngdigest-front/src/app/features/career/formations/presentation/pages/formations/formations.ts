@@ -11,12 +11,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
-import { environment } from '../../../../../../../environments/environment';
 import { Formation, FormationPick } from '../../../domain/models/formation.model';
 import { FORMATIONS } from '../../../infrastructure/formations.data';
 import { FormationCardComponent } from '../../components/formation-card/formation-card';
-
-const BASE_URL = environment.baseUrl;
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
   fr: 'Formations Angular — les meilleures, triées à la main — NgDigest',
@@ -26,12 +23,6 @@ const SEO_TITLES: Record<'fr' | 'en', string> = {
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   fr: 'Mon annuaire des meilleures formations Angular — FR & EN, gratuit & payant, du tuto officiel au workshop testing. Vérifié, avec le pourquoi de chaque choix.',
   en: 'My directory of the best Angular training — FR & EN, free & paid, from the official tutorial to the testing workshop. Verified, with the why behind each pick.',
-};
-
-/** FR ↔ EN slugs differ, so the alternate URL is built explicitly (like blog posts). */
-const ALTERNATE_PATH: Record<'fr' | 'en', string> = {
-  fr: '/en/career/trainings',
-  en: '/fr/carriere/formations',
 };
 
 type LangFilter = 'all' | 'fr' | 'en';
@@ -123,12 +114,7 @@ export class FormationsComponent {
   constructor() {
     effect(() => {
       const lang = this.languageService.lang();
-      this.seoService.updateMeta(
-        SEO_TITLES[lang],
-        SEO_DESCRIPTIONS[lang],
-        lang,
-        `${BASE_URL}${ALTERNATE_PATH[lang]}`
-      );
+      this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
       this.seoService.setJsonLd('formations-jsonld', {
         '@context': 'https://schema.org',
         '@type': 'ItemList',

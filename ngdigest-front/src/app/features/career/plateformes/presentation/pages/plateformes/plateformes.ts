@@ -11,12 +11,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
-import { environment } from '../../../../../../../environments/environment';
 import { Platform, PlatformCategory } from '../../../domain/models/platform.model';
 import { PLATFORMS } from '../../../infrastructure/platforms.data';
 import { PlatformCardComponent } from '../../components/platform-card/platform-card';
-
-const BASE_URL = environment.baseUrl;
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
   fr: 'Plateformes & statut — où trouver du travail Angular — NgDigest',
@@ -26,12 +23,6 @@ const SEO_TITLES: Record<'fr' | 'en', string> = {
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   fr: 'Mon annuaire des canaux pour trouver des missions freelance, un CDI ou une ESN — plus le portage salarial pour choisir ton statut. Des canaux vérifiés, pas des offres.',
   en: 'My directory of channels to find freelance gigs, a permanent role or a consultancy — plus umbrella employment to pick your status. Verified channels, not listings.',
-};
-
-/** FR ↔ EN slugs differ, so the alternate URL is built explicitly. */
-const ALTERNATE_PATH: Record<'fr' | 'en', string> = {
-  fr: '/en/career/platforms',
-  en: '/fr/carriere/plateformes',
 };
 
 type GeoFilter = 'all' | 'fr' | 'intl';
@@ -137,12 +128,7 @@ export class PlateformesComponent {
   constructor() {
     effect(() => {
       const lang = this.languageService.lang();
-      this.seoService.updateMeta(
-        SEO_TITLES[lang],
-        SEO_DESCRIPTIONS[lang],
-        lang,
-        `${BASE_URL}${ALTERNATE_PATH[lang]}`
-      );
+      this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
       this.seoService.setJsonLd('platforms-jsonld', {
         '@context': 'https://schema.org',
         '@type': 'ItemList',

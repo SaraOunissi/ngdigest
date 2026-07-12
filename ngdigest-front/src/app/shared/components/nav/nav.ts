@@ -5,32 +5,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 
 import { LanguageService } from '@core/services/language.service';
+import { translateRoutePath } from '@core/i18n/route-slugs';
 import { BlogService } from '@features/blog/infrastructure/blog.service';
-
-/**
- * FR ↔ EN slug pairs for routes whose path differs between languages.
- * Used by the language switcher to keep the user on the same page when toggling.
- */
-const SLUG_TRANSLATIONS: Record<string, string> = {
-  carriere: 'career',
-  career: 'carriere',
-  'carriere/guide': 'career/guide',
-  'career/guide': 'carriere/guide',
-  'carriere/certifications': 'career/certifications',
-  'career/certifications': 'carriere/certifications',
-  'carriere/formations': 'career/trainings',
-  'career/trainings': 'carriere/formations',
-  'carriere/plateformes': 'career/platforms',
-  'career/platforms': 'carriere/plateformes',
-  'carriere/entretien': 'career/interview',
-  'career/interview': 'carriere/entretien',
-  ressources: 'resources',
-  resources: 'ressources',
-  'mentions-legales': 'legal-notice',
-  'legal-notice': 'mentions-legales',
-  'politique-confidentialite': 'privacy-policy',
-  'privacy-policy': 'politique-confidentialite',
-};
 
 @Component({
   selector: 'app-nav',
@@ -110,15 +86,8 @@ export class NavComponent {
       return;
     }
 
-    // Split "/<lang>/<path><suffix>" and translate <path> when its slug differs
+    // Translate "/<lang>/<path><suffix>", swapping the slug when it differs
     // between languages (career, certifications, interview, catalog, legal…).
-    const match = currentUrl.match(/^\/(fr|en)(?:\/([^?#]*))?([?#].*)?$/);
-    const path = (match?.[2] ?? '').replace(/\/$/, '');
-    const suffix = match?.[3] ?? '';
-    const translatedPath = SLUG_TRANSLATIONS[path] ?? path;
-    const target = translatedPath
-      ? `/${targetLang}/${translatedPath}${suffix}`
-      : `/${targetLang}${suffix}`;
-    this.router.navigateByUrl(target);
+    this.router.navigateByUrl(translateRoutePath(currentUrl, targetLang));
   }
 }
