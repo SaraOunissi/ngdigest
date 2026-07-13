@@ -1,8 +1,8 @@
 <header class="wrap">
-  <nav class="formations-crumb" aria-label="Breadcrumb">
+  <nav class="dir-crumb" aria-label="Breadcrumb">
     <a [routerLink]="careerRoute()">{{ 'formations.crumbHome' | translate }}</a>
     <span aria-hidden="true">/</span>
-    <span class="formations-crumb__current">{{ 'formations.crumbCurrent' | translate }}</span>
+    <span class="dir-crumb__current">{{ 'formations.crumbCurrent' | translate }}</span>
   </nav>
 
   <div class="phero">
@@ -15,8 +15,8 @@
     <p class="phero__subtitle">{{ 'formations.hero.subtitle' | translate }}</p>
   </div>
 
-  <div class="formations-banner" role="note">
-    <span class="formations-banner__ic" aria-hidden="true">€</span>
+  <div class="dir-banner" role="note">
+    <span class="dir-banner__ic" aria-hidden="true">€</span>
     <p>
       <b>{{ 'formations.banner.title' | translate }}</b> {{ 'formations.banner.text' | translate }}
     </p>
@@ -36,11 +36,11 @@
   </div>
 </section>
 
-<div class="formations-filters">
+<div class="dir-filters">
   <div class="wrap">
-    <div class="formations-filters__row">
-      <label class="formations-search">
-        <span class="formations-search__icon" aria-hidden="true"></span>
+    <div class="dir-filters__row">
+      <label class="dir-search">
+        <span class="dir-search__icon" aria-hidden="true"></span>
         <input
           type="search"
           autocomplete="off"
@@ -50,27 +50,27 @@
           (input)="onSearch($event)"
         />
       </label>
-      <div class="formations-seg" role="group" [attr.aria-label]="'formations.filters.langLabel' | translate">
+      <div class="dir-seg" role="group" [attr.aria-label]="'formations.filters.langLabel' | translate">
         <button
           type="button"
-          [class.formations-seg__btn--on]="langFilter() === 'all'"
-          class="formations-seg__btn"
+          [class.dir-seg__btn--on]="langFilter() === 'all'"
+          class="dir-seg__btn"
           (click)="langFilter.set('all')"
         >
           {{ 'formations.filters.langAll' | translate }}
         </button>
         <button
           type="button"
-          [class.formations-seg__btn--on]="langFilter() === 'fr'"
-          class="formations-seg__btn"
+          [class.dir-seg__btn--on]="langFilter() === 'fr'"
+          class="dir-seg__btn"
           (click)="langFilter.set('fr')"
         >
           FR
         </button>
         <button
           type="button"
-          [class.formations-seg__btn--on]="langFilter() === 'en'"
-          class="formations-seg__btn"
+          [class.dir-seg__btn--on]="langFilter() === 'en'"
+          class="dir-seg__btn"
           (click)="langFilter.set('en')"
         >
           EN
@@ -78,27 +78,27 @@
       </div>
     </div>
 
-    <div class="formations-filters__row">
-      <div class="formations-chips" role="group" [attr.aria-label]="'formations.filters.chipLabel' | translate">
+    <div class="dir-filters__row">
+      <div class="dir-chips" role="group" [attr.aria-label]="'formations.filters.chipLabel' | translate">
         @for (chipItem of chips; track chipItem) {
           <button
             type="button"
-            class="formations-chip"
-            [class.formations-chip--on]="chip() === chipItem"
+            class="dir-chip"
+            [class.dir-chip--on]="chip() === chipItem"
             [attr.aria-pressed]="chip() === chipItem"
             (click)="chip.set(chipItem)"
           >
             {{ 'formations.chip.' + chipItem | translate }}
-            <span class="formations-chip__count">{{ chipCount(chipItem) }}</span>
+            <span class="dir-chip__count">{{ chipCount(chipItem) }}</span>
           </button>
         }
       </div>
 
-      <button type="button" class="formations-reset" (click)="reset()">
+      <button type="button" class="dir-reset" (click)="reset()">
         {{ 'formations.filters.reset' | translate }}
       </button>
 
-      <span class="formations-count" aria-live="polite">
+      <span class="dir-count" aria-live="polite">
         <b>{{ resultCount() }}</b>
         {{ (resultCount() > 1 ? 'formations.filters.countPlural' : 'formations.filters.countSingular') | translate }}
       </span>
@@ -106,23 +106,23 @@
   </div>
 </div>
 
-<main class="wrap formations-results">
+<main class="wrap dir-results">
   @if (loading()) {
     <div class="formations-grid" aria-hidden="true">
       @for (skeleton of skeletons; track skeleton) {
-        <div class="formations-skeleton">
-          <div class="formations-skeleton__top">
-            <span class="formations-skeleton__avatar"></span>
-            <span class="formations-skeleton__lines"></span>
+        <div class="dir-skeleton">
+          <div class="dir-skeleton__top">
+            <span class="dir-skeleton__avatar"></span>
+            <span class="dir-skeleton__lines"></span>
           </div>
-          <span class="formations-skeleton__bar formations-skeleton__bar--sm"></span>
-          <span class="formations-skeleton__bar"></span>
-          <span class="formations-skeleton__bar formations-skeleton__bar--wide"></span>
+          <span class="dir-skeleton__bar dir-skeleton__bar--sm"></span>
+          <span class="dir-skeleton__bar"></span>
+          <span class="dir-skeleton__bar dir-skeleton__bar--wide"></span>
         </div>
       }
     </div>
   } @else if (resultCount() === 0) {
-    <div class="formations-empty">
+    <div class="dir-empty">
       <h3>{{ 'formations.empty.title' | translate }}</h3>
       <p>{{ 'formations.empty.subtitle' | translate }}</p>
       <button type="button" class="ghost-btn" (click)="reset()">{{ 'formations.empty.reset' | translate }}</button>

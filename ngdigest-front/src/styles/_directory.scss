@@ -1,0 +1,385 @@
+@use "variables" as *;
+@use "colors" as *;
+
+// =============================================================================
+// Directory-page shell — shared chrome for the career "directory" pages
+// (/carriere/formations, /carriere/plateformes, /carriere/entretien) and any
+// future list page: breadcrumb, affiliation banner, sticky filter bar, result
+// count, empty state and loading skeleton.
+//
+// These live in the GLOBAL stylesheet (loaded once via src/styles.scss) on
+// purpose: the markup was previously duplicated per page with a page-specific
+// class prefix (formations-*, pf-*, iv-*), which tripped the per-component
+// style budget and drifted (hardcoded colours, off-by-2px paddings). One
+// source of truth here keeps every list page visually identical.
+//
+// Page-specific layout (grids, cross-links, editorial sections) stays in each
+// component's own .scss.
+// =============================================================================
+
+.dir-crumb {
+  padding: 22px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-family-mono;
+  font-size: 12px;
+  color: $color-text-muted;
+
+  a {
+    color: $color-text-muted;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__current {
+    color: $color-text-secondary;
+  }
+}
+
+// — Affiliation transparency banner (FR disclosure obligation) —
+.dir-banner {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 14px 18px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  border-left: 3px solid $color-accent-gold;
+  background: $color-surface;
+
+  &__ic {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba($color-accent-gold, 0.16);
+    color: $color-accent-gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $font-weight-bold;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: $color-text-muted;
+
+    b {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// — Editorial voice / pull-quote (author avatar + quote + citation) —
+.dir-voice {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-surface;
+
+  &__av {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $gradient-hero;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 13px;
+    color: $color-white;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $color-text-secondary;
+
+    b {
+      color: $color-text-primary;
+    }
+  }
+
+  cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-family: $font-family-mono;
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+}
+
+// — Sticky filter bar —
+.dir-filters {
+  position: sticky;
+  top: $header-height;
+  z-index: 20;
+  padding: 14px 0;
+  margin-top: 36px;
+  background: rgba($color-bg, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    & + & {
+      margin-top: 12px;
+    }
+  }
+}
+
+.dir-search {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+
+  &__icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    border: 2px solid $color-text-muted;
+    border-radius: 50%;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      bottom: -4px;
+      width: 6px;
+      height: 2px;
+      background: $color-text-muted;
+      transform: rotate(45deg);
+    }
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 0;
+    border: none;
+    background: transparent;
+    color: $color-text-primary;
+    font-family: $font-family;
+    font-size: $font-size-base;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.dir-seg {
+  display: flex;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+  padding: 3px;
+
+  &__btn {
+    border: none;
+    background: transparent;
+    color: $color-text-muted;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    padding: 6px 12px;
+    border-radius: $radius-pill;
+    cursor: pointer;
+
+    &--on {
+      background: $gradient-hero;
+      color: $color-white;
+    }
+  }
+}
+
+.dir-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dir-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border-radius: $radius-pill;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  color: $color-text-secondary;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-hairline-strong;
+  }
+
+  &--on {
+    color: $color-white;
+    border-color: transparent;
+    background: $gradient-hero;
+  }
+
+  &__count {
+    font-family: $font-family-mono;
+    font-size: 10px;
+    opacity: 0.8;
+  }
+}
+
+.dir-reset {
+  padding: 8px 14px;
+  border-radius: $radius-pill;
+  border: 1px solid $color-border;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-hairline-strong;
+  }
+}
+
+.dir-count {
+  margin-left: auto;
+  font-family: $font-family-mono;
+  font-size: 12px;
+  color: $color-text-muted;
+
+  b {
+    color: $color-text-primary;
+  }
+}
+
+.dir-results {
+  padding-top: 30px;
+}
+
+.dir-empty {
+  text-align: center;
+  padding: 48px 0;
+
+  h3 {
+    font-family: $font-family-display;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: $color-text-muted;
+    margin-bottom: 20px;
+  }
+}
+
+// — Loading skeleton —
+.dir-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  height: 100%;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: $radius-sm;
+    background: $color-surface-3;
+  }
+
+  &__lines {
+    flex: 1;
+    height: 28px;
+    border-radius: $radius-sm;
+    background: $color-surface-3;
+  }
+
+  &__bar {
+    height: 12px;
+    border-radius: $radius-pill;
+    background: $color-surface-3;
+
+    &--sm {
+      width: 40%;
+    }
+
+    &--wide {
+      width: 80%;
+    }
+  }
+
+  &__bar,
+  &__avatar,
+  &__lines {
+    animation: dir-pulse 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes dir-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 620px) {
+  .dir-count {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dir-skeleton__bar,
+  .dir-skeleton__avatar,
+  .dir-skeleton__lines {
+    animation: none;
+  }
+}

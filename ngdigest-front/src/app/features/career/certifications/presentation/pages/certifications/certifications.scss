@@ -5,29 +5,7 @@
   display: block;
 }
 
-.cert-crumb {
-  padding: 22px 0 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: $font-family-mono;
-  font-size: 12px;
-  color: $color-text-muted;
-
-  a {
-    color: $color-text-muted;
-    text-decoration: none;
-
-    &:hover {
-      color: $color-primary;
-      text-decoration: none;
-    }
-  }
-
-  &__current {
-    color: $color-text-secondary;
-  }
-}
+// Breadcrumb chrome is shared via src/styles/_directory.scss (.dir-crumb).
 
 .cert-truth {
   display: grid;
@@ -70,50 +48,7 @@
   }
 }
 
-.cert-voice {
-  display: flex;
-  gap: 16px;
-  margin-top: 24px;
-  padding: 18px 20px;
-  border-radius: $radius-md;
-  border: 1px solid $color-border;
-  background: $color-surface;
-
-  &__av {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: $gradient-hero;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: $font-family-display;
-    font-weight: $font-weight-bold;
-    font-size: 13px;
-    color: $color-white;
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: $color-text-secondary;
-
-    b {
-      color: $color-text-primary;
-    }
-  }
-
-  cite {
-    display: block;
-    margin-top: 8px;
-    font-style: normal;
-    font-family: $font-family-mono;
-    font-size: 12px;
-    color: $color-text-muted;
-  }
-}
+// Editorial voice / pull-quote is shared via _directory.scss (.dir-voice).
 
 .cert-verdict {
   margin-top: 42px;

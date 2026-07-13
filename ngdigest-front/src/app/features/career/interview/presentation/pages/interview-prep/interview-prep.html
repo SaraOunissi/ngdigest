@@ -1,8 +1,8 @@
 <header class="wrap">
-  <nav class="iv-crumb" aria-label="Breadcrumb">
+  <nav class="dir-crumb" aria-label="Breadcrumb">
     <a [routerLink]="learnRoute()">{{ 'interview.crumbHome' | translate }}</a>
     <span aria-hidden="true">/</span>
-    <span class="iv-crumb__current">{{ 'interview.crumbCurrent' | translate }}</span>
+    <span class="dir-crumb__current">{{ 'interview.crumbCurrent' | translate }}</span>
   </nav>
 
   <div class="phero">
@@ -22,8 +22,8 @@
     </div>
   </div>
 
-  <div class="iv-voice">
-    <span class="iv-voice__av" aria-hidden="true">SO</span>
+  <div class="dir-voice">
+    <span class="dir-voice__av" aria-hidden="true">SO</span>
     <div>
       <p>{{ 'interview.voice.text' | translate }}</p>
       <cite>{{ 'interview.voice.cite' | translate }}</cite>
@@ -31,11 +31,11 @@
   </div>
 </header>
 
-<div class="iv-filters">
+<div class="dir-filters">
   <div class="wrap">
-    <div class="iv-filters__row">
-      <label class="iv-search">
-        <span class="iv-search__icon" aria-hidden="true"></span>
+    <div class="dir-filters__row">
+      <label class="dir-search">
+        <span class="dir-search__icon" aria-hidden="true"></span>
         <input
           type="search"
           autocomplete="off"
@@ -57,22 +57,22 @@
         {{ 'interview.filters.modern' | translate }}
       </button>
 
-      <div class="iv-seg" role="group" [attr.aria-label]="'interview.filters.answerLang' | translate">
-        <button type="button" class="iv-seg__btn" [class.iv-seg__btn--on]="answerLang() === 'fr'" (click)="answerLang.set('fr')">FR</button>
-        <button type="button" class="iv-seg__btn" [class.iv-seg__btn--on]="answerLang() === 'en'" (click)="answerLang.set('en')">EN</button>
+      <div class="dir-seg" role="group" [attr.aria-label]="'interview.filters.answerLang' | translate">
+        <button type="button" class="dir-seg__btn" [class.dir-seg__btn--on]="answerLang() === 'fr'" (click)="answerLang.set('fr')">FR</button>
+        <button type="button" class="dir-seg__btn" [class.dir-seg__btn--on]="answerLang() === 'en'" (click)="answerLang.set('en')">EN</button>
       </div>
     </div>
 
-    <div class="iv-filters__row">
-      <div class="iv-chips">
-        <button type="button" class="iv-chip" [class.iv-chip--on]="theme() === 'all'" (click)="theme.set('all')">
+    <div class="dir-filters__row">
+      <div class="dir-chips">
+        <button type="button" class="dir-chip" [class.dir-chip--on]="theme() === 'all'" (click)="theme.set('all')">
           {{ 'interview.themeAll' | translate }}
-          <span class="iv-chip__count">{{ chipCount('all') }}</span>
+          <span class="dir-chip__count">{{ chipCount('all') }}</span>
         </button>
         @for (themeItem of themes; track themeItem.id) {
-          <button type="button" class="iv-chip" [class.iv-chip--on]="theme() === themeItem.id" (click)="theme.set(themeItem.id)">
+          <button type="button" class="dir-chip" [class.dir-chip--on]="theme() === themeItem.id" (click)="theme.set(themeItem.id)">
             {{ themeItem.label[languageService.lang()] }}
-            <span class="iv-chip__count">{{ chipCount(themeItem.id) }}</span>
+            <span class="dir-chip__count">{{ chipCount(themeItem.id) }}</span>
           </button>
         }
       </div>
@@ -92,7 +92,7 @@
 
 <main class="wrap iv-results">
   @if (resultCount() === 0) {
-    <div class="iv-empty">
+    <div class="dir-empty">
       <h3>{{ 'interview.empty.title' | translate }}</h3>
       <p>{{ 'interview.empty.subtitle' | translate }}</p>
       <button type="button" class="ghost-btn" (click)="reset()">{{ 'interview.empty.reset' | translate }}</button>

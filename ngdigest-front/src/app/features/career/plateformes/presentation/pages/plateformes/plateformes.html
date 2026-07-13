@@ -1,8 +1,8 @@
 <header class="wrap">
-  <nav class="pf-crumb" aria-label="Breadcrumb">
+  <nav class="dir-crumb" aria-label="Breadcrumb">
     <a [routerLink]="careerRoute()">{{ 'platforms.crumbHome' | translate }}</a>
     <span aria-hidden="true">/</span>
-    <span class="pf-crumb__current">{{ 'platforms.crumbCurrent' | translate }}</span>
+    <span class="dir-crumb__current">{{ 'platforms.crumbCurrent' | translate }}</span>
   </nav>
 
   <div class="phero">
@@ -15,19 +15,19 @@
     <p class="phero__subtitle">{{ 'platforms.hero.subtitle' | translate }}</p>
   </div>
 
-  <div class="pf-banner" role="note">
-    <span class="pf-banner__ic" aria-hidden="true">€</span>
+  <div class="dir-banner" role="note">
+    <span class="dir-banner__ic" aria-hidden="true">€</span>
     <p>
       <b>{{ 'platforms.banner.title' | translate }}</b> {{ 'platforms.banner.text' | translate }}
     </p>
   </div>
 </header>
 
-<div class="pf-filters">
+<div class="dir-filters">
   <div class="wrap">
-    <div class="pf-filters__row">
-      <label class="pf-search">
-        <span class="pf-search__icon" aria-hidden="true"></span>
+    <div class="dir-filters__row">
+      <label class="dir-search">
+        <span class="dir-search__icon" aria-hidden="true"></span>
         <input
           type="search"
           autocomplete="off"
@@ -37,11 +37,11 @@
           (input)="onSearch($event)"
         />
       </label>
-      <div class="pf-seg" role="group" [attr.aria-label]="'platforms.filters.geoLabel' | translate">
+      <div class="dir-seg" role="group" [attr.aria-label]="'platforms.filters.geoLabel' | translate">
         <button
           type="button"
-          class="pf-seg__btn"
-          [class.pf-seg__btn--on]="geoFilter() === 'all'"
+          class="dir-seg__btn"
+          [class.dir-seg__btn--on]="geoFilter() === 'all'"
           [attr.aria-pressed]="geoFilter() === 'all'"
           (click)="geoFilter.set('all')"
         >
@@ -49,8 +49,8 @@
         </button>
         <button
           type="button"
-          class="pf-seg__btn"
-          [class.pf-seg__btn--on]="geoFilter() === 'fr'"
+          class="dir-seg__btn"
+          [class.dir-seg__btn--on]="geoFilter() === 'fr'"
           [attr.aria-pressed]="geoFilter() === 'fr'"
           (click)="geoFilter.set('fr')"
         >
@@ -58,8 +58,8 @@
         </button>
         <button
           type="button"
-          class="pf-seg__btn"
-          [class.pf-seg__btn--on]="geoFilter() === 'intl'"
+          class="dir-seg__btn"
+          [class.dir-seg__btn--on]="geoFilter() === 'intl'"
           [attr.aria-pressed]="geoFilter() === 'intl'"
           (click)="geoFilter.set('intl')"
         >
@@ -68,27 +68,27 @@
       </div>
     </div>
 
-    <div class="pf-filters__row">
-      <div class="pf-chips" role="group" [attr.aria-label]="'platforms.filters.chipLabel' | translate">
+    <div class="dir-filters__row">
+      <div class="dir-chips" role="group" [attr.aria-label]="'platforms.filters.chipLabel' | translate">
         @for (chipItem of chips; track chipItem) {
           <button
             type="button"
-            class="pf-chip"
-            [class.pf-chip--on]="chip() === chipItem"
+            class="dir-chip"
+            [class.dir-chip--on]="chip() === chipItem"
             [attr.aria-pressed]="chip() === chipItem"
             (click)="chip.set(chipItem)"
           >
             {{ 'platforms.chip.' + chipItem | translate }}
-            <span class="pf-chip__count">{{ chipCount(chipItem) }}</span>
+            <span class="dir-chip__count">{{ chipCount(chipItem) }}</span>
           </button>
         }
       </div>
 
-      <button type="button" class="pf-reset" (click)="reset()">
+      <button type="button" class="dir-reset" (click)="reset()">
         {{ 'platforms.filters.reset' | translate }}
       </button>
 
-      <span class="pf-count" aria-live="polite">
+      <span class="dir-count" aria-live="polite">
         <b>{{ resultCount() }}</b>
         {{ (resultCount() > 1 ? 'platforms.filters.countPlural' : 'platforms.filters.countSingular') | translate }}
       </span>
@@ -96,23 +96,23 @@
   </div>
 </div>
 
-<main class="wrap pf-results">
+<main class="wrap dir-results">
   @if (loading()) {
     <div class="pf-grid" aria-hidden="true">
       @for (skeleton of skeletons; track skeleton) {
-        <div class="pf-skeleton">
-          <div class="pf-skeleton__top">
-            <span class="pf-skeleton__avatar"></span>
-            <span class="pf-skeleton__lines"></span>
+        <div class="dir-skeleton">
+          <div class="dir-skeleton__top">
+            <span class="dir-skeleton__avatar"></span>
+            <span class="dir-skeleton__lines"></span>
           </div>
-          <span class="pf-skeleton__bar pf-skeleton__bar--sm"></span>
-          <span class="pf-skeleton__bar"></span>
-          <span class="pf-skeleton__bar pf-skeleton__bar--wide"></span>
+          <span class="dir-skeleton__bar dir-skeleton__bar--sm"></span>
+          <span class="dir-skeleton__bar"></span>
+          <span class="dir-skeleton__bar dir-skeleton__bar--wide"></span>
         </div>
       }
     </div>
   } @else if (resultCount() === 0) {
-    <div class="pf-empty">
+    <div class="dir-empty">
       <h3>{{ 'platforms.empty.title' | translate }}</h3>
       <p>{{ 'platforms.empty.subtitle' | translate }}</p>
       <button type="button" class="ghost-btn" (click)="reset()">{{ 'platforms.empty.reset' | translate }}</button>
