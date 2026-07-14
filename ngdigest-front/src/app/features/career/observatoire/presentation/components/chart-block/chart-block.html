@@ -1,0 +1,241 @@
+<div class="chart-block" [class.chart-block--hero]="hero()">
+  <h3 class="chart-block__title">{{ title() }}</h3>
+  <p class="chart-block__angle">{{ angle() }}</p>
+
+  @if (anchors(); as anchorList) {
+    <div class="chart-block__anchors">
+      @for (anchor of anchorList; track anchor) {
+        <span class="chart-block__anchor">{{ anchor }}</span>
+      }
+    </div>
+  }
+
+  @if (scissorsVm(); as vm) {
+    <ul class="chart-block__legend chart-block__legend--top">
+      @for (line of vm.lines; track line.label) {
+        <li><span class="chart-block__dot chart-c--{{ line.color }}"></span>{{ line.label }}</li>
+      }
+    </ul>
+  }
+
+  @if (soonText(); as soon) {
+    <span class="chart-block__soon">{{ soon }}</span>
+  }
+
+  <div
+    class="chart-block__canvas"
+    [class.chart-block__canvas--tall]="hero()"
+    role="img"
+    [attr.aria-label]="ariaLabel()"
+  >
+    @switch (metric().kind) {
+      @case ('bar') {
+        @if (barVm(); as vm) {
+          <svg class="chart-block__svg" viewBox="0 0 360 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line
+              class="chart-block__baseline"
+              [attr.x1]="vm.baselineX1"
+              [attr.y1]="vm.baselineY"
+              [attr.x2]="vm.baselineX2"
+              [attr.y2]="vm.baselineY"
+            />
+            @for (bar of vm.bars; track bar.label) {
+              <rect
+                class="chart-bar chart-c--{{ bar.color }}"
+                [attr.x]="bar.x"
+                [attr.y]="bar.y"
+                [attr.width]="bar.width"
+                [attr.height]="bar.height"
+                rx="6"
+              />
+              <text class="chart-block__value" [attr.x]="bar.labelX" [attr.y]="bar.valueY" text-anchor="middle">
+                {{ bar.valueLabel }}
+              </text>
+              <text class="chart-block__cat" [attr.x]="bar.labelX" [attr.y]="bar.labelY" text-anchor="middle">
+                {{ bar.label }}
+              </text>
+            }
+          </svg>
+        }
+      }
+
+      @case ('hbar') {
+        @if (hbarVm(); as vm) {
+          <svg class="chart-block__svg" viewBox="0 0 360 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient [attr.id]="vm.gradientId" x1="0" y1="0" x2="1" y2="0">
+                <stop class="chart-grad--a" offset="0" />
+                <stop class="chart-grad--b" offset="0.55" />
+                <stop class="chart-grad--c" offset="1" />
+              </linearGradient>
+            </defs>
+            @for (bar of vm.bars; track bar.label) {
+              <rect
+                class="chart-block__hbar"
+                [attr.fill]="'url(#' + vm.gradientId + ')'"
+                [attr.x]="bar.x"
+                [attr.y]="bar.y"
+                [attr.width]="bar.width"
+                [attr.height]="bar.height"
+                rx="5"
+              />
+              <text
+                class="chart-block__cat"
+                [attr.x]="bar.labelX"
+                [attr.y]="bar.centerY"
+                text-anchor="end"
+                dominant-baseline="middle"
+              >
+                {{ bar.label }}
+              </text>
+              <text
+                class="chart-block__value"
+                [attr.x]="bar.valueX"
+                [attr.y]="bar.centerY"
+                text-anchor="start"
+                dominant-baseline="middle"
+              >
+                {{ bar.valueLabel }}
+              </text>
+            }
+            @if (vm.avgX !== null) {
+              <line
+                class="chart-block__avgline"
+                [attr.x1]="vm.avgX"
+                [attr.y1]="vm.avgTop"
+                [attr.x2]="vm.avgX"
+                [attr.y2]="vm.avgBottom"
+              />
+            }
+          </svg>
+        }
+      }
+
+      @case ('donut') {
+        @if (donutVm(); as vm) {
+          <div class="chart-block__donut">
+            <svg class="chart-block__ring" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              @for (seg of vm.segments; track seg.label) {
+                <circle
+                  class="chart-arc chart-c--{{ seg.color }}"
+                  [attr.cx]="vm.cx"
+                  [attr.cy]="vm.cy"
+                  [attr.r]="vm.r"
+                  [attr.stroke-width]="vm.strokeWidth"
+                  [attr.stroke-dasharray]="seg.dash + ' ' + seg.gap"
+                  [attr.transform]="'rotate(' + seg.rotate + ' ' + vm.cx + ' ' + vm.cy + ')'"
+                />
+              }
+            </svg>
+            <ul class="chart-block__legend">
+              @for (seg of vm.segments; track seg.label) {
+                <li>
+                  <span class="chart-block__dot chart-c--{{ seg.color }}"></span>{{ seg.label }}
+                  <b>{{ seg.valueLabel }}</b>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      }
+
+      @case ('scissors') {
+        @if (scissorsVm(); as vm) {
+          <svg
+            class="chart-block__svg"
+            [attr.viewBox]="'0 0 ' + vm.width + ' 260'"
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+          >
+            @for (grid of vm.gridLines; track grid.value) {
+              <line
+                class="chart-block__grid"
+                [attr.x1]="vm.padLeft"
+                [attr.y1]="grid.y"
+                [attr.x2]="vm.width - vm.padRight"
+                [attr.y2]="grid.y"
+              />
+              <text class="chart-block__tick" [attr.x]="vm.padLeft - 6" [attr.y]="grid.y + 3" text-anchor="end">
+                {{ grid.value }}
+              </text>
+            }
+            @for (line of vm.lines; track line.label) {
+              <polyline class="chart-line chart-c--{{ line.color }}" [attr.points]="line.polyline" />
+              @for (dot of line.dots; track $index) {
+                <circle class="chart-dot chart-c--{{ line.color }}" [attr.cx]="dot.x" [attr.cy]="dot.y" r="4.5" />
+              }
+            }
+            @for (xl of vm.xLabels; track xl.text) {
+              <text class="chart-block__cat" [attr.x]="xl.x" [attr.y]="vm.baselineY + 24" text-anchor="middle">
+                {{ xl.text }}
+              </text>
+            }
+            <text
+              class="chart-block__axis"
+              [attr.x]="vm.axisX"
+              [attr.y]="vm.axisY"
+              text-anchor="middle"
+              [attr.transform]="'rotate(-90 ' + vm.axisX + ' ' + vm.axisY + ')'"
+            >
+              {{ vm.axisLabel }}
+            </text>
+          </svg>
+        }
+      }
+    }
+  </div>
+
+  @if (avgLabel(); as avg) {
+    <p class="chart-block__avg">
+      <span class="chart-block__avg-mark" aria-hidden="true"></span>
+      {{ 'observatoire.avg' | translate }} · {{ avg }}
+    </p>
+  }
+
+  @if (note()) {
+    <p class="chart-block__note">{{ note() }}</p>
+  }
+
+  <div class="chart-block__foot">
+    <details class="chart-block__data">
+      <summary>{{ 'observatoire.seeData' | translate }}</summary>
+      <table class="chart-block__table">
+        <caption>{{ title() }}</caption>
+        <thead>
+          <tr>
+            @for (key of table().headKeys; track key) {
+              <th scope="col">{{ key | translate }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of table().rows; track $index) {
+            <tr>
+              @for (cell of row.cells; track $index) {
+                <td [class.chart-block__num]="cell.num">
+                  @if (cell.color) {
+                    <span class="chart-block__dot chart-c--{{ cell.color }}"></span>
+                  }
+                  {{ cell.text }}
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </details>
+
+    <span class="chart-block__sources">
+      <a class="chart-block__src" [href]="metric().source.url" target="_blank" rel="noopener">
+        <app-icon name="arrow-up-right" [size]="11" />
+        <span>{{ 'observatoire.source' | translate }} · {{ metric().source.label }} · {{ metric().source.date }}</span>
+      </a>
+      @if (metric().source2; as source2) {
+        <a class="chart-block__src" [href]="source2.url" target="_blank" rel="noopener">
+          <app-icon name="arrow-up-right" [size]="11" />
+          <span>{{ source2.label }} · {{ source2.date }}</span>
+        </a>
+      }
+    </span>
+  </div>
+</div>

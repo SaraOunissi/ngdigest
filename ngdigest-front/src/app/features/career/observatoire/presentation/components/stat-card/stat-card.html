@@ -1,0 +1,15 @@
+<article class="stat-card">
+  <div class="stat-card__value grad-text">{{ value() }}</div>
+  <p class="stat-card__label">{{ label() }}</p>
+  <p class="stat-card__angle">{{ angle() }}</p>
+  <a
+    class="stat-card__src"
+    [href]="kpi().source.url"
+    target="_blank"
+    rel="noopener"
+    [attr.aria-label]="('observatoire.source' | translate) + ' : ' + kpi().source.label"
+  >
+    <app-icon name="arrow-up-right" [size]="11" />
+    <span>{{ 'observatoire.source' | translate }} · {{ kpi().source.label }} · {{ kpi().source.date }}</span>
+  </a>
+</article>

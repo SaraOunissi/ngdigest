@@ -8,6 +8,7 @@ import { CertificationsComponent } from './features/career/certifications/presen
 import { FormationsComponent } from './features/career/formations/presentation/pages/formations/formations';
 import { PlateformesComponent } from './features/career/plateformes/presentation/pages/plateformes/plateformes';
 import { InterviewPrepComponent } from './features/career/interview/presentation/pages/interview-prep/interview-prep';
+import { ObservatoireComponent } from './features/career/observatoire/presentation/pages/observatoire/observatoire';
 import { SourcesComponent } from './features/sources/sources.component';
 import { AboutComponent } from './features/about/about.component';
 import { BlogListComponent } from './features/blog/presentation/pages/blog-list/blog-list.component';
@@ -50,6 +51,8 @@ export const routes: Routes = [
       { path: 'career/platforms', component: PlateformesComponent },
       { path: 'carriere/entretien', component: InterviewPrepComponent },
       { path: 'career/interview', component: InterviewPrepComponent },
+      { path: 'carriere/observatoire', component: ObservatoireComponent },
+      { path: 'career/observatory', component: ObservatoireComponent },
       { path: 'sources', component: SourcesComponent },
       { path: 'about', component: AboutComponent },
       { path: 'blog', component: BlogListComponent },

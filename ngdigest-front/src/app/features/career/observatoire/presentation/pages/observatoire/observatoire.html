@@ -1,0 +1,144 @@
+<header class="wrap">
+  <nav class="obs-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="careerRoute()">{{ 'observatoire.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="obs-crumb__current">{{ 'observatoire.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'observatoire.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'observatoire.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'observatoire.hero.titleAccent' | translate }}</span>
+    </h1>
+    <p class="phero__subtitle">{{ 'observatoire.hero.subtitle' | translate }}</p>
+
+    <div class="obs-meta">
+      <span class="obs-chip"><span class="obs-chip__dot" aria-hidden="true"></span>{{ metaLabel() }}</span>
+      <span class="obs-chip obs-chip--soft"
+        ><span class="obs-chip__dot" aria-hidden="true"></span>{{ metaUpdated() }}</span
+      >
+    </div>
+  </div>
+
+  <div class="obs-kpis" [attr.aria-label]="'observatoire.kpisLabel' | translate">
+    @for (kpi of kpis; track kpi.id) {
+      <app-stat-card [kpi]="kpi" />
+    }
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 01 · Technos + Front vs Fullstack (soon) -->
+  <section class="obs-section">
+    <span class="kicker">{{ 'observatoire.sec.technos' | translate }}</span>
+    <div class="obs-grid2">
+      <app-chart-block [metric]="technosChart" />
+
+      @if (frontFsSoon(); as soon) {
+        <article class="obs-soon obs-soon--fill">
+          <span class="obs-soon__badge">{{ 'observatoire.soon.badge' | translate }}</span>
+          <h3 class="obs-soon__title">{{ soon.title }}</h3>
+          <p class="obs-soon__body">{{ soon.body }}</p>
+          <svg class="obs-spark" viewBox="0 0 140 30" preserveAspectRatio="none" aria-hidden="true">
+            @for (bar of sparkBars; track $index) {
+              <rect
+                class="obs-spark__bar"
+                [attr.x]="bar.x"
+                [attr.y]="bar.y"
+                width="14"
+                [attr.height]="bar.height"
+                rx="2"
+              />
+            }
+          </svg>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- 02 · The AI effect — the "scissors" (full width) -->
+  <section class="obs-section">
+    <span class="kicker">{{ 'observatoire.sec.ia' | translate }}</span>
+    <app-chart-block [metric]="iaChart" [hero]="true" />
+  </section>
+
+  <!-- 03 · Remote & pay -->
+  <section class="obs-section">
+    <span class="kicker">{{ 'observatoire.sec.life' | translate }}</span>
+    <div class="obs-grid2">
+      <app-chart-block [metric]="remoteChart" />
+      <app-chart-block [metric]="salaryChart" />
+    </div>
+  </section>
+
+  <!-- 04 · Under construction (own data coming in v2) -->
+  <section class="obs-section">
+    <div class="obs-section__head">
+      <span class="kicker">{{ 'observatoire.sec.soon' | translate }}</span>
+      <h2 class="obs-section__title">{{ 'observatoire.soon.title' | translate }}</h2>
+      <p class="obs-section__sub">{{ 'observatoire.soon.sub' | translate }}</p>
+    </div>
+    <div class="obs-grid3">
+      @for (soon of otherSoon(); track soon.id) {
+        <article class="obs-soon">
+          <span class="obs-soon__badge">{{ 'observatoire.soon.badge' | translate }}</span>
+          <h3 class="obs-soon__title">{{ soon.title }}</h3>
+          <p class="obs-soon__body">{{ soon.body }}</p>
+          @if (soon.tags.length) {
+            <div class="obs-soon__tags">
+              @for (tag of soon.tags; track tag) {
+                <span class="obs-tag">{{ tag }}</span>
+              }
+            </div>
+          }
+          <svg class="obs-spark" viewBox="0 0 140 30" preserveAspectRatio="none" aria-hidden="true">
+            @for (bar of sparkBars; track $index) {
+              <rect
+                class="obs-spark__bar"
+                [attr.x]="bar.x"
+                [attr.y]="bar.y"
+                width="14"
+                [attr.height]="bar.height"
+                rx="2"
+              />
+            }
+          </svg>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- CTA — the analysis ships every month -->
+  <section class="obs-section">
+    <div class="obs-cta">
+      <div class="obs-cta__in">
+        <span class="kicker">{{ 'observatoire.cta.kicker' | translate }}</span>
+        <h2 class="obs-cta__title">{{ 'observatoire.cta.title' | translate }}</h2>
+        <p class="obs-cta__body">{{ 'observatoire.cta.body' | translate }}</p>
+        <div class="obs-cta__btns">
+          <a class="grad-btn" [href]="linkedinUrl" target="_blank" rel="noopener">
+            {{ 'observatoire.cta.linkedin' | translate }}
+          </a>
+          <a class="ghost-btn" [routerLink]="veilleRoute()">
+            {{ 'observatoire.cta.secondary' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method & sources (E-E-A-T) -->
+  <section class="obs-methodo">
+    <span class="kicker">{{ 'observatoire.sources' | translate }}</span>
+    <p class="obs-methodo__lead">{{ 'observatoire.methodo' | translate }}</p>
+    <ul class="obs-srclist">
+      @for (source of sources; track source.url) {
+        <li>
+          <a [href]="source.url" target="_blank" rel="noopener">{{ source.label }}</a>
+          <span class="obs-srclist__date">{{ source.date }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+</main>

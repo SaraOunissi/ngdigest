@@ -1,0 +1,92 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  height: 100%;
+  padding: 22px 20px 18px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  // Brand gradient accent on the left edge.
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: $gradient-hero;
+    opacity: 0.9;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-hairline-strong;
+    background: $color-surface-hover;
+  }
+
+  &__value {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(38px, 4.4vw, 50px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  &__label {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.35;
+    color: $color-text-primary;
+  }
+
+  &__angle {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: $color-text-secondary;
+  }
+
+  &__src {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+    font-family: $font-family-mono;
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    color: $color-text-muted;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    span {
+      border-bottom: 1px dotted $color-hairline-strong;
+      padding-bottom: 1px;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    &:hover span {
+      border-bottom-color: $color-primary;
+    }
+  }
+}

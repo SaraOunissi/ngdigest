@@ -31,6 +31,8 @@ describe('translateRoutePath', () => {
     expect(translateRoutePath('/en/career/interview', 'fr')).toBe('/fr/carriere/entretien');
     expect(translateRoutePath('/fr/carriere/formations', 'en')).toBe('/en/career/trainings');
     expect(translateRoutePath('/fr/carriere/plateformes', 'en')).toBe('/en/career/platforms');
+    expect(translateRoutePath('/fr/carriere/observatoire', 'en')).toBe('/en/career/observatory');
+    expect(translateRoutePath('/en/career/observatory', 'fr')).toBe('/fr/carriere/observatoire');
   });
 
   it('translates the legal pages', () => {

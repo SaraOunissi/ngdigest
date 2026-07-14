@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
+import { IconComponent } from '@shared/components/icon/icon';
 import { StatusChipComponent } from '@shared/components/status-chip/status-chip';
 import { lightMarkdown } from '@features/career/interview/application/light-markdown';
 import { GUIDE_DECISION_TREE } from '../../../infrastructure/decision-tree.data';
@@ -24,7 +25,14 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
 
 @Component({
   selector: 'app-guide',
-  imports: [RouterLink, TranslatePipe, StatusChipComponent, DecisionTreeComponent, RealityCheckItemComponent],
+  imports: [
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    StatusChipComponent,
+    DecisionTreeComponent,
+    RealityCheckItemComponent,
+  ],
   templateUrl: './guide.html',
   styleUrl: './guide.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +54,11 @@ export class GuideComponent {
   protected readonly careerRoute = computed<string[]>(() => {
     const lang = this.languageService.lang();
     return ['/', lang, lang === 'fr' ? 'carriere' : 'career'];
+  });
+
+  protected readonly observatoireRoute = computed<string[]>(() => {
+    const lang = this.languageService.lang();
+    return ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'observatoire' : 'observatory'];
   });
 
   // Callout copy is authored in our data file and escaped before markdown is

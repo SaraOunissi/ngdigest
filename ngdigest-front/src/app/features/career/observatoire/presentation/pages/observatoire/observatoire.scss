@@ -1,0 +1,344 @@
+@use "variables" as *;
+@use "colors" as *;
+
+:host {
+  display: block;
+}
+
+// — Breadcrumb (dashboard, not a directory page → no shared .dir-* chrome). —
+.obs-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 20px;
+  font-family: $font-family-mono;
+  font-size: 12px;
+  color: $color-text-muted;
+
+  a {
+    color: $color-text-muted;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__current {
+    color: $color-text-secondary;
+  }
+}
+
+// — Snapshot meta chips under the hero —
+.obs-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.obs-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-family-mono;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: $color-text-secondary;
+  background: $color-surface-hover;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+  padding: 7px 13px;
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-score-high;
+    box-shadow: 0 0 0 3px $color-score-high-bg;
+  }
+
+  &--soft {
+    color: $color-text-muted;
+  }
+
+  &--soft &__dot {
+    background: $color-accent-gold;
+    box-shadow: 0 0 0 3px rgba($color-accent-gold, 0.14);
+  }
+}
+
+// — KPI band —
+.obs-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 38px;
+}
+
+// — Sections —
+.obs-section {
+  margin-top: 56px;
+
+  > .kicker {
+    display: inline-flex;
+  }
+
+  &__head {
+    margin: 0 0 20px;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(22px, 2.6vw, 30px);
+    letter-spacing: -0.02em;
+    margin: 12px 0 0;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+
+  &__sub {
+    margin: 12px 0 0;
+    max-width: 640px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: $color-text-secondary;
+  }
+}
+
+.obs-section > .kicker + .obs-grid2,
+.obs-section > .kicker + .obs-grid3,
+.obs-section > .kicker + app-chart-block {
+  margin-top: 20px;
+  display: block;
+}
+
+.obs-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.obs-grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+// — "Coming soon" card —
+.obs-soon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 24px 22px;
+  border: 1px dashed $color-hairline-strong;
+  border-radius: $radius-lg;
+  background: rgba(255, 255, 255, 0.015);
+
+  &__badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: $font-family-mono;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $color-accent-gold;
+    background: rgba($color-accent-gold, 0.14);
+    border: 1px solid rgba($color-accent-gold, 0.25);
+    border-radius: $radius-pill;
+    padding: 5px 11px;
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $color-accent-gold;
+      box-shadow: 0 0 0 3px rgba($color-accent-gold, 0.14);
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  &__body {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: $color-text-secondary;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+}
+
+.obs-tag {
+  font-family: $font-family-mono;
+  font-size: 10.5px;
+  color: $color-text-muted;
+  padding: 3px 9px;
+  background: $color-tag-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+}
+
+.obs-spark {
+  margin-top: auto;
+  width: 100%;
+  height: 26px;
+  opacity: 0.5;
+
+  &__bar {
+    fill: $color-primary;
+  }
+}
+
+// — CTA —
+.obs-cta {
+  position: relative;
+  overflow: hidden;
+  margin-top: 8px;
+  padding: 44px 40px;
+  border: 1px solid $color-hairline-strong;
+  border-radius: $radius-lg;
+  background: $color-surface;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $gradient-hero-soft;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__in {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+  }
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(23px, 2.8vw, 32px);
+    letter-spacing: -0.02em;
+    margin: 12px 0;
+    text-wrap: balance;
+  }
+
+  &__body {
+    margin: 0 0 24px;
+    max-width: 56ch;
+    font-size: 15px;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+// — Method & sources —
+.obs-methodo {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid $color-border;
+
+  &__lead {
+    margin: 14px 0 20px;
+    max-width: 760px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: $color-text-muted;
+  }
+}
+
+.obs-srclist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid $color-border;
+    font-size: 13px;
+  }
+
+  a {
+    color: $color-text-secondary;
+    text-decoration: none;
+    border-bottom: 1px dotted $color-hairline-strong;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $color-primary;
+      border-bottom-color: $color-primary;
+    }
+  }
+
+  &__date {
+    margin-left: auto;
+    padding-left: 12px;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    white-space: nowrap;
+    color: $color-text-muted;
+  }
+}
+
+// — Responsive (breakpoints aligned with the rest of the site: 900 → 520).
+//   Larger max-widths first so the narrower rules win the cascade. —
+@media (max-width: 900px) {
+  .obs-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .obs-grid2,
+  .obs-grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .obs-srclist {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .obs-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .obs-cta {
+    padding: 34px 24px;
+  }
+}

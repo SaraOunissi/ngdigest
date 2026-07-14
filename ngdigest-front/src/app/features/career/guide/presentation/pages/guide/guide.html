@@ -75,15 +75,19 @@
     </div>
   </aside>
 
-  <!-- Observatory CTA (deferred until its data lands) -->
-  <div class="guide-obs">
+  <!-- Observatory CTA — now live -->
+  <a class="guide-obs" [routerLink]="observatoireRoute()">
     <div class="guide-obs__txt">
       <div class="guide-obs__kicker-row">
         <span class="kicker">{{ 'guide.obs.kicker' | translate }}</span>
-        <app-status-chip status="soon" />
+        <app-status-chip status="new" />
       </div>
       <h2 class="guide-obs__title">{{ 'guide.obs.title' | translate }}</h2>
       <p class="guide-obs__text">{{ 'guide.obs.text' | translate }}</p>
     </div>
-  </div>
+    <span class="guide-obs__cta">
+      {{ 'guide.obs.cta' | translate }}
+      <app-icon name="arrow-right" [size]="14" />
+    </span>
+  </a>
 </main>
