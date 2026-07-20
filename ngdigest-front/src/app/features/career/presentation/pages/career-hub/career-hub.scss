@@ -89,7 +89,9 @@
     content: "";
     position: absolute;
     left: 25px;
-    top: 18px;
+    // Nodes are vertically centered in their card, so the line starts/ends
+    // behind the first/last pill (which sit lower than the old top-aligned pills).
+    top: 46px;
     bottom: 46px;
     width: 2px;
     border-radius: 2px;
@@ -102,6 +104,8 @@
 
     &::before {
       left: 18px;
+      // Cards wrap taller on mobile, so the centered pills sit lower.
+      top: 56px;
     }
   }
 }
