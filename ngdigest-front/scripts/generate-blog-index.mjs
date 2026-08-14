@@ -22,6 +22,7 @@ import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import { draftReason } from './lib/blog-draft-gate.mjs'; // by project-worker 2026-08-14
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
@@ -194,14 +195,14 @@ for (const lang of ['fr', 'en']) {
     const raw = await readFile(join(langDir, file), 'utf-8');
     const { data: frontmatter, content: mdContent } = matter(raw);
 
-    // Skip drafts and WIP articles: a publishable article must have all required fields.
-    // Sara's working drafts in src/content/blog/ live alongside published ones.
-    const required = ['slug', 'title', 'description', 'date', 'author', 'lang', 'alternate'];
-    const missing = required.filter(
-      (key) => frontmatter[key] === undefined || frontmatter[key] === null || frontmatter[key] === '',
-    );
-    if (missing.length > 0) {
-      console.warn(`Skipping blog draft ${lang}/${file} — missing frontmatter: ${missing.join(', ')}`);
+    // Skip drafts and WIP articles. Sara's working drafts live in src/content/blog/
+    // alongside the published ones, so publishing must stay a deliberate act:
+    // `status: draft` and the `draft-` file name prefix both keep an article out of
+    // the index even when its frontmatter is complete. See scripts/lib/blog-draft-gate.mjs.
+    // by project-worker 2026-08-14
+    const skipReason = draftReason(file, frontmatter);
+    if (skipReason) {
+      console.warn(`Skipping blog draft ${lang}/${file} — ${skipReason}`);
       continue;
     }
 
