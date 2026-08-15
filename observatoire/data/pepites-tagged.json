@@ -1,0 +1,74 @@
+{
+  "layer": "selective",
+  "generatedAt": "2026-06-01",
+  "warning": "Échantillon ULTRA-TRIÉ (pépites publiées). Ne JAMAIS fusionner avec le store marché LARGE : les stats de l'observatoire seraient biaisées (cadrage §1).",
+  "counts": {
+    "total": 2,
+    "active": 1,
+    "expired": 1
+  },
+  "offers": [
+    {
+      "file": "2026-06-01-hospitable-senior-frontend-angular.md",
+      "slug": "hospitable-senior-frontend-angular",
+      "status": "active",
+      "url": "https://apply.workable.com/hospitable/j/3C7DDE165E/",
+      "metadata": {
+        "fingerprint": "e930e85359a30a36",
+        "sourceId": null,
+        "source": "autre",
+        "scannedAt": "2026-06-01",
+        "firstSeen": "2026-06-01",
+        "lastSeen": "2026-06-01",
+        "title": "Senior Front-End Angular Product Engineer",
+        "company": "Hospitable",
+        "techno": "angular",
+        "posteType": "front",
+        "seniority": "senior",
+        "remote": "full",
+        "officeDaysPerWeek": null,
+        "zone": "EU",
+        "city": "Europe (remote-only)",
+        "contractType": "cdi",
+        "salaryMin": 134450,
+        "salaryMax": 167258,
+        "tjmMin": null,
+        "tjmMax": null,
+        "typeRecruteur": "client-final",
+        "isDevRel": false,
+        "raw": "Senior Front-End Angular Product Engineer Angular RxJS Tailwind Ionic (bonus) angular remote-eu salaire-affiche product-engineer saas Europe (remote-only) Du vrai Angular moderne, 100% remote Europe, et une fourchette de salaire affichée à 6 chiffres en dollars — rare combinaison. Hospitable est un SaaS remote-only (logiciel d'automatisation pour locations\nAirbnb/Vrbo) qui cherche un Senior Front-End sur du Angular moderne + RxJS\n+ Tailwind, avec bonus Ionic/web components. La fourchette est affichée\nnoir sur blanc (134 450-167 258 USD), plus equity et PSUs — niveau de\ntransparence salariale qu'on voit surtout chez les boîtes US, ici ouverte\nà l'Europe. 35 jours de congés, culture async-first. C'est exactement le\ntype de poste qu'un dev Angular senior FR peut viser sans bouger de chez lui."
+      }
+    },
+    {
+      "file": "2026-05-16-aircall-frontend-remote-france.md",
+      "slug": "aircall-frontend-remote-france",
+      "status": "expired",
+      "url": "https://aircall.welcometothejungle.com/",
+      "metadata": {
+        "fingerprint": "f1eef409daa3a230",
+        "sourceId": null,
+        "source": "wttj",
+        "scannedAt": "2026-05-16",
+        "firstSeen": "2026-05-16",
+        "lastSeen": "2026-05-16",
+        "title": "Frontend Engineer (Remote France)",
+        "company": "Aircall",
+        "techno": "angular",
+        "posteType": "front",
+        "seniority": "senior",
+        "remote": "full",
+        "officeDaysPerWeek": null,
+        "zone": "FR",
+        "city": "France",
+        "contractType": "cdi",
+        "salaryMin": 65000,
+        "salaryMax": 90000,
+        "tjmMin": null,
+        "tjmMax": null,
+        "typeRecruteur": "client-final",
+        "isDevRel": false,
+        "raw": "Frontend Engineer (Remote France) Angular TypeScript GraphQL angular remote-france cdi-senior France 100% frontend, pas mixé back. Médiane FR plutôt 65-90k. Aircall continue de recruter en remote France. Position 100% frontend\n(pas fullstack imposé), TJM-équivalent intéressant pour qui veut sortir\ndes plateformes ESN classiques. À vérifier la stack exacte côté Angular\nvs autre framework lors du screening initial avec la RH."
+      }
+    }
+  ]
+}

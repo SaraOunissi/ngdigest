@@ -29,7 +29,41 @@ métriques enrichies, §9 cadence hebdo + dedup + France Travail socle) et
 | `src/market-store.mjs` | Store marché append-only JSONL + **dedup par empreinte** (stock vs flux). |
 | `src/aggregator.mjs` | Store → **snapshot hebdo JSON** (les 6 métriques + médianes salaire/TJM par séniorité, jours bureau, top villes, DevRel). |
 | `src/run-demo.mjs` | Pipeline complet sur fixtures + **smoke test** (assertions). |
+| `src/pepites-bridge.mjs` | **(q135)** Tague les offres de la couche SÉLECTIVE au même schéma. Frontmatter curé > heuristiques. Module pur, sans I/O. |
 | `fixtures/sample-offers.json` | 8 offres représentatives au format France Travail. |
+| `data/pepites-tagged.json` | Sortie du taggage sélectif. **Fichier séparé du store LARGE** — ne jamais fusionner. |
+
+## Taguer les offres de la couche sélective (q135)
+
+<!-- by project-worker 2026-08-15 -->
+
+Les pépites publiées (`ngdigest-front/src/content/jobs/*.md`) portent déjà des métadonnées
+**curées à la main par Sara**. `pepites-bridge.mjs` les projette sur le **même schéma
+ObserveOffer** que la couche large, avec l'ordre de priorité :
+
+```
+frontmatter curé  >  heuristiques du normalizer  >  'inconnu'
+```
+
+```bash
+cd ngdigest-front
+npm run tag:jobs         # (re)génère ../observatoire/data/pepites-tagged.json
+npm run check:tag-jobs   # ne réécrit rien ; sort 1 si le fichier est périmé
+```
+
+**La couche de publication est strictement inchangée** : le script ne touche ni les fiches `.md`
+ni `jobs-data.generated.ts`, et n'est **pas** branché sur `prebuild`. Le build reste identique.
+
+Deux portées de texte, volontairement séparées : les signaux **structurés** (intitulé, `stack`,
+`tags`, `location`) classent techno / posteType / séniorité ; la **prose éditoriale** de Sara
+n'alimente que le mode de travail, le repérage DevRel et l'extrait `raw` d'audit. Motif : les
+notes sont argumentées et pleines de négations (« position 100% frontend, *pas fullstack
+imposé* ») — un détecteur par mots-clés y lit « fullstack » et classe l'offre à l'envers. Cas
+réel constaté sur la fiche Aircall, verrouillé par un test de régression.
+
+⚠️ La sortie est un échantillon **ultra-trié**. La fusionner dans le store marché LARGE
+biaiserait les stats de l'observatoire (cadrage §1) — d'où le fichier séparé et le champ
+`layer: "selective"`.
 
 ## Lancer la démo (aucune credential requise)
 
@@ -55,8 +89,9 @@ node --test "observatoire/**/*.test.mjs"
 | `src/normalizer.test.mjs` | chaque heuristique `detect*`, `parseSalary`, `fingerprintFor`, `normalizeOffer`, et les garde-fous accent-/mot-safe (`octo` ≠ `doctolib`, ville en sous-chaîne ignorée). |
 | `src/aggregator.test.mjs` | fenêtre stock/flux, distributions, `cityTop`, médianes salaire/TJM par séniorité, jours bureau moyens, DevRel, store vide. |
 | `src/market-store.test.mjs` | dedup `mergeBatch` (new vs still-online), round-trip `saveStore`/`loadStore`, tolérance aux lignes JSONL corrompues. |
+| `src/pepites-bridge.test.mjs` | mappings frontmatter (`remote: 100`→`full`, `Worldwide`→`WW`, `stack`→techno), précédence curé > heuristique, salaire/TJM parsés séparément, régression Aircall (prose négative), conformité stricte au schéma JSON, enveloppe `layer: "selective"`. |
 
-48 tests au total. La démo `run-demo.mjs` reste le smoke test d'intégration bout-en-bout.
+65 tests au total (48 couche large + 17 pont sélectif q135). La démo `run-demo.mjs` reste le smoke test d'intégration bout-en-bout.
 
 ## Brancher France Travail (Sara)
 
