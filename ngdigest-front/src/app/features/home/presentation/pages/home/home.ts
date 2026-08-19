@@ -38,7 +38,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
 /** Hours between two aggregation runs of the tech-watch pipeline. */
 const VEILLE_FRESHNESS = '12 h';
 
-interface EntryDefinition {
+export interface EntryDefinition {
   readonly id: string;
   readonly icon: IconName;
   readonly titleKey: string;
@@ -47,7 +47,11 @@ interface EntryDefinition {
   readonly route: (lang: 'fr' | 'en') => string[] | null;
 }
 
-const ENTRY_DEFINITIONS: readonly EntryDefinition[] = [
+/**
+ * Home entry tiles. Exported so `nav-consistency.spec.ts` can assert that a
+ * tile is never advertised as "soon" once its page is actually routable.
+ */
+export const ENTRY_DEFINITIONS: readonly EntryDefinition[] = [
   {
     id: 'certifications',
     icon: 'certif',
@@ -77,8 +81,9 @@ const ENTRY_DEFINITIONS: readonly EntryDefinition[] = [
     icon: 'formations',
     titleKey: 'home.entries.formations.title',
     descKey: 'home.entries.formations.desc',
-    status: 'soon',
-    route: () => null,
+    // by project-worker 2026-08-19 — page shipped (9efdc14), tile was still "soon" + dead
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'formations' : 'trainings'],
   },
   {
     id: 'resources',
@@ -93,8 +98,14 @@ const ENTRY_DEFINITIONS: readonly EntryDefinition[] = [
     icon: 'observatoire',
     titleKey: 'home.entries.observatoire.title',
     descKey: 'home.entries.observatoire.desc',
-    status: 'soon',
-    route: () => null,
+    // by project-worker 2026-08-19 — page shipped (7a05426), tile was still "soon" + dead
+    status: 'new',
+    route: (lang) => [
+      '/',
+      lang,
+      lang === 'fr' ? 'carriere' : 'career',
+      lang === 'fr' ? 'observatoire' : 'observatory',
+    ],
   },
 ];
 

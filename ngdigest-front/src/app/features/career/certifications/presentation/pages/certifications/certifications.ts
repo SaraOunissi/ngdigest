@@ -93,6 +93,13 @@ export class CertificationsComponent {
     return ['/', lang, lang === 'fr' ? 'carriere' : 'career'];
   });
 
+  // by project-worker 2026-08-19 — q174.4: the "prepare for the certs" cross-link
+  // pointed at the hub while /carriere/formations was still "soon". It ships now.
+  protected readonly formationsRoute = computed<string[]>(() => {
+    const lang = this.languageService.lang();
+    return ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'formations' : 'trainings'];
+  });
+
   protected readonly catalogRoute = computed<string[]>(() => {
     const lang = this.languageService.lang();
     return ['/', lang, lang === 'fr' ? 'ressources' : 'resources'];

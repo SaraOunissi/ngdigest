@@ -20,7 +20,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   en: 'From upskilling to a signed offer: a clear path to grow your Angular career — training, certifications, interview prep, gigs.',
 };
 
-interface StepDefinition {
+export interface StepDefinition {
   readonly id: string;
   readonly icon: IconName;
   readonly status: ChipStatus;
@@ -29,10 +29,13 @@ interface StepDefinition {
 
 /**
  * Guided path (direction B). The Guide is the entry step ("start here").
- * Observatoire & Toolkit are deferred until their data is ready, so they are
- * marked "soon" and not clickable yet.
+ * Toolkit is deferred until its assets are ready, so it is marked "soon" and
+ * not clickable yet.
+ *
+ * Exported so `nav-consistency.spec.ts` can assert that a step is never
+ * advertised as "soon" once its page is actually routable.
  */
-const STEP_DEFINITIONS: readonly StepDefinition[] = [
+export const STEP_DEFINITIONS: readonly StepDefinition[] = [
   {
     id: 'guide',
     icon: 'guide',
