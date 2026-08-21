@@ -15,6 +15,7 @@
     "check:jobs-links": "node scripts/check-jobs-links.mjs",
     "tag:jobs": "node scripts/tag-jobs-metadata.mjs",
     "check:tag-jobs": "node scripts/tag-jobs-metadata.mjs --check",
+    "check:toolkit": "node --test \"scripts/lib/toolkit-assets.test.mjs\"",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,scss}\"",

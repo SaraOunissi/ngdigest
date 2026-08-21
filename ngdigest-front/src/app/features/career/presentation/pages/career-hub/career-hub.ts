@@ -29,8 +29,7 @@ export interface StepDefinition {
 
 /**
  * Guided path (direction B). The Guide is the entry step ("start here").
- * Toolkit is deferred until its assets are ready, so it is marked "soon" and
- * not clickable yet.
+ * Every step is live: Toolkit shipped with its downloadable assets on 2026-08-21.
  *
  * Exported so `nav-consistency.spec.ts` can assert that a step is never
  * advertised as "soon" once its page is actually routable.
@@ -72,7 +71,13 @@ export const STEP_DEFINITIONS: readonly StepDefinition[] = [
     status: 'new',
     route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'observatoire' : 'observatory'],
   },
-  { id: 'toolkit', icon: 'toolkit', status: 'soon', route: () => null },
+  // by project-worker 2026-08-21 — q176: page shipped, step flipped soon → live
+  {
+    id: 'toolkit',
+    icon: 'toolkit',
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', 'toolkit'],
+  },
 ];
 
 @Component({

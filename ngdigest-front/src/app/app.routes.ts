@@ -9,6 +9,7 @@ import { FormationsComponent } from './features/career/formations/presentation/p
 import { PlateformesComponent } from './features/career/plateformes/presentation/pages/plateformes/plateformes';
 import { InterviewPrepComponent } from './features/career/interview/presentation/pages/interview-prep/interview-prep';
 import { ObservatoireComponent } from './features/career/observatoire/presentation/pages/observatoire/observatoire';
+import { ToolkitComponent } from './features/career/toolkit/presentation/pages/toolkit/toolkit';
 import { SourcesComponent } from './features/sources/sources.component';
 import { AboutComponent } from './features/about/about.component';
 import { BlogListComponent } from './features/blog/presentation/pages/blog-list/blog-list.component';
@@ -53,6 +54,9 @@ export const routes: Routes = [
       { path: 'career/interview', component: InterviewPrepComponent },
       { path: 'carriere/observatoire', component: ObservatoireComponent },
       { path: 'career/observatory', component: ObservatoireComponent },
+      // by project-worker 2026-08-21 — q176
+      { path: 'carriere/toolkit', component: ToolkitComponent },
+      { path: 'career/toolkit', component: ToolkitComponent },
       { path: 'sources', component: SourcesComponent },
       { path: 'about', component: AboutComponent },
       { path: 'blog', component: BlogListComponent },

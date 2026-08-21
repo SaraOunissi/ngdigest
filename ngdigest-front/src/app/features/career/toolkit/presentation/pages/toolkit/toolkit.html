@@ -1,0 +1,106 @@
+<!-- by project-worker 2026-08-21 -->
+<header class="wrap">
+  <nav class="dir-crumb" aria-label="Breadcrumb">
+    <a [routerLink]="careerRoute()">{{ 'toolkit.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="dir-crumb__current">{{ 'toolkit.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'toolkit.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">
+      {{ 'toolkit.hero.titleBefore' | translate
+      }}<span class="grad-text">{{ 'toolkit.hero.titleAccent' | translate }}</span
+      >{{ 'toolkit.hero.titleAfter' | translate }}
+    </h1>
+    <p class="phero__subtitle">{{ 'toolkit.hero.subtitle' | translate }}</p>
+  </div>
+
+  <div class="dir-banner" role="note">
+    <span class="dir-banner__ic" aria-hidden="true">↓</span>
+    <p>
+      <b>{{ 'toolkit.banner.title' | translate }}</b> {{ 'toolkit.banner.text' | translate }}
+    </p>
+  </div>
+</header>
+
+<main class="wrap dir-results">
+  @for (group of groups(); track group.category) {
+    <section class="tk-family">
+      <div class="tk-family__head">
+        <span class="kicker">{{ 'toolkit.family.' + group.category + '.kicker' | translate }}</span>
+        <h2 class="tk-family__title">{{ 'toolkit.family.' + group.category + '.title' | translate }}</h2>
+        <p class="tk-family__intro">{{ 'toolkit.family.' + group.category + '.intro' | translate }}</p>
+      </div>
+
+      <div class="tk-grid">
+        @for (card of group.cards; track card.asset.id) {
+          <article class="tk-card">
+            <div class="tk-card__head">
+              <h3 class="tk-card__title">{{ card.asset.title[languageService.lang()] }}</h3>
+              <span class="tk-card__effort">{{ card.asset.effort[languageService.lang()] }}</span>
+            </div>
+
+            <p class="tk-card__blurb">{{ card.asset.blurb[languageService.lang()] }}</p>
+
+            <ul class="tk-card__points">
+              @for (highlight of card.asset.highlights; track highlight.fr) {
+                <li>{{ highlight[languageService.lang()] }}</li>
+              }
+            </ul>
+
+            <div class="tk-card__foot">
+              @if (card.primary; as primary) {
+                <a
+                  class="tk-dl"
+                  [href]="primary.path"
+                  [attr.download]="downloadName(primary)"
+                  [attr.aria-label]="
+                    ('toolkit.download.aria' | translate) + ' ' + card.asset.title[languageService.lang()]
+                  "
+                >
+                  <span class="tk-dl__ic" aria-hidden="true">↓</span>
+                  {{ 'toolkit.download.primary' | translate }}
+                  <span class="tk-dl__meta">{{ 'toolkit.download.markdown' | translate }}</span>
+                </a>
+              }
+              @if (card.secondary; as secondary) {
+                <a class="tk-dl tk-dl--ghost" [href]="secondary.path" [attr.download]="downloadName(secondary)">
+                  {{ 'toolkit.download.other' | translate }} ({{ secondary.lang === 'fr' ? 'FR' : 'EN' }})
+                </a>
+              }
+              <span class="tk-card__updated"> {{ 'toolkit.updated' | translate }} {{ card.asset.updated }} </span>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
+</main>
+
+<section class="wrap">
+  <aside class="tk-how" aria-labelledby="tk-how-title">
+    <h2 class="tk-how__title" id="tk-how-title">{{ 'toolkit.how.title' | translate }}</h2>
+    <ol class="tk-how__steps">
+      <li>{{ 'toolkit.how.step1' | translate }}</li>
+      <li>{{ 'toolkit.how.step2' | translate }}</li>
+      <li>{{ 'toolkit.how.step3' | translate }}</li>
+    </ol>
+    <p class="tk-how__note">{{ 'toolkit.how.note' | translate }}</p>
+  </aside>
+
+  <div class="tk-cross">
+    <a class="tk-xlink" [routerLink]="interviewRoute()">
+      <div class="tk-xlink__txt">
+        <h3>{{ 'toolkit.cross.interviewTitle' | translate }}</h3>
+        <p>{{ 'toolkit.cross.interviewText' | translate }}</p>
+      </div>
+    </a>
+    <a class="tk-xlink" [routerLink]="platformsRoute()">
+      <div class="tk-xlink__txt">
+        <h3>{{ 'toolkit.cross.platformsTitle' | translate }}</h3>
+        <p>{{ 'toolkit.cross.platformsText' | translate }}</p>
+      </div>
+    </a>
+  </div>
+</section>

@@ -97,6 +97,17 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
   },
+  // by project-worker 2026-08-21 — q176
+  {
+    path: ':lang/carriere/toolkit',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/career/toolkit',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
   {
     path: ':lang/sources',
     renderMode: RenderMode.Prerender,
