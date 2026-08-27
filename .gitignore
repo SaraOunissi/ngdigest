@@ -160,3 +160,12 @@ Thumbs.db
 # Claude Code local config / session state
 /.claude/
 
+
+# Docs de cadrage prives — repo ngdigest PUBLIC, ne JAMAIS committer ici.
+# Copie de reference : D:\dev\_state\_briefs\ngdigest\ (repo prive)
+# by project-worker 2026-08-26
+/CARRIERE_ROADMAP.md
+/FORMATIONS_ANGULAR.md
+/HANDOFF_CLAUDE_DESIGN_2026-06-11.md
+/JOBS_PEPITES_EMPLOYEURS_REMOTE.md
+/WORKERS_PEPITES_OBSERVATOIRE_CADRAGE.md
