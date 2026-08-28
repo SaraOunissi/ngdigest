@@ -286,6 +286,8 @@ export const INTERVIEW_QUESTIONS: readonly InterviewQuestion[] = [
       en: '**Standalone**, no hesitation, since Angular 15+ (default since 17). Less boilerplate, explicit per-component imports, `loadComponent` lazy loading, better tree-shaking. `NgModule` only survives in legacy code to migrate.',
     },
   },
+  // Correction factuelle : zoneless est stable depuis v20.2 (2025-08-20), pas depuis la v22.
+  // Sources : blog.angular.dev (Summer Update 2025) + notes de version 20.2. by project-worker 2026-08-29
   {
     id: '2.8',
     theme: 'angular-core',
@@ -298,8 +300,8 @@ export const INTERVIEW_QUESTIONS: readonly InterviewQuestion[] = [
       en: 'Zoneless Angular — what changes in practice?',
     },
     a: {
-      fr: "Plus de `zone.js` qui patche les API async → la change detection n'est plus déclenchée « automatiquement partout ». On rend l'état **explicitement réactif** via **signals** (un `set`/`update` notifie le framework). Bénéfices : bundles plus légers, CD plus prévisible et performante. 💡 **2026** : zoneless **stable** en Angular 22 (`provideZonelessChangeDetection()`).",
-      en: 'No more `zone.js` patching async APIs → change detection isn\'t triggered "magically everywhere". State becomes **explicitly reactive** via **signals** (a `set`/`update` notifies the framework). Benefits: lighter bundles, more predictable & performant CD. 💡 **2026**: zoneless is **stable** in Angular 22 (`provideZonelessChangeDetection()`).',
+      fr: "Plus de `zone.js` qui patche les API async → la change detection n'est plus déclenchée « automatiquement partout ». On rend l'état **explicitement réactif** via **signals** (un `set`/`update` notifie le framework). Bénéfices : bundles plus légers, CD plus prévisible et performante. 💡 **Le repère de date qui compte en entretien** : `provideZonelessChangeDetection()` est **stable depuis Angular 20.2** (août 2025) — pas depuis la v22. Depuis **Angular 21**, `zone.js` n'est plus inclus dans une app neuve par défaut. Dire « zoneless c'est tout neuf en 2026 » te fait passer pour quelqu'un qui n'a pas suivi.",
+      en: 'No more `zone.js` patching async APIs → change detection isn\'t triggered "magically everywhere". State becomes **explicitly reactive** via **signals** (a `set`/`update` notifies the framework). Benefits: lighter bundles, more predictable & performant CD. 💡 **The date to get right in an interview**: `provideZonelessChangeDetection()` has been **stable since Angular 20.2** (August 2025) — not since v22. Since **Angular 21**, `zone.js` is no longer part of a new app by default. Calling zoneless "brand new in 2026" signals you haven\'t kept up.',
     },
   },
   {
@@ -830,6 +832,9 @@ export const INTERVIEW_QUESTIONS: readonly InterviewQuestion[] = [
       en: '3 paths: **Angular Elements** (small components), **Stencil** (framework-agnostic design system), or shared **headless logic** (pure TS lib) + per-framework UI, sharing styles (CSS/tokens).',
     },
   },
+  // Correction factuelle : depuis Angular 22 (juin 2026) OnPush est le DÉFAUT et `Default`
+  // s'appelle `Eager`. Source primaire : RFC angular/angular discussion #66779 (27/01/2026,
+  // statut [Complete]) + doc API ChangeDetectionStrategy. by project-worker 2026-08-29
   {
     id: '12.1',
     theme: 'performance',
@@ -842,8 +847,8 @@ export const INTERVIEW_QUESTIONS: readonly InterviewQuestion[] = [
       en: 'Tell me about change detection (and OnPush).',
     },
     a: {
-      fr: "Mécanisme par lequel Angular détecte les changements d'état et met à jour le DOM. **Default** : vérifie tout l'arbre à chaque événement (simple, peut être lent). **OnPush** : ne vérifie que si un `input()` change (nouvelle réf), un événement interne survient, un Observable émet (async), ou `markForCheck()`. 💡 **2026** : en **zoneless**, les **signals** déclenchent la CD de façon granulaire — bascule à OnPush + signals par défaut.",
-      en: 'The mechanism by which Angular detects state changes and updates the DOM. **Default**: checks the whole tree on each event (simple, can be slow). **OnPush**: checks only when an `input()` changes (new ref), an internal event fires, an Observable emits (async), or `markForCheck()`. 💡 **2026**: in **zoneless**, **signals** trigger CD granularly — go OnPush + signals by default.',
+      fr: "Mécanisme par lequel Angular détecte les changements d'état et met à jour le DOM. **OnPush** : le composant n'est vérifié que si un `input()` change (nouvelle réf), qu'un événement interne survient, qu'un Observable émet (async pipe), ou sur `markForCheck()`. **`Eager`** : vérifie tout le sous-arbre à chaque événement (simple, peut être lent). ⚠️ **Depuis Angular 22 (juin 2026), OnPush est la stratégie PAR DÉFAUT** : un composant qui ne dit rien est en OnPush, et l'ancien `Default` a été **renommé `Eager`** (le nom décrit enfin ce que la stratégie fait). `ng update` tague les composants existants en `Eager` pour que rien ne casse le jour de la migration. 💡 En entretien, la vraie question devient donc l'inverse d'avant : ce n'est plus « pourquoi passer à OnPush ? » mais « **où as-tu dû garder `Eager`, et pourquoi ?** » (mutation d'objet en place, lib tierce qui écrit dans le state sans notifier, code hors zone Angular).",
+      en: 'The mechanism by which Angular detects state changes and updates the DOM. **OnPush**: the component is checked only when an `input()` changes (new ref), an internal event fires, an Observable emits (async pipe), or on `markForCheck()`. **`Eager`**: checks the whole subtree on every event (simple, can be slow). ⚠️ **Since Angular 22 (June 2026), OnPush is the DEFAULT strategy**: a component that says nothing is OnPush, and the old `Default` was **renamed `Eager`** (the name finally describes what it does). `ng update` tags existing components as `Eager` so nothing breaks on migration day. 💡 In interviews the question flips: it is no longer "why move to OnPush?" but "**where did you have to keep `Eager`, and why?**" (in-place object mutation, third-party lib writing to state without notifying, code running outside Angular).',
     },
   },
   {
