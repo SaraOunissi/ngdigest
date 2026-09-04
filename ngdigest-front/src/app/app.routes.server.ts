@@ -129,9 +129,7 @@ export const serverRoutes: ServerRoute[] = [
     path: ':lang/blog/:slug',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () =>
-      Promise.resolve(
-        BLOG_DATA.map((article) => ({ lang: article.lang, slug: article.slug })),
-      ),
+      Promise.resolve(BLOG_DATA.map((article) => ({ lang: article.lang, slug: article.slug }))),
   },
   // Jobs list pages
   {
@@ -148,8 +146,34 @@ export const serverRoutes: ServerRoute[] = [
         JOBS_DATA.flatMap((job) => [
           { lang: 'fr', slug: job.slug },
           { lang: 'en', slug: job.slug },
-        ]),
+        ])
       ),
+  },
+  // by project-worker 2026-09-04 — q178
+  // Legal pages (FR + EN slugs). They existed in `app.routes.ts` but had no
+  // entry here, so they fell through to the `**` catch-all and were rendered
+  // on demand by the Node/serverless handler instead of being prerendered —
+  // for two pages whose content is fully static. Prerendering them removes
+  // that runtime cost and gives crawlers plain HTML.
+  {
+    path: ':lang/mentions-legales',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/politique-confidentialite',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/legal-notice',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
+  },
+  {
+    path: ':lang/privacy-policy',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
   },
   // Catch-all (/, /resources, unknown langs → redirect to /fr)
   { path: '**', renderMode: RenderMode.Server },
