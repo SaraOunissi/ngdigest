@@ -169,3 +169,12 @@ Thumbs.db
 /HANDOFF_CLAUDE_DESIGN_2026-06-11.md
 /JOBS_PEPITES_EMPLOYEURS_REMOTE.md
 /WORKERS_PEPITES_OBSERVATOIRE_CADRAGE.md
+
+# Common engineering gate
+.engineering/artifacts/
+.engineering/node_modules/
+.engineering/__pycache__/
+
+# Current technical plan is shareable; historical private notes are not
+!PLAN.md
+docs/history/

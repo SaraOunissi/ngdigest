@@ -1,0 +1,47 @@
+# Product CI configuration. Shared runner is generated; keep check names stable.
+name: Quality
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+        working-directory: ngdigest-front
+      - run: npm ci
+        working-directory: ngdigest-back
+      - run: npm ci --prefix .engineering
+      - run: npx playwright install --with-deps chromium
+        working-directory: .engineering
+      - name: Contract, tests, build, mobile and accessibility
+        env:
+          QUALITY_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD' }}
+        run: python .engineering/quality.py --mode all
+      - name: Preserve evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-evidence
+          path: |
+            .engineering/artifacts/
+            test-results/
+          retention-days: 14
