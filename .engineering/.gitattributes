@@ -1,0 +1,2 @@
+# Distributed files are hashed byte for byte; Git must preserve their bytes.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

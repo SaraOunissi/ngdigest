@@ -2,6 +2,7 @@
   "version": 2,
   "profile": "browser",
   "sha256": {
+    ".gitattributes": "876609236fc67c3185e68200583038b6792ae3ef4d7b632e15279e7d2c21c076",
     "quality.py": "f944d840bc4e66e3186e604b2561b3cb26e38bba21e49d60e049dfd2233962ba",
     "security.py": "09b9a02f36c9c510d85a66f45773edf62ae393244916d741cc4f70b6f868dee1",
     "browser.mjs": "77caa930a24185a55efc05e0a19e92310e0476de94efd301322cca1391e64e16",
