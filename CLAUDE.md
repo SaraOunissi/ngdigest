@@ -1,5 +1,9 @@
 # NgDigest - Conventions & Rules
 
+État courant et prochaines actions : [PLAN.md](PLAN.md). Ce fichier contient les
+conventions durables ; ne pas y empiler de comptes rendus de séance.
+Socle qualité : `D:/dev/_state/engineering/STANDARD.md` ; configuration locale : `.engineering/quality.json`.
+
 ## CSS / SCSS
 
 - **BEM** (Block Element Modifier) naming for all CSS classes: `.resource-card`, `.resource-card__title`, `.resource-card--highlighted`

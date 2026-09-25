@@ -160,3 +160,11 @@ Thumbs.db
 # Claude Code local config / session state
 /.claude/
 
+# Common engineering gate
+.engineering/artifacts/
+.engineering/node_modules/
+.engineering/__pycache__/
+
+# Current technical plan is shareable; historical private notes are not
+!PLAN.md
+docs/history/

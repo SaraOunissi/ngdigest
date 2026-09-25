@@ -1,5 +1,7 @@
 # NgDigest
 
+État courant, prochaines actions et preuves : [PLAN.md](PLAN.md).
+
 **Angular tech-watch aggregator** — automatically collects, scores, and surfaces the best Angular resources from across the web.
 
 🌐 **Live at [ngdigest.co](https://ngdigest.co)**

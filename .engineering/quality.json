@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "project": "ngdigest",
+  "frontend": "ngdigest-front",
+  "design_tokens": [
+    "ngdigest-front/src/styles/_colors.scss",
+    "ngdigest-front/src/styles/_variables.scss"
+  ],
+  "translations": [
+    [
+      "ngdigest-front/public/assets/i18n/fr.json",
+      "ngdigest-front/public/assets/i18n/en.json"
+    ]
+  ],
+  "commands": [
+    {
+      "id": "backend-lint",
+      "group": "lint",
+      "cwd": "ngdigest-back",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "{src,apps,libs,test}/**/*.ts"
+      ]
+    },
+    {
+      "id": "backend-tests",
+      "group": "test",
+      "cwd": "ngdigest-back",
+      "command": [
+        "node",
+        "node_modules/jest/bin/jest.js",
+        "--runInBand"
+      ]
+    },
+    {
+      "id": "backend-build",
+      "group": "build",
+      "cwd": "ngdigest-back",
+      "command": [
+        "node",
+        "node_modules/@nestjs/cli/bin/nest.js",
+        "build"
+      ]
+    },
+    {
+      "id": "content-tests",
+      "group": "test",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "--test",
+        "scripts/**/*.test.mjs"
+      ]
+    },
+    {
+      "id": "frontend-lint",
+      "group": "lint",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "node_modules/@angular/cli/bin/ng.js",
+        "lint"
+      ]
+    },
+    {
+      "id": "frontend-tests",
+      "group": "test",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "node_modules/@angular/cli/bin/ng.js",
+        "test",
+        "--watch=false"
+      ]
+    },
+    {
+      "id": "generate-blog",
+      "group": "build",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "scripts/generate-blog-index.mjs"
+      ]
+    },
+    {
+      "id": "generate-jobs",
+      "group": "build",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "scripts/generate-jobs-data.mjs"
+      ]
+    },
+    {
+      "id": "frontend-build",
+      "group": "build",
+      "cwd": "ngdigest-front",
+      "command": [
+        "node",
+        "node_modules/@angular/cli/bin/ng.js",
+        "build"
+      ],
+      "timeout": 420
+    },
+    {
+      "id": "mobile-a11y",
+      "group": "browser",
+      "cwd": ".",
+      "command": [
+        "node",
+        ".engineering/browser.mjs"
+      ],
+      "timeout": 300
+    }
+  ],
+  "browser": {
+    "build_dir": "ngdigest-front/dist/ngdigest-app/browser",
+    "routes": [
+      "/fr",
+      "/fr/carriere",
+      "/en/career"
+    ],
+    "fixtures": [
+      {
+        "path": "/api/listings",
+        "body": {
+          "total": 0,
+          "items": [],
+          "facets": {}
+        }
+      },
+      {
+        "path": "/api/sources",
+        "body": {
+          "data": []
+        }
+      },
+      {
+        "path": "/api/resources",
+        "body": {
+          "data": [],
+          "meta": {
+            "total": 0,
+            "page": 1,
+            "limit": 20
+          }
+        }
+      },
+      {
+        "path": "/api/stats",
+        "body": {
+          "total": 0
+        }
+      }
+    ]
+  },
+  "backend_node": "ngdigest-back",
+  "tooling_profile": "browser"
+}
