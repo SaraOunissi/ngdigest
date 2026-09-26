@@ -160,7 +160,6 @@ Thumbs.db
 # Claude Code local config / session state
 /.claude/
 
-
 # Docs de cadrage prives — repo ngdigest PUBLIC, ne JAMAIS committer ici.
 # Copie de reference : D:\dev\_state\_briefs\ngdigest\ (repo prive)
 # by project-worker 2026-08-26

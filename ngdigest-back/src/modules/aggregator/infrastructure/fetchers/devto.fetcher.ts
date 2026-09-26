@@ -44,9 +44,7 @@ export class DevtoFetcher {
       });
 
       if (!response.ok) {
-        throw new Error(
-          `Dev.to API responded with status ${response.status}`,
-        );
+        throw new Error(`Dev.to API responded with status ${response.status}`);
       }
 
       const articles = (await response.json()) as DevtoArticle[];

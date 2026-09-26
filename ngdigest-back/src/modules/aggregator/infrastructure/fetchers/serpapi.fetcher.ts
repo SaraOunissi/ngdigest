@@ -35,25 +35,43 @@ function parseFlexibleDate(raw: string): Date | null {
     const unit = relativeMatch[2].toLowerCase();
     const date = new Date();
     switch (unit) {
-      case 'day':   date.setDate(date.getDate() - amount);         break;
-      case 'week':  date.setDate(date.getDate() - amount * 7);     break;
-      case 'month': date.setMonth(date.getMonth() - amount);       break;
-      case 'year':  date.setFullYear(date.getFullYear() - amount); break;
+      case 'day':
+        date.setDate(date.getDate() - amount);
+        break;
+      case 'week':
+        date.setDate(date.getDate() - amount * 7);
+        break;
+      case 'month':
+        date.setMonth(date.getMonth() - amount);
+        break;
+      case 'year':
+        date.setFullYear(date.getFullYear() - amount);
+        break;
     }
     return date;
   }
 
   // 3. Relative dates FR: "il y a N jour(s)|semaine(s)|mois|an(s)"
-  const frenchRelativeMatch = /il y a\s+(\d+)\s+(jour|semaine|mois|an)s?/i.exec(raw);
+  const frenchRelativeMatch = /il y a\s+(\d+)\s+(jour|semaine|mois|an)s?/i.exec(
+    raw,
+  );
   if (frenchRelativeMatch) {
     const amount = parseInt(frenchRelativeMatch[1], 10);
     const unit = frenchRelativeMatch[2].toLowerCase();
     const date = new Date();
     switch (unit) {
-      case 'jour':    date.setDate(date.getDate() - amount);         break;
-      case 'semaine': date.setDate(date.getDate() - amount * 7);     break;
-      case 'mois':    date.setMonth(date.getMonth() - amount);       break;
-      case 'an':      date.setFullYear(date.getFullYear() - amount); break;
+      case 'jour':
+        date.setDate(date.getDate() - amount);
+        break;
+      case 'semaine':
+        date.setDate(date.getDate() - amount * 7);
+        break;
+      case 'mois':
+        date.setMonth(date.getMonth() - amount);
+        break;
+      case 'an':
+        date.setFullYear(date.getFullYear() - amount);
+        break;
     }
     return date;
   }
@@ -69,7 +87,9 @@ function parseFlexibleDate(raw: string): Date | null {
  * Note: most Google organic results do NOT include dates in snippets.
  */
 function extractDateFromSnippet(snippet: string): Date | null {
-  const match = /^([A-Z][a-z]{2,8}\.?\s+\d{1,2},?\s+\d{4})\s*[·—\s]/u.exec(snippet);
+  const match = /^([A-Z][a-z]{2,8}\.?\s+\d{1,2},?\s+\d{4})\s*[·—\s]/u.exec(
+    snippet,
+  );
   if (!match) return null;
   const date = new Date(match[1].replace('.', ''));
   return isNaN(date.getTime()) ? null : date;
@@ -101,7 +121,15 @@ function extractDateFromUrl(url: string): Date | null {
     const year = parseInt(match[1], 10);
     const month = parseInt(match[2], 10);
     const day = match[3] ? parseInt(match[3], 10) : 1;
-    if (year < 2015 || year > 2030 || month < 1 || month > 12 || day < 1 || day > 31) return null;
+    if (
+      year < 2015 ||
+      year > 2030 ||
+      month < 1 ||
+      month > 12 ||
+      day < 1 ||
+      day > 31
+    )
+      return null;
     const date = new Date(Date.UTC(year, month - 1, day));
     return isNaN(date.getTime()) ? null : date;
   } catch {

@@ -1,3 +1,4 @@
+<main>
 <header class="wrap">
   <nav class="career-crumb" aria-label="Breadcrumb">
     <a [routerLink]="homeRoute()">{{ 'career.crumbHome' | translate }}</a>
@@ -31,10 +32,12 @@
   </div>
 </header>
 
-<main class="wrap">
+<section class="wrap">
   <div class="career-path">
     @for (step of steps(); track step.id) {
       <app-career-step [step]="step" />
     }
   </div>
+</section>
+
 </main>

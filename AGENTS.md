@@ -5,4 +5,3 @@ Les tokens propres au produit sont déclarés dans `.engineering/quality.json`.
 Référencer les preuves datées dans PLAN.md ; distinguer local, vérifié, déployé et vérifié en production.
 Les accès locaux de travail prévus sont D:/dev et D:/Documents/Projects. Vérifier les droits effectifs.
 <!-- /engineering-entry -->
-

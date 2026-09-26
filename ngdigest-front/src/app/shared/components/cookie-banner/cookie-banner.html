@@ -1,4 +1,4 @@
-<div class="cookie-banner" role="dialog" aria-live="polite">
+<div class="cookie-banner" role="region" [attr.aria-label]="'cookies.message' | translate" aria-live="polite">
   <p class="cookie-banner__message">{{ 'cookies.message' | translate }}</p>
   <div class="cookie-banner__actions">
     <button class="cookie-banner__btn cookie-banner__btn--refuse" type="button" (click)="onRefuse()">

@@ -43,10 +43,7 @@ export function detectLanguageFromUrl(
   if (!url) return 'unknown';
   try {
     const hostname = new URL(url).hostname.replace(/^www\./, '');
-    if (
-      hostname.endsWith('.fr') ||
-      (FRENCH_DOMAINS as readonly string[]).includes(hostname)
-    ) {
+    if (hostname.endsWith('.fr') || FRENCH_DOMAINS.includes(hostname)) {
       return 'fr';
     }
     return 'en';
@@ -65,7 +62,7 @@ export function detectLanguageFromUrl(
  */
 export function detectLanguageFromText(
   title: string | undefined,
-  snippet?: string | undefined,
+  snippet?: string,
 ): ResourceLanguage | null {
   if (!title) return null;
   const combined = snippet ? `${title} ${snippet}` : title;
@@ -108,8 +105,8 @@ export function detectLanguageFromTitle(
  */
 export function detectLanguage(
   url: string | undefined,
-  title?: string | undefined,
-  snippet?: string | undefined,
+  title?: string,
+  snippet?: string,
 ): ResourceLanguage {
   const urlLang = detectLanguageFromUrl(url);
 

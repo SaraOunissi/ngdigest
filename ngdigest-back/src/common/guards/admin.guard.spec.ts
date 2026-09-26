@@ -9,14 +9,18 @@ describe('AdminGuard', () => {
 
   /** Builds an ExecutionContext whose request carries the given admin key header. */
   function contextWithKey(key: string | undefined): ExecutionContext {
-    const request = { headers: key === undefined ? {} : { 'x-admin-key': key } };
+    const request = {
+      headers: key === undefined ? {} : { 'x-admin-key': key },
+    };
     return {
       switchToHttp: () => ({ getRequest: () => request }),
     } as unknown as ExecutionContext;
   }
 
   beforeEach(() => {
-    mockConfigService = { get: jest.fn() } as unknown as jest.Mocked<ConfigService>;
+    mockConfigService = {
+      get: jest.fn(),
+    } as unknown as jest.Mocked<ConfigService>;
     guard = new AdminGuard(mockConfigService);
   });
 
@@ -33,7 +37,9 @@ describe('AdminGuard', () => {
     mockConfigService.get.mockReturnValue('s3cret');
 
     // Act + Assert
-    expect(() => guard.canActivate(contextWithKey('wrong'))).toThrow(UnauthorizedException);
+    expect(() => guard.canActivate(contextWithKey('wrong'))).toThrow(
+      UnauthorizedException,
+    );
   });
 
   it('rejects when no key header is present', () => {
@@ -41,7 +47,9 @@ describe('AdminGuard', () => {
     mockConfigService.get.mockReturnValue('s3cret');
 
     // Act + Assert
-    expect(() => guard.canActivate(contextWithKey(undefined))).toThrow(UnauthorizedException);
+    expect(() => guard.canActivate(contextWithKey(undefined))).toThrow(
+      UnauthorizedException,
+    );
   });
 
   it('rejects (fails closed) when ADMIN_SECRET is not configured', () => {
@@ -49,7 +57,11 @@ describe('AdminGuard', () => {
     mockConfigService.get.mockReturnValue(undefined);
 
     // Act + Assert — even an empty provided key must not open the door.
-    expect(() => guard.canActivate(contextWithKey(undefined))).toThrow(UnauthorizedException);
-    expect(() => guard.canActivate(contextWithKey(''))).toThrow(UnauthorizedException);
+    expect(() => guard.canActivate(contextWithKey(undefined))).toThrow(
+      UnauthorizedException,
+    );
+    expect(() => guard.canActivate(contextWithKey(''))).toThrow(
+      UnauthorizedException,
+    );
   });
 });

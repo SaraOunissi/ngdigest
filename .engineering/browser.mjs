@@ -27,8 +27,13 @@ try {
     await context.route('**/*', async route => {
       const url = new URL(route.request().url());
       if (url.origin === server.url && !url.pathname.startsWith('/api/')) return route.continue();
-      const fixture = (config.browser.fixtures || []).find(item => url.pathname === item.path);
-      if (fixture) return route.fulfill({ status: fixture.status || 200, contentType: 'application/json', body: JSON.stringify(fixture.body) });
+      const fixture = (config.browser.fixtures || []).find(item =>
+        item.url_pattern ? new RegExp(item.url_pattern).test(url.href) : url.pathname === item.path);
+      if (fixture) return route.fulfill({
+        status: fixture.status || 200,
+        contentType: fixture.content_type || 'application/json',
+        body: fixture.content_type ? fixture.body : JSON.stringify(fixture.body),
+      });
       return route.abort('blockedbyclient');
     });
     const page = await context.newPage();
