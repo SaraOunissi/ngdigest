@@ -1,4 +1,4 @@
-import { OBSERVATOIRE_2026_07 } from './observatoire.data';
+import { OBSERVATOIRE_2026_07, OBSERVATOIRE_2026_09, OBSERVATOIRE_LATEST } from './observatoire.data';
 
 /**
  * Guards the editorial invariant of the observatoire: it publishes ONLY the
@@ -56,5 +56,54 @@ describe('OBSERVATOIRE_2026_07 snapshot', () => {
       'combos',
       'seniorite',
     ]);
+  });
+});
+
+describe('OBSERVATOIRE_2026_09 snapshot', () => {
+  const snapshot = OBSERVATOIRE_2026_09;
+
+  it('is the latest snapshot rendered by the page, dated from the 22/09 reading', () => {
+    expect(OBSERVATOIRE_LATEST).toBe(snapshot);
+    expect(snapshot.meta.id).toBe('2026-09');
+    expect(snapshot.meta.collected).toBe('2026-09-22');
+    expect(snapshot.meta.baseline).toBe(false);
+  });
+
+  it('keeps every figure published, bilingual and backed by a dated https source', () => {
+    for (const kpi of snapshot.kpis) {
+      expect(kpi.status).toBe('published');
+      expect(kpi.value.fr).toBeTruthy();
+      expect(kpi.value.en).toBeTruthy();
+    }
+    const sources = [
+      ...snapshot.kpis.map((kpi) => kpi.source),
+      ...snapshot.charts.flatMap((chart) => [chart.source, ...(chart.source2 ? [chart.source2] : [])]),
+      ...snapshot.sources,
+    ];
+    for (const source of sources) {
+      expect(source.url).toMatch(/^https:\/\//);
+      expect(source.date).toBeTruthy();
+    }
+  });
+
+  it('extends the July series instead of reshaping it (no August point is invented)', () => {
+    const technos = snapshot.charts.find((chart) => chart.id === 'technos');
+    for (const serie of technos?.series ?? []) {
+      expect(serie.points.map((point) => point.t)).toEqual(['2026-07', '2026-09']);
+    }
+    const angular = technos?.series?.find((serie) => serie.key === 'angular');
+    expect(angular?.points.map((point) => point.v)).toEqual([20.7, 22.1]);
+  });
+
+  it('shows the 22/09 Malt daily rates by seniority around the 536 € average', () => {
+    const salary = snapshot.charts.find((chart) => chart.id === 'salary');
+    expect(salary?.bars?.map((bar) => bar.value)).toEqual([299, 407, 536, 582]);
+    expect(salary?.avg).toBe(536);
+  });
+
+  it('keeps the same chart layout as July so the page selects them by id', () => {
+    expect(snapshot.charts.map((chart) => chart.id)).toEqual(
+      OBSERVATOIRE_2026_07.charts.map((chart) => chart.id),
+    );
   });
 });
