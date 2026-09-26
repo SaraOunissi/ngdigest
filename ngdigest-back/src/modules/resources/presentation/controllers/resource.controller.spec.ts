@@ -66,7 +66,13 @@ describe('ResourceController', () => {
         meta: { page: 2, limit: 10, total: 0 },
       });
 
-      const query = { page: 2, limit: 10, source: 'Angular Blog', sort: 'score', lang: 'fr' as const };
+      const query = {
+        page: 2,
+        limit: 10,
+        source: 'Angular Blog',
+        sort: 'score',
+        lang: 'fr' as const,
+      };
 
       // Act
       await controller.findAll(query);

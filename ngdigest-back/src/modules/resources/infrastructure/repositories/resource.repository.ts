@@ -29,9 +29,7 @@ export class ResourceRepository {
    * When lang='en', only English resources are returned.
    * When lang='all' (default), all languages are returned.
    */
-  async findPaginated(
-    query: PaginatedQuery,
-  ): Promise<[Resource[], number]> {
+  async findPaginated(query: PaginatedQuery): Promise<[Resource[], number]> {
     const filter: Record<string, unknown> = { archivedAt: null };
 
     if (query.source) {
@@ -104,7 +102,12 @@ export class ResourceRepository {
               },
             },
           },
-          { $sort: { [sortField]: sortDirection as 1 | -1, _langPriority: 1 as 1 } },
+          {
+            $sort: {
+              [sortField]: sortDirection as 1 | -1,
+              _langPriority: 1 as const,
+            },
+          },
           { $skip: skip },
           { $limit: limit },
           { $unset: '_langPriority' },

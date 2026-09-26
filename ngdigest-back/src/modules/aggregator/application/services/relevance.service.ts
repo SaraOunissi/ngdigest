@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Resource, ScoreDetails } from '../../../resources/domain/entities/resource.entity.js';
+import {
+  Resource,
+  ScoreDetails,
+} from '../../../resources/domain/entities/resource.entity.js';
 import { TRUSTED_DOMAINS } from '../../infrastructure/config/trusted-sources.js';
 
 const ANGULAR_KEYWORDS: readonly string[] = [
   // Angular version releases — "What is new in Angular 21.1", "Angular 20 est là"
   'what is new',
   "what's new",
-  'nouveaut',      // covers "nouveautés", "nouveauté" (FR)
-  'angular 1',     // Angular v10–19
-  'angular 2',     // Angular v20–29
+  'nouveaut', // covers "nouveautés", "nouveauté" (FR)
+  'angular 1', // Angular v10–19
+  'angular 2', // Angular v20–29
   // Core concepts (EN)
   'signal',
   'signals',
@@ -26,20 +29,20 @@ const ANGULAR_KEYWORDS: readonly string[] = [
   'httpresource',
   // Core concepts (FR) — many FR Angular articles miss the +2 keyword bonus
   // because they use French equivalents in their titles
-  'composant',           // "composants standalone", "nouveau composant"
-  'autonome',            // FR for "standalone"
+  'composant', // "composants standalone", "nouveau composant"
+  'autonome', // FR for "standalone"
   'détection de changement',
   'flux de contrôle',
-  'paresseux',           // "chargement paresseux" = lazy
+  'paresseux', // "chargement paresseux" = lazy
   'chargement différé',
   'hydratation',
-  'injection',           // "injection de dépendance"
-  'gabarit',             // FR for "template"
+  'injection', // "injection de dépendance"
+  'gabarit', // FR for "template"
   'formulaire réactif',
   'pipe',
   'migration',
-  'sans zone',           // FR for "zoneless"
-  'rendu côté serveur',  // FR for "SSR"
+  'sans zone', // FR for "zoneless"
+  'rendu côté serveur', // FR for "SSR"
 ] as const;
 
 const MIN_RELEVANCE_SCORE = 3;
@@ -59,7 +62,9 @@ export class RelevanceService {
   scoreArticle(article: Partial<Resource>): number {
     const { trustedSource, angularKeyword, isRecent } =
       this.getScoreDetails(article);
-    return (trustedSource ? 3 : 0) + (angularKeyword ? 2 : 0) + (isRecent ? 1 : 0);
+    return (
+      (trustedSource ? 3 : 0) + (angularKeyword ? 2 : 0) + (isRecent ? 1 : 0)
+    );
   }
 
   /** Returns the individual score criteria for an article. */
@@ -79,7 +84,7 @@ export class RelevanceService {
     if (!url) return false;
     try {
       const hostname = new URL(url).hostname.replace(/^www\./, '');
-      return (TRUSTED_DOMAINS as readonly string[]).some(
+      return TRUSTED_DOMAINS.some(
         (domain) => hostname === domain || hostname.endsWith(`.${domain}`),
       );
     } catch {

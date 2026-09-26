@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ResourceRepository } from '../../infrastructure/repositories/resource.repository.js';
-import { Resource, ScoreDetails } from '../../domain/entities/resource.entity.js';
+import {
+  Resource,
+  ScoreDetails,
+} from '../../domain/entities/resource.entity.js';
 import { ApiMeta } from '../../../../common/interfaces/api-response.interface.js';
 
 export interface GetResourcesQuery {
@@ -49,9 +52,8 @@ export class GetResourcesUseCase {
     });
 
     const items: ResourceItem[] = rawItems.map((item) => {
-      const plain = (
-        item as Resource & { toObject?: () => Resource }
-      ).toObject?.() ?? (item as Resource);
+      const plain =
+        (item as Resource & { toObject?: () => Resource }).toObject?.() ?? item;
       return {
         ...plain,
         scoreDetails: plain.scoreDetails ?? inferScoreDetails(plain.score),

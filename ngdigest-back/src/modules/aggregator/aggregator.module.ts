@@ -11,6 +11,13 @@ import { AggregatorController } from './presentation/controllers/aggregator.cont
 @Module({
   imports: [ResourcesModule],
   controllers: [AggregatorController],
-  providers: [SerpapiNewsFetcher, DevtoFetcher, RssFetcher, AggregationService, RelevanceService, RetentionService],
+  providers: [
+    SerpapiNewsFetcher,
+    DevtoFetcher,
+    RssFetcher,
+    AggregationService,
+    RelevanceService,
+    RetentionService,
+  ],
 })
 export class AggregatorModule {}

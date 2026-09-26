@@ -18,7 +18,11 @@ describe('PurgeNonArticlesUseCase', () => {
   it('archives active non-article pages and leaves real articles untouched', async () => {
     // Arrange
     const resources = [
-      mockResource('a1', 'https://blog.angular.dev/angular-21-signals-guide', 'Angular 21 Signals Guide'),
+      mockResource(
+        'a1',
+        'https://blog.angular.dev/angular-21-signals-guide',
+        'Angular 21 Signals Guide',
+      ),
       mockResource('a2', 'https://blog.angular.dev/latest', 'Latest'), // listing page
       mockResource('a3', 'https://blog.angular.dev/tag/rxjs', 'RxJS'), // tag page
     ];
@@ -36,7 +40,12 @@ describe('PurgeNonArticlesUseCase', () => {
   it('skips resources that are already archived', async () => {
     // Arrange — a non-article that is already archived must not be re-archived.
     const resources = [
-      mockResource('a1', 'https://blog.angular.dev/latest', 'Latest', new Date('2026-01-01')),
+      mockResource(
+        'a1',
+        'https://blog.angular.dev/latest',
+        'Latest',
+        new Date('2026-01-01'),
+      ),
       mockResource('a2', 'https://blog.angular.dev/tag/rxjs', 'RxJS'),
     ];
     mockRepository.findAll.mockResolvedValue(resources);
@@ -52,7 +61,11 @@ describe('PurgeNonArticlesUseCase', () => {
   it('archives nothing when every active resource is a real article', async () => {
     // Arrange
     const resources = [
-      mockResource('a1', 'https://blog.angular.dev/signals-in-depth', 'Signals in depth'),
+      mockResource(
+        'a1',
+        'https://blog.angular.dev/signals-in-depth',
+        'Signals in depth',
+      ),
     ];
     mockRepository.findAll.mockResolvedValue(resources);
     mockRepository.archiveByIds.mockResolvedValue(0);

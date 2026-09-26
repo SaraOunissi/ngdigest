@@ -1,9 +1,5 @@
 import { AllExceptionsFilter } from './all-exceptions.filter.js';
-import {
-  ArgumentsHost,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 
 describe('AllExceptionsFilter', () => {
   let filter: AllExceptionsFilter;
@@ -52,7 +48,9 @@ describe('AllExceptionsFilter', () => {
     filter.catch(exception, mockHost);
 
     // Assert
-    expect(mockResponse.status).toHaveBeenCalledWith(HttpStatus.INTERNAL_SERVER_ERROR);
+    expect(mockResponse.status).toHaveBeenCalledWith(
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
     expect(mockResponse.json).toHaveBeenCalledWith({
       error: {
         message: 'An unexpected error occurred',
