@@ -24,9 +24,13 @@ tests du socle et installation des hooks restent centraux.
 
 ## Validation du 26 septembre
 
-Correctifs en cours de vérification : dépendances compatibles, lint, navigation clavier,
+Correctifs de consolidation validés sur `4e3ee7b` : dépendances, lint, navigation clavier,
 repères HTML et contrastes via les tokens propres au produit. Aucun seuil du gate abaissé.
-Les résultats CI de cette PR attestent la version testée ; attendre tous les checks verts.
+[Quality Gate](https://github.com/SaraOunissi/ngdigest/actions/runs/36240828585) et
+[Dependency Audit](https://github.com/SaraOunissi/ngdigest/actions/runs/36240828483) réussis.
+La [PR #1](https://github.com/SaraOunissi/ngdigest/pull/1) porte la fusion et les preuves
+ultérieures de livraison. La validation synthétique couvre les routes déclarées dans
+quality.json sur 320, 390, 768 et 1440 px ; elle ne valide pas toutes les données réelles.
 
 ## Preuves et livraison
 
@@ -34,10 +38,11 @@ Lancer `python .engineering/quality.py --mode all` avec les dépendances déclar
 dans `.github/workflows/quality.yml`. Preuves locales ignorées par Git :
 `.engineering/artifacts/` (`all.json` ou rapport partiel daté). Les rapports antérieurs
 à la modification du socle ne valident pas automatiquement sa nouvelle version.
-Bilan mesuré et limites : `D:/dev/_state/_audits/engineering/2026-09-21.md`.
+Historique initial : `D:/dev/_state/_audits/engineering/2026-09-21.md`.
+Suivi courant de consolidation : `D:/dev/_state/_audits/consolidation-2026-09-26/README.md`.
 
 Distinguer local, testé, déployé et vérifié en production. Les branches distantes
 étaient non protégées lors de l'audit ; les hooks locaux bloquent main/master sur
 ce poste, sans protéger GitHub ni les autres outils. Revoir la diff, résoudre les
 contrôles rouges, publier les workflows et configurer les contrôles requis avant
-de déclarer la production protégée. Cette passe n'a effectué aucun déploiement.
+de déclarer la production protégée. Le succès CI ne prouve pas une livraison : vérifier le déploiement associé à la fusion et les parcours publics ; consigner la preuve dans la PR.
