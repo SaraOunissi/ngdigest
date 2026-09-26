@@ -4,9 +4,9 @@ describe('isLikelyArticle', () => {
   describe('rejects non-article pages', () => {
     it('rejects the reported Angular blog "Latest" listing page', () => {
       // Arrange / Act / Assert
-      expect(
-        isLikelyArticle('https://blog.angular.dev/latest', 'Latest'),
-      ).toBe(false);
+      expect(isLikelyArticle('https://blog.angular.dev/latest', 'Latest')).toBe(
+        false,
+      );
     });
 
     it('rejects a generic navigation title regardless of URL', () => {
@@ -22,18 +22,18 @@ describe('isLikelyArticle', () => {
     });
 
     it('rejects tag / tagged listing pages', () => {
-      expect(
-        isLikelyArticle('https://medium.com/tag/angular', 'Angular'),
-      ).toBe(false);
+      expect(isLikelyArticle('https://medium.com/tag/angular', 'Angular')).toBe(
+        false,
+      );
       expect(
         isLikelyArticle('https://blog.angular.dev/tagged/angular', 'Angular'),
       ).toBe(false);
     });
 
     it('rejects a bare Medium author profile page', () => {
-      expect(
-        isLikelyArticle('https://medium.com/@angular', 'Angular'),
-      ).toBe(false);
+      expect(isLikelyArticle('https://medium.com/@angular', 'Angular')).toBe(
+        false,
+      );
     });
 
     it('rejects pagination and search pages', () => {

@@ -17,7 +17,10 @@ describe('GetResourcesUseCase', () => {
 
   it('should return paginated resources with default parameters', async () => {
     // Arrange
-    const mockResources = [createMockResource('Resource 1'), createMockResource('Resource 2')];
+    const mockResources = [
+      createMockResource('Resource 1'),
+      createMockResource('Resource 2'),
+    ];
     mockRepository.findPaginated.mockResolvedValue([mockResources, 2]);
 
     // Act
@@ -40,7 +43,13 @@ describe('GetResourcesUseCase', () => {
     mockRepository.findPaginated.mockResolvedValue([[], 0]);
 
     // Act
-    await useCase.execute({ page: 3, limit: 10, source: 'Angular Blog', sort: 'score', lang: 'en' });
+    await useCase.execute({
+      page: 3,
+      limit: 10,
+      source: 'Angular Blog',
+      sort: 'score',
+      lang: 'en',
+    });
 
     // Assert
     expect(mockRepository.findPaginated).toHaveBeenCalledWith({
@@ -81,7 +90,10 @@ describe('GetResourcesUseCase', () => {
     // Arrange
     const frResource = createMockResource('FR Resource', 'fr');
     const enResource = createMockResource('EN Resource', 'en');
-    mockRepository.findPaginated.mockResolvedValue([[frResource, enResource], 2]);
+    mockRepository.findPaginated.mockResolvedValue([
+      [frResource, enResource],
+      2,
+    ]);
 
     // Act
     const result = await useCase.execute({ lang: 'fr' });

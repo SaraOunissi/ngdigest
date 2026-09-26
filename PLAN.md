@@ -22,6 +22,12 @@ tests du socle et installation des hooks restent centraux.
   conserver la page dans NgDigest tant qu'un second consommateur du contrat de données n'est pas éprouvé.
 - Auditer séparément la fraîcheur par source ; un flux public accessible ne valide pas tous les collecteurs.
 
+## Validation du 26 septembre
+
+Correctifs en cours de vérification : dépendances compatibles, lint, navigation clavier,
+repères HTML et contrastes via les tokens propres au produit. Aucun seuil du gate abaissé.
+Les résultats CI de cette PR attestent la version testée ; attendre tous les checks verts.
+
 ## Preuves et livraison
 
 Lancer `python .engineering/quality.py --mode all` avec les dépendances déclarées

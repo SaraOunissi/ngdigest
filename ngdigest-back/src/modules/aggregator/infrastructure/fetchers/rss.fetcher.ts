@@ -125,7 +125,10 @@ export class RssFetcher {
     const feed = await this.parser.parseURL(config.url);
     return feed.items
       .filter((item) => Boolean(item.title) && Boolean(item.link))
-      .filter((item) => !config.titleFilter || config.titleFilter.test(item.title ?? ''))
+      .filter(
+        (item) =>
+          !config.titleFilter || config.titleFilter.test(item.title ?? ''),
+      )
       .map((item) => ({
         title: item.title ?? '',
         url: item.link ?? '',

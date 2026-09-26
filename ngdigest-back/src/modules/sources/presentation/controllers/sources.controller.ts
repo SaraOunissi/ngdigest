@@ -1,4 +1,11 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { CreateSuggestionUseCase } from '../../application/use-cases/create-suggestion.use-case.js';
 import { SuggestSourceDto } from '../dtos/suggest-source.dto.js';
 import { TRUSTED_DOMAINS } from '../../../aggregator/infrastructure/config/trusted-sources.js';

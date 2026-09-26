@@ -4,7 +4,10 @@ import { Transform } from 'class-transformer';
 export class SuggestSourceDto {
   @IsUrl(
     { protocols: ['http', 'https'], require_protocol: true },
-    { message: "URL invalide. Seuls les protocoles http et https sont acceptés." },
+    {
+      message:
+        'URL invalide. Seuls les protocoles http et https sont acceptés.',
+    },
   )
   @MaxLength(500, { message: 'URL trop longue (max 500 caractères).' })
   @Transform(({ value }: { value: unknown }) =>
