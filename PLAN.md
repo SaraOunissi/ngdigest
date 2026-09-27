@@ -20,8 +20,8 @@ limites sont conservées dans
 `D:/dev/_state/_audits/consolidation-2026-09-26/README.md`.
 
 La réconciliation des travaux locaux a ensuite été fusionnée le 27 septembre dans
-la PR 2. `main` est propre et synchronisé sur `3b44ff6`. Le déploiement de ce commit
-précis n'a pas été revalidé pendant la passe documentaire du 27 septembre ; ne pas
+la PR 2 ; la PR 3 a réaligné ce PLAN. Le déploiement de cette version produit
+n'a pas été revalidé pendant la passe documentaire du 27 septembre ; ne pas
 le déduire de la seule fusion.
 
 ## Organisation
