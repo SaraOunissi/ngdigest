@@ -1,24 +1,15 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './features/home/presentation/pages/home/home';
-import { ResourceListComponent } from './features/resources/presentation/pages/resource-list/resource-list';
-import { CatalogComponent } from './features/catalog/presentation/pages/catalog/catalog';
-import { CareerHubComponent } from './features/career/presentation/pages/career-hub/career-hub';
-import { GuideComponent } from './features/career/guide/presentation/pages/guide/guide';
-import { CertificationsComponent } from './features/career/certifications/presentation/pages/certifications/certifications';
-import { FormationsComponent } from './features/career/formations/presentation/pages/formations/formations';
-import { PlateformesComponent } from './features/career/plateformes/presentation/pages/plateformes/plateformes';
-import { InterviewPrepComponent } from './features/career/interview/presentation/pages/interview-prep/interview-prep';
-import { ObservatoireComponent } from './features/career/observatoire/presentation/pages/observatoire/observatoire';
-import { SourcesComponent } from './features/sources/sources.component';
-import { AboutComponent } from './features/about/about.component';
-import { BlogListComponent } from './features/blog/presentation/pages/blog-list/blog-list.component';
-import { BlogPostComponent } from './features/blog/presentation/pages/blog-post/blog-post.component';
-import { JobListComponent } from './features/jobs/presentation/pages/job-list/job-list.component';
-import { JobDetailComponent } from './features/jobs/presentation/pages/job-detail/job-detail.component';
-import { LegalNoticeComponent } from './features/legal/presentation/legal-notice/legal-notice.component';
-import { PrivacyPolicyComponent } from './features/legal/presentation/privacy-policy/privacy-policy.component';
 import { langGuard } from './core/guards/lang.guard';
 import { langResolver } from './core/resolvers/lang.resolver';
+
+// by project-worker 2026-09-04 — q178 (lazy-load)
+// Every page component is now loaded with `loadComponent` instead of a
+// top-level `import` + `component:`. Before this change the 19 page
+// components (and their templates + component styles) were all pulled into
+// the initial browser bundle, because a static import at the top of the
+// routes file is reachable from `main.ts` on every route.
+// Prerendering is unaffected: `app.routes.server.ts` keeps the same paths,
+// and the SSR renderer awaits the dynamic import like the browser does.
 
 export const routes: Routes = [
   { path: '', redirectTo: 'fr', pathMatch: 'full' },
@@ -32,39 +23,217 @@ export const routes: Routes = [
     resolve: { lang: langResolver },
     children: [
       // New career-copilot home.
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./features/home/presentation/pages/home/home').then((m) => m.HomeComponent),
+      },
       // Tech-watch feed (former home).
-      { path: 'veille', component: ResourceListComponent },
+      {
+        path: 'veille',
+        loadComponent: () =>
+          import('./features/resources/presentation/pages/resource-list/resource-list').then(
+            (m) => m.ResourceListComponent
+          ),
+      },
       // Creators & blogs catalog (FR + EN slugs).
-      { path: 'ressources', component: CatalogComponent },
-      { path: 'resources', component: CatalogComponent },
+      {
+        path: 'ressources',
+        loadComponent: () =>
+          import('./features/catalog/presentation/pages/catalog/catalog').then(
+            (m) => m.CatalogComponent
+          ),
+      },
+      {
+        path: 'resources',
+        loadComponent: () =>
+          import('./features/catalog/presentation/pages/catalog/catalog').then(
+            (m) => m.CatalogComponent
+          ),
+      },
       // Career hub + sub-pages (FR + EN slugs).
-      { path: 'carriere', component: CareerHubComponent },
-      { path: 'career', component: CareerHubComponent },
-      { path: 'carriere/guide', component: GuideComponent },
-      { path: 'career/guide', component: GuideComponent },
-      { path: 'carriere/certifications', component: CertificationsComponent },
-      { path: 'career/certifications', component: CertificationsComponent },
-      { path: 'carriere/formations', component: FormationsComponent },
-      { path: 'career/trainings', component: FormationsComponent },
-      { path: 'carriere/plateformes', component: PlateformesComponent },
-      { path: 'career/platforms', component: PlateformesComponent },
-      { path: 'carriere/entretien', component: InterviewPrepComponent },
-      { path: 'career/interview', component: InterviewPrepComponent },
-      { path: 'carriere/observatoire', component: ObservatoireComponent },
-      { path: 'career/observatory', component: ObservatoireComponent },
-      { path: 'sources', component: SourcesComponent },
-      { path: 'about', component: AboutComponent },
-      { path: 'blog', component: BlogListComponent },
-      { path: 'blog/:slug', component: BlogPostComponent },
-      { path: 'jobs', component: JobListComponent },
-      { path: 'jobs/:slug', component: JobDetailComponent },
+      {
+        path: 'carriere',
+        loadComponent: () =>
+          import('./features/career/presentation/pages/career-hub/career-hub').then(
+            (m) => m.CareerHubComponent
+          ),
+      },
+      {
+        path: 'career',
+        loadComponent: () =>
+          import('./features/career/presentation/pages/career-hub/career-hub').then(
+            (m) => m.CareerHubComponent
+          ),
+      },
+      {
+        path: 'carriere/guide',
+        loadComponent: () =>
+          import('./features/career/guide/presentation/pages/guide/guide').then(
+            (m) => m.GuideComponent
+          ),
+      },
+      {
+        path: 'career/guide',
+        loadComponent: () =>
+          import('./features/career/guide/presentation/pages/guide/guide').then(
+            (m) => m.GuideComponent
+          ),
+      },
+      {
+        path: 'carriere/certifications',
+        loadComponent: () =>
+          import('./features/career/certifications/presentation/pages/certifications/certifications').then(
+            (m) => m.CertificationsComponent
+          ),
+      },
+      {
+        path: 'career/certifications',
+        loadComponent: () =>
+          import('./features/career/certifications/presentation/pages/certifications/certifications').then(
+            (m) => m.CertificationsComponent
+          ),
+      },
+      {
+        path: 'carriere/formations',
+        loadComponent: () =>
+          import('./features/career/formations/presentation/pages/formations/formations').then(
+            (m) => m.FormationsComponent
+          ),
+      },
+      {
+        path: 'career/trainings',
+        loadComponent: () =>
+          import('./features/career/formations/presentation/pages/formations/formations').then(
+            (m) => m.FormationsComponent
+          ),
+      },
+      {
+        path: 'carriere/plateformes',
+        loadComponent: () =>
+          import('./features/career/plateformes/presentation/pages/plateformes/plateformes').then(
+            (m) => m.PlateformesComponent
+          ),
+      },
+      {
+        path: 'career/platforms',
+        loadComponent: () =>
+          import('./features/career/plateformes/presentation/pages/plateformes/plateformes').then(
+            (m) => m.PlateformesComponent
+          ),
+      },
+      {
+        path: 'carriere/entretien',
+        loadComponent: () =>
+          import('./features/career/interview/presentation/pages/interview-prep/interview-prep').then(
+            (m) => m.InterviewPrepComponent
+          ),
+      },
+      {
+        path: 'career/interview',
+        loadComponent: () =>
+          import('./features/career/interview/presentation/pages/interview-prep/interview-prep').then(
+            (m) => m.InterviewPrepComponent
+          ),
+      },
+      {
+        path: 'carriere/observatoire',
+        loadComponent: () =>
+          import('./features/career/observatoire/presentation/pages/observatoire/observatoire').then(
+            (m) => m.ObservatoireComponent
+          ),
+      },
+      {
+        path: 'career/observatory',
+        loadComponent: () =>
+          import('./features/career/observatoire/presentation/pages/observatoire/observatoire').then(
+            (m) => m.ObservatoireComponent
+          ),
+      },
+      // by project-worker 2026-08-21 — q176
+      {
+        path: 'carriere/toolkit',
+        loadComponent: () =>
+          import('./features/career/toolkit/presentation/pages/toolkit/toolkit').then(
+            (m) => m.ToolkitComponent
+          ),
+      },
+      {
+        path: 'career/toolkit',
+        loadComponent: () =>
+          import('./features/career/toolkit/presentation/pages/toolkit/toolkit').then(
+            (m) => m.ToolkitComponent
+          ),
+      },
+      {
+        path: 'sources',
+        loadComponent: () =>
+          import('./features/sources/sources.component').then((m) => m.SourcesComponent),
+      },
+      {
+        path: 'about',
+        loadComponent: () =>
+          import('./features/about/about.component').then((m) => m.AboutComponent),
+      },
+      {
+        path: 'blog',
+        loadComponent: () =>
+          import('./features/blog/presentation/pages/blog-list/blog-list.component').then(
+            (m) => m.BlogListComponent
+          ),
+      },
+      {
+        path: 'blog/:slug',
+        loadComponent: () =>
+          import('./features/blog/presentation/pages/blog-post/blog-post.component').then(
+            (m) => m.BlogPostComponent
+          ),
+      },
+      {
+        path: 'jobs',
+        loadComponent: () =>
+          import('./features/jobs/presentation/pages/job-list/job-list.component').then(
+            (m) => m.JobListComponent
+          ),
+      },
+      {
+        path: 'jobs/:slug',
+        loadComponent: () =>
+          import('./features/jobs/presentation/pages/job-detail/job-detail.component').then(
+            (m) => m.JobDetailComponent
+          ),
+      },
       // Legal pages — FR slugs
-      { path: 'mentions-legales', component: LegalNoticeComponent },
-      { path: 'politique-confidentialite', component: PrivacyPolicyComponent },
+      {
+        path: 'mentions-legales',
+        loadComponent: () =>
+          import('./features/legal/presentation/legal-notice/legal-notice.component').then(
+            (m) => m.LegalNoticeComponent
+          ),
+      },
+      {
+        path: 'politique-confidentialite',
+        loadComponent: () =>
+          import('./features/legal/presentation/privacy-policy/privacy-policy.component').then(
+            (m) => m.PrivacyPolicyComponent
+          ),
+      },
       // Legal pages — EN slugs
-      { path: 'legal-notice', component: LegalNoticeComponent },
-      { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      {
+        path: 'legal-notice',
+        loadComponent: () =>
+          import('./features/legal/presentation/legal-notice/legal-notice.component').then(
+            (m) => m.LegalNoticeComponent
+          ),
+      },
+      {
+        path: 'privacy-policy',
+        loadComponent: () =>
+          import('./features/legal/presentation/privacy-policy/privacy-policy.component').then(
+            (m) => m.PrivacyPolicyComponent
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: 'fr' },

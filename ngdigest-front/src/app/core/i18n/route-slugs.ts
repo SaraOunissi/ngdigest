@@ -29,6 +29,8 @@ export const ROUTE_SLUG_TRANSLATIONS: Record<string, string> = {
   'career/interview': 'carriere/entretien',
   'carriere/observatoire': 'career/observatory',
   'career/observatory': 'carriere/observatoire',
+  'carriere/toolkit': 'career/toolkit',
+  'career/toolkit': 'carriere/toolkit',
   'mentions-legales': 'legal-notice',
   'legal-notice': 'mentions-legales',
   'politique-confidentialite': 'privacy-policy',

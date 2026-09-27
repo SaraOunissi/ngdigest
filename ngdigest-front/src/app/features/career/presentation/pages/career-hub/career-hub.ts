@@ -20,7 +20,7 @@ const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   en: 'From upskilling to a signed offer: a clear path to grow your Angular career — training, certifications, interview prep, gigs.',
 };
 
-interface StepDefinition {
+export interface StepDefinition {
   readonly id: string;
   readonly icon: IconName;
   readonly status: ChipStatus;
@@ -29,10 +29,12 @@ interface StepDefinition {
 
 /**
  * Guided path (direction B). The Guide is the entry step ("start here").
- * Observatoire & Toolkit are deferred until their data is ready, so they are
- * marked "soon" and not clickable yet.
+ * Every step is live: Toolkit shipped with its downloadable assets on 2026-08-21.
+ *
+ * Exported so `nav-consistency.spec.ts` can assert that a step is never
+ * advertised as "soon" once its page is actually routable.
  */
-const STEP_DEFINITIONS: readonly StepDefinition[] = [
+export const STEP_DEFINITIONS: readonly StepDefinition[] = [
   {
     id: 'guide',
     icon: 'guide',
@@ -69,7 +71,13 @@ const STEP_DEFINITIONS: readonly StepDefinition[] = [
     status: 'new',
     route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', lang === 'fr' ? 'observatoire' : 'observatory'],
   },
-  { id: 'toolkit', icon: 'toolkit', status: 'soon', route: () => null },
+  // by project-worker 2026-08-21 — q176: page shipped, step flipped soon → live
+  {
+    id: 'toolkit',
+    icon: 'toolkit',
+    status: 'new',
+    route: (lang) => ['/', lang, lang === 'fr' ? 'carriere' : 'career', 'toolkit'],
+  },
 ];
 
 @Component({

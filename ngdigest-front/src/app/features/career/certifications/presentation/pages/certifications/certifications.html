@@ -103,7 +103,8 @@
   </div>
 
   <div class="cert-cross">
-    <a class="cert-xlink" [routerLink]="careerRoute()">
+    <!-- by project-worker 2026-08-19 — q174.4: was careerRoute() while formations was "soon" -->
+    <a class="cert-xlink" [routerLink]="formationsRoute()">
       <div class="cert-xlink__txt">
         <h3>{{ 'certifications.cross.prepTitle' | translate }}</h3>
         <p>{{ 'certifications.cross.prepText' | translate }}</p>

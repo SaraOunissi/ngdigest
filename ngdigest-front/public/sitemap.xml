@@ -181,6 +181,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Career toolkit (downloadable assets) FR -->
+  <url>
+    <loc>https://ngdigest.co/fr/carriere/toolkit</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/toolkit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/toolkit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/toolkit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Career toolkit (downloadable assets) EN -->
+  <url>
+    <loc>https://ngdigest.co/en/career/toolkit</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://ngdigest.co/fr/carriere/toolkit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ngdigest.co/en/career/toolkit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ngdigest.co/fr/carriere/toolkit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- Sources FR -->
   <url>
     <loc>https://ngdigest.co/fr/sources</loc>

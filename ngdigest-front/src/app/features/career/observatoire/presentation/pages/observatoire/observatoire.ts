@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import { SoonBlock } from '../../../domain/models/observatoire.model';
-import { OBSERVATOIRE_2026_07 } from '../../../infrastructure/observatoire.data';
+import { OBSERVATOIRE_LATEST } from '../../../infrastructure/observatoire.data';
 import { StatCardComponent } from '../../components/stat-card/stat-card';
 import { ChartBlockComponent } from '../../components/chart-block/chart-block';
 
@@ -29,7 +29,7 @@ interface ResolvedSoon {
 
 /**
  * /carriere/observatoire — an editorial dashboard on the French front-end
- * market. Renders one dated snapshot (2026-07); every figure is public and
+ * market. Renders the latest dated snapshot (`OBSERVATOIRE_LATEST`); every figure is public and
  * sourced, and unsourceable metrics show as "coming soon" blocks.
  */
 @Component({
@@ -43,7 +43,7 @@ export class ObservatoireComponent {
   protected readonly languageService = inject(LanguageService);
   private readonly seoService = inject(SeoService);
 
-  protected readonly snapshot = OBSERVATOIRE_2026_07;
+  protected readonly snapshot = OBSERVATOIRE_LATEST;
   protected readonly kpis = this.snapshot.kpis;
   protected readonly sources = this.snapshot.sources;
 
