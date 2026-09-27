@@ -6,7 +6,7 @@ Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
 ## Version publiée
 
-La consolidation a été fusionnée le 26 septembre 2026 dans la
+La première consolidation a été fusionnée le 26 septembre 2026 dans la
 [PR #1](https://github.com/SaraOunissi/ngdigest/pull/1). Les contrôles publiés ont
 validé les dépendances, le lint, la navigation clavier, les repères HTML et les
 contrastes, sans abaisser les seuils :
@@ -19,11 +19,10 @@ Elle ne valide pas chaque donnée réelle ni chaque collecteur. Les preuves et l
 limites sont conservées dans
 `D:/dev/_state/_audits/consolidation-2026-09-26/README.md`.
 
-## Branche de réconciliation
-
-La branche `codex/reconcile-native-2026-09-26` rassemble les travaux locaux historiques,
-la consolidation publiée et le snapshot Observatoire de septembre. Elle doit passer
-le Quality Gate et une revue de confidentialité avant sa PR sur ce dépôt public.
+La réconciliation des travaux locaux a ensuite été fusionnée le 27 septembre dans
+la PR 2. `main` est propre et synchronisé sur `3b44ff6`. Le déploiement de ce commit
+précis n'a pas été revalidé pendant la passe documentaire du 27 septembre ; ne pas
+le déduire de la seule fusion.
 
 ## Organisation
 
