@@ -15,6 +15,7 @@ import { SeoService } from '@core/services/seo.service';
 import { environment } from '../../../../../../environments/environment';
 import { GetJobsUseCase } from '../../../application/use-cases/get-jobs.use-case';
 import { Job } from '../../../domain/models/job.model';
+import { resolveJobCompensation } from '../../../domain/models/job-compensation';
 
 const BASE_URL = environment.baseUrl;
 
@@ -72,11 +73,7 @@ export class JobDetailComponent {
   }
 
   protected compensationLabel(job: Job): string {
-    const isEn = this.languageService.lang() === 'en';
-    if (job.type === 'CDI') {
-      return (isEn && job.salaryEn) ? job.salaryEn : (job.salary ?? '');
-    }
-    return job.tjm ?? '';
+    return resolveJobCompensation(job, this.languageService.lang()).label;
   }
 
   protected editorialNoteFor(job: Job): string {
@@ -92,7 +89,7 @@ export class JobDetailComponent {
   }
 
   protected compensationKindKey(job: Job): string {
-    return job.type === 'CDI' ? 'jobs.fact.salary' : 'jobs.fact.tjm';
+    return `jobs.fact.${resolveJobCompensation(job, this.languageService.lang()).kind}`;
   }
 
   protected remoteLabelKey(remote: Job['remote']): string {

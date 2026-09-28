@@ -15,6 +15,7 @@ import {
   readFrontmatterField,
   setFrontmatterStatus,
   evaluateOffer,
+  isSoftNotFound,
 } from './jobs-link-health.mjs';
 
 test('classifyOutcome: 2xx and 3xx are ALIVE', () => {
@@ -183,4 +184,12 @@ test('evaluateOffer: an inconclusive probe never expires an offer', () => {
   assert.equal(result.health.strikes, FAIL_THRESHOLD);
   assert.equal(result.newStatus, 'active');
   assert.equal(result.changed, false);
+});
+
+test('isSoftNotFound: ATS redirects to a not-found page count as dead', () => {
+  assert.equal(isSoftNotFound('https://apply.workable.com/hospitable/?not_found=true'), true);
+  assert.equal(isSoftNotFound('https://jobs.lever.co/acme?error=true'), true);
+  assert.equal(isSoftNotFound('https://jobs.lever.co/acme/123'), false);
+  assert.equal(isSoftNotFound(undefined), false);
+  assert.equal(isSoftNotFound('not a url'), false);
 });

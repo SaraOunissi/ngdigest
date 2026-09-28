@@ -18,7 +18,7 @@ stack:
   - Ionic (bonus)
 url: "https://apply.workable.com/hospitable/j/3C7DDE165E/"
 scannedAt: 2026-06-01
-status: active
+status: expired
 tags:
   - angular
   - remote-eu

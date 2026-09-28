@@ -34,6 +34,24 @@ Le socle maintenu est `D:/dev/_state/engineering/`. `.engineering/quality.json` 
 la configuration propre au projet ; les autres fichiers de `.engineering/` sont les
 exports minimaux nécessaires à une CI autonome, contrôlés par hash.
 
+## Offres /jobs
+
+Le 28/09/2026, le board ne comptait plus aucune offre active : les sélections de la
+veille `pepites-job` restaient dans `_carriere/jobs-a-publier/` depuis juin. Rattrapage
+sur la branche `feat/jobs-rattrapage-2026-09-28` : 6 offres re-vérifiées à la source le
+28/09 (Agicap, Dougs, Builder.io, SerpApi ×2, ViaBill), Hospitable passée en `expired`.
+
+- La veille écrit désormais directement dans `ngdigest-front/src/content/jobs/`
+  (un fichier bilingue par offre, voir `_schema.md`), sans commande git.
+- `scripts/lib/jobs-schema.mjs` fait échouer `generate-jobs-data` (prebuild) si une
+  offre ne respecte pas le contrat ; tests dans `jobs-schema.test.mjs`.
+- Une offre freelance payée à l'année affiche son montant annuel
+  (`domain/models/job-compensation.ts`).
+- Le moniteur de liens traite une redirection `?not_found=true` comme un lien mort.
+
+Statut : réalisé et testé localement ; fusion, déploiement et affichage en production
+restent à vérifier.
+
 ## Prochaines passes produit
 
 - Valider la fraîcheur et les volumes du snapshot Observatoire de septembre avant publication.

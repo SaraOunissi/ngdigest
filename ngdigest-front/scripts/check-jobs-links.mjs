@@ -26,6 +26,7 @@ import {
   evaluateOffer,
   readFrontmatterField,
   setFrontmatterStatus,
+  isSoftNotFound,
 } from './lib/jobs-link-health.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -65,6 +66,10 @@ async function probeOnce(url) {
       // Retry with GET when HEAD is not supported by the origin.
       if (method === 'HEAD' && (response.status === 405 || response.status === 501)) {
         continue;
+      }
+      // A redirect to a generic "offer not found" page is a dead link, not a 200.
+      if (response.ok && isSoftNotFound(response.url)) {
+        return { status: 404, networkError: false };
       }
       return { status: response.status, networkError: false };
     } catch {

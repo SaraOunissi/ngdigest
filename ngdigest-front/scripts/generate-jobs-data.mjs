@@ -13,6 +13,8 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
 
+import { toIsoDate, validateJobCollection } from './lib/jobs-schema.mjs';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -21,15 +23,8 @@ const CONTENT_DIR = join(ROOT, 'src', 'content', 'jobs');
 const OUTPUT_DIR = join(ROOT, 'src', 'app', 'features', 'jobs', 'infrastructure');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'jobs-data.generated.ts');
 
-/** Normalises a YAML date value to an ISO `YYYY-MM-DD` string. */
-function toIsoDate(value) {
-  if (value instanceof Date) {
-    return value.toISOString().slice(0, 10);
-  }
-  return String(value);
-}
-
 const jobs = [];
+const parsedEntries = [];
 
 let files;
 try {
@@ -42,6 +37,7 @@ try {
 for (const file of files.filter((f) => f.endsWith('.md') && !f.startsWith('_'))) {
   const raw = await readFile(join(CONTENT_DIR, file), 'utf-8');
   const { data: frontmatter } = matter(raw);
+  parsedEntries.push({ fileName: file, frontmatter });
 
   const entry = {
     slug: frontmatter['slug'],
@@ -70,6 +66,15 @@ for (const file of files.filter((f) => f.endsWith('.md') && !f.startsWith('_')))
   if (frontmatter['salaryEn']) entry.salaryEn = frontmatter['salaryEn'];
 
   jobs.push(entry);
+}
+
+// Fail the build on a malformed offer rather than publishing a broken card.
+const { errors, warnings } = validateJobCollection(parsedEntries);
+for (const warning of warnings) console.warn(`[jobs] warning: ${warning}`);
+if (errors.length > 0) {
+  for (const error of errors) console.error(`[jobs] error: ${error}`);
+  console.error(`[jobs] ${errors.length} invalid field(s) in src/content/jobs — see _schema.md`);
+  process.exit(1);
 }
 
 // Sort jobs: most recently scanned first

@@ -164,3 +164,21 @@ export function evaluateOffer({ currentStatus, previousHealth, probe }) {
     changed: newStatus !== currentStatus,
   };
 }
+
+/**
+ * Some ATS answer a closed offer with a 200 on a generic page after a redirect
+ * (e.g. Workable → `?not_found=true`). Treat those final URLs as a 404 so the
+ * weekly monitor can expire them.
+ *
+ * @param {string | null | undefined} finalUrl URL after redirects
+ * @returns {boolean}
+ */
+export function isSoftNotFound(finalUrl) {
+  if (!finalUrl) return false;
+  try {
+    const parsed = new URL(finalUrl);
+    return parsed.searchParams.get('not_found') === 'true' || parsed.searchParams.get('error') === 'true';
+  } catch {
+    return false;
+  }
+}
