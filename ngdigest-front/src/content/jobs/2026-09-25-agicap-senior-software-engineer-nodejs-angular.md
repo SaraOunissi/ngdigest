@@ -21,8 +21,8 @@ stack:
   - SQL Server
   - GCP
 url: "https://jobs.lever.co/agicap/17e34e47-fed3-44a3-9019-4b1af309f48c"
-scannedAt: 2026-09-28
-status: active
+scannedAt: 2026-10-02
+status: expired
 tags:
   - angular
   - remote-france

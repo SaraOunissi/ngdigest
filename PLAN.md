@@ -49,8 +49,26 @@ sur la branche `feat/jobs-rattrapage-2026-09-28` : 6 offres re-vérifiées à la
   (`domain/models/job-compensation.ts`).
 - Le moniteur de liens traite une redirection `?not_found=true` comme un lien mort.
 
-Statut : réalisé et testé localement ; fusion, déploiement et affichage en production
-restent à vérifier.
+Veille du 02/10/2026 : N2JSoft ajoutée
+(`2026-09-11-n2jsoft-developpeur-fullstack-confirme-dotnet-angular.md`, 40-50 k€, full
+remote FR) ; Agicap (404 Lever) et Builder.io (board Greenhouse vide) passées en
+`expired` ; ViaBill, Dougs et SerpApi ×2 re-vérifiées (`scannedAt` 2026-10-02).
+Board : 9 offres, **5 actives** (ViaBill, Dougs, SerpApi ×2, N2JSoft), 4 expirées
+(Agicap, Builder.io, Hospitable, Aircall).
+
+Statut au 03/10/2026 :
+
+- local : lot complet sur `feat/jobs-rattrapage-2026-09-28` (commit 3714664 + commit
+  de la veille du 02/10) ;
+- testé localement le 02/10 : `generate-jobs-data` (9 offres), `check:tag-jobs`,
+  `scripts/lib/*.test.mjs` 73/73, `observatoire/src/*.test.mjs` 65/65, `npm run build`
+  vert (79 routes prérendues) ; Quality Gate complet non exécuté en local ;
+- PR vers `main` : à ouvrir ;
+- fusion, déploiement et affichage des 5 offres en production : non faits.
+
+## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
+
+`observatoire/data/pepites-tagged.json` datait du 01/06 (2 offres) ; `npm run check:tag-jobs` sortait en échec. Régénéré le 02/10 par `npm run tag:jobs` après la veille du jour : 9 offres taguées (5 actives, 4 expirées), `generatedAt` 2026-10-02, vérification `--check` verte. Versionné avec le lot /jobs (même branche, même PR) ; non fusionné. Les snapshots mensuels `_drafts/observatoire-snapshots/` (brouillons privés) sont une autre source : leurs chiffres Free-Work (parts, variations) ont été recalculés sans écart, mais les compteurs eux-mêmes ne sont pas revérifiés. <!-- by project-worker 2026-10-01 -->
 
 ## Prochaines passes produit
 

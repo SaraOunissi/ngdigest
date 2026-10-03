@@ -23,7 +23,7 @@ export const JOBS_DATA: readonly Job[] = [
       "Node.js"
     ],
     "url": "https://jobs.lever.co/viabill/db393d02-e09b-4abc-a3d2-94e411e74618",
-    "scannedAt": "2026-09-28",
+    "scannedAt": "2026-10-02",
     "status": "active",
     "tags": [
       "angular",
@@ -61,8 +61,8 @@ export const JOBS_DATA: readonly Job[] = [
       "LLM"
     ],
     "url": "https://job-boards.greenhouse.io/builder/jobs/5359270004",
-    "scannedAt": "2026-09-28",
-    "status": "active",
+    "scannedAt": "2026-10-02",
+    "status": "expired",
     "tags": [
       "remote-emea",
       "salaire-affiche",
@@ -96,7 +96,7 @@ export const JOBS_DATA: readonly Job[] = [
       "DevRel"
     ],
     "url": "https://serpapi.com/careers/french-developer-advocate",
-    "scannedAt": "2026-09-28",
+    "scannedAt": "2026-10-02",
     "status": "active",
     "tags": [
       "devrel",
@@ -131,7 +131,7 @@ export const JOBS_DATA: readonly Job[] = [
       "DevRel"
     ],
     "url": "https://serpapi.com/careers/javascript-developer-advocate",
-    "scannedAt": "2026-09-28",
+    "scannedAt": "2026-10-02",
     "status": "active",
     "tags": [
       "devrel",
@@ -168,7 +168,7 @@ export const JOBS_DATA: readonly Job[] = [
       "GCP"
     ],
     "url": "https://careers.dougs.fr/jobs/8454141-senior-software-engineer-squad-portail-facturation-h-f",
-    "scannedAt": "2026-09-28",
+    "scannedAt": "2026-10-02",
     "status": "active",
     "tags": [
       "angular",
@@ -183,6 +183,43 @@ export const JOBS_DATA: readonly Job[] = [
     "editorialNoteEn": "Dougs is a new-generation French accounting firm (450 people including 90+\nengineers, 42,000 business clients) that builds its own app in-house: a product\ncompany, not a consultancy. The listing says « Entièrement à distance » (fully\nremote), with office, partial or full remote all possible and one team\ngathering per quarter in Bron. The role is full-stack with a genuine front-end\nhalf (Angular on the front, NestJS/PostgreSQL on the back) and the squad\nincludes a dedicated front-end expert. The subject: France's e-invoicing\nreform, so regulated product work. Requirements: 5 years full-stack, solid\nNestJS/TypeScript, PostgreSQL, comfortable in Angular, tests non-negotiable,\nDDD welcome. Posted pay: €50,000 – €55,000 per year. Process: two video calls,\na take-home test, a debrief with the team. The role is in French.\n",
     "locationEn": "France — fully remote (offices in Bron, near Lyon)",
     "salaryEn": "€50,000 – €55,000/year"
+  },
+  {
+    "slug": "n2jsoft-developpeur-fullstack-confirme-dotnet-angular",
+    "title": "Développeur fullstack confirmé H/F (C#, .Net, Angular)",
+    "company": "N2JSoft (N2F)",
+    "companyLogo": "",
+    "type": "CDI",
+    "remote": "100",
+    "zone": "FR",
+    "location": "France — full remote, une semaine sur site par trimestre (Montagnat, Ain)",
+    "language": "fr",
+    "salary": "40 000 – 50 000 €/an",
+    "tjm": null,
+    "stack": [
+      "Angular",
+      "TypeScript",
+      ".NET",
+      "C#",
+      "PostgreSQL",
+      "AWS"
+    ],
+    "url": "https://n2jsoft.recruitee.com/o/developpeur-fullstack-confirme-hf-c-net-angular-12",
+    "scannedAt": "2026-10-02",
+    "status": "active",
+    "tags": [
+      "angular",
+      "remote-france",
+      "salaire-affiche",
+      "dotnet",
+      "saas-b2b"
+    ],
+    "editorialHook": "Éditeur SaaS rentable, full remote avec une semaine par trimestre sur site, 40-50 k€ affichés et une migration Angular 16 → 21 en cours.",
+    "editorialNote": "N2JSoft édite N2F, un logiciel de notes de frais et de factures fournisseurs\n(20 000 clients, 1 million d'utilisateurs, 220 personnes dont 45 en tech) :\nun client final rentable, pas une ESN. Le poste est fullstack avec une vraie\nmoitié front : « Front : Angular 16/21 », .NET 10 et C# côté back, MSSQL,\nPostgreSQL et DynamoDB, sur AWS, en monolithe modulaire. Prérequis : 3 ans de\n.NET/C# et 2 ans d'Angular, donc un niveau confirmé plutôt que senior.\nLe télétravail est écrit noir sur blanc : full remote possible, avec une semaine\nde présence par trimestre prise en charge par l'entreprise. À savoir : si tu\nhabites à moins d'une heure de Montagnat (Ain), l'entreprise attend plutôt un ou\ndeux jours sur site par semaine. Rémunération affichée : 40 000 à 50 000 € brut\npar an. Process : test technique à la maison (7 jours), revue de code d'une heure,\nentretien avec le CTO.\n",
+    "editorialHookEn": "Profitable SaaS vendor, fully remote with one week on site per quarter, €40-50k posted and an Angular 16 → 21 migration under way.",
+    "editorialNoteEn": "N2JSoft builds N2F, an expense-report and supplier-invoice tool (20,000\ncustomers, 1 million users, 220 people including 45 in tech): a profitable\nproduct company, not a consultancy. The role is full-stack with a genuine\nfront-end half: « Front : Angular 16/21 », .NET 10 and C# on the back end,\nMSSQL, PostgreSQL and DynamoDB, on AWS, in a modular monolith. Requirements:\n3 years of .NET/C# and 2 years of Angular, so mid-level rather than senior.\nRemote is in writing: fully remote is possible, with one company-paid week on\nsite per quarter. Worth knowing: if you live within an hour of Montagnat (Ain,\nnear Lyon), the company expects one or two days a week on site. Posted pay:\n€40,000 – €50,000 gross per year. Process: a take-home test (7 days), a\none-hour code review, an interview with the CTO. The role is in French.\n",
+    "locationEn": "France — fully remote, one week on site per quarter (Montagnat, Ain)",
+    "salaryEn": "€40,000 – €50,000/year"
   },
   {
     "slug": "agicap-senior-software-engineer-nodejs-angular",
@@ -206,8 +243,8 @@ export const JOBS_DATA: readonly Job[] = [
       "GCP"
     ],
     "url": "https://jobs.lever.co/agicap/17e34e47-fed3-44a3-9019-4b1af309f48c",
-    "scannedAt": "2026-09-28",
-    "status": "active",
+    "scannedAt": "2026-10-02",
+    "status": "expired",
     "tags": [
       "angular",
       "remote-france",

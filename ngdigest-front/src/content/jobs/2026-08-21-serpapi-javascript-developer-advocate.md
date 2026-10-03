@@ -19,7 +19,7 @@ stack:
   - API
   - DevRel
 url: "https://serpapi.com/careers/javascript-developer-advocate"
-scannedAt: 2026-09-28
+scannedAt: 2026-10-02
 status: active
 tags:
   - devrel

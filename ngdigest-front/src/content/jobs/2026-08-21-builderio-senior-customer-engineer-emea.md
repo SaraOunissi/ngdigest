@@ -21,8 +21,8 @@ stack:
   - GraphQL
   - LLM
 url: "https://job-boards.greenhouse.io/builder/jobs/5359270004"
-scannedAt: 2026-09-28
-status: active
+scannedAt: 2026-10-02
+status: expired
 tags:
   - remote-emea
   - salaire-affiche

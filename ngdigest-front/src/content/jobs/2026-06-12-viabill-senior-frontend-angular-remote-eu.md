@@ -19,7 +19,7 @@ stack:
   - Jest
   - Node.js
 url: "https://jobs.lever.co/viabill/db393d02-e09b-4abc-a3d2-94e411e74618"
-scannedAt: 2026-09-28
+scannedAt: 2026-10-02
 status: active
 tags:
   - angular

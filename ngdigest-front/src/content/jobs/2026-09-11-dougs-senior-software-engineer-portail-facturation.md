@@ -20,7 +20,7 @@ stack:
   - Jest
   - GCP
 url: "https://careers.dougs.fr/jobs/8454141-senior-software-engineer-squad-portail-facturation-h-f"
-scannedAt: 2026-09-28
+scannedAt: 2026-10-02
 status: active
 tags:
   - angular
