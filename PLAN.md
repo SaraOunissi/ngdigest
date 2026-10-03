@@ -96,11 +96,19 @@ Points connus, sans effet en production :
 
 - 78 routes prérendues au lieu de 79 : `/resources` (redirection, déjà 404) n'est
   plus comptée ;
-- `angular.json` a `security.allowedHosts: []` : `server.mjs` refuse tout hôte non
-  listé (400). Vercel sert les fichiers prérendus et n'utilise pas ce serveur. Test
-  local : `NG_ALLOWED_HOSTS=localhost` ;
-- `test:e2e` du back échoue, déjà avant ces PR : `test/jest-e2e.json` n'a pas le
-  `moduleNameMapper` des imports `.js` (la CI ne le lance pas).
+- Vercel sert les fichiers prérendus et n'utilise pas `server.mjs`.
+
+Corrections du 04/10, branche `chore/ssr-hosts-e2e-voix` (poussée, PR à ouvrir) :
+
+- `angular.json` : `security.allowedHosts` passe de `[]` à `ngdigest.co` et
+  `www.ngdigest.co`. Testé localement sur `server.mjs` : ces deux hôtes en 200, un hôte
+  inconnu en 400. Pour un test local : `NG_ALLOWED_HOSTS=localhost` ;
+- back : `test:e2e` réparé. Le test généré par NestJS (`GET /` → « Hello World! », base
+  MongoDB réelle) est remplacé par `test/resources.e2e-spec.ts` : vrai pipeline HTTP
+  (préfixe `/api`, validation, enveloppe `{ data, meta }`, filtre d'erreurs, garde admin)
+  avec cas d'usage simulés, sans base. Ce pipeline est factorisé dans `src/app.setup.ts`,
+  utilisé par `main.ts`. 7/7 ; tests unitaires 82/82, lint et build verts. La CI ne lance
+  toujours pas `test:e2e` (`.engineering/quality.json` non modifié).
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
 
