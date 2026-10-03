@@ -58,12 +58,14 @@ Board : 9 offres, **5 actives** (ViaBill, Dougs, SerpApi ×2, N2JSoft), 4 expir�
 
 Statut au 03/10/2026 :
 
-- local : lot complet sur `feat/jobs-rattrapage-2026-09-28` (commit 3714664 + commit
-  de la veille du 02/10) ;
+- versionné : lot complet sur `feat/jobs-rattrapage-2026-09-28` (3714664 + dbab770),
+  branche poussée sur `origin` le 03/10 ;
 - testé localement le 02/10 : `generate-jobs-data` (9 offres), `check:tag-jobs`,
   `scripts/lib/*.test.mjs` 73/73, `observatoire/src/*.test.mjs` 65/65, `npm run build`
   vert (79 routes prérendues) ; Quality Gate complet non exécuté en local ;
-- PR vers `main` : à ouvrir ;
+- PR vers `main` : pas encore ouverte (`gh` absent du poste, navigateur de session non
+  connecté à GitHub) ; à créer depuis
+  `https://github.com/SaraOunissi/ngdigest/compare/main...feat/jobs-rattrapage-2026-09-28` ;
 - fusion, déploiement et affichage des 5 offres en production : non faits.
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
