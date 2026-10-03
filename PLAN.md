@@ -73,8 +73,11 @@ Statut au 03/10/2026 :
 ## Dependency Audit (alertes publiées du 18/09 au 01/10/2026)
 
 `.engineering/security.py` échoue depuis le 03/10 sur de nouvelles alertes, sans lien
-avec le lot /jobs. Branche `fix/dependency-audit-2026-10` (03/10, local + poussée, PR à
-ouvrir) :
+avec le lot /jobs.
+
+Étape 1, fusionnée et déployée : [PR #7](https://github.com/SaraOunissi/ngdigest/pull/7)
+(merge `2589058`, 03/10 21:02 UTC ; Vercel Production `success`). Production revérifiée
+le 03/10 : `/`, `/fr`, `/fr/jobs`, `/en/jobs`, fiche N2JSoft et Observatoire en 200.
 
 - back : `jest` 30.2 → 30.5.2 et `ts-loader` 9.5 → 9.6.2 (dev uniquement) retirent
   `micromatch`/`braces` (GHSA-vfj7-8cjw-p6xm, sans correctif) ; `npm audit` à 0. Tests
@@ -83,11 +86,25 @@ ouvrir) :
 - front : Angular 21.2.25 (`@angular/router` corrige GHSA-ff3f-86qr-9cv3, SSR DoS) et
   override `piscina` ^5.3.2 (GHSA-67c8-pqhq-4rmx, critical). Build (79 routes), tests
   174/174, lint, `test:scripts` 73/73 verts ;
-- reste rouge : `http-cache-semantics` ≤ 4.2.0 (GHSA-ch52-4w7c-c8xp, high, **aucune
-  version corrigée publiée**), embarqué par `@angular/cli` 21 via `pacote` →
-  `make-fetch-happen` (outil de dev, absent du bundle servi). Seul `@angular/cli` 22
-  n'en dépend plus : décision de Sara attendue (montée Angular 22 ou attente d'un
-  correctif).
+- reste rouge après #7 : `http-cache-semantics` ≤ 4.2.0 (GHSA-ch52-4w7c-c8xp, high,
+  **aucune version corrigée publiée**), embarqué par `@angular/cli` 21 via `pacote`
+  (outil de dev, absent du bundle servi).
+
+Étape 2, décidée par Sara le 03/10 : passage à Angular 22, seul `@angular/cli` sans
+`pacote`. Branche `chore/angular-22` (poussée, PR à ouvrir) : Angular 22.2.1,
+TypeScript 6.0.3, angular-eslint 22.5.0, typescript-eslint 8.71.0 ; migrations
+officielles (`withNoIncrementalHydration()` pour garder le comportement pré-v22,
+`withXhr()` dans deux specs) ; `baseUrl` retiré du tsconfig (déprécié en TS 6) ; override
+`piscina` retiré (Angular 22 embarque 5.3.2). Testé localement : `npm audit` front à 0,
+build vert, tests 174/174, lint, `test:scripts` 73/73 ; serveur SSR local : pages clés
+en 200, hydratation Angular 22.2.1, 5 offres actives sur `/fr/jobs`. Vercel Preview
+`success` (protégé par SSO, non consulté). 78 routes prérendues au lieu de 79 : seule
+`/resources` (redirection, déjà 404 en production) n'est plus comptée.
+
+À savoir : `angular.json` a `security.allowedHosts: []` (déjà sur `main`). Le serveur
+SSR `server.mjs` refuse donc tout hôte non listé (400) ; sans effet sur Vercel, qui sert
+les fichiers prérendus (preuve : `/` n'y redirige pas vers `/fr` comme le ferait
+`server.ts`). Pour un test local : `NG_ALLOWED_HOSTS=localhost`.
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
 
