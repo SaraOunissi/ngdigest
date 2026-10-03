@@ -60,7 +60,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": ["ngdigest.co", "www.ngdigest.co"]
             },
             "ssr": {
               "entry": "src/server.ts"
