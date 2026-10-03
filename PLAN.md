@@ -58,19 +58,28 @@ Board : 9 offres, **5 actives** (ViaBill, Dougs, SerpApi ×2, N2JSoft), 4 expir�
 
 Statut au 03/10/2026 :
 
-- versionné : lot complet sur `feat/jobs-rattrapage-2026-09-28` (3714664 + dbab770),
-  branche poussée sur `origin` le 03/10 ;
 - testé localement le 02/10 : `generate-jobs-data` (9 offres), `check:tag-jobs`,
   `scripts/lib/*.test.mjs` 73/73, `observatoire/src/*.test.mjs` 65/65, `npm run build`
-  vert (79 routes prérendues) ; Quality Gate complet non exécuté en local ;
-- PR vers `main` : pas encore ouverte (`gh` absent du poste, navigateur de session non
-  connecté à GitHub) ; à créer depuis
-  `https://github.com/SaraOunissi/ngdigest/compare/main...feat/jobs-rattrapage-2026-09-28` ;
-- fusion, déploiement et affichage des 5 offres en production : non faits.
+  vert (79 routes prérendues) ;
+- fusionné : [PR #5](https://github.com/SaraOunissi/ngdigest/pull/5), merge `9f11ec4`
+  le 03/10 à 19:57 UTC. [Quality](https://github.com/SaraOunissi/ngdigest/actions/runs/37149774423)
+  vert sur `main` ; Dependency Audit rouge sur la PR (voir ci-dessous) ;
+- déployé : Vercel Production `success` pour `9f11ec4` (03/10, 19:58 UTC) ;
+- vérifié en production le 03/10 : `https://ngdigest.co/fr/jobs` et `/en/jobs`
+  affichent exactement 5 offres actives (ViaBill, SerpApi ×2, Dougs, N2JSoft, 5 boutons
+  « Postuler ») et 4 offres dans « Offres archivées ». Les URL sans préfixe de langue
+  (`/jobs`) renvoient 404, comme les autres pages du site.
+
+Dependency Audit (`.engineering/security.py`) échoue depuis le 03/10 sans lien avec ce
+lot (lockfiles inchangés ; dernier passage vert : run planifié sur `2f7e1a2`). Nouvelles
+alertes high/critical : front — `piscina` < 5.3.2 (critical, via `@angular/build`,
+correctif annoncé en Angular 22 majeur), `@angular/router` < 21.2.24 (SSR DoS,
+correctif mineur), `http-cache-semantics` via `@angular/cli` ; back — `braces` ≤ 3.0.3
+via la chaîne `jest`/`ts-loader` (correctif non majeur). À traiter dans une PR dédiée.
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
 
-`observatoire/data/pepites-tagged.json` datait du 01/06 (2 offres) ; `npm run check:tag-jobs` sortait en échec. Régénéré le 02/10 par `npm run tag:jobs` après la veille du jour : 9 offres taguées (5 actives, 4 expirées), `generatedAt` 2026-10-02, vérification `--check` verte. Versionné avec le lot /jobs (même branche, même PR) ; non fusionné. Les snapshots mensuels `_drafts/observatoire-snapshots/` (brouillons privés) sont une autre source : leurs chiffres Free-Work (parts, variations) ont été recalculés sans écart, mais les compteurs eux-mêmes ne sont pas revérifiés. <!-- by project-worker 2026-10-01 -->
+`observatoire/data/pepites-tagged.json` datait du 01/06 (2 offres) ; `npm run check:tag-jobs` sortait en échec. Régénéré le 02/10 par `npm run tag:jobs` après la veille du jour : 9 offres taguées (5 actives, 4 expirées), `generatedAt` 2026-10-02, vérification `--check` verte. Fusionné avec le lot /jobs ([PR #5](https://github.com/SaraOunissi/ngdigest/pull/5), 03/10). Les snapshots mensuels `_drafts/observatoire-snapshots/` (brouillons privés) sont une autre source : leurs chiffres Free-Work (parts, variations) ont été recalculés sans écart, mais les compteurs eux-mêmes ne sont pas revérifiés. <!-- by project-worker 2026-10-01 -->
 
 ## Prochaines passes produit
 
