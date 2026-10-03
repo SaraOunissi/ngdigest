@@ -70,12 +70,24 @@ Statut au 03/10/2026 :
   « Postuler ») et 4 offres dans « Offres archivées ». Les URL sans préfixe de langue
   (`/jobs`) renvoient 404, comme les autres pages du site.
 
-Dependency Audit (`.engineering/security.py`) échoue depuis le 03/10 sans lien avec ce
-lot (lockfiles inchangés ; dernier passage vert : run planifié sur `2f7e1a2`). Nouvelles
-alertes high/critical : front — `piscina` < 5.3.2 (critical, via `@angular/build`,
-correctif annoncé en Angular 22 majeur), `@angular/router` < 21.2.24 (SSR DoS,
-correctif mineur), `http-cache-semantics` via `@angular/cli` ; back — `braces` ≤ 3.0.3
-via la chaîne `jest`/`ts-loader` (correctif non majeur). À traiter dans une PR dédiée.
+## Dependency Audit (alertes publiées du 18/09 au 01/10/2026)
+
+`.engineering/security.py` échoue depuis le 03/10 sur de nouvelles alertes, sans lien
+avec le lot /jobs. Branche `fix/dependency-audit-2026-10` (03/10, local + poussée, PR à
+ouvrir) :
+
+- back : `jest` 30.2 → 30.5.2 et `ts-loader` 9.5 → 9.6.2 (dev uniquement) retirent
+  `micromatch`/`braces` (GHSA-vfj7-8cjw-p6xm, sans correctif) ; `npm audit` à 0. Tests
+  82/82, build, lint verts. `test:e2e` échoue déjà avant ce changement :
+  `test/jest-e2e.json` n'a pas le `moduleNameMapper` des imports `.js` (hors CI) ;
+- front : Angular 21.2.25 (`@angular/router` corrige GHSA-ff3f-86qr-9cv3, SSR DoS) et
+  override `piscina` ^5.3.2 (GHSA-67c8-pqhq-4rmx, critical). Build (79 routes), tests
+  174/174, lint, `test:scripts` 73/73 verts ;
+- reste rouge : `http-cache-semantics` ≤ 4.2.0 (GHSA-ch52-4w7c-c8xp, high, **aucune
+  version corrigée publiée**), embarqué par `@angular/cli` 21 via `pacote` →
+  `make-fetch-happen` (outil de dev, absent du bundle servi). Seul `@angular/cli` 22
+  n'en dépend plus : décision de Sara attendue (montée Angular 22 ou attente d'un
+  correctif).
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
 
