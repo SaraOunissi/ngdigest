@@ -9,6 +9,7 @@ import {
   provideClientHydration,
   withEventReplay,
   withHttpTransferCacheOptions,
+  withNoIncrementalHydration,
 } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
       withHttpTransferCacheOptions({
         filter: (req) => !req.url.includes('/resources'),
       }),
+      withNoIncrementalHydration()
     ),
   ],
 };

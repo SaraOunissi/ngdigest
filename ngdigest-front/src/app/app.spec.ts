@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { TranslateLoader, TranslateNoOpLoader, provideTranslateService } from '@ngx-translate/core';
 
 import { App } from './app';
@@ -11,7 +11,7 @@ describe('App', () => {
       imports: [App],
       providers: [
         provideRouter([]),
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideTranslateService({
           loader: { provide: TranslateLoader, useClass: TranslateNoOpLoader },
         }),
