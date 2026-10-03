@@ -70,41 +70,37 @@ Statut au 03/10/2026 :
   « Postuler ») et 4 offres dans « Offres archivées ». Les URL sans préfixe de langue
   (`/jobs`) renvoient 404, comme les autres pages du site.
 
-## Dependency Audit (alertes publiées du 18/09 au 01/10/2026)
+## Dépendances et Angular 22 (03-04/10/2026)
 
-`.engineering/security.py` échoue depuis le 03/10 sur de nouvelles alertes, sans lien
-avec le lot /jobs.
+Le Dependency Audit (`.engineering/security.py`) était rouge depuis le 03/10 sur des
+alertes publiées du 18/09 au 01/10. Il est revenu au vert après deux PR fusionnées et
+déployées :
 
-Étape 1, fusionnée et déployée : [PR #7](https://github.com/SaraOunissi/ngdigest/pull/7)
-(merge `2589058`, 03/10 21:02 UTC ; Vercel Production `success`). Production revérifiée
-le 03/10 : `/`, `/fr`, `/fr/jobs`, `/en/jobs`, fiche N2JSoft et Observatoire en 200.
+- [PR #7](https://github.com/SaraOunissi/ngdigest/pull/7) (merge `2589058`) : back —
+  `jest` 30.5.2 et `ts-loader` 9.6.2 retirent `micromatch`/`braces`
+  (GHSA-vfj7-8cjw-p6xm) ; front — Angular 21.2.25 (`@angular/router`,
+  GHSA-ff3f-86qr-9cv3) et `piscina` 5.3.2 (GHSA-67c8-pqhq-4rmx, critical) ;
+- [PR #8](https://github.com/SaraOunissi/ngdigest/pull/8) (merge `574501b`, 03/10
+  22:06 UTC) : Angular 22.2.1, TypeScript 6.0.3, angular-eslint 22.5.0,
+  typescript-eslint 8.71.0. `@angular/cli` 22 ne dépend plus de `pacote`, ce qui
+  retire `http-cache-semantics` (GHSA-ch52-4w7c-c8xp, sans version corrigée).
+  Migrations officielles : `withNoIncrementalHydration()` (comportement pré-v22
+  conservé), `withXhr()` dans deux specs ; `baseUrl` retiré du tsconfig (TS 6).
 
-- back : `jest` 30.2 → 30.5.2 et `ts-loader` 9.5 → 9.6.2 (dev uniquement) retirent
-  `micromatch`/`braces` (GHSA-vfj7-8cjw-p6xm, sans correctif) ; `npm audit` à 0. Tests
-  82/82, build, lint verts. `test:e2e` échoue déjà avant ce changement :
-  `test/jest-e2e.json` n'a pas le `moduleNameMapper` des imports `.js` (hors CI) ;
-- front : Angular 21.2.25 (`@angular/router` corrige GHSA-ff3f-86qr-9cv3, SSR DoS) et
-  override `piscina` ^5.3.2 (GHSA-67c8-pqhq-4rmx, critical). Build (79 routes), tests
-  174/174, lint, `test:scripts` 73/73 verts ;
-- reste rouge après #7 : `http-cache-semantics` ≤ 4.2.0 (GHSA-ch52-4w7c-c8xp, high,
-  **aucune version corrigée publiée**), embarqué par `@angular/cli` 21 via `pacote`
-  (outil de dev, absent du bundle servi).
+Preuves : sur la PR #8, Dependency Audit, Quality Gate et Vercel verts, état GitHub
+`clean`. Vercel Production `success` pour `574501b`. Vérifié en production le 03/10 :
+pages clés en 200, `ng-version="22.2.1"`, `/` redirige vers `/fr`, `/fr/jobs` affiche
+5 offres actives et 4 archivées, console sans erreur.
 
-Étape 2, décidée par Sara le 03/10 : passage à Angular 22, seul `@angular/cli` sans
-`pacote`. Branche `chore/angular-22` (poussée, PR à ouvrir) : Angular 22.2.1,
-TypeScript 6.0.3, angular-eslint 22.5.0, typescript-eslint 8.71.0 ; migrations
-officielles (`withNoIncrementalHydration()` pour garder le comportement pré-v22,
-`withXhr()` dans deux specs) ; `baseUrl` retiré du tsconfig (déprécié en TS 6) ; override
-`piscina` retiré (Angular 22 embarque 5.3.2). Testé localement : `npm audit` front à 0,
-build vert, tests 174/174, lint, `test:scripts` 73/73 ; serveur SSR local : pages clés
-en 200, hydratation Angular 22.2.1, 5 offres actives sur `/fr/jobs`. Vercel Preview
-`success` (protégé par SSO, non consulté). 78 routes prérendues au lieu de 79 : seule
-`/resources` (redirection, déjà 404 en production) n'est plus comptée.
+Points connus, sans effet en production :
 
-À savoir : `angular.json` a `security.allowedHosts: []` (déjà sur `main`). Le serveur
-SSR `server.mjs` refuse donc tout hôte non listé (400) ; sans effet sur Vercel, qui sert
-les fichiers prérendus (preuve : `/` n'y redirige pas vers `/fr` comme le ferait
-`server.ts`). Pour un test local : `NG_ALLOWED_HOSTS=localhost`.
+- 78 routes prérendues au lieu de 79 : `/resources` (redirection, déjà 404) n'est
+  plus comptée ;
+- `angular.json` a `security.allowedHosts: []` : `server.mjs` refuse tout hôte non
+  listé (400). Vercel sert les fichiers prérendus et n'utilise pas ce serveur. Test
+  local : `NG_ALLOWED_HOSTS=localhost` ;
+- `test:e2e` du back échoue, déjà avant ces PR : `test/jest-e2e.json` n'a pas le
+  `moduleNameMapper` des imports `.js` (la CI ne le lance pas).
 
 ## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
 
