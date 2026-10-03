@@ -98,7 +98,10 @@ Points connus, sans effet en production :
   plus comptée ;
 - Vercel sert les fichiers prérendus et n'utilise pas `server.mjs`.
 
-Corrections du 04/10, branche `chore/ssr-hosts-e2e-voix` (poussée, PR à ouvrir) :
+Corrections du 04/10, fusionnées et déployées par la
+[PR #10](https://github.com/SaraOunissi/ngdigest/pull/10) (merge `8a75fbd` ; Quality Gate,
+Dependency Audit et Vercel verts ; production revérifiée : pages clés en 200, 5 offres
+actives et 4 archivées sur `/fr/jobs`) :
 
 - `angular.json` : `security.allowedHosts` passe de `[]` à `ngdigest.co` et
   `www.ngdigest.co`. Testé localement sur `server.mjs` : ces deux hôtes en 200, un hôte
