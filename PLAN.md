@@ -34,6 +34,44 @@ Le socle maintenu est `D:/dev/_state/engineering/`. `.engineering/quality.json` 
 la configuration propre au projet ; les autres fichiers de `.engineering/` sont les
 exports minimaux nécessaires à une CI autonome, contrôlés par hash.
 
+## Offres /jobs
+
+Le 28/09/2026, le board ne comptait plus aucune offre active : les sélections de la
+veille `pepites-job` restaient dans `_carriere/jobs-a-publier/` depuis juin. Rattrapage
+sur la branche `feat/jobs-rattrapage-2026-09-28` : 6 offres re-vérifiées à la source le
+28/09 (Agicap, Dougs, Builder.io, SerpApi ×2, ViaBill), Hospitable passée en `expired`.
+
+- La veille écrit désormais directement dans `ngdigest-front/src/content/jobs/`
+  (un fichier bilingue par offre, voir `_schema.md`), sans commande git.
+- `scripts/lib/jobs-schema.mjs` fait échouer `generate-jobs-data` (prebuild) si une
+  offre ne respecte pas le contrat ; tests dans `jobs-schema.test.mjs`.
+- Une offre freelance payée à l'année affiche son montant annuel
+  (`domain/models/job-compensation.ts`).
+- Le moniteur de liens traite une redirection `?not_found=true` comme un lien mort.
+
+Veille du 02/10/2026 : N2JSoft ajoutée
+(`2026-09-11-n2jsoft-developpeur-fullstack-confirme-dotnet-angular.md`, 40-50 k€, full
+remote FR) ; Agicap (404 Lever) et Builder.io (board Greenhouse vide) passées en
+`expired` ; ViaBill, Dougs et SerpApi ×2 re-vérifiées (`scannedAt` 2026-10-02).
+Board : 9 offres, **5 actives** (ViaBill, Dougs, SerpApi ×2, N2JSoft), 4 expirées
+(Agicap, Builder.io, Hospitable, Aircall).
+
+Statut au 03/10/2026 :
+
+- versionné : lot complet sur `feat/jobs-rattrapage-2026-09-28` (3714664 + dbab770),
+  branche poussée sur `origin` le 03/10 ;
+- testé localement le 02/10 : `generate-jobs-data` (9 offres), `check:tag-jobs`,
+  `scripts/lib/*.test.mjs` 73/73, `observatoire/src/*.test.mjs` 65/65, `npm run build`
+  vert (79 routes prérendues) ; Quality Gate complet non exécuté en local ;
+- PR vers `main` : pas encore ouverte (`gh` absent du poste, navigateur de session non
+  connecté à GitHub) ; à créer depuis
+  `https://github.com/SaraOunissi/ngdigest/compare/main...feat/jobs-rattrapage-2026-09-28` ;
+- fusion, déploiement et affichage des 5 offres en production : non faits.
+
+## Observatoire — données couche sélective (29 septembre → 2 octobre 2026)
+
+`observatoire/data/pepites-tagged.json` datait du 01/06 (2 offres) ; `npm run check:tag-jobs` sortait en échec. Régénéré le 02/10 par `npm run tag:jobs` après la veille du jour : 9 offres taguées (5 actives, 4 expirées), `generatedAt` 2026-10-02, vérification `--check` verte. Versionné avec le lot /jobs (même branche, même PR) ; non fusionné. Les snapshots mensuels `_drafts/observatoire-snapshots/` (brouillons privés) sont une autre source : leurs chiffres Free-Work (parts, variations) ont été recalculés sans écart, mais les compteurs eux-mêmes ne sont pas revérifiés. <!-- by project-worker 2026-10-01 -->
+
 ## Prochaines passes produit
 
 - Valider la fraîcheur et les volumes du snapshot Observatoire de septembre avant publication.

@@ -6,6 +6,7 @@ import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 import { JobsStore } from '../../../application/jobs.store';
 import { Job } from '../../../domain/models/job.model';
+import { resolveJobCompensation } from '../../../domain/models/job-compensation';
 import { JobFiltersComponent } from '../../components/job-filters/job-filters.component';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
@@ -52,11 +53,7 @@ export class JobListComponent {
   }
 
   protected compensationLabel(job: Job): string {
-    const isEn = this.languageService.lang() === 'en';
-    if (job.type === 'CDI') {
-      return (isEn && job.salaryEn) ? job.salaryEn : (job.salary ?? '');
-    }
-    return job.tjm ?? '';
+    return resolveJobCompensation(job, this.languageService.lang()).label;
   }
 
   protected editorialHookFor(job: Job): string {
@@ -72,7 +69,7 @@ export class JobListComponent {
   }
 
   protected compensationKindKey(job: Job): string {
-    return job.type === 'CDI' ? 'jobs.fact.salary' : 'jobs.fact.tjm';
+    return `jobs.fact.${resolveJobCompensation(job, this.languageService.lang()).kind}`;
   }
 
   protected remoteLabelKey(remote: Job['remote']): string {
