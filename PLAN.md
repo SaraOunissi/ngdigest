@@ -4,6 +4,10 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Audit des dépendances — 6 octobre 2026
+
+« Dependency Audit » était rouge sur toute nouvelle PR : `proxy-addr` ≤ 2.0.7 (GHSA-jqcg-44mw-7w3h, front et back) et `source-map-js` < 1.2.2 (GHSA-68fv-2mgg-jv7q, front). Overrides npm `proxy-addr` ^2.0.8 (front et back) et `source-map-js` ^1.2.2 (front). Avec l'export du `security.py` commun (avis pnpm ignorés, décision de Sara du 06/10). Vérifié en local : `security.py` passed ; tests back 82/82 ; tests front laissés à la CI.
+
 ## Version publiée
 
 La première consolidation a été fusionnée le 26 septembre 2026 dans la

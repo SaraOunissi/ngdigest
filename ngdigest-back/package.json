@@ -85,5 +85,8 @@
     "moduleNameMapper": {
       "^(\\.{1,2}/.*)\\.js$": "$1"
     }
+  },
+  "overrides": {
+    "proxy-addr": "^2.0.8"
   }
 }
