@@ -26,6 +26,20 @@ if config.get('backend'):
     lock = folder / ('requirements.lock' if (folder / 'requirements.lock').exists() else 'requirements.txt')
     checks.append(('python', folder, lock, [sys.executable, '-m', 'pip_audit', '-r', lock.name, '--format=json', '--progress-spinner=off']))
 
+def pnpm_status(stdout):
+    """pnpm audit --json exits 1 while GHSAs ignored via auditConfig.ignoreGhsas are still
+    counted in its metadata. Only the advisories it actually lists count; anything we cannot
+    read stays failed."""
+    try:
+        advisories = json.loads(stdout)['advisories']
+    except (ValueError, KeyError, TypeError):
+        return 'failed'
+    if not isinstance(advisories, dict):
+        return 'failed'
+    blocking = [a for a in advisories.values() if a.get('severity') in ('high', 'critical')]
+    return 'failed' if blocking else 'passed'
+
+
 report = {'checked_at': datetime.now(timezone.utc).isoformat(), 'project': config['project'], 'checks': [],
           'scope': 'npm high/critical, all known Python severities; no automatic fix'}
 for identifier, folder, lock, command in checks:
@@ -35,6 +49,8 @@ for identifier, folder, lock, command in checks:
         (out / (identifier + '.json')).write_bytes(result.stdout)
         (out / (identifier + '.log')).write_bytes(result.stderr)
         status = 'passed' if result.returncode == 0 else 'failed'
+        if status == 'failed' and command[1:2] == ['audit'] and lock.name == 'pnpm-lock.yaml':
+            status = pnpm_status(result.stdout)
     except (OSError, subprocess.TimeoutExpired):
         status = 'blocked'
     if lock.read_bytes() != before: raise RuntimeError('Audit modified lockfile: ' + str(lock))

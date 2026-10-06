@@ -4,7 +4,7 @@
   "sha256": {
     ".gitattributes": "876609236fc67c3185e68200583038b6792ae3ef4d7b632e15279e7d2c21c076",
     "quality.py": "f944d840bc4e66e3186e604b2561b3cb26e38bba21e49d60e049dfd2233962ba",
-    "security.py": "09b9a02f36c9c510d85a66f45773edf62ae393244916d741cc4f70b6f868dee1",
+    "security.py": "78a02d5a4f765c6e2dadbbd3eebe33a02540a63a345005e3f338bed24929f4ce",
     "browser.mjs": "e90eb6727a1f1896302754d4438bdca60b43fda88da82c6eabc8673fad0b9fbe",
     "serve.mjs": "56f2bb0a98f698067502c4ca3167b07a722ede603a15acead56d637c4d072017",
     "package.json": "03aff55f2d21ca6166a8615583de6f05bde0e1b3e24605c7a24fbb92c8b82b9c",
