@@ -19,8 +19,8 @@ stack:
   - PostgreSQL
   - Jest
   - GCP
-url: "https://careers.dougs.fr/jobs/8454141-senior-software-engineer-squad-portail-facturation-h-f"
-scannedAt: 2026-10-02
+url: "https://careers.dougs.fr/jobs/8522684-senior-software-engineer-squad-portail-facturation-h-f"
+scannedAt: 2026-10-23
 status: active
 tags:
   - angular
@@ -42,7 +42,7 @@ editorialNote: |
   réglementaire. Prérequis : 5 ans de fullstack, NestJS/TypeScript solide,
   PostgreSQL, à l'aise en Angular, tests non négociables, DDD apprécié.
   Rémunération affichée : 50 000 à 55 000 € par an. Process : deux visios, un test
-  technique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09/2026.
+  technique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09 puis le 09/10/2026 (nouvel identifiant).
 editorialNoteEn: |
   Dougs is a new-generation French accounting firm (450 people including 90+
   engineers, 42,000 business clients) that builds its own app in-house: a product

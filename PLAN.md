@@ -40,6 +40,16 @@ exports minimaux nécessaires à une CI autonome, contrôlés par hash.
 
 ## Offres /jobs
 
+Publication du 23/10/2026 : [PR #12](https://github.com/SaraOunissi/ngdigest/pull/12).
+Lot : Dougs Cross-functional ajoutée (45–55 k€, télétravail intégral), Compte Pro
+archivée, URL Facturation actualisée, offres revérifiées au 23/10 ; 11 offres au
+total, 6 actives et 5 archivées. Première CI : tests, lint, build et accessibilité
+verts, mais garde PLAN et audit sécurité rouges (preuves : runs 40016095616 et
+40016095830). Correction : référence de preuves dans ce PLAN, mises à jour
+compatibles des dépendances verrouillées front/back et override Vite ^8.3.5
+pour remplacer la version vulnérable imposée par Angular build. Nouvelle CI
+requise avant fusion ; production non encore vérifiée.
+
 Le 28/09/2026, le board ne comptait plus aucune offre active : les sélections de la
 veille `pepites-job` restaient dans `_carriere/jobs-a-publier/` depuis juin. Rattrapage
 sur la branche `feat/jobs-rattrapage-2026-09-28` : 6 offres re-vérifiées à la source le

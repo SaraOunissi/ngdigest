@@ -20,7 +20,7 @@ stack:
   - PostgreSQL
   - AWS
 url: "https://n2jsoft.recruitee.com/o/developpeur-fullstack-confirme-hf-c-net-angular-12"
-scannedAt: 2026-10-02
+scannedAt: 2026-10-23
 status: active
 tags:
   - angular
