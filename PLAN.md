@@ -131,9 +131,19 @@ actives et 4 archivées sur `/fr/jobs`) :
 
 `observatoire/data/pepites-tagged.json` datait du 01/06 (2 offres) ; `npm run check:tag-jobs` sortait en échec. Régénéré le 02/10 par `npm run tag:jobs` après la veille du jour : 9 offres taguées (5 actives, 4 expirées), `generatedAt` 2026-10-02, vérification `--check` verte. Fusionné avec le lot /jobs ([PR #5](https://github.com/SaraOunissi/ngdigest/pull/5), 03/10). Les snapshots mensuels `_drafts/observatoire-snapshots/` (brouillons privés) sont une autre source : leurs chiffres Free-Work (parts, variations) ont été recalculés sans écart, mais les compteurs eux-mêmes ne sont pas revérifiés. <!-- by project-worker 2026-10-01 -->
 
+## Observatoire — publication d’octobre 2026
+
+Le lot préparé le 07/10 est repris le 23/10 sur la version publiée après la PR #12.
+Il ajoute le relevé du 01/10 et sélectionne octobre dans `OBSERVATOIRE_LATEST` ;
+juillet et septembre sont conservés, aucun point d’août n’est inventé.
+Source : `_drafts/observatoire-snapshots/SNAPSHOT-2026-10.md`. Contrôles déclarés
+par le producteur : 179 tests Angular, lint et build development verts.
+La CI complète de cette branche doit encore valider le lot avant fusion ;
+déploiement et vérification FR/EN en production restent à faire.
+
 ## Prochaines passes produit
 
-- Valider la fraîcheur et les volumes du snapshot Observatoire de septembre avant publication.
+- Vérifier la publication du relevé Observatoire d’octobre (relevé daté du 01/10).
 - Auditer la fraîcheur par source : un flux public accessible ne valide pas tous les collecteurs.
 - Décider du devenir de l’Observatoire après avoir éprouvé un second consommateur du contrat de données.
 

@@ -144,7 +144,7 @@ export const OBSERVATOIRE_2026_07: ObservatoireSnapshot = {
         en: 'AI didn’t kill tech jobs — it shut the entry door. Juniors sit where the two blades cross.',
       },
       note: {
-        fr: "Indice base 100 = fév. 2020, données Indeed US/global (offres software dev −34 % ; mentions IA +134 %). La version FR × front pur est le trou public le plus différenciant — collecte propre (v2).",
+        fr: 'Indice base 100 = fév. 2020, données Indeed US/global (offres software dev −34 % ; mentions IA +134 %). La version FR × front pur est le trou public le plus différenciant — collecte propre (v2).',
         en: 'Index base 100 = Feb 2020, Indeed US/global (software-dev postings −34%; AI mentions +134%). The FR × pure-front version is the most differentiating public gap — own collection (v2).',
       },
       unit: '',
@@ -210,7 +210,12 @@ export const OBSERVATOIRE_2026_07: ObservatoireSnapshot = {
       },
       unit: '%',
       segments: [
-        { key: 'remote', label: { fr: 'Full remote', en: 'Full remote' }, color: 'green', value: 18.1 },
+        {
+          key: 'remote',
+          label: { fr: 'Full remote', en: 'Full remote' },
+          color: 'green',
+          value: 18.1,
+        },
         { key: 'hybride', label: { fr: 'Hybride', en: 'Hybrid' }, color: 'blue', value: 32.8 },
         { key: 'onsite', label: { fr: 'Présentiel', en: 'On-site' }, color: 'muted', value: 49.1 },
       ],
@@ -281,7 +286,16 @@ export const OBSERVATOIRE_2026_07: ObservatoireSnapshot = {
         fr: 'En FR, Angular + TypeScript + (Java ou .NET) ouvre le plus d’offres. La fréquence chiffrée de chaque combo arrive avec ma collecte propre.',
         en: 'In France, Angular + TypeScript + (Java or .NET) opens the most doors. The measured frequency of each combo comes with my own collection.',
       },
-      tags: ['TypeScript', 'Java / Spring', '.NET / C#', 'Node', 'RxJS', 'Nx', 'Tailwind', 'Copilot / Claude Code'],
+      tags: [
+        'TypeScript',
+        'Java / Spring',
+        '.NET / C#',
+        'Node',
+        'RxJS',
+        'Nx',
+        'Tailwind',
+        'Copilot / Claude Code',
+      ],
     },
     {
       id: 'seniorite',
@@ -296,12 +310,36 @@ export const OBSERVATOIRE_2026_07: ObservatoireSnapshot = {
 
   // ── Method & sources (E-E-A-T) — 🟢 publishable only ───────────────────────
   sources: [
-    { label: 'Stack Overflow Developer Survey 2025', date: 'juil. 2025', url: 'https://survey.stackoverflow.co/2025/technology' },
-    { label: 'Malt — Baromètre tarifs front-end 2026', date: 'juil. 2026', url: 'https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend' },
-    { label: "Indeed Hiring Lab France — l'IA dans un marché en recul", date: 'avr. 2026', url: 'https://www.hiringlab.org/fr/blog/2026/04/01/avril-2026-lia-progresse-dans-un-marche-du-travail-en-recul/' },
-    { label: 'INSEE / Le Monde Informatique — emploi IT & juniors', date: 'mars 2026', url: 'https://www.lemondeinformatique.fr/actualites/lire-l-ia-impacte-le-recrutement-it-des-jeunes-et-les-salaires-99689.html' },
-    { label: 'APEC — prévisions recrutements cadres 2026', date: '2026', url: 'https://www.lemondeinformatique.fr/actualites/lire-les-recrutements-de-cadres-it-repartent-a-la-hausse-en-2026-99899.html' },
-    { label: 'WeLoveDevs — salaires développeur front-end', date: '27/06/2026', url: 'https://welovedevs.com/fr/salaires/developpeur-front-end' },
+    {
+      label: 'Stack Overflow Developer Survey 2025',
+      date: 'juil. 2025',
+      url: 'https://survey.stackoverflow.co/2025/technology',
+    },
+    {
+      label: 'Malt — Baromètre tarifs front-end 2026',
+      date: 'juil. 2026',
+      url: 'https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend',
+    },
+    {
+      label: "Indeed Hiring Lab France — l'IA dans un marché en recul",
+      date: 'avr. 2026',
+      url: 'https://www.hiringlab.org/fr/blog/2026/04/01/avril-2026-lia-progresse-dans-un-marche-du-travail-en-recul/',
+    },
+    {
+      label: 'INSEE / Le Monde Informatique — emploi IT & juniors',
+      date: 'mars 2026',
+      url: 'https://www.lemondeinformatique.fr/actualites/lire-l-ia-impacte-le-recrutement-it-des-jeunes-et-les-salaires-99689.html',
+    },
+    {
+      label: 'APEC — prévisions recrutements cadres 2026',
+      date: '2026',
+      url: 'https://www.lemondeinformatique.fr/actualites/lire-les-recrutements-de-cadres-it-repartent-a-la-hausse-en-2026-99899.html',
+    },
+    {
+      label: 'WeLoveDevs — salaires développeur front-end',
+      date: '27/06/2026',
+      url: 'https://welovedevs.com/fr/salaires/developpeur-front-end',
+    },
   ],
 };
 
@@ -479,13 +517,225 @@ export const OBSERVATOIRE_2026_09: ObservatoireSnapshot = {
   sources: [
     FREE_WORK_ANGULAR,
     MALT_FRONT_SEPT,
-    { label: 'Stack Overflow Developer Survey 2025 (édition 2026 non publiée au 22/09)', date: 'juil. 2025', url: 'https://survey.stackoverflow.co/2025/technology' },
-    { label: "Indeed Hiring Lab France — l'IA dans un marché en recul", date: 'avr. 2026', url: 'https://www.hiringlab.org/fr/blog/2026/04/01/avril-2026-lia-progresse-dans-un-marche-du-travail-en-recul/' },
-    { label: 'INSEE / Le Monde Informatique — emploi IT & juniors', date: 'mars 2026', url: 'https://www.lemondeinformatique.fr/actualites/lire-l-ia-impacte-le-recrutement-it-des-jeunes-et-les-salaires-99689.html' },
+    {
+      label: 'Stack Overflow Developer Survey 2025 (édition 2026 non publiée au 22/09)',
+      date: 'juil. 2025',
+      url: 'https://survey.stackoverflow.co/2025/technology',
+    },
+    {
+      label: "Indeed Hiring Lab France — l'IA dans un marché en recul",
+      date: 'avr. 2026',
+      url: 'https://www.hiringlab.org/fr/blog/2026/04/01/avril-2026-lia-progresse-dans-un-marche-du-travail-en-recul/',
+    },
+    {
+      label: 'INSEE / Le Monde Informatique — emploi IT & juniors',
+      date: 'mars 2026',
+      url: 'https://www.lemondeinformatique.fr/actualites/lire-l-ia-impacte-le-recrutement-it-des-jeunes-et-les-salaires-99689.html',
+    },
     APEC_TELETRAVAIL,
-    { label: 'WeLoveDevs — salaires développeur front-end', date: 'sept. 2026', url: 'https://welovedevs.com/fr/salaires/developpeur-front-end' },
+    {
+      label: 'WeLoveDevs — salaires développeur front-end',
+      date: 'sept. 2026',
+      url: 'https://welovedevs.com/fr/salaires/developpeur-front-end',
+    },
+  ],
+};
+
+const SEPT_TECHNOS: ChartMetric = fromSnapshot(OBSERVATOIRE_2026_09.charts, 'technos', '2026-09');
+const SEPT_SALARY: ChartMetric = fromSnapshot(OBSERVATOIRE_2026_09.charts, 'salary', '2026-09');
+
+const FREE_WORK_OCT: Kpi['source'] = {
+  label: 'Free-Work — offres par tag (relevé direct)',
+  date: '01/10/2026',
+  url: 'https://www.free-work.com/fr/tech-it/jobs/angular',
+};
+
+const MALT_FRONT_OCT: Kpi['source'] = {
+  label: 'Malt Baromètre front-end 2026',
+  date: '01/10/2026',
+  url: 'https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend',
+};
+
+const APEC_T3_2026: Kpi['source'] = {
+  label: 'APEC — baromètre T3 2026 (enquête juin 2026)',
+  date: '22/09/2026',
+  url: 'https://www.apec.fr/tendances-emploi-cadre/recrutement-et-pratiques-rh/recrutement-de-cadres-au-3e-trimestre-2026-l-attentisme-s-installe.html',
+};
+
+/** Reuses a September item that this month does not supersede. */
+function fromSnapshot<T extends { readonly id: string }>(
+  items: readonly T[],
+  id: string,
+  snapshotId: string
+): T {
+  const item = items.find((candidate) => candidate.id === id);
+  if (!item) {
+    throw new Error(`Observatoire ${snapshotId}: unknown id "${id}"`);
+  }
+  return item;
+}
+
+/**
+ * Observatoire — snapshot 2026-10 (3rd point of the series).
+ *
+ * Source of truth: `_drafts/observatoire-snapshots/SNAPSHOT-2026-10.md`
+ * (direct readings of 2026-10-01). Only the "🟢 À publier" figures are shown.
+ * Not published on purpose: the Paris vs rest-of-France split (first reading,
+ * undocumented filter), the "21 % of dev ads mention AI" (primary source still
+ * unread), US-only Stanford figures and isolated tag counts as Angular combos.
+ */
+export const OBSERVATOIRE_2026_10: ObservatoireSnapshot = {
+  meta: {
+    id: '2026-10',
+    collected: '2026-10-01',
+    baseline: false,
+    label: { fr: 'Snapshot · octobre 2026', en: 'Snapshot · October 2026' },
+    updated: { fr: 'Mis à jour chaque mois', en: 'Updated every month' },
+  },
+
+  kpis: [
+    {
+      id: 'angular-share-fr',
+      status: 'published',
+      value: { fr: '20,2 %', en: '20.2%' },
+      label: {
+        fr: 'des offres front FR sur le tag Angular de Free-Work',
+        en: 'of French front-end ads on Free-Work’s Angular tag',
+      },
+      angle: {
+        fr: 'Toujours devant React (17,7 %), mais l’écart se resserre : 1,33 offre Angular pour une React le 22/09, 1,14 le 1er octobre.',
+        en: 'Still ahead of React (17.7%), but the gap is closing: 1.33 Angular ads per React ad on 22/09, 1.14 on 1 October.',
+      },
+      source: FREE_WORK_OCT,
+    },
+    {
+      id: 'junior-door',
+      status: 'published',
+      value: { fr: '38 %', en: '38%' },
+      label: {
+        fr: 'des cadres de moins de 35 ans se sentent menacés de licenciement',
+        en: 'of French managers under 35 feel at risk of being laid off',
+      },
+      angle: {
+        fr: '+10 points en un an (28 % tous âges). Et dans l’informatique, les intentions d’embauche de cadres reculent de 4 points.',
+        en: 'Up 10 points in a year (28% across all ages). And in IT, plans to hire managers are down 4 points.',
+      },
+      source: APEC_T3_2026,
+    },
+    fromJuly(OBSERVATOIRE_2026_07.kpis, 'ia-mentions'),
+    {
+      id: 'tjm-front',
+      status: 'published',
+      value: { fr: '536 €', en: '€536' },
+      label: {
+        fr: 'de TJM moyen pour un front freelance',
+        en: 'average daily rate, freelance front-end',
+      },
+      angle: {
+        fr: 'Quatrième relevé au même euro, rentrée comprise. Le junior reste à 299 €.',
+        en: 'Fourth reading at the same euro, September included. Juniors stay at €299.',
+      },
+      source: MALT_FRONT_OCT,
+    },
+  ],
+
+  charts: [
+    {
+      ...SEPT_TECHNOS,
+      angle: {
+        fr: 'Angular reste en tête à chaque relevé, mais React rattrape : 301 offres Angular contre 264 React le 1er octobre (ratio 1,14, contre 1,33 le 22/09).',
+        en: 'Angular leads at every reading, but React is catching up: 301 Angular ads vs 264 React on 1 October (ratio 1.14, down from 1.33 on 22/09).',
+      },
+      note: {
+        fr: 'Compteurs des pages tag Free-Work le 01/10/2026, en part de la catégorie front (1 489 offres, le niveau de juillet : le creux d’août était saisonnier). Tags qui peuvent se recouvrir ; un seul jobboard. Usage mondial déclaré (Stack Overflow 2025, édition 2026 non publiée au 01/10) : React 44,7 %, Angular 18,2 %.',
+        en: 'Free-Work tag-page counters on 01/10/2026, as a share of the front-end category (1,489 ads, back to the July level: the August dip was seasonal). Tags may overlap; a single job board. Self-reported global usage (Stack Overflow 2025, 2026 edition not out on 01/10): React 44.7%, Angular 18.2%.',
+      },
+      series: [
+        {
+          key: 'angular',
+          label: 'Angular',
+          color: 'violet',
+          points: [
+            { t: '2026-07', v: 20.7 },
+            { t: '2026-09', v: 22.1 },
+            { t: '2026-10', v: 20.2 },
+          ],
+        },
+        {
+          key: 'react',
+          label: 'React',
+          color: 'blue',
+          points: [
+            { t: '2026-07', v: null },
+            { t: '2026-09', v: 16.6 },
+            { t: '2026-10', v: 17.7 },
+          ],
+        },
+        {
+          key: 'vue',
+          label: 'Vue',
+          color: 'gold',
+          points: [
+            { t: '2026-07', v: null },
+            { t: '2026-09', v: 11.0 },
+            { t: '2026-10', v: 11.8 },
+          ],
+        },
+        {
+          key: 'svelte',
+          label: 'Svelte',
+          color: 'green',
+          points: [
+            { t: '2026-07', v: null },
+            { t: '2026-09', v: 0.5 },
+            { t: '2026-10', v: 0.5 },
+          ],
+        },
+      ],
+      source: FREE_WORK_OCT,
+    },
+    fromJuly(OBSERVATOIRE_2026_07.charts, 'ia-scissors'),
+    fromSnapshot(OBSERVATOIRE_2026_09.charts, 'remote', '2026-09'),
+    {
+      ...SEPT_SALARY,
+      angle: {
+        fr: 'Quatre relevés, même TJM moyen (536 €), alors que la fenêtre Malt inclut désormais la rentrée. Pendant ce temps, l’offre freelance front continue de grossir (18 096 profils, +1,4 % depuis juillet).',
+        en: 'Four readings, same average rate (€536), even though Malt’s window now includes September. Meanwhile the freelance front-end pool keeps growing (18,096 profiles, +1.4% since July).',
+      },
+      bars: [
+        { key: 's1', label: { fr: '0–2 ans', en: '0–2 yrs' }, value: 299 },
+        { key: 's2', label: { fr: '3–7 ans', en: '3–7 yrs' }, value: 407 },
+        { key: 's3', label: { fr: '8–15 ans', en: '8–15 yrs' }, value: 536 },
+        { key: 's4', label: { fr: '15 ans +', en: '15 yrs +' }, value: 582 },
+      ],
+      source: MALT_FRONT_OCT,
+    },
+  ],
+
+  soon: OBSERVATOIRE_2026_07.soon,
+
+  sources: [
+    FREE_WORK_OCT,
+    MALT_FRONT_OCT,
+    APEC_T3_2026,
+    {
+      label: 'Stack Overflow Developer Survey 2025 (édition 2026 non publiée au 01/10)',
+      date: 'juil. 2025',
+      url: 'https://survey.stackoverflow.co/2025/technology',
+    },
+    {
+      label: "Indeed Hiring Lab France — l'IA dans un marché en recul",
+      date: 'avr. 2026',
+      url: 'https://www.hiringlab.org/fr/blog/2026/04/01/avril-2026-lia-progresse-dans-un-marche-du-travail-en-recul/',
+    },
+    APEC_TELETRAVAIL,
+    {
+      label: 'WeLoveDevs — salaires développeur front-end',
+      date: 'sept. 2026',
+      url: 'https://welovedevs.com/fr/salaires/developpeur-front-end',
+    },
   ],
 };
 
 /** The snapshot rendered by /carriere/observatoire — always the latest one. */
-export const OBSERVATOIRE_LATEST: ObservatoireSnapshot = OBSERVATOIRE_2026_09;
+export const OBSERVATOIRE_LATEST: ObservatoireSnapshot = OBSERVATOIRE_2026_10;
