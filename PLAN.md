@@ -147,6 +147,15 @@ déploiement et vérification FR/EN en production restent à faire.
 
 ## Prochaines passes produit
 
+Publication novembre demandée par Sara le 02/11/2026 : lot du 01/11 repris sur
+`main` après la PR #14. Source privée : `_drafts/observatoire-snapshots/SNAPSHOT-2026-11.md`.
+Le snapshot novembre devient celui affiché, avec le point Free-Work ajouté à la
+série juillet/septembre/octobre ; aucun point août créé. Angular 22,8 %, React
+16,8 %, Vue 12,4 %, Svelte 0,6 %. Malt inaccessible : valeurs conservées avec leur
+date du 01/10. Paris exclu car périmètre non comparable. Contrôles déclarés dans
+le bundle : 184 tests Angular et lint verts. CI complète, fusion et vérification
+FR/EN en production restent à effectuer sur cette branche.
+
 - Vérifier la publication du relevé Observatoire d’octobre (relevé daté du 01/10).
 - Auditer la fraîcheur par source : un flux public accessible ne valide pas tous les collecteurs.
 - Décider du devenir de l’Observatoire après avoir éprouvé un second consommateur du contrat de données.

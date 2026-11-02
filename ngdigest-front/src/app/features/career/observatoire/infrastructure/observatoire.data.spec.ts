@@ -2,6 +2,7 @@ import {
   OBSERVATOIRE_2026_07,
   OBSERVATOIRE_2026_09,
   OBSERVATOIRE_2026_10,
+  OBSERVATOIRE_2026_11,
   OBSERVATOIRE_LATEST,
 } from './observatoire.data';
 
@@ -119,7 +120,6 @@ describe('OBSERVATOIRE_2026_10 snapshot', () => {
   const snapshot = OBSERVATOIRE_2026_10;
 
   it('is the latest snapshot rendered by the page, dated from the 01/10 reading', () => {
-    expect(OBSERVATOIRE_LATEST).toBe(snapshot);
     expect(snapshot.meta.id).toBe('2026-10');
     expect(snapshot.meta.collected).toBe('2026-10-01');
     expect(snapshot.meta.baseline).toBe(false);
@@ -162,6 +162,53 @@ describe('OBSERVATOIRE_2026_10 snapshot', () => {
     const salary = snapshot.charts.find((chart) => chart.id === 'salary');
     expect(salary?.bars?.map((bar) => bar.value)).toEqual([299, 407, 536, 582]);
     expect(salary?.avg).toBe(536);
+    expect(salary?.source.date).toBe('01/10/2026');
+  });
+
+  it('keeps the same chart layout as July so the page selects them by id', () => {
+    expect(snapshot.charts.map((chart) => chart.id)).toEqual(
+      OBSERVATOIRE_2026_07.charts.map((chart) => chart.id)
+    );
+  });
+});
+
+describe('OBSERVATOIRE_2026_11 snapshot', () => {
+  const snapshot = OBSERVATOIRE_2026_11;
+
+  it('is the latest snapshot rendered by the page, dated from the 01/11 reading', () => {
+    expect(OBSERVATOIRE_LATEST).toBe(snapshot);
+    expect(snapshot.meta.id).toBe('2026-11');
+    expect(snapshot.meta.collected).toBe('2026-11-01');
+    expect(snapshot.meta.baseline).toBe(false);
+  });
+
+  it('keeps every figure published and backed by a dated https source', () => {
+    for (const kpi of snapshot.kpis) {
+      expect(kpi.status).toBe('published');
+      expect(kpi.source.url).toMatch(/^https:\/\//);
+      expect(kpi.source.date).toBeTruthy();
+    }
+    for (const source of snapshot.sources) {
+      expect(source.url).toMatch(/^https:\/\//);
+      expect(source.date).toBeTruthy();
+    }
+  });
+
+  it('appends the November point to every framework series', () => {
+    const technos = snapshot.charts.find((chart) => chart.id === 'technos');
+    for (const serie of technos?.series ?? []) {
+      expect(serie.points.map((point) => point.t)).toEqual(['2026-07', '2026-09', '2026-10', '2026-11']);
+    }
+    const last = (key: string): number | null | undefined =>
+      technos?.series?.find((serie) => serie.key === key)?.points.at(-1)?.v;
+    expect(last('angular')).toBe(22.8);
+    expect(last('react')).toBe(16.8);
+    expect(last('vue')).toBe(12.4);
+    expect(last('svelte')).toBe(0.6);
+  });
+
+  it('keeps the carried-over Malt rates dated from the 01/10 reading', () => {
+    const salary = snapshot.charts.find((chart) => chart.id === 'salary');
     expect(salary?.source.date).toBe('01/10/2026');
   });
 

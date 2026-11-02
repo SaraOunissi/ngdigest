@@ -737,5 +737,74 @@ export const OBSERVATOIRE_2026_10: ObservatoireSnapshot = {
   ],
 };
 
+const FREE_WORK_NOV: Kpi['source'] = {
+  label: 'Free-Work — offres par tag (relevé direct)',
+  date: '01/11/2026',
+  url: 'https://www.free-work.com/fr/tech-it/jobs/angular',
+};
+
+const OCT_TECHNOS: ChartMetric = fromSnapshot(OBSERVATOIRE_2026_10.charts, 'technos', '2026-10');
+const NOV_NEXT_POINT: Record<string, number> = { angular: 22.8, react: 16.8, vue: 12.4, svelte: 0.6 };
+
+/**
+ * Observatoire — snapshot 2026-11 (4th point of the series).
+ *
+ * Source of truth: `_drafts/observatoire-snapshots/SNAPSHOT-2026-11.md`
+ * (direct Free-Work readings of 2026-11-01). Malt was unreachable this month:
+ * the TJM figures are carried over from the 01/10 reading and keep that date.
+ * Not published: the Paris split (filter changed to a 10 km radius, not comparable
+ * with October), the Stack Overflow 2026 edition (not found).
+ */
+export const OBSERVATOIRE_2026_11: ObservatoireSnapshot = {
+  ...OBSERVATOIRE_2026_10,
+  meta: {
+    id: '2026-11',
+    collected: '2026-11-01',
+    baseline: false,
+    label: { fr: 'Snapshot · novembre 2026', en: 'Snapshot · November 2026' },
+    updated: { fr: 'Mis à jour chaque mois', en: 'Updated every month' },
+  },
+  kpis: [
+    {
+      id: 'angular-share-fr',
+      status: 'published',
+      value: { fr: '22,8 %', en: '22.8%' },
+      label: {
+        fr: 'des offres front FR sur le tag Angular de Free-Work',
+        en: 'of French front-end ads on Free-Work’s Angular tag',
+      },
+      angle: {
+        fr: 'Angular repasse nettement devant React (16,8 %) : 1,36 offre Angular pour une React le 1er novembre, contre 1,14 un mois plus tôt. L’écart bouge d’un relevé à l’autre ; le classement, non.',
+        en: 'Angular pulls clearly ahead of React again (16.8%): 1.36 Angular ads per React ad on 1 November, vs 1.14 a month earlier. The gap moves between readings; the ranking does not.',
+      },
+      source: FREE_WORK_NOV,
+    },
+    ...OBSERVATOIRE_2026_10.kpis.slice(1),
+  ],
+  charts: [
+    {
+      ...OCT_TECHNOS,
+      angle: {
+        fr: 'Cinq relevés, même classement : Angular, React, Vue, Svelte. Le 1er novembre, 401 offres Angular contre 295 React (ratio 1,36).',
+        en: 'Five readings, same ranking: Angular, React, Vue, Svelte. On 1 November, 401 Angular ads vs 295 React (ratio 1.36).',
+      },
+      note: {
+        fr: 'Compteurs des pages tag Free-Work le 01/11/2026, en part de la catégorie front (1 760 offres, plus haut du suivi). Tags qui peuvent se recouvrir ; un seul jobboard. Usage mondial déclaré (Stack Overflow 2025, édition 2026 non trouvée au 01/11) : React 44,7 %, Angular 18,2 %.',
+        en: 'Free-Work tag-page counters on 01/11/2026, as a share of the front-end category (1,760 ads, the highest of the series). Tags may overlap; a single job board. Self-reported global usage (Stack Overflow 2025, 2026 edition not found on 01/11): React 44.7%, Angular 18.2%.',
+      },
+      series: (OCT_TECHNOS.series ?? []).map((serie) => ({
+        ...serie,
+        points: [...serie.points, { t: '2026-11', v: NOV_NEXT_POINT[serie.key] ?? null }],
+      })),
+      source: FREE_WORK_NOV,
+    },
+    ...OBSERVATOIRE_2026_10.charts.slice(1),
+  ],
+  sources: [
+    FREE_WORK_NOV,
+    ...OBSERVATOIRE_2026_10.sources.filter((source) => source !== FREE_WORK_OCT),
+  ],
+};
+
 /** The snapshot rendered by /carriere/observatoire — always the latest one. */
-export const OBSERVATOIRE_LATEST: ObservatoireSnapshot = OBSERVATOIRE_2026_10;
+export const OBSERVATOIRE_LATEST: ObservatoireSnapshot = OBSERVATOIRE_2026_11;
