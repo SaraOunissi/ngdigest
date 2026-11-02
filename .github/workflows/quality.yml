@@ -13,7 +13,7 @@ concurrency:
 jobs:
   quality:
     name: Quality Gate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # ubuntu-latest = 26.04 depuis le 19/10, non pris en charge par Playwright
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
