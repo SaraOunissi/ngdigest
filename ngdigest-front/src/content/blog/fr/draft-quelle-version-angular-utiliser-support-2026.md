@@ -40,6 +40,16 @@ Si une dépendance indispensable ne suit pas encore, tu as plusieurs options : r
 
 Évite de fixer une cible uniquement parce que le numéro est plus récent. Le bon résultat, c'est une application maintenable dont les parcours importants continuent de fonctionner.
 
+### Ce qui m'est arrivé en mission
+
+J'ai rencontré ce cas chez un client. Je m'occupais d'une montée de version Angular, mais le design system que nous utilisions dépendait d'une autre équipe. Avec le temps et les ressources disponibles, elle avait laissé la partie Angular Material en legacy.
+
+Pour avancer sur notre application, j'ai donc dû conserver ces composants legacy pendant plusieurs mois. Lors d'une montée de version suivante, le design system avait terminé cette migration. Il a alors fallu retirer le legacy de notre côté, notamment reprendre les imports et vérifier qu'il n'en restait pas dans un coin.
+
+Ce n'était pas la fin du monde, mais c'était du travail supplémentaire, assez pénible, qui demandait de l'attention un peu partout dans l'application.
+
+C'est pour ça que je regarde aussi ce que les bibliothèques utilisées ont réellement migré. Une dépendance peut annoncer une version compatible tout en gardant une transition à terminer. Et ce travail peut ensuite retomber sur les équipes qui l'utilisent.
+
 ## Découpe la migration en étapes vérifiables
 
 Pour estimer le travail, commence par une liste courte :

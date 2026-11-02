@@ -40,6 +40,16 @@ If an essential dependency is not ready, you have several options: temporarily s
 
 Do not choose a target just because its version number is higher. The result you need is a maintainable application whose critical user journeys still work.
 
+### What happened on a client project
+
+I ran into this on a client project. I was handling an Angular upgrade, but our design system was maintained by another team. With the time and resources available, they had kept the Angular Material components on the legacy implementation.
+
+To move our application forward, I had to keep those legacy components for several months. By a later Angular upgrade, the design system had completed that migration. I then had to remove the legacy usage on our side, including updating imports and checking that none had been missed elsewhere in the application.
+
+It was not a disaster, but it was additional, tedious work that needed attention across the application.
+
+That is why I also check what the libraries we use have actually migrated. A dependency can advertise a compatible version while still having a transition to finish. That work can then fall to the teams using it.
+
 ## Break the upgrade into verifiable steps
 
 Start with a short list:
