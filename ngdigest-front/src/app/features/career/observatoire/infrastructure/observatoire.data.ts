@@ -744,14 +744,20 @@ const FREE_WORK_NOV: Kpi['source'] = {
 };
 
 const OCT_TECHNOS: ChartMetric = fromSnapshot(OBSERVATOIRE_2026_10.charts, 'technos', '2026-10');
+const OCT_SALARY: ChartMetric = fromSnapshot(OBSERVATOIRE_2026_10.charts, 'salary', '2026-10');
+const MALT_FRONT_NOV: Kpi['source'] = {
+  label: 'Malt Baromètre front-end 2026',
+  date: '02/11/2026',
+  url: 'https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend',
+};
 const NOV_NEXT_POINT: Record<string, number> = { angular: 22.8, react: 16.8, vue: 12.4, svelte: 0.6 };
 
 /**
  * Observatoire — snapshot 2026-11 (4th point of the series).
  *
  * Source of truth: `_drafts/observatoire-snapshots/SNAPSHOT-2026-11.md`
- * (direct Free-Work readings of 2026-11-01). Malt was unreachable this month:
- * the TJM figures are carried over from the 01/10 reading and keep that date.
+ * (direct Free-Work readings of 2026-11-01, Malt checked on 2026-11-02).
+ * Malt's experienced-profile average is unchanged; the 15+ years band is now 580.
  * Not published: the Paris split (filter changed to a 10 km radius, not comparable
  * with October), the Stack Overflow 2026 edition (not found).
  */
@@ -779,7 +785,22 @@ export const OBSERVATOIRE_2026_11: ObservatoireSnapshot = {
       },
       source: FREE_WORK_NOV,
     },
-    ...OBSERVATOIRE_2026_10.kpis.slice(1),
+    ...OBSERVATOIRE_2026_10.kpis.slice(1).map((kpi) =>
+      kpi.id === 'tjm-front'
+        ? {
+            ...kpi,
+            label: {
+              fr: 'de TJM moyen pour les profils front expérimentés sur Malt',
+              en: 'average daily rate for experienced front-end profiles on Malt',
+            },
+            angle: {
+              fr: 'Relevé du 2 novembre : moyenne toujours à 536 €, junior à 299 €. La tranche 15 ans et plus passe de 582 à 580 €.',
+              en: 'Checked on 2 November: the average remains €536, juniors €299. The 15+ years band moves from €582 to €580.',
+            },
+            source: MALT_FRONT_NOV,
+          }
+        : kpi
+    ),
   ],
   charts: [
     {
@@ -798,11 +819,35 @@ export const OBSERVATOIRE_2026_11: ObservatoireSnapshot = {
       })),
       source: FREE_WORK_NOV,
     },
-    ...OBSERVATOIRE_2026_10.charts.slice(1),
+    ...OBSERVATOIRE_2026_10.charts.slice(1).map((chart) =>
+      chart.id === 'salary'
+        ? {
+            ...OCT_SALARY,
+            angle: {
+              fr: 'Au 2 novembre, le TJM moyen des profils expérimentés reste à 536 €. Malt affiche 18 193 profils front ; la tranche 15 ans et plus est à 580 €, contre 582 € au relevé précédent.',
+              en: 'On 2 November, experienced profiles still average €536/day. Malt lists 18,193 front-end profiles; the 15+ years band is €580, compared with €582 at the previous reading.',
+            },
+            note: {
+              fr: 'Relevé direct du 02/11/2026. Moyennes Malt, pas des médianes ni des tarifs de missions signées. La moyenne principale porte sur les profils expérimentés actifs sur les 3 derniers mois.',
+              en: 'Direct reading on 02/11/2026. Malt averages, not medians or signed-contract rates. The headline average covers experienced profiles active in the last 3 months.',
+            },
+            bars: [
+              { key: 's1', label: { fr: '0–2 ans', en: '0–2 yrs' }, value: 299 },
+              { key: 's2', label: { fr: '3–7 ans', en: '3–7 yrs' }, value: 407 },
+              { key: 's3', label: { fr: '8–15 ans', en: '8–15 yrs' }, value: 536 },
+              { key: 's4', label: { fr: '15 ans +', en: '15 yrs +' }, value: 580 },
+            ],
+            source: MALT_FRONT_NOV,
+          }
+        : chart
+    ),
   ],
   sources: [
     FREE_WORK_NOV,
-    ...OBSERVATOIRE_2026_10.sources.filter((source) => source !== FREE_WORK_OCT),
+    MALT_FRONT_NOV,
+    ...OBSERVATOIRE_2026_10.sources.filter(
+      (source) => source !== FREE_WORK_OCT && source !== MALT_FRONT_OCT
+    ),
   ],
 };
 

@@ -207,9 +207,14 @@ describe('OBSERVATOIRE_2026_11 snapshot', () => {
     expect(last('svelte')).toBe(0.6);
   });
 
-  it('keeps the carried-over Malt rates dated from the 01/10 reading', () => {
+  it('uses the November Malt reading without changing historical snapshots', () => {
     const salary = snapshot.charts.find((chart) => chart.id === 'salary');
-    expect(salary?.source.date).toBe('01/10/2026');
+    expect(salary?.source.date).toBe('02/11/2026');
+    expect(salary?.bars?.map((bar) => bar.value)).toEqual([299, 407, 536, 580]);
+    expect(snapshot.kpis.find((kpi) => kpi.id === 'tjm-front')?.source.date).toBe('02/11/2026');
+    const octoberSalary = OBSERVATOIRE_2026_10.charts.find((chart) => chart.id === 'salary');
+    expect(octoberSalary?.source.date).toBe('01/10/2026');
+    expect(octoberSalary?.bars?.at(-1)?.value).toBe(582);
   });
 
   it('keeps the same chart layout as July so the page selects them by id', () => {

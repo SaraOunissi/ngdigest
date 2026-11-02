@@ -147,6 +147,26 @@ déploiement et vérification FR/EN en production restent à faire.
 
 ## Prochaines passes produit
 
+### Mise à jour Malt et offres — demande Sara du 02/11/2026
+
+Malt ouvert à la source le 02/11 : moyenne des profils expérimentés 536 €/j ;
+tranches 299 / 407 / 536 / 580 € (15 ans et plus : 582 € en octobre), 18 193 profils.
+Novembre porte désormais la date du 02/11 pour Malt ; octobre reste inchangé.
+Source : https://www.malt.fr/t/barometre-tarifs/tech/developpeur-frontend.
+Tests : 184 Angular, 73 scripts et lint front verts localement.
+
+Board : ajout Recrulab (éditeur SaaS non nommé, front multi-framework dont Angular,
+CDI 40–60 k€, full remote FR ; https://www.hellowork.com/fr-fr/emplois/84791957.html).
+Dougs Facturation : URL republiée `8607485`, salaire 50–55 k€, rassemblement trimestriel
+signalé. Cross-functional : 410 et absente de la liste carrière, archivée.
+ViaBill, SerpApi ×2 et N2JSoft revérifiées vivantes, `scannedAt` au 02/11.
+Total attendu : 12 offres, 6 actives, 6 archivées.
+Recherche ouverte : Free-Work, WTTJ, employeurs/ATS (Dougs, Agicap, N2JSoft, SerpApi,
+Lucca, Apify, Supabase), autres annonces Angular et DevRel. Rejets : Lucca 404,
+Externatic indisponible, Data Recrutement pourvue, missions allemandes verrouillées
+par nationalité/pays ; autres pistes sans salaire, contrat ou remote FR vérifiables.
+CI complète, fusion et production restent à vérifier sur cette branche.
+
 Publication novembre demandée par Sara le 02/11/2026 : lot du 01/11 repris sur
 `main` après la PR #14. Source privée : `_drafts/observatoire-snapshots/SNAPSHOT-2026-11.md`.
 Le snapshot novembre devient celui affiché, avec le point Free-Work ajouté à la

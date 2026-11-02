@@ -18,7 +18,7 @@ stack:
   - Documentation
   - DevRel
 url: "https://serpapi.com/careers/french-developer-advocate"
-scannedAt: 2026-10-23
+scannedAt: 2026-11-02
 status: active
 tags:
   - devrel
