@@ -4,6 +4,10 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Visibilité dans les moteurs d'IA — 2 novembre 2026 (branche `feature/llms-txt`)
+
+Plan SEO étape 0.7. `ngdigest-front/public/llms.txt` (format llmstxt.org) : résumé du site et liens vers le hub carrière et ses sous-pages, l'Observatoire, la veille, les créateurs, les sources, le blog et les offres, d'après les descriptions SEO déjà publiées. Aucun chiffre recopié (l'Observatoire est mis à jour chaque mois). `robots.txt` autorise déjà tous les robots, aucun pare-feu Vercel actif (vérifié le 02/11). Même branche : Quality Gate fixé sur Ubuntu 24.04 (`ubuntu-latest` = 26.04, refusé par Playwright) ; Dependency Audit rouge sur des alertes hautes apparues depuis (front : body-parser, undici ; back : body-parser, follow-redirects, multer via @nestjs/platform-express) → `npm audit fix --package-lock-only` avec npm 11.21.1 (version récente, comme le `npm ci` du runner : npm 11.6.2 retirait du lock les dépendances optionnelles `@emnapi/*` et faisait échouer `npm ci` en CI), override `multer ^2.5.0` et `@nestjs/platform-express` 11.2.8 côté back. Plus aucune alerte haute ou critique ; `security.py` et `npm ci --dry-run` passent en local. typescript-eslint 8.72 signale une assertion devenue inutile dans `resource.repository.ts` (`sortDirection as number`), retirée ; lint, tests (82) et build back passent.
+
 ## Audit des dépendances — 6 octobre 2026
 
 « Dependency Audit » était rouge sur toute nouvelle PR : `proxy-addr` ≤ 2.0.7 (GHSA-jqcg-44mw-7w3h, front et back) et `source-map-js` < 1.2.2 (GHSA-68fv-2mgg-jv7q, front). Overrides npm `proxy-addr` ^2.0.8 (front et back) et `source-map-js` ^1.2.2 (front). Avec l'export du `security.py` commun (avis pnpm ignorés, décision de Sara du 06/10). Vérifié en local : `security.py` passed ; tests back 82/82 ; tests front laissés à la CI.
