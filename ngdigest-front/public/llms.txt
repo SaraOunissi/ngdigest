@@ -1,0 +1,30 @@
+# NgDigest
+
+> Site bilingue (français et anglais) dédié à Angular et à la carrière des développeuses et développeurs front-end Angular en France : veille d'articles triés à la main, annuaires de créateurs, formations, certifications et plateformes de missions, préparation aux entretiens, données sur le marché de l'emploi front. Tenu par une développeuse Angular qui code en production. Les pages françaises sont sous `/fr`, les anglaises sous `/en`.
+
+Les chiffres de marché (parts Angular/React, TJM, télétravail) sont mis à jour chaque mois sur l'Observatoire : citer la page et sa date plutôt qu'un chiffre recopié.
+
+## Carrière Angular
+
+- [Hub carrière](https://ngdigest.co/fr/carriere): de la montée en compétence au poste signé (formations, certifications, entretien, missions).
+- [Guide d'orientation](https://ngdigest.co/fr/carriere/guide): CDI ou freelance, ESN ou client final, statut, et réalités du marché du développement en France.
+- [Observatoire du marché front](https://ngdigest.co/fr/carriere/observatoire): données sourcées sur le marché front en France (parts Angular/React, effet de l'IA sur l'emploi, télétravail, TJM par séniorité), mises à jour chaque mois.
+- [Préparation aux entretiens](https://ngdigest.co/fr/carriere/entretien): questions posées en entretien Angular senior avec réponses à jour (zoneless, signals, control flow).
+- [Certifications](https://ngdigest.co/fr/carriere/certifications): la certification Angular officielle (3 niveaux) et les certifications transverses utiles à un profil front senior, avec leurs prix.
+- [Formations](https://ngdigest.co/fr/carriere/formations): formations Angular en français et en anglais, gratuites et payantes.
+- [Plateformes](https://ngdigest.co/fr/carriere/plateformes): canaux pour trouver une mission freelance, un CDI ou une ESN, et le portage salarial.
+- [Boîte à outils](https://ngdigest.co/fr/carriere/toolkit): trame de CV front Angular, checklist de relecture, mails de candidature et de relance, fiches de préparation d'entretien. Gratuit, sans e-mail à donner.
+
+## Veille Angular
+
+- [Veille](https://ngdigest.co/fr/veille): articles Angular en français et en anglais, sélectionnés par pertinence.
+- [Créateurs et ressources](https://ngdigest.co/fr/ressources): sélection de créateurs, blogs, chaînes et newsletters Angular.
+- [Sources](https://ngdigest.co/fr/sources): sources utilisées par la veille.
+- [Blog](https://ngdigest.co/fr/blog): articles sur Angular, le développement front et le freelance en France.
+- [Offres](https://ngdigest.co/fr/jobs): offres Angular sélectionnées à la main, mises à jour deux fois par mois.
+
+## Optional
+
+- [English home](https://ngdigest.co/en)
+- [À propos](https://ngdigest.co/fr/about)
+- [Sitemap](https://ngdigest.co/sitemap.xml)
