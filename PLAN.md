@@ -188,3 +188,11 @@ dans `.github/workflows/quality.yml`. Les preuves locales restent dans
 
 Toujours distinguer local, testé, fusionné, déployé et vérifié en production. Les
 hooks locaux protègent ce poste ; la protection GitHub doit être vérifiée séparément.
+
+## Article « Quelle version Angular utiliser ? » — révision du 02/11/2026
+
+Angle pragmatique et cinq sections françaises validés par Sara. Brouillons FR/EN existants révisés : choix par situation, support/LTS, dépendances, étapes de migration et contraintes de calendrier. Scènes commerciales fictives et raccourcis de migration retirés. Slugs et alternate conservés ; sources Angular officielles contrôlées le 02/11. La date de brouillon historique reste inchangée : date de publication à fixer lors de la décision de publication.
+
+Statut : local et contrôlé, contenu toujours exclu de la publication par les noms draft-. Aucun retrait de ce garde-fou ni déploiement effectué. Vérifications : 24 tests draft-gate/parité passés ; frontmatter YAML lu, rendu Markdown réussi, 6 sections et 2 liens internes résolus dans chaque langue, alternate réciproques. Preuve locale ignorée par Git : .engineering/artifacts/angular-support/check.json. Build complet et contrôle navigateur de la page publiée non réalisés sur cette passe de brouillons.
+
+Prochaine action : examiner la PR de révision, puis obtenir la décision de publication avant de retirer le statut brouillon et de fixer la date ; Quality Gate, audit et vérification du rendu restent nécessaires pour une livraison. Responsable : GPT. Chemin canonique : D:/dev/ngdigest/PLAN.md.
