@@ -61,7 +61,7 @@ export class ResourceRepository {
       return this.findPaginatedFrFirst(
         filter,
         sortField,
-        sortDirection as number,
+        sortDirection,
         skip,
         query.limit,
       );
