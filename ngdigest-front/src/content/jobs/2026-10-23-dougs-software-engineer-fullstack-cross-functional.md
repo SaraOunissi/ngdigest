@@ -19,8 +19,8 @@ stack:
   - SQL
   - GCP
 url: "https://careers.dougs.fr/jobs/8522718-software-engineer-fullstack-cross-functional-team-h-f"
-scannedAt: 2026-10-23
-status: active
+scannedAt: 2026-11-02
+status: expired
 tags:
   - angular
   - remote-france

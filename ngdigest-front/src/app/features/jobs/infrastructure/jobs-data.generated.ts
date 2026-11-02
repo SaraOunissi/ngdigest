@@ -23,7 +23,7 @@ export const JOBS_DATA: readonly Job[] = [
       "Node.js"
     ],
     "url": "https://jobs.lever.co/viabill/db393d02-e09b-4abc-a3d2-94e411e74618",
-    "scannedAt": "2026-10-23",
+    "scannedAt": "2026-11-02",
     "status": "active",
     "tags": [
       "angular",
@@ -58,7 +58,7 @@ export const JOBS_DATA: readonly Job[] = [
       "DevRel"
     ],
     "url": "https://serpapi.com/careers/french-developer-advocate",
-    "scannedAt": "2026-10-23",
+    "scannedAt": "2026-11-02",
     "status": "active",
     "tags": [
       "devrel",
@@ -93,7 +93,7 @@ export const JOBS_DATA: readonly Job[] = [
       "DevRel"
     ],
     "url": "https://serpapi.com/careers/javascript-developer-advocate",
-    "scannedAt": "2026-10-23",
+    "scannedAt": "2026-11-02",
     "status": "active",
     "tags": [
       "devrel",
@@ -129,8 +129,8 @@ export const JOBS_DATA: readonly Job[] = [
       "Jest",
       "GCP"
     ],
-    "url": "https://careers.dougs.fr/jobs/8522684-senior-software-engineer-squad-portail-facturation-h-f",
-    "scannedAt": "2026-10-23",
+    "url": "https://careers.dougs.fr/jobs/8607485-senior-software-engineer-squad-portail-facturation-h-f",
+    "scannedAt": "2026-11-02",
     "status": "active",
     "tags": [
       "angular",
@@ -140,9 +140,9 @@ export const JOBS_DATA: readonly Job[] = [
       "fintech"
     ],
     "editorialHook": "CDI français, 100 % télétravail, salaire écrit dans l'annonce et Angular en première ligne, chez un client final qui recrute toute son équipe à distance.",
-    "editorialNote": "Dougs est un cabinet d'expertise comptable nouvelle génération (450 personnes\ndont plus de 90 ingénieurs, 42 000 entrepreneurs clients) qui développe son\napplication en interne : un client final, pas une ESN. Le statut est écrit sur\nla fiche : « Entièrement à distance », avec « Dans nos locaux, en télétravail\npartiel ou à 100 %, tout est possible » et un rassemblement par trimestre à\nBron. Le poste est fullstack avec une vraie moitié front (« Angular côté front,\nNestJS/PostgreSQL côté back ») et la squad compte une experte front. Le sujet :\nla réforme de la facturation électronique, donc du produit sous contrainte\nréglementaire. Prérequis : 5 ans de fullstack, NestJS/TypeScript solide,\nPostgreSQL, à l'aise en Angular, tests non négociables, DDD apprécié.\nRémunération affichée : 50 000 à 55 000 € par an. Process : deux visios, un test\ntechnique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09 puis le 09/10/2026 (nouvel identifiant).\n",
+    "editorialNote": "Dougs est un cabinet d'expertise comptable nouvelle génération (450 personnes\ndont plus de 90 ingénieurs, 43 000 entrepreneurs clients) qui développe son\napplication en interne : un client final, pas une ESN. Le statut est écrit sur\nla fiche : « Entièrement à distance », avec « Dans nos locaux, en télétravail\npartiel ou à 100 %, tout est possible » et un rassemblement par trimestre à\nBron. Le poste est fullstack avec une vraie moitié front (« Angular côté front,\nNestJS/PostgreSQL côté back ») et la squad compte une experte front. Le sujet :\nla réforme de la facturation électronique, donc du produit sous contrainte\nréglementaire. Prérequis : 5 ans de fullstack, NestJS/TypeScript solide,\nPostgreSQL, à l'aise en Angular, tests non négociables, DDD apprécié.\nRémunération affichée : 50 000 à 55 000 € par an. Process : deux visios, un test\ntechnique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09 puis le 09/10 ; nouvelle URL vérifiée le 02/11/2026.\n",
     "editorialHookEn": "A French permanent contract, fully remote, salary in the ad and Angular up front, at a product company that hires its whole team remotely.",
-    "editorialNoteEn": "Dougs is a new-generation French accounting firm (450 people including 90+\nengineers, 42,000 business clients) that builds its own app in-house: a product\ncompany, not a consultancy. The listing says « Entièrement à distance » (fully\nremote), with office, partial or full remote all possible and one team\ngathering per quarter in Bron. The role is full-stack with a genuine front-end\nhalf (Angular on the front, NestJS/PostgreSQL on the back) and the squad\nincludes a dedicated front-end expert. The subject: France's e-invoicing\nreform, so regulated product work. Requirements: 5 years full-stack, solid\nNestJS/TypeScript, PostgreSQL, comfortable in Angular, tests non-negotiable,\nDDD welcome. Posted pay: €50,000 – €55,000 per year. Process: two video calls,\na take-home test, a debrief with the team. The role is in French.\n",
+    "editorialNoteEn": "Dougs is a new-generation French accounting firm (450 people including 90+\nengineers, 43,000 business clients) that builds its own app in-house: a product\ncompany, not a consultancy. The listing says « Entièrement à distance » (fully\nremote), with office, partial or full remote all possible and one team\ngathering per quarter in Bron. The role is full-stack with a genuine front-end\nhalf (Angular on the front, NestJS/PostgreSQL on the back) and the squad\nincludes a dedicated front-end expert. The subject: France's e-invoicing\nreform, so regulated product work. Requirements: 5 years full-stack, solid\nNestJS/TypeScript, PostgreSQL, comfortable in Angular, tests non-negotiable,\nDDD welcome. Posted pay: €50,000 – €55,000 per year. Process: two video calls,\na take-home test, a debrief with the team. The role is in French.\n",
     "locationEn": "France — fully remote (offices in Bron, near Lyon)",
     "salaryEn": "€50,000 – €55,000/year"
   },
@@ -167,7 +167,7 @@ export const JOBS_DATA: readonly Job[] = [
       "AWS"
     ],
     "url": "https://n2jsoft.recruitee.com/o/developpeur-fullstack-confirme-hf-c-net-angular-12",
-    "scannedAt": "2026-10-23",
+    "scannedAt": "2026-11-02",
     "status": "active",
     "tags": [
       "angular",
@@ -182,6 +182,79 @@ export const JOBS_DATA: readonly Job[] = [
     "editorialNoteEn": "N2JSoft builds N2F, an expense-report and supplier-invoice tool (20,000\ncustomers, 1 million users, 220 people including 45 in tech): a profitable\nproduct company, not a consultancy. The role is full-stack with a genuine\nfront-end half: « Front : Angular 16/21 », .NET 10 and C# on the back end,\nMSSQL, PostgreSQL and DynamoDB, on AWS, in a modular monolith. Requirements:\n3 years of .NET/C# and 2 years of Angular, so mid-level rather than senior.\nRemote is in writing: fully remote is possible, with one company-paid week on\nsite per quarter. Worth knowing: if you live within an hour of Montagnat (Ain,\nnear Lyon), the company expects one or two days a week on site. Posted pay:\n€40,000 – €50,000 gross per year. Process: a take-home test (7 days), a\none-hour code review, an interview with the CTO. The role is in French.\n",
     "locationEn": "France — fully remote, one week on site per quarter (Montagnat, Ain)",
     "salaryEn": "€40,000 – €50,000/year"
+  },
+  {
+    "slug": "dougs-software-engineer-fullstack-cross-functional",
+    "title": "Software Engineer Fullstack — Équipe transverse (Cross-functional)",
+    "company": "Dougs",
+    "companyLogo": "",
+    "type": "CDI",
+    "remote": "100",
+    "zone": "FR",
+    "location": "France — 100 % à distance (bureaux à Bron, près de Lyon)",
+    "language": "fr",
+    "salary": "45 000 – 55 000 €/an",
+    "tjm": null,
+    "stack": [
+      "Angular",
+      "Node.js",
+      "TypeScript",
+      "SQL",
+      "GCP"
+    ],
+    "url": "https://careers.dougs.fr/jobs/8522718-software-engineer-fullstack-cross-functional-team-h-f",
+    "scannedAt": "2026-11-02",
+    "status": "expired",
+    "tags": [
+      "angular",
+      "remote-france",
+      "salaire-affiche",
+      "nodejs",
+      "fintech"
+    ],
+    "editorialHook": "Le poste de Dougs le plus accessible : 3 ans d'expérience suffisent, 100 % télétravail, 45-55 k€ affichés, Angular + Node.js TypeScript.",
+    "editorialNote": "Équipe transverse chez Dougs (cabinet d'expertise comptable en ligne, produit\ndéveloppé en interne, plus de 90 ingénieurs) : les développeurs travaillent avec\nles « Operation Specialists » pour transformer leurs processus métier\n(comptabilité, juridique, social) en outils. Stack écrite dans l'annonce :\n« Angular et Node.js (TypeScript) », hébergée sur GCP. Le statut est affiché sur\nla fiche : « Entièrement à distance », avec « en télétravail partiel ou à\n100 %, tout est possible ». Rémunération : 45 000 à 55 000 € par an, CDI.\nPrérequis : 3 ans d'expérience, bonne pratique de Node.js/TypeScript, SQL ;\nAngular est cité comme « tu connais Angular ». Réserve honnête : le poste est\nplus back que front, et il vise un niveau intermédiaire plutôt que senior.\nÉcrit en octobre : l'annonce avait été vue dès le 09/10 mais écartée une semaine\npour une formulation de remote jugée ambiguë ; la fiche affiche pourtant le\nstatut « Entièrement à distance » sans réserve. Process : visio RH, visio\ntechnique, test à la maison, débrief.\n",
+    "editorialHookEn": "The most accessible role at Dougs: 3 years of experience is enough, fully remote, €45-55k posted, Angular + Node.js TypeScript.",
+    "editorialNoteEn": "Cross-functional team at Dougs (online accounting firm, product built in-house,\n90+ engineers): developers work alongside \"Operation Specialists\" to turn their\nbusiness processes (accounting, legal, payroll) into tools. Stack stated in the\nad: \"Angular and Node.js (TypeScript)\", hosted on GCP. The status is on the\nposting: « fully remote », plus « partial or 100 % remote, anything is\npossible ». Pay: €45,000 to €55,000 a year, permanent contract. Requirements:\n3 years of experience, solid Node.js/TypeScript, SQL; Angular is phrased as\n\"you know Angular\". Honest caveat: the role leans back-end and targets\nmid-level rather than senior. The ad was first seen on 09/10 but set aside for a\nweek over remote wording judged ambiguous; the posting nonetheless shows the\nstatus « fully remote » without reservation. Process: HR call, technical call,\ntake-home test, debrief.\n",
+    "locationEn": "France — fully remote (offices in Bron, near Lyon)",
+    "salaryEn": "€45,000 – €55,000/year"
+  },
+  {
+    "slug": "recrulab-developpeur-frontend-saas",
+    "title": "Développeur Frontend H/F",
+    "company": "Éditeur SaaS (via Recrulab)",
+    "companyLogo": "",
+    "type": "CDI",
+    "remote": "100",
+    "zone": "FR",
+    "location": "France — full remote (annonce localisée à Lyon)",
+    "language": "fr",
+    "salary": "40 000 – 60 000 €/an",
+    "tjm": null,
+    "stack": [
+      "Angular",
+      "Lit",
+      "Web Components",
+      "Vue.js",
+      "React",
+      "Docker",
+      "Kubernetes"
+    ],
+    "url": "https://www.hellowork.com/fr-fr/emplois/84791957.html",
+    "scannedAt": "2026-11-02",
+    "status": "active",
+    "tags": [
+      "angular",
+      "remote-france",
+      "salaire-affiche",
+      "saas-b2b"
+    ],
+    "editorialHook": "Un poste front chez un éditeur SaaS, 40-60 k€ et full remote : Angular fait partie des technos acceptées, avec Lit et les Web Components.",
+    "editorialNote": "Recrulab recrute en CDI pour un éditeur SaaS dont le nom n'est pas communiqué.\nL'annonce confirme le full remote et 40-60 k€ brut annuel. Le périmètre est\nfront, avec Angular, Lit, Web Components, Vue et React ; ce n'est pas du pur\nAngular. Deux ans d'expérience minimum, Bac+5 et bon anglais demandés.\nRéserve : employeur final et répartition des frameworks à préciser en entretien.\n",
+    "editorialHookEn": "A front-end role at a SaaS vendor, €40-60k and fully remote: Angular is among the accepted technologies, alongside Lit and Web Components.",
+    "editorialNoteEn": "Recrulab is recruiting a permanent front-end engineer for an unnamed SaaS\nvendor. The posting confirms fully remote work and €40-60k gross annually.\nAngular, Lit, Web Components, Vue and React are listed; this is not an\nAngular-only position. At least two years of experience, a master's-level\nqualification and good English are required. Caveat: clarify the employer's\nidentity and actual framework split during interviews.\n",
+    "locationEn": "France — fully remote (posting listed in Lyon)",
+    "salaryEn": "€40,000 – €60,000/year"
   },
   {
     "slug": "dougs-software-engineer-fullstack-compte-pro",
@@ -219,42 +292,6 @@ export const JOBS_DATA: readonly Job[] = [
     "editorialNoteEn": "Compte Pro squad at Dougs (online accounting firm, product built in-house):\naccounting and finance for business owners, with a banking partner in a\nregulated setting (PSD2, ACPR). Angular, NestJS, PostgreSQL, TypeScript and Jest\non GCP, with a Shape Up-inspired method. The status is on the posting: « fully\nremote », plus « partial or 100 % remote, anything is possible ». Posted pay:\n€50,000 to €55,000 a year, permanent contract. Requirements: about 5 years of\nexperience and solid Node.js/TypeScript. Honest caveat: the role leans back-end,\nand Angular knowledge is « appreciated, or a wish to learn it ». Best for\nsomeone who enjoys fullstack work. Process: HR call, technical call, take-home\ntest, debrief.\n",
     "locationEn": "France — fully remote (offices in Bron, near Lyon)",
     "salaryEn": "€50,000 – €55,000/year"
-  },
-  {
-    "slug": "dougs-software-engineer-fullstack-cross-functional",
-    "title": "Software Engineer Fullstack — Équipe transverse (Cross-functional)",
-    "company": "Dougs",
-    "companyLogo": "",
-    "type": "CDI",
-    "remote": "100",
-    "zone": "FR",
-    "location": "France — 100 % à distance (bureaux à Bron, près de Lyon)",
-    "language": "fr",
-    "salary": "45 000 – 55 000 €/an",
-    "tjm": null,
-    "stack": [
-      "Angular",
-      "Node.js",
-      "TypeScript",
-      "SQL",
-      "GCP"
-    ],
-    "url": "https://careers.dougs.fr/jobs/8522718-software-engineer-fullstack-cross-functional-team-h-f",
-    "scannedAt": "2026-10-23",
-    "status": "active",
-    "tags": [
-      "angular",
-      "remote-france",
-      "salaire-affiche",
-      "nodejs",
-      "fintech"
-    ],
-    "editorialHook": "Le poste de Dougs le plus accessible : 3 ans d'expérience suffisent, 100 % télétravail, 45-55 k€ affichés, Angular + Node.js TypeScript.",
-    "editorialNote": "Équipe transverse chez Dougs (cabinet d'expertise comptable en ligne, produit\ndéveloppé en interne, plus de 90 ingénieurs) : les développeurs travaillent avec\nles « Operation Specialists » pour transformer leurs processus métier\n(comptabilité, juridique, social) en outils. Stack écrite dans l'annonce :\n« Angular et Node.js (TypeScript) », hébergée sur GCP. Le statut est affiché sur\nla fiche : « Entièrement à distance », avec « en télétravail partiel ou à\n100 %, tout est possible ». Rémunération : 45 000 à 55 000 € par an, CDI.\nPrérequis : 3 ans d'expérience, bonne pratique de Node.js/TypeScript, SQL ;\nAngular est cité comme « tu connais Angular ». Réserve honnête : le poste est\nplus back que front, et il vise un niveau intermédiaire plutôt que senior.\nÉcrit en octobre : l'annonce avait été vue dès le 09/10 mais écartée une semaine\npour une formulation de remote jugée ambiguë ; la fiche affiche pourtant le\nstatut « Entièrement à distance » sans réserve. Process : visio RH, visio\ntechnique, test à la maison, débrief.\n",
-    "editorialHookEn": "The most accessible role at Dougs: 3 years of experience is enough, fully remote, €45-55k posted, Angular + Node.js TypeScript.",
-    "editorialNoteEn": "Cross-functional team at Dougs (online accounting firm, product built in-house,\n90+ engineers): developers work alongside \"Operation Specialists\" to turn their\nbusiness processes (accounting, legal, payroll) into tools. Stack stated in the\nad: \"Angular and Node.js (TypeScript)\", hosted on GCP. The status is on the\nposting: « fully remote », plus « partial or 100 % remote, anything is\npossible ». Pay: €45,000 to €55,000 a year, permanent contract. Requirements:\n3 years of experience, solid Node.js/TypeScript, SQL; Angular is phrased as\n\"you know Angular\". Honest caveat: the role leans back-end and targets\nmid-level rather than senior. The ad was first seen on 09/10 but set aside for a\nweek over remote wording judged ambiguous; the posting nonetheless shows the\nstatus « fully remote » without reservation. Process: HR call, technical call,\ntake-home test, debrief.\n",
-    "locationEn": "France — fully remote (offices in Bron, near Lyon)",
-    "salaryEn": "€45,000 – €55,000/year"
   },
   {
     "slug": "builderio-senior-customer-engineer-emea",

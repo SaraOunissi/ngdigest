@@ -19,8 +19,8 @@ stack:
   - PostgreSQL
   - Jest
   - GCP
-url: "https://careers.dougs.fr/jobs/8522684-senior-software-engineer-squad-portail-facturation-h-f"
-scannedAt: 2026-10-23
+url: "https://careers.dougs.fr/jobs/8607485-senior-software-engineer-squad-portail-facturation-h-f"
+scannedAt: 2026-11-02
 status: active
 tags:
   - angular
@@ -32,7 +32,7 @@ editorialHook: "CDI français, 100 % télétravail, salaire écrit dans l'annonc
 editorialHookEn: "A French permanent contract, fully remote, salary in the ad and Angular up front, at a product company that hires its whole team remotely."
 editorialNote: |
   Dougs est un cabinet d'expertise comptable nouvelle génération (450 personnes
-  dont plus de 90 ingénieurs, 42 000 entrepreneurs clients) qui développe son
+  dont plus de 90 ingénieurs, 43 000 entrepreneurs clients) qui développe son
   application en interne : un client final, pas une ESN. Le statut est écrit sur
   la fiche : « Entièrement à distance », avec « Dans nos locaux, en télétravail
   partiel ou à 100 %, tout est possible » et un rassemblement par trimestre à
@@ -42,10 +42,10 @@ editorialNote: |
   réglementaire. Prérequis : 5 ans de fullstack, NestJS/TypeScript solide,
   PostgreSQL, à l'aise en Angular, tests non négociables, DDD apprécié.
   Rémunération affichée : 50 000 à 55 000 € par an. Process : deux visios, un test
-  technique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09 puis le 09/10/2026 (nouvel identifiant).
+  technique à la maison, un débrief avec l'équipe. Annonce republiée le 25/09 puis le 09/10 ; nouvelle URL vérifiée le 02/11/2026.
 editorialNoteEn: |
   Dougs is a new-generation French accounting firm (450 people including 90+
-  engineers, 42,000 business clients) that builds its own app in-house: a product
+  engineers, 43,000 business clients) that builds its own app in-house: a product
   company, not a consultancy. The listing says « Entièrement à distance » (fully
   remote), with office, partial or full remote all possible and one team
   gathering per quarter in Bron. The role is full-stack with a genuine front-end
