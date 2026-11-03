@@ -4,6 +4,14 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Page Entretien : uniquement les questions réellement posées — 4 novembre 2026 (branche `feature/entretien-vraies-questions`)
+
+Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment posées, retirer celles de l'agent, revoir toutes les réponses (justes, humaines, ni trop théoriques ni trop courtes). Source : sa liste de 53 questions (Drive, `questions-seulement.md`, mars 2026). Les 16 questions « seed » de l'agent (31/05) et les doublons ajoutés (bundler, API REST) sont retirés ; le thème Accessibilité disparaît faute de question réelle. Les 53 réponses FR/EN sont réécrites (médiane ≈ 95 mots), vérifiées sur Angular 21 et 22 (zoneless par défaut en 21, OnPush par défaut et `Eager` en 22, Vitest par défaut, `httpResource` stable, `*ngIf` déprécié en 20). « C'est quoi les balises CI ? » : réponse honnête sur l'ambiguïté (tags GitLab des runners, tags Git de livraison). Textes de la page et compteurs passés de 69 à 53. Nouveau test `interview-questions.data.spec.ts` (53 questions, aucune seed, thèmes non vides, réponses de plus de 50 mots, parité de la note 2026).
+
+Source des réponses : `D:/dev/_state/_briefs/ngdigest/entretien/questions.py` (génère `interview-questions.data.ts`).
+
+Statut : à relire par Sara avant fusion (contenu technique publié sous son nom).
+
 ## Blog : graphiques, images de partage, article TJM — 3 novembre 2026 (branche `feature/blog-visuels`)
 
 Demande de Sara : des articles ngDigest mieux mis en valeur (chiffres, graphiques, images), comme sur Mensualio et OrOGramme.
