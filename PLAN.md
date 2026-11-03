@@ -4,6 +4,12 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Article « Quelle version d'Angular utiliser ? » publié — 4 novembre 2026 (branche `content/angular-support-pragmatique`)
+
+Réécriture FR validée par Sara le 04/11 (« je le valide comme ça, on peut le mettre en ligne ») : introduction de trois paragraphes, sans tournure dévalorisante (« Je n'ai jamais été très bonne pour faire ma veille Angular »), dates clés en `:::keyfigures`, renvoi vers l'outil de support des versions, anecdote 14 → 15 → 16 conservée. Version EN alignée section par section. Fichiers sortis du préfixe `draft-`, date 2026-11-04, `highlight` (28/11/2026), images de partage FR/EN générées, deux entrées ajoutées au sitemap. L'outil affiche maintenant le lien vers l'article (`RELATED_ARTICLE_SLUGS`).
+
+Statut : à fusionner puis vérifier en production (page prérendue, image de partage, lien depuis l'outil), puis soumettre l'URL dans Search Console.
+
 ## Blog : graphiques, images de partage, article TJM — 3 novembre 2026 (branche `feature/blog-visuels`)
 
 Demande de Sara : des articles ngDigest mieux mis en valeur (chiffres, graphiques, images), comme sur Mensualio et OrOGramme.
