@@ -31,6 +31,8 @@ export const ROUTE_SLUG_TRANSLATIONS: Record<string, string> = {
   'career/observatory': 'carriere/observatoire',
   'carriere/toolkit': 'career/toolkit',
   'career/toolkit': 'carriere/toolkit',
+  'outils/support-versions-angular': 'tools/angular-version-support',
+  'tools/angular-version-support': 'outils/support-versions-angular',
   'mentions-legales': 'legal-notice',
   'legal-notice': 'mentions-legales',
   'politique-confidentialite': 'privacy-policy',

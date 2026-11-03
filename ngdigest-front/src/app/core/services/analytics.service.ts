@@ -55,6 +55,15 @@ export class AnalyticsService {
     }
   }
 
+  /** Événement GA4 personnalisé (outils gratuits), soumis au consentement comme les pages vues. */
+  trackEvent(name: string, params: Record<string, string | number | boolean> = {}): void {
+    if (!this.isBrowser || this._consentStatus() !== 'accepted') return;
+    const win = window as unknown as GtagWindow;
+    if (typeof win.gtag === 'function') {
+      win.gtag('event', name, params);
+    }
+  }
+
   private loadGtag(): void {
     if (!this.isBrowser || document.getElementById(GTAG_SCRIPT_ID)) return;
 
