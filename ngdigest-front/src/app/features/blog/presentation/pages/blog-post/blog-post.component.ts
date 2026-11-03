@@ -87,6 +87,7 @@ export class BlogPostComponent {
 
       const alternateUrl = `${BASE_URL}/${lang === 'fr' ? 'en' : 'fr'}/blog/${article.alternate}`;
       this.seoService.updateMeta(article.title, article.description, lang, alternateUrl);
+      if (article.ogImage) this.seoService.updateImage(article.ogImage, article.title);
       this.injectJsonLd(article);
     });
 
@@ -191,6 +192,7 @@ export class BlogPostComponent {
       },
       url: `${BASE_URL}/${article.lang}/blog/${article.slug}`,
       inLanguage: article.lang === 'fr' ? 'fr-FR' : 'en-GB',
+      ...(article.ogImage ? { image: `https://ngdigest.co${article.ogImage}` } : {}),
       publisher: {
         '@type': 'Organization',
         name: 'NgDigest',

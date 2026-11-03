@@ -7,6 +7,7 @@ author: "Sara Ounissi"
 tags: ["freelance", "angular", "day-rate", "france"]
 lang: "en"
 alternate: "tjm-developpeur-angular-2026"
+highlight: { value: "€480/day", label: "average daily rate for a mid-level Angular freelancer in France, 2026" }
 ---
 
 This year, I decided to go freelance. Well, "decided" might be a strong word. Let's say I'm right in the middle of it: the prospecting, the administrative questions, the doubts. After years working through consulting firms (ESN, the French equivalent of staffing agencies for tech), I'm preparing to make the jump toward an independent Angular development business. And honestly? It's really not easy.
@@ -37,12 +38,18 @@ This was actually one of the things that surprised me most when I started diggin
 
 Here are the average ranges observed on the French market in 2026, compiled from data on Malt, Free-Work, Freelance-Informatique and industry barometers:
 
-| Experience Level | Average Rate | Range |
-|-----------------|-------------|-------|
-| **Junior** (0-2 years) | €350 | €300 - 400 |
-| **Mid-level** (3-5 years) | €480 | €400 - 550 |
-| **Senior** (5-8 years) | €580 | €500 - 650 |
-| **Expert / Lead** (8+ years) | €680 | €600 - 800 |
+:::keyfigures Average Angular daily rates in France, 2026
+- neutral | €350 | **Junior** (0-2 years)
+- gold | €480 | **Mid-level** (3-5 years)
+- good | €580 | **Senior** (5-8 years)
+:::
+
+:::chart Angular daily rate by level, France 2026 | €/day | average rate | Sources: Malt, Free-Work, Freelance-Informatique, industry barometers (2026)
+- Junior (0-2 years) | 300-400 | 350
+- Mid-level (3-5 years) | 400-550 | 480
+- Senior (5-8 years) | 500-650 | 580
+- Expert / Lead (8+ years) | 600-800 | 680
+:::
 
 These figures correspond to **time-and-materials** contracts, which represent the majority of the Angular market. Fixed-price projects can yield higher rates if you're good at estimating workload.
 

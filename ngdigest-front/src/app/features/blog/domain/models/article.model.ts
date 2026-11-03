@@ -33,6 +33,8 @@ export interface Article {
   readonly toc: readonly TocEntry[];
   /** Cover image path, or null to fall back to the striped placeholder. */
   readonly cover: string | null;
+  /** Image de partage 1200×630 (`/assets/images/og/blog/<lang>/<slug>.png`), null si absente. */
+  readonly ogImage: string | null;
   /** Big editorial figure for the featured-card placeholder, or null. */
   readonly highlight: ArticleHighlight | null;
   /** When true, pins this article as the featured one on the blog list. */

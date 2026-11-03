@@ -51,7 +51,7 @@ cover: ""                          # /assets/blog/<slug>/cover.webp, sinon place
 
 ---
 
-## 3. Les 3 directives spéciales
+## 3. Les directives spéciales
 
 ### `:::keyfigures` — trois grands chiffres
 ```markdown
@@ -81,6 +81,31 @@ La demande Node **baisse** en ce moment. À suivre sur 12 mois avant de miser de
 **Un seul CTA par article**, juste **avant** la conclusion.
 
 ---
+
+### `:::chart` — graphique en barres (chiffres sourcés uniquement)
+
+```md
+:::chart Titre | unité | légende du repère | source
+- Libellé | 300-400 | 350
+- Autre libellé | 538
+:::
+```
+
+Une ligne = libellé | valeur ou fourchette `min-max` | repère facultatif (moyenne, médiane…).
+L'échelle part de 0. Une ligne illisible fait échouer le build (jamais de graphique faux).
+Rendu : `scripts/lib/blog-figures.mjs`. Garder les chiffres identiques au texte et à la source citée.
+
+### Ancre explicite d'un titre
+
+`## Titre {#mon-ancre}` : l'ancre est retirée du titre affiché et devient son `id`
+(utile pour garder un lien interne stable quand le titre change).
+
+### Image de partage (LinkedIn, Slack…)
+
+À la publication d'un article (ou si son titre change) : `node scripts/generate-og-images.mjs`
+(Playwright requis, `--force` pour tout régénérer). L'image 1200×630 reprend le titre et le
+`highlight` du frontmatter ; elle est versionnée dans `public/assets/images/og/blog/<lang>/`.
+Sans image, la page garde le logo NgDigest.
 
 ## 4. Règles strictes
 
