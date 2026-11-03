@@ -4,7 +4,6 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
-<<<<<<< HEAD
 ## Page Entretien : uniquement les questions réellement posées — 4 novembre 2026 (branche `feature/entretien-vraies-questions`)
 
 Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment posées, retirer celles de l'agent, revoir toutes les réponses (justes, humaines, ni trop théoriques ni trop courtes). Source : sa liste de 53 questions (Drive, `questions-seulement.md`, mars 2026). Les 16 questions « seed » de l'agent (31/05) et les doublons ajoutés (bundler, API REST) sont retirés ; le thème Accessibilité disparaît faute de question réelle. Les 53 réponses FR/EN sont réécrites (médiane ≈ 95 mots), vérifiées sur Angular 21 et 22 (zoneless par défaut en 21, OnPush par défaut et `Eager` en 22, Vitest par défaut, `httpResource` stable, `*ngIf` déprécié en 20). « C'est quoi les balises CI ? » : réponse honnête sur l'ambiguïté (tags GitLab des runners, tags Git de livraison). Textes de la page et compteurs passés de 69 à 53. Nouveau test `interview-questions.data.spec.ts` (53 questions, aucune seed, thèmes non vides, réponses de plus de 50 mots, parité de la note 2026).
@@ -12,13 +11,12 @@ Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment po
 Source des réponses : `D:/dev/_state/_briefs/ngdigest/entretien/questions.py` (génère `interview-questions.data.ts`).
 
 Statut : à relire par Sara avant fusion (contenu technique publié sous son nom).
-=======
+
 ## Article « Quelle version d'Angular utiliser ? » publié — 4 novembre 2026 (branche `content/angular-support-pragmatique`)
 
 Réécriture FR validée par Sara le 04/11 (« je le valide comme ça, on peut le mettre en ligne ») : introduction de trois paragraphes, sans tournure dévalorisante (« Je n'ai jamais été très bonne pour faire ma veille Angular »), dates clés en `:::keyfigures`, renvoi vers l'outil de support des versions, anecdote 14 → 15 → 16 conservée. Version EN alignée section par section. Fichiers sortis du préfixe `draft-`, date 2026-11-04, `highlight` (28/11/2026), images de partage FR/EN générées, deux entrées ajoutées au sitemap. L'outil affiche maintenant le lien vers l'article (`RELATED_ARTICLE_SLUGS`).
 
-Statut : à fusionner puis vérifier en production (page prérendue, image de partage, lien depuis l'outil), puis soumettre l'URL dans Search Console.
->>>>>>> origin/main
+Statut : fusionné (#17) et vérifié en production le 04/11 (page servie avec la nouvelle introduction). Reste : soumettre l'URL dans Search Console.
 
 ## Blog : graphiques, images de partage, article TJM — 3 novembre 2026 (branche `feature/blog-visuels`)
 
