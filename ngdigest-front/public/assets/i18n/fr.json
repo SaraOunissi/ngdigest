@@ -719,5 +719,23 @@
   "versionsTool.sources.policy": "politique de versions et calendrier des prochaines sorties (relu le {{date}}).",
   "versionsTool.disclaimer": "Information, pas un conseil : les dates viennent de l'équipe Angular et peuvent évoluer. Vérifie sur angular.dev avant une décision qui engage un client.",
   "versionsTool.and": " et ",
-  "footer.versionsTool": "Versions d'Angular"
+
+  "nav.tools": "Outils",
+  "footer.tools": "Outils",
+  "toolsHub.crumbHome": "Accueil",
+  "toolsHub.crumbCurrent": "Outils",
+  "toolsHub.hero.kicker": "Gratuit · sans inscription",
+  "toolsHub.hero.title": "Les outils gratuits pour devs Angular",
+  "toolsHub.hero.subtitle": "Des outils que j'ai d'abord faits pour moi : vérifier le support d'une version, préparer une migration, postuler avec de bons modèles. Tu t'en sers, tu repars, sans laisser ton email.",
+  "toolsHub.kind.interactive": "Outil interactif",
+  "toolsHub.kind.download": "Modèles à télécharger",
+  "toolsHub.versions.title": "Ma version d'Angular est-elle encore supportée ?",
+  "toolsHub.versions.body": "Le statut de ta version, sa date de fin de support, les jours restants et ton chemin de migration jusqu'à la dernière version, d'après angular.dev.",
+  "toolsHub.versions.highlight": "Angular {{major}} : fin de tout support le {{date}}, dans {{days}} jours.",
+  "toolsHub.versions.cta": "Vérifier ma version",
+  "toolsHub.toolkit.title": "Toolkit carrière : CV, mails, fiches d'entretien",
+  "toolsHub.toolkit.body": "Trame de CV, mails de candidature et de relance, fiches de prépa et de débrief d'entretien. Tu télécharges, tu remplis, tu envoies.",
+  "toolsHub.toolkit.highlight": "{{count}} fichiers en Markdown, à ouvrir dans n'importe quel éditeur.",
+  "toolsHub.toolkit.cta": "Voir le toolkit",
+  "toolsHub.note": "D'autres outils arrivent au fil de mes besoins. Une idée d'outil qui te manque ? Écris-moi sur LinkedIn."
 }

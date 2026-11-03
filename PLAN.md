@@ -4,6 +4,10 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Page « Outils » — 3 novembre 2026 (branche `feature/hub-outils`)
+
+Demande de Sara : un seul endroit pour les outils. `/fr/outils` et `/en/tools` (prérendues, JSON-LD CollectionPage + ItemList + BreadcrumbList, sitemap, llms.txt) listent l'outil versions d'Angular (avec la prochaine fin de support calculée sur les données) et le Toolkit carrière, qui reste aussi à sa place dans le parcours carrière. Entrée « Outils » dans le menu (bureau et mobile) et le pied de page ; fil d'Ariane de l'outil versions : Accueil / Outils / Versions. Test du hub ajouté ; lint et tests de la fonctionnalité verts ; captures 390 et 1 440 px sans débordement.
+
 ## Outil « Ma version d'Angular est-elle encore supportée ? » — 3 novembre 2026 (branche `feature/outil-versions-angular`)
 
 Plan SEO 1.6. Pages prérendues `/fr/outils/support-versions-angular` et `/en/tools/angular-version-support` (canonique, hreflang via `route-slugs.ts`, JSON-LD WebApplication + BreadcrumbList + FAQPage, sitemap, llms.txt, lien dans le pied de page).
