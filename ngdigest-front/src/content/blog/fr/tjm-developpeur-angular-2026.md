@@ -7,6 +7,7 @@ author: "Sara Ounissi"
 tags: ["freelance", "angular", "tjm", "france"]
 lang: "fr"
 alternate: "angular-developer-daily-rate-2026"
+highlight: { value: "480 €/j", label: "TJM moyen d'un dev Angular confirmé en France en 2026" }
 ---
 
 <!-- Update mai 2026 : section "Barème 2026 actualisé" + Paris vs régions vs remote + sources fraîches. by project-worker 2026-05-22 (q017) -->
@@ -41,12 +42,18 @@ C'est d'ailleurs un des trucs qui m'a le plus surprise en commençant à creuser
 
 Voici les fourchettes moyennes observées sur le marché français en 2026, compilées à partir des données de Malt, Free-Work, Freelance-Informatique et des baromètres du secteur :
 
-| Niveau d'expérience | TJM moyen | Fourchette |
-|---------------------|-----------|------------|
-| **Junior** (0-2 ans) | 350€ | 300 - 400€ |
-| **Confirmé** (3-5 ans) | 480€ | 400 - 550€ |
-| **Senior** (5-8 ans) | 580€ | 500 - 650€ |
-| **Expert / Lead** (8+ ans) | 680€ | 600 - 800€ |
+:::keyfigures TJM moyens Angular en France, 2026
+- neutral | 350 € | **Junior** (0-2 ans)
+- gold | 480 € | **Confirmé** (3-5 ans)
+- good | 580 € | **Senior** (5-8 ans)
+:::
+
+:::chart TJM Angular par niveau, France 2026 | €/j | TJM moyen | Sources : Malt, Free-Work, Freelance-Informatique, baromètres du secteur (2026)
+- Junior (0-2 ans) | 300-400 | 350
+- Confirmé (3-5 ans) | 400-550 | 480
+- Senior (5-8 ans) | 500-650 | 580
+- Expert / Lead (8+ ans) | 600-800 | 680
+:::
 
 Ces chiffres correspondent à des missions en **régie** (temps passé), qui représentent la majorité du marché Angular. En forfait, les tarifs peuvent être plus élevés si tu maîtrises bien l'estimation de charge.
 
@@ -96,7 +103,7 @@ Free-Work et codeur.com séparent désormais les TJM front-end par secteur. Sur 
 
 ### Ce qui a vraiment bougé depuis mars 2026
 
-- **+5 à +8%** sur les TJM seniors Angular toutes localisations confondues (porté par la demande Signals + zoneless + SSR — voir [retour d'expérience zoneless en production](./draft-angular-21-zoneless-retour-experience.md) à paraître).
+- **+5 à +8%** sur les TJM seniors Angular toutes localisations confondues (porté par la demande Signals + zoneless + SSR ; un retour d'expérience zoneless en production est à paraître).
 - **Resserrement du delta Paris/régions** sur les profils confirmés (le remote hybride parisien grignote le différentiel pur géographique).
 - **Apparition d'une prime "perf front"** : maîtrise SSR + Signals + audit Lighthouse = +50 à +100€/j sur les missions SaaS B2C à fort trafic.
 - **Plafond micro-entreprise saturé plus vite** : à 480€/j médian confirmé sur 180j facturés, on atteint 86 400€ de CA — soit ~9 000€ au-dessus du plafond BNC de 77 700€. La bascule SASU devient quasi mécanique en année 2 pour un confirmé qui tient sa cadence.

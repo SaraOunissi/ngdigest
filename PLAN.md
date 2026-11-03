@@ -4,6 +4,16 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Blog : graphiques, images de partage, article TJM — 3 novembre 2026 (branche `feature/blog-visuels`)
+
+Demande de Sara : des articles ngDigest mieux mis en valeur (chiffres, graphiques, images), comme sur Mensualio et OrOGramme.
+- **`:::chart`** (`scripts/lib/blog-figures.mjs`, 6 tests) : barres horizontales générées au build, libellés et valeurs en HTML, barre en petit SVG décoratif (géométrie par attributs, aucun style en ligne), échelle à 0, repère facultatif (moyenne/médiane), source sous le graphique ; une ligne illisible fait échouer le build. Styles dans `_blog.scss` (jetons de la charte), empilé sous 720 px.
+- **Ancre explicite `## Titre {#ancre}`** : retirée du texte affiché. Corrige le titre de l'article TJM qui affichait `{#mise-a-jour-mai-2026-bareme-actualise}` en production (et le lien « Aller directement à la section actualisée »).
+- **Images de partage** : `scripts/generate-og-images.mjs` (local, Playwright) produit un PNG 1200×630 par article publié (titre, `highlight`, couleurs lues dans `_colors.scss`, polices Space Grotesk / Inter embarquées sous licence OFL dans `scripts/og/fonts`). `generate-blog-index` renseigne `ogImage` si le fichier existe ; la page pose og:image / twitter:image et `image` dans le JSON-LD BlogPosting. `SeoService.updateMeta` repart de l'image par défaut à chaque page. 4 images générées (2 FR, 2 EN).
+- **Article TJM (FR/EN)** : bloc trois chiffres (TJM moyens junior / confirmé / senior) et graphique des fourchettes par niveau à la place du tableau, mêmes chiffres et mêmes sources que le texte ; `highlight` 480 €/j pour l'image de partage ; lien mort vers un brouillon (`./draft-angular-21-zoneless-retour-experience.md`) retiré, mention « à paraître » conservée.
+- README du blog : `:::chart`, ancre explicite, procédure d'image de partage.
+Testé localement : lint, 13 fichiers de tests front, 79 tests de contenu, build avec prérendu (og:image d'article présent, logo par défaut ailleurs), captures 390 / 1 440 px du bloc et du graphique.
+
 ## Outil « Ma version d'Angular est-elle encore supportée ? » — 3 novembre 2026 (branche `feature/outil-versions-angular`)
 
 Plan SEO 1.6. Pages prérendues `/fr/outils/support-versions-angular` et `/en/tools/angular-version-support` (canonique, hreflang via `route-slugs.ts`, JSON-LD WebApplication + BreadcrumbList + FAQPage, sitemap, llms.txt, lien dans le pied de page).

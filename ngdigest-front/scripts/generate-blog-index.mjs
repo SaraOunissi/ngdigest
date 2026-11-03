@@ -23,6 +23,8 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
 import { draftReason } from './lib/blog-draft-gate.mjs'; // by project-worker 2026-08-14
+import { explicitHeadingId, transformCharts } from './lib/blog-figures.mjs';
+import { existsSync } from 'fs';
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
@@ -93,6 +95,9 @@ function decodeEntities(text) {
  *   :::keyfigures / :::note|warn|tip / :::cta
  */
 function transformDirectives(md) {
+  // :::chart — horizontal bar chart (scripts/lib/blog-figures.mjs).
+  md = transformCharts(md, inline);
+
   // :::keyfigures — 3 big figures side by side.
   md = md.replace(/:::keyfigures([^\n]*)\n([\s\S]*?)\n:::/g, (_m, title, rows) => {
     const items = rows
@@ -137,9 +142,11 @@ function wrapTables(html) {
 /** Add ids to every <h2> and collect the table of contents. */
 function withToc(html) {
   const toc = [];
-  const out = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner) => {
+  const out = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, rawInner) => {
+    // `## Titre {#ancre}` : ancre explicite, retirée du texte affiché.
+    const { inner, id: explicitId } = explicitHeadingId(rawInner);
     const text = decodeEntities(inner.replace(/<[^>]+>/g, '').trim());
-    const id = slugify(text);
+    const id = explicitId ?? slugify(text);
     toc.push({ id, text });
     return `<h2 id="${id}">${inner}</h2>`;
   });
@@ -221,6 +228,10 @@ for (const lang of ['fr', 'en']) {
       readingMinutes: readingMinutes(mdContent),
       toc,
       cover: frontmatter['cover'] ?? null,
+      // Image de partage générée par scripts/generate-og-images.mjs (si présente).
+      ogImage: existsSync(join(ROOT, 'public', 'assets', 'images', 'og', 'blog', frontmatter['lang'], `${frontmatter['slug']}.png`))
+        ? `/assets/images/og/blog/${frontmatter['lang']}/${frontmatter['slug']}.png`
+        : null,
       highlight: frontmatter['highlight'] ?? null,
       featured: frontmatter['featured'] === true,
     });
