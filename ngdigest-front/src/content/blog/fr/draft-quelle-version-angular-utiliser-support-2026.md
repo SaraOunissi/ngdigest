@@ -40,15 +40,21 @@ Si une dépendance indispensable ne suit pas encore, tu as plusieurs options : r
 
 Évite de fixer une cible uniquement parce que le numéro est plus récent. Le bon résultat, c'est une application maintenable dont les parcours importants continuent de fonctionner.
 
-### Ce qui m'est arrivé en mission
+### Ce qui m'est arrivé en mission : Angular 14 vers 15, puis 16
 
-J'ai rencontré ce cas chez un client. Je m'occupais d'une montée de version Angular, mais le design system que nous utilisions dépendait d'une autre équipe. Avec le temps et les ressources disponibles, elle avait laissé la partie Angular Material en legacy.
+Chez un client, je m'occupais du passage d'Angular 14 à 15. Le design system que nous utilisions était maintenu par une autre équipe. Faute de temps et de ressources pour terminer la migration Material, elle avait conservé les composants legacy.
 
-Pour avancer sur notre application, j'ai donc dû conserver ces composants legacy pendant plusieurs mois. Lors d'une montée de version suivante, le design system avait terminé cette migration. Il a alors fallu retirer le legacy de notre côté, notamment reprendre les imports et vérifier qu'il n'en restait pas dans un coin.
+Pour m'adapter à cette dépendance et avancer sur notre application, j'ai dû passer les imports Material du projet en legacy. Nous avons gardé cette situation pendant plusieurs mois.
 
-Ce n'était pas la fin du monde, mais c'était du travail supplémentaire, assez pénible, qui demandait de l'attention un peu partout dans l'application.
+Environ six mois plus tard, lors du passage d'Angular 15 à 16, le design system avait terminé sa migration. J'ai alors dû reprendre les imports dans l'autre sens, retirer le legacy et vérifier que les composants s'affichaient correctement partout. Une partie du travail avait été faite deux fois.
 
-C'est pour ça que je regarde aussi ce que les bibliothèques utilisées ont réellement migré. Une dépendance peut annoncer une version compatible tout en gardant une transition à terminer. Et ce travail peut ensuite retomber sur les équipes qui l'utilisent.
+Le contexte technique correspond bien à cette transition : Angular Material 15 a rendu stables les composants basés sur MDC, avec des changements de structure HTML et de styles. Les anciennes implémentations restaient disponibles via des imports legacy. C'est documenté dans [l'annonce officielle d'Angular 15](https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8). Le retrait du legacy lors du passage à Angular 16 décrit ici le calendrier de notre projet, pas une obligation générale imposée par cette version.
+
+Le temps ne partait pas seulement dans les imports. Il fallait aussi repasser sur les écrans, retrouver les petites modales qu'on ouvre rarement, vérifier les affichages et chercher les régressions sur les différents navigateurs.
+
+Ce chantier m'a pris plusieurs semaines. Je découvrais aussi une application que je connaissais encore peu : cette durée comprenait la montée de version, les vérifications et ma prise en main du projet. Ce n'est donc pas un délai à appliquer à toutes les migrations.
+
+C'est ce que je retiens pour le chiffrage : prévoir la mise à jour technique, mais aussi la coordination avec les bibliothèques utilisées, la recette visuelle et les corrections de régression. Un build vert ne couvre pas tout ce travail.
 
 ## Découpe la migration en étapes vérifiables
 

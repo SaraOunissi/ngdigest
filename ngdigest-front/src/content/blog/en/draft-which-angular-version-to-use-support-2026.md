@@ -40,15 +40,21 @@ If an essential dependency is not ready, you have several options: temporarily s
 
 Do not choose a target just because its version number is higher. The result you need is a maintainable application whose critical user journeys still work.
 
-### What happened on a client project
+### What happened on a client project: Angular 14 to 15, then 16
 
-I ran into this on a client project. I was handling an Angular upgrade, but our design system was maintained by another team. With the time and resources available, they had kept the Angular Material components on the legacy implementation.
+On a client project, I was handling the upgrade from Angular 14 to 15. Our design system was maintained by another team. Without enough time and resources to finish the Material migration, they had kept the legacy components.
 
-To move our application forward, I had to keep those legacy components for several months. By a later Angular upgrade, the design system had completed that migration. I then had to remove the legacy usage on our side, including updating imports and checking that none had been missed elsewhere in the application.
+To stay compatible with that dependency and move our application forward, I had to switch the project's Material imports to legacy. We kept that arrangement for several months.
 
-It was not a disaster, but it was additional, tedious work that needed attention across the application.
+About six months later, when upgrading from Angular 15 to 16, the design system had completed its migration. I then had to update the imports again, remove the legacy usage and check that the components still displayed correctly throughout the application. Part of the work had been done twice.
 
-That is why I also check what the libraries we use have actually migrated. A dependency can advertise a compatible version while still having a transition to finish. That work can then fall to the teams using it.
+The technical context fits that transition: Angular Material 15 made the MDC-based components stable, with changes to their HTML structure and styling. The old implementations remained available through legacy imports, as described in the [official Angular 15 announcement](https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8). Removing legacy during our Angular 16 upgrade was our project's timeline, not a general requirement imposed by that release.
+
+The imports were only part of the work. I also had to revisit screens, find the small dialogs that are rarely opened, check how they displayed and look for regressions across browsers.
+
+The work took me several weeks. I was also getting familiar with an application I did not yet know well, so that duration included the upgrade, verification and learning the project. It is not a baseline for every migration.
+
+That is what I take into an estimate: the technical upgrade, coordination with dependencies, visual verification and regression fixes. A passing build does not cover all of that work.
 
 ## Break the upgrade into verifiable steps
 
