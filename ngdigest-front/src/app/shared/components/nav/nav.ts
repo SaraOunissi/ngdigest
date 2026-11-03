@@ -61,6 +61,11 @@ export class NavComponent {
     return ['/', lang, lang === 'fr' ? 'carriere' : 'career'];
   }
 
+  protected toolsRoute(): string[] {
+    const lang = this.languageService.lang();
+    return ['/', lang, lang === 'fr' ? 'outils' : 'tools'];
+  }
+
   protected catalogRoute(): string[] {
     const lang = this.languageService.lang();
     return ['/', lang, lang === 'fr' ? 'ressources' : 'resources'];

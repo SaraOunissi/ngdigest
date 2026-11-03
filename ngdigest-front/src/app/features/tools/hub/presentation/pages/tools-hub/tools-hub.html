@@ -1,0 +1,33 @@
+<header class="wrap">
+  <nav class="dir-crumb" [attr.aria-label]="'toolsHub.crumbCurrent' | translate">
+    <a [routerLink]="['/', languageService.lang()]">{{ 'toolsHub.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="dir-crumb__current">{{ 'toolsHub.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'toolsHub.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">{{ 'toolsHub.hero.title' | translate }}</h1>
+    <p class="phero__subtitle">{{ 'toolsHub.hero.subtitle' | translate }}</p>
+  </div>
+</header>
+
+<main class="wrap th">
+  <ul class="th-grid">
+    @for (card of cards(); track card.id) {
+      <li class="th-card grad-card grad-card--glow">
+        <span class="th-card__kind">{{ card.kindKey | translate }}</span>
+        <h2 class="th-card__title">
+          <a class="th-card__link" [routerLink]="card.route">{{ card.titleKey | translate }}</a>
+        </h2>
+        <p class="th-card__body">{{ card.bodyKey | translate }}</p>
+        @if (card.highlight; as highlight) {
+          <p class="th-card__highlight">{{ highlight.key | translate: highlight.params }}</p>
+        }
+        <span class="th-card__cta" aria-hidden="true">{{ card.ctaKey | translate }} →</span>
+      </li>
+    }
+  </ul>
+
+  <p class="th-note">{{ 'toolsHub.note' | translate }}</p>
+</main>

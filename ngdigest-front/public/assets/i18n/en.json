@@ -719,5 +719,23 @@
   "versionsTool.sources.policy": "versioning policy and upcoming release schedule (checked on {{date}}).",
   "versionsTool.disclaimer": "Information, not advice: dates come from the Angular team and may change. Check angular.dev before a decision that commits a client.",
   "versionsTool.and": " and ",
-  "footer.versionsTool": "Angular versions"
+
+  "nav.tools": "Tools",
+  "footer.tools": "Tools",
+  "toolsHub.crumbHome": "Home",
+  "toolsHub.crumbCurrent": "Tools",
+  "toolsHub.hero.kicker": "Free · no sign-up",
+  "toolsHub.hero.title": "Free tools for Angular developers",
+  "toolsHub.hero.subtitle": "Tools I first built for myself: check a version's support, plan a migration, apply with solid templates. Use them and go, no email required.",
+  "toolsHub.kind.interactive": "Interactive tool",
+  "toolsHub.kind.download": "Templates to download",
+  "toolsHub.versions.title": "Is my Angular version still supported?",
+  "toolsHub.versions.body": "Your version's status, end-of-support date, days left and migration path to the latest version, based on angular.dev.",
+  "toolsHub.versions.highlight": "Angular {{major}}: all support ends on {{date}}, in {{days}} days.",
+  "toolsHub.versions.cta": "Check my version",
+  "toolsHub.toolkit.title": "Career toolkit: resume, emails, interview sheets",
+  "toolsHub.toolkit.body": "Resume outline, application and follow-up emails, interview prep and debrief sheets. Download, fill in, send.",
+  "toolsHub.toolkit.highlight": "{{count}} Markdown files, open them in any editor.",
+  "toolsHub.toolkit.cta": "See the toolkit",
+  "toolsHub.note": "More tools will come as I need them. Missing a tool? Message me on LinkedIn."
 }

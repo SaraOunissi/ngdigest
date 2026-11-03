@@ -13,6 +13,9 @@ Demande de Sara : des articles ngDigest mieux mis en valeur (chiffres, graphique
 - **Article TJM (FR/EN)** : bloc trois chiffres (TJM moyens junior / confirmé / senior) et graphique des fourchettes par niveau à la place du tableau, mêmes chiffres et mêmes sources que le texte ; `highlight` 480 €/j pour l'image de partage ; lien mort vers un brouillon (`./draft-angular-21-zoneless-retour-experience.md`) retiré, mention « à paraître » conservée.
 - README du blog : `:::chart`, ancre explicite, procédure d'image de partage.
 Testé localement : lint, 13 fichiers de tests front, 79 tests de contenu, build avec prérendu (og:image d'article présent, logo par défaut ailleurs), captures 390 / 1 440 px du bloc et du graphique.
+## Page « Outils » — 3 novembre 2026 (branche `feature/hub-outils`)
+
+Demande de Sara : un seul endroit pour les outils. `/fr/outils` et `/en/tools` (prérendues, JSON-LD CollectionPage + ItemList + BreadcrumbList, sitemap, llms.txt) listent l'outil versions d'Angular (avec la prochaine fin de support calculée sur les données) et le Toolkit carrière, qui reste aussi à sa place dans le parcours carrière. Entrée « Outils » dans le menu (bureau et mobile) et le pied de page ; fil d'Ariane de l'outil versions : Accueil / Outils / Versions. Test du hub ajouté ; lint et tests de la fonctionnalité verts ; captures 390 et 1 440 px sans débordement.
 
 ## Outil « Ma version d'Angular est-elle encore supportée ? » — 3 novembre 2026 (branche `feature/outil-versions-angular`)
 

@@ -26,6 +26,17 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }, { lang: 'en' }]),
   },
+  // Free tools hub (FR /outils, EN /tools)
+  {
+    path: ':lang/outils',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'fr' }]),
+  },
+  {
+    path: ':lang/tools',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: () => Promise.resolve([{ lang: 'en' }]),
+  },
   // Free tool — Angular version support (FR + EN slugs)
   {
     path: ':lang/outils/support-versions-angular',
