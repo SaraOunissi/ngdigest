@@ -270,6 +270,7 @@ export class AngularVersionsComponent {
   });
   protected readonly veilleRoute = computed(() => ['/', this.lang(), 'veille']);
   protected readonly homeRoute = computed(() => ['/', this.lang()]);
+  protected readonly toolsRoute = computed(() => ['/', this.lang(), this.lang() === 'fr' ? 'outils' : 'tools']);
 
   private readonly oldestSupported = computed<AngularCycle>(() => {
     const supported = supportedCycles(this.data, this.today());
@@ -374,7 +375,8 @@ export class AngularVersionsComponent {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'NgDigest', item: `${BASE_URL}/${lang}` },
-          { '@type': 'ListItem', position: 2, name: SEO_TITLES[lang], item: pageUrl },
+          { '@type': 'ListItem', position: 2, name: lang === 'fr' ? 'Outils' : 'Tools', item: `${BASE_URL}/${lang}/${lang === 'fr' ? 'outils' : 'tools'}` },
+          { '@type': 'ListItem', position: 3, name: SEO_TITLES[lang], item: pageUrl },
         ],
       },
     ];

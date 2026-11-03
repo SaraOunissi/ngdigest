@@ -18,9 +18,9 @@ export class FooterComponent {
     return ['/', lang, lang === 'fr' ? 'mentions-legales' : 'legal-notice'];
   }
 
-  protected versionsToolRoute(): string[] {
+  protected toolsRoute(): string[] {
     const lang = this.languageService.lang();
-    return lang === 'fr' ? ['/', 'fr', 'outils', 'support-versions-angular'] : ['/', 'en', 'tools', 'angular-version-support'];
+    return ['/', lang, lang === 'fr' ? 'outils' : 'tools'];
   }
 
   protected privacyPolicyRoute(): string[] {

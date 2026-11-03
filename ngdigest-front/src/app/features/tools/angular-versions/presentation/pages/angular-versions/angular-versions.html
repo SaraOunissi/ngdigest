@@ -5,6 +5,8 @@
   <nav class="dir-crumb" [attr.aria-label]="'versionsTool.crumbCurrent' | translate">
     <a [routerLink]="homeRoute()">{{ 'versionsTool.crumbHome' | translate }}</a>
     <span aria-hidden="true">/</span>
+    <a [routerLink]="toolsRoute()">{{ 'toolsHub.crumbCurrent' | translate }}</a>
+    <span aria-hidden="true">/</span>
     <span class="dir-crumb__current">{{ 'versionsTool.crumbCurrent' | translate }}</span>
   </nav>
 

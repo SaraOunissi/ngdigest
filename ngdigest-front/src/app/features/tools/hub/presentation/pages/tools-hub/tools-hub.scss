@@ -1,0 +1,97 @@
+@use "variables" as *;
+@use "colors" as *;
+@use "mixins" as *;
+
+// Hub des outils gratuits — préfixe BEM `th-`.
+
+:host {
+  display: block;
+}
+
+.th {
+  padding-bottom: $spacing-hero;
+}
+
+.th-grid {
+  margin: $spacing-lg 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: $spacing-md;
+
+  @include respond-to($breakpoint-tablet) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.th-card {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+
+  &__kind {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family-display;
+    font-size: clamp(20px, 2.4vw, 24px);
+    font-weight: $font-weight-bold;
+    line-height: 1.25;
+  }
+
+  // Toute la carte est cliquable via le lien du titre.
+  &__link {
+    color: $color-text-primary;
+    text-decoration: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 4px;
+    }
+  }
+
+  &__body {
+    margin: 0;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  &__highlight {
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: $radius-md;
+    border-left: 3px solid $color-accent-gold;
+    background: $color-surface-3;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__cta {
+    margin-top: auto;
+    padding-top: $spacing-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+  }
+}
+
+.th-note {
+  margin: $spacing-xl 0 0;
+  max-width: 640px;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+  color: $color-text-muted;
+}

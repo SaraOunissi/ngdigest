@@ -18,6 +18,9 @@
       <a class="nav__link" [routerLink]="catalogRoute()" routerLinkActive="nav__link--active">
         {{ 'nav.resources' | translate }}
       </a>
+      <a class="nav__link" [routerLink]="toolsRoute()" routerLinkActive="nav__link--active">
+        {{ 'nav.tools' | translate }}
+      </a>
       <a class="nav__link" [routerLink]="blogRoute()" routerLinkActive="nav__link--active">
         {{ 'nav.blog' | translate }}
       </a>
@@ -67,6 +70,9 @@
       </a>
       <a class="nav__mobile-link" [routerLink]="catalogRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
         {{ 'nav.resources' | translate }}
+      </a>
+      <a class="nav__mobile-link" [routerLink]="toolsRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
+        {{ 'nav.tools' | translate }}
       </a>
       <a class="nav__mobile-link" [routerLink]="blogRoute()" routerLinkActive="nav__mobile-link--active" (click)="closeMenu()">
         {{ 'nav.blog' | translate }}
