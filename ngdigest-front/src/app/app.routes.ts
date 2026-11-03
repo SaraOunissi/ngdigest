@@ -166,6 +166,32 @@ export const routes: Routes = [
             (m) => m.ToolkitComponent
           ),
       },
+      // Hub des outils gratuits (FR /outils, EN /tools)
+      {
+        path: 'outils',
+        loadComponent: () =>
+          import('./features/tools/hub/presentation/pages/tools-hub/tools-hub').then((m) => m.ToolsHubComponent),
+      },
+      {
+        path: 'tools',
+        loadComponent: () =>
+          import('./features/tools/hub/presentation/pages/tools-hub/tools-hub').then((m) => m.ToolsHubComponent),
+      },
+      // Outil gratuit — plan SEO 1.6 (slugs FR/EN, cf. core/i18n/route-slugs.ts)
+      {
+        path: 'outils/support-versions-angular',
+        loadComponent: () =>
+          import('./features/tools/angular-versions/presentation/pages/angular-versions/angular-versions').then(
+            (m) => m.AngularVersionsComponent
+          ),
+      },
+      {
+        path: 'tools/angular-version-support',
+        loadComponent: () =>
+          import('./features/tools/angular-versions/presentation/pages/angular-versions/angular-versions').then(
+            (m) => m.AngularVersionsComponent
+          ),
+      },
       {
         path: 'sources',
         loadComponent: () =>

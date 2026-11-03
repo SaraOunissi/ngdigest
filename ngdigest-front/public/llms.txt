@@ -4,6 +4,11 @@
 
 Les chiffres de marché (parts Angular/React, TJM, télétravail) sont mis à jour chaque mois sur l'Observatoire : citer la page et sa date plutôt qu'un chiffre recopié.
 
+## Outils gratuits
+
+- [Tous les outils gratuits](https://ngdigest.co/fr/outils): point d'entrée des outils interactifs et du toolkit carrière.
+- [Ma version d'Angular est-elle encore supportée ?](https://ngdigest.co/fr/outils/support-versions-angular): statut de support de chaque version majeure d'Angular (actif, LTS, fin de vie), dates de fin, jours restants et chemin de migration, d'après la politique officielle d'angular.dev. Version anglaise : [Angular version support](https://ngdigest.co/en/tools/angular-version-support).
+
 ## Carrière Angular
 
 - [Hub carrière](https://ngdigest.co/fr/carriere): de la montée en compétence au poste signé (formations, certifications, entretien, missions).

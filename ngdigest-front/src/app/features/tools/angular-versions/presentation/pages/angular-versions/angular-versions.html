@@ -1,0 +1,260 @@
+<!-- Outil « Ma version d'Angular est-elle encore supportée ? » (plan SEO 1.6).
+     Dates : angular-releases.generated.ts (endoflife.date, d'après angular.dev), statuts
+     recalculés à la date du jour. -->
+<header class="wrap">
+  <nav class="dir-crumb" [attr.aria-label]="'versionsTool.crumbCurrent' | translate">
+    <a [routerLink]="homeRoute()">{{ 'versionsTool.crumbHome' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <a [routerLink]="toolsRoute()">{{ 'toolsHub.crumbCurrent' | translate }}</a>
+    <span aria-hidden="true">/</span>
+    <span class="dir-crumb__current">{{ 'versionsTool.crumbCurrent' | translate }}</span>
+  </nav>
+
+  <div class="phero">
+    <span class="kicker">{{ 'versionsTool.hero.kicker' | translate }}</span>
+    <h1 class="phero__title">{{ 'versionsTool.hero.title' | translate }}</h1>
+    <p class="phero__subtitle">{{ 'versionsTool.hero.subtitle' | translate: pageParams() }}</p>
+  </div>
+</header>
+
+<main class="wrap av">
+  <!-- ── Outil ─────────────────────────────────────────────────────────── -->
+  <section class="av-tool" [attr.aria-label]="'versionsTool.form.legend' | translate">
+    <form class="av-form" (submit)="$event.preventDefault()">
+      <div class="av-field">
+        <label class="av-label" for="av-version">{{ 'versionsTool.form.select' | translate }}</label>
+        <select id="av-version" class="av-input" [value]="selectedMajor()" (change)="onSelect($event)">
+          @for (major of options(); track major) {
+            <option [value]="major" [selected]="major === selectedMajor()">
+              {{ 'versionsTool.form.option' | translate: { major: major } }}
+            </option>
+          }
+          <option [value]="olderOptionMajor()" [selected]="olderOptionMajor() === selectedMajor()">
+            {{ 'versionsTool.form.optionOlder' | translate: { major: olderOptionMajor() } }}
+          </option>
+        </select>
+      </div>
+
+      <div class="av-field">
+        <label class="av-label" for="av-paste">{{ 'versionsTool.form.paste' | translate }}</label>
+        <input
+          id="av-paste"
+          class="av-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          [placeholder]="'versionsTool.form.pastePlaceholder' | translate"
+          [value]="pasteValue()"
+          (input)="onPaste($event)"
+          [attr.aria-invalid]="pasteError()"
+          aria-describedby="av-hint"
+        />
+        @if (pasteError()) {
+          <p class="av-error" role="alert">{{ 'versionsTool.form.pasteError' | translate }}</p>
+        }
+      </div>
+      <p id="av-hint" class="av-hint">{{ 'versionsTool.form.hint' | translate }}</p>
+    </form>
+
+    @if (selected(); as current) {
+      <div class="av-result" [class]="'av-result av-result--' + statusKey()" aria-live="polite">
+        <span class="av-status" [class]="'av-status av-status--' + statusKey()">{{ 'versionsTool.status.' + statusKey() | translate }}</span>
+        <p class="av-headline">{{ headlineKey() | translate: resultParams() }}</p>
+        @if (!current.older) {
+          <p class="av-countdown">{{ 'versionsTool.result.countdown.' + current.info.status | translate: resultParams() }}</p>
+
+          <dl class="av-dates">
+            <div>
+              <dt>{{ 'versionsTool.result.release' | translate }}</dt>
+              <dd>{{ resultParams()['release'] }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'versionsTool.result.activeEnd' | translate }}</dt>
+              <dd>{{ resultParams()['activeEnd'] }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'versionsTool.result.ltsEnd' | translate }}</dt>
+              <dd>{{ resultParams()['ltsEnd'] }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'versionsTool.result.latest' | translate }}</dt>
+              <dd>
+                @if (resultParams()['latestDate']) {
+                  {{ 'versionsTool.result.latestValue' | translate: { version: resultParams()['version'], date: resultParams()['latestDate'] } }}
+                } @else {
+                  {{ resultParams()['version'] }}
+                }
+              </dd>
+            </div>
+          </dl>
+        }
+
+        <div class="av-advice">
+          <h2 class="av-advice__title">{{ 'versionsTool.advice.title' | translate }}</h2>
+          <p>{{ adviceKey() | translate: resultParams() }}</p>
+        </div>
+
+        <div class="av-path">
+          <h2 class="av-path__title">{{ 'versionsTool.path.title' | translate: resultParams() }}</h2>
+          @if (pathSteps().length === 0) {
+            <p>{{ 'versionsTool.path.none' | translate: resultParams() }}</p>
+          } @else {
+            <p class="av-path__count">
+              {{ (pathSteps().length === 1 ? 'versionsTool.path.one' : 'versionsTool.path.many') | translate: resultParams() }}
+            </p>
+            <ol class="av-path__steps">
+              @for (step of pathSteps(); track step.to) {
+                <li class="av-path__step">
+                  <span>{{ 'versionsTool.path.step' | translate: { from: step.from, to: step.to } }}</span>
+                  <a
+                    class="av-path__guide"
+                    [href]="step.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    [attr.aria-label]="'versionsTool.path.guideLabel' | translate: { from: step.from, to: step.to }"
+                    (click)="trackGuideClick(step.from, step.to)"
+                  >{{ 'versionsTool.path.guide' | translate }} ↗</a>
+                </li>
+              }
+            </ol>
+            <p class="av-path__why">{{ 'versionsTool.path.why' | translate }}</p>
+          }
+        </div>
+
+        <div class="av-copy">
+          <button type="button" class="ghost-btn" (click)="copySummary()">{{ 'versionsTool.copy.button' | translate }}</button>
+          @if (copyState() === 'done') {
+            <p class="av-copy__state" role="status">{{ 'versionsTool.copy.done' | translate }}</p>
+          } @else if (copyState() === 'error') {
+            <p class="av-copy__state av-copy__state--error" role="status">{{ 'versionsTool.copy.error' | translate }}</p>
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- ── Calendrier ────────────────────────────────────────────────────── -->
+  <section class="av-section" aria-labelledby="av-table-title">
+    <h2 id="av-table-title" class="av-section__title">{{ 'versionsTool.table.title' | translate }}</h2>
+    <p class="av-section__intro">{{ 'versionsTool.table.intro' | translate: pageParams() }}</p>
+    <div class="av-table-wrap" role="region" tabindex="0" aria-labelledby="av-table-title">
+      <table class="av-table">
+        <caption class="av-visually-hidden">{{ 'versionsTool.table.caption' | translate }}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{{ 'versionsTool.table.version' | translate }}</th>
+            <th scope="col">{{ 'versionsTool.table.status' | translate }}</th>
+            <th scope="col">{{ 'versionsTool.table.release' | translate }}</th>
+            <th scope="col">{{ 'versionsTool.table.activeEnd' | translate }}</th>
+            <th scope="col">{{ 'versionsTool.table.ltsEnd' | translate }}</th>
+            <th scope="col">{{ 'versionsTool.table.latest' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of visibleRows(); track row.major) {
+            <tr>
+              <th scope="row">Angular {{ row.major }}</th>
+              <td><span [class]="'av-status ' + row.statusClass">{{ 'versionsTool.status.' + row.statusKey | translate }}</span></td>
+              <td>{{ row.release }}</td>
+              <td>{{ row.activeEnd }}</td>
+              <td>{{ row.ltsEnd }}</td>
+              <td>{{ row.latest }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    @if (olderRows().length > 0) {
+      <details class="av-older">
+        <summary>{{ 'versionsTool.table.older' | translate: { count: olderRows().length } }}</summary>
+        <div class="av-table-wrap" role="region" tabindex="0" [attr.aria-label]="'versionsTool.table.caption' | translate">
+          <table class="av-table">
+            <tbody>
+              @for (row of olderRows(); track row.major) {
+                <tr>
+                  <th scope="row">Angular {{ row.major }}</th>
+                  <td><span [class]="'av-status ' + row.statusClass">{{ 'versionsTool.status.' + row.statusKey | translate }}</span></td>
+                  <td>{{ row.release }}</td>
+                  <td>{{ row.activeEnd }}</td>
+                  <td>{{ row.ltsEnd }}</td>
+                  <td>{{ row.latest }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </details>
+    }
+  </section>
+
+  <!-- ── Politique ─────────────────────────────────────────────────────── -->
+  <section class="av-section" aria-labelledby="av-policy-title">
+    <h2 id="av-policy-title" class="av-section__title">{{ 'versionsTool.policy.title' | translate }}</h2>
+    <ul class="av-policy">
+      <li>{{ 'versionsTool.policy.cadence' | translate }}</li>
+      <li>{{ 'versionsTool.policy.duration' | translate }}</li>
+      <li>{{ 'versionsTool.policy.deprecation' | translate }}</li>
+      <li>{{ 'versionsTool.policy.today' | translate: pageParams() }}</li>
+    </ul>
+  </section>
+
+  <!-- ── Prochaines versions ───────────────────────────────────────────── -->
+  @if (upcoming().length > 0) {
+    <section class="av-section" aria-labelledby="av-upcoming-title">
+      <h2 id="av-upcoming-title" class="av-section__title">{{ 'versionsTool.upcoming.title' | translate }}</h2>
+      <p class="av-section__intro">{{ 'versionsTool.upcoming.intro' | translate: { date: pageParams()['checked'] } }}</p>
+      <ol class="av-upcoming">
+        @for (release of upcoming(); track release.version) {
+          <li class="av-upcoming__item" [class.av-upcoming__item--major]="release.major">
+            <span class="av-upcoming__version">Angular {{ release.version }}</span>
+            <span class="av-upcoming__kind">{{ (release.major ? 'versionsTool.upcoming.major' : 'versionsTool.upcoming.minor') | translate }}</span>
+            <span class="av-upcoming__date">{{ 'versionsTool.upcoming.approx' | translate: { month: release.month } }}</span>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────── -->
+  @if (faqItems().length > 0) {
+    <section class="av-section" aria-labelledby="av-faq-title">
+      <h2 id="av-faq-title" class="av-section__title">{{ 'versionsTool.faq.title' | translate }}</h2>
+      <div class="av-faq">
+        @for (item of faqItems(); track item.q) {
+          <details>
+            <summary>{{ item.q }}</summary>
+            <p>{{ item.a }}</p>
+          </details>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ── Maillage ──────────────────────────────────────────────────────── -->
+  <section class="av-section" aria-labelledby="av-related-title">
+    <h2 id="av-related-title" class="av-section__title">{{ 'versionsTool.related.title' | translate }}</h2>
+    <ul class="av-related">
+      @if (relatedArticle(); as article) {
+        <li><a [routerLink]="['/', lang(), 'blog', article.slug]">{{ article.title }}</a></li>
+      }
+      <li><a [routerLink]="veilleRoute()">{{ 'versionsTool.related.veille' | translate }}</a></li>
+      <li><a [routerLink]="observatoireRoute()">{{ 'versionsTool.related.observatory' | translate }}</a></li>
+    </ul>
+  </section>
+
+  <!-- ── Sources ───────────────────────────────────────────────────────── -->
+  <section class="av-section av-sources" aria-labelledby="av-sources-title">
+    <h2 id="av-sources-title" class="av-section__title av-section__title--small">{{ 'versionsTool.sources.title' | translate }}</h2>
+    <ul>
+      <li>
+        <a href="https://endoflife.date/angular" target="_blank" rel="noopener noreferrer">endoflife.date/angular</a>
+        — {{ 'versionsTool.sources.dates' | translate: { date: pageParams()['fetched'] } }}
+      </li>
+      <li>
+        <a href="https://angular.dev/reference/releases" target="_blank" rel="noopener noreferrer">angular.dev/reference/releases</a>
+        — {{ 'versionsTool.sources.policy' | translate: { date: pageParams()['checked'] } }}
+      </li>
+    </ul>
+    <p class="av-disclaimer">{{ 'versionsTool.disclaimer' | translate }}</p>
+  </section>
+</main>

@@ -1,0 +1,436 @@
+@use "variables" as *;
+@use "colors" as *;
+@use "mixins" as *;
+
+// Outil « versions d'Angular » — préfixe BEM `av-`. Chrome de page partagé
+// (.wrap, .dir-crumb, .phero, .kicker, .ghost-btn) dans les styles globaux.
+
+:host {
+  display: block;
+}
+
+.av {
+  padding-bottom: $spacing-hero;
+}
+
+// ───────── Outil ─────────
+.av-tool {
+  margin-top: $spacing-lg;
+  display: grid;
+  gap: $spacing-lg;
+
+  @include respond-to($breakpoint-desktop) {
+    grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.av-form {
+  display: grid;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  border: 1px solid $color-hairline-strong;
+  background: $color-surface;
+}
+
+.av-field {
+  display: grid;
+  gap: $spacing-xs;
+}
+
+.av-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.av-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-bg-2;
+  color: $color-text-primary;
+  font-family: $font-family;
+  font-size: $font-size-base;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-error;
+  }
+}
+
+.av-hint {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: 1.55;
+  color: $color-text-muted;
+}
+
+.av-error {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-error;
+}
+
+// ───────── Résultat ─────────
+.av-result {
+  display: grid;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  border: 1px solid $color-hairline-strong;
+  border-left: 4px solid $color-score-high;
+  background: $color-surface;
+
+  &--lts {
+    border-left-color: $color-accent-gold;
+  }
+
+  &--ltsSoon {
+    border-left-color: $color-score-medium;
+  }
+
+  &--eol {
+    border-left-color: $color-score-low;
+  }
+}
+
+.av-status {
+  justify-self: start;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: $radius-pill;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  &--active {
+    color: $color-score-high;
+    background: $color-score-high-bg;
+  }
+
+  &--lts {
+    color: $color-accent-gold;
+    background: $color-surface-3;
+  }
+
+  &--soon,
+  &--ltsSoon {
+    color: $color-score-medium;
+    background: $color-score-medium-bg;
+  }
+
+  &--eol {
+    color: $color-score-low;
+    background: $color-score-low-bg;
+  }
+}
+
+.av-headline {
+  margin: 0;
+  font-family: $font-family-display;
+  font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: $font-weight-bold;
+  line-height: 1.25;
+  color: $color-text-primary;
+}
+
+.av-countdown {
+  margin: 0;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
+.av-dates {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-sm $spacing-md;
+
+  @include respond-to($breakpoint-tablet) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  dt {
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $color-text-muted;
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+}
+
+.av-advice,
+.av-path {
+  padding-top: $spacing-md;
+  border-top: 1px solid $color-border;
+
+  p {
+    margin: 0 0 $spacing-sm;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+}
+
+.av-advice__title,
+.av-path__title {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.av-path__count {
+  font-weight: $font-weight-semibold;
+}
+
+.av-path__steps {
+  margin: 0 0 $spacing-sm;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.av-path__step {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 6px 12px;
+  border-radius: $radius-pill;
+  border: 1px solid $color-border;
+  background: $color-bg-2;
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+}
+
+.av-path__guide {
+  font-family: $font-family;
+  font-size: $font-size-xs;
+  color: $color-primary;
+}
+
+.av-path__why {
+  font-size: $font-size-sm;
+}
+
+.av-copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-md;
+
+  &__state {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-score-high;
+
+    &--error {
+      color: $color-error;
+    }
+  }
+}
+
+// ───────── Sections ─────────
+.av-section {
+  margin-top: $spacing-2xl;
+  max-width: 900px;
+
+  &__title {
+    font-family: $font-family-display;
+    font-weight: $font-weight-bold;
+    font-size: clamp(22px, 2.8vw, 30px);
+    letter-spacing: -0.02em;
+    margin: 0 0 $spacing-sm;
+
+    &--small {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__intro {
+    margin: 0 0 $spacing-md;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+}
+
+.av-table-wrap {
+  overflow-x: auto;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.av-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-sm;
+
+  th,
+  td {
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid $color-border;
+  }
+
+  thead th {
+    background: $color-surface;
+    color: $color-text-muted;
+    font-weight: $font-weight-semibold;
+  }
+
+  tbody th {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+
+  td {
+    color: $color-text-secondary;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.av-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.av-older {
+  margin-top: $spacing-md;
+
+  summary {
+    cursor: pointer;
+    margin-bottom: $spacing-sm;
+    color: $color-text-secondary;
+  }
+}
+
+.av-policy {
+  margin: 0;
+  padding-left: $spacing-lg;
+  display: grid;
+  gap: $spacing-sm;
+  line-height: 1.6;
+  color: $color-text-secondary;
+}
+
+.av-upcoming {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: $spacing-sm;
+
+  &__item {
+    display: grid;
+    grid-template-columns: minmax(110px, auto) 1fr auto;
+    align-items: center;
+    gap: $spacing-md;
+    padding: 10px 14px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    background: $color-surface;
+
+    &--major {
+      border-color: $color-hairline-strong;
+      border-left: 3px solid $color-primary;
+    }
+  }
+
+  &__version {
+    font-family: $font-family-mono;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__kind {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+.av-faq {
+  details {
+    border-bottom: 1px solid $color-border;
+    padding: $spacing-md 0;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  p {
+    margin: $spacing-sm 0 0;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+}
+
+.av-related {
+  margin: 0;
+  padding-left: $spacing-lg;
+  display: grid;
+  gap: $spacing-sm;
+
+  a {
+    color: $color-primary;
+  }
+}
+
+.av-sources {
+  ul {
+    margin: 0 0 $spacing-md;
+    padding-left: $spacing-lg;
+    display: grid;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  a {
+    color: $color-primary;
+  }
+}
+
+.av-disclaimer {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}

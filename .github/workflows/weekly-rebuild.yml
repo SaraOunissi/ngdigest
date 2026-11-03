@@ -1,0 +1,60 @@
+# Reconstruction hebdomadaire du front (plan SEO 0.5).
+#
+# L'outil « versions d'Angular » lit ses dates au build
+# (ngdigest-front/scripts/generate-angular-releases.mjs, lancé par `prebuild`) :
+# sans nouveau build, un nouveau correctif ou une nouvelle majeure n'apparaîtrait
+# qu'au prochain push. Ce workflow redéploie la production chaque lundi via un
+# deploy hook Vercel (secret VERCEL_DEPLOY_HOOK_URL). Secret absent : rien n'est
+# fait, un avertissement est affiché (pas de commit vide sur main).
+name: Weekly rebuild
+
+on:
+  schedule:
+    - cron: '20 6 * * 1' # lundi 06:20 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    name: Redeploy production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Redeploy via Vercel deploy hook
+        shell: bash
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          # Tolère un copier-coller imparfait : espaces, retours à la ligne, guillemets.
+          DEPLOY_HOOK_URL="$(printf '%s' "$DEPLOY_HOOK_URL" | tr -d '[:space:]"'"'"'')"
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "::warning::VERCEL_DEPLOY_HOOK_URL absent : aucune reconstruction. Créer un deploy hook (Vercel > Settings > Git > Deploy Hooks) et l'enregistrer comme secret du dépôt."
+            exit 0
+          fi
+          case "$DEPLOY_HOOK_URL" in
+            https://api.vercel.com/v1/integrations/deploy/prj_*/?*) ;;
+            *)
+              echo "::error::VERCEL_DEPLOY_HOOK_URL (${#DEPLOY_HOOK_URL} caractères) n'est pas une URL complète de hook Vercel (environ 89 caractères attendus)." >&2
+              exit 1
+              ;;
+          esac
+          trigger() {
+            curl --silent --show-error --max-time 30 --retry 2 --retry-delay 10 \
+              --output /tmp/deploy-hook.json --write-out '%{http_code}' "$@" "$DEPLOY_HOOK_URL"
+          }
+          status=$(trigger --request POST --header 'Content-Type: application/json' --data '{}')
+          if [ "$status" = "415" ] || [ "$status" = "405" ]; then
+            status=$(trigger --request GET)
+          fi
+          echo "Deploy hook HTTP $status" >> "$GITHUB_STEP_SUMMARY"
+          head -c 500 /tmp/deploy-hook.json >> "$GITHUB_STEP_SUMMARY" || true
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "Deploy hook refused (HTTP $status)" >&2
+            exit 1
+          fi

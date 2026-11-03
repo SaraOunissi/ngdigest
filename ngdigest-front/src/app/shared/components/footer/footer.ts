@@ -18,6 +18,11 @@ export class FooterComponent {
     return ['/', lang, lang === 'fr' ? 'mentions-legales' : 'legal-notice'];
   }
 
+  protected toolsRoute(): string[] {
+    const lang = this.languageService.lang();
+    return ['/', lang, lang === 'fr' ? 'outils' : 'tools'];
+  }
+
   protected privacyPolicyRoute(): string[] {
     const lang = this.languageService.lang();
     return ['/', lang, lang === 'fr' ? 'politique-confidentialite' : 'privacy-policy'];

@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment';
 import { translateRoutePath } from '../i18n/route-slugs';
 
 const BASE_URL = environment.baseUrl;
+/** Image de partage par défaut (index.html) ; une page peut la remplacer via `updateImage`. */
+const DEFAULT_SHARE_IMAGE = 'https://ngdigest.co/assets/images/ngdigest-logo.png';
 
 /**
  * Centralises all SEO concerns: page title, meta description, OG tags,
@@ -63,11 +65,28 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:locale:alternate', content: lang === 'fr' ? 'en_US' : 'fr_FR' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
+    // Chaque page repart de l'image par défaut : pas d'image d'article qui « colle »
+    // lors d'une navigation interne vers une autre page.
+    this.updateImage(DEFAULT_SHARE_IMAGE);
 
     this.setLinkTag('canonical', pageUrl);
     this.setLinkTag('alternate', pageUrl, lang);
     this.setLinkTag('alternate', alternateUrl, alternateLang);
     this.setLinkTag('alternate', `${BASE_URL}/fr`, 'x-default');
+  }
+
+  /** Image de partage (Open Graph + Twitter), URL absolue ou chemin du site. */
+  updateImage(url: string, alt?: string): void {
+    const absolute = url.startsWith('http') ? url : `https://ngdigest.co${url}`;
+    this.meta.updateTag({ property: 'og:image', content: absolute });
+    this.meta.updateTag({ name: 'twitter:image', content: absolute });
+    if (alt) {
+      this.meta.updateTag({ property: 'og:image:alt', content: alt });
+      this.meta.updateTag({ name: 'twitter:image:alt', content: alt });
+    } else {
+      this.meta.removeTag('property="og:image:alt"');
+      this.meta.removeTag('name="twitter:image:alt"');
+    }
   }
 
   /**
