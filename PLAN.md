@@ -4,6 +4,7 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+<<<<<<< HEAD
 ## Page Entretien : uniquement les questions réellement posées — 4 novembre 2026 (branche `feature/entretien-vraies-questions`)
 
 Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment posées, retirer celles de l'agent, revoir toutes les réponses (justes, humaines, ni trop théoriques ni trop courtes). Source : sa liste de 53 questions (Drive, `questions-seulement.md`, mars 2026). Les 16 questions « seed » de l'agent (31/05) et les doublons ajoutés (bundler, API REST) sont retirés ; le thème Accessibilité disparaît faute de question réelle. Les 53 réponses FR/EN sont réécrites (médiane ≈ 95 mots), vérifiées sur Angular 21 et 22 (zoneless par défaut en 21, OnPush par défaut et `Eager` en 22, Vitest par défaut, `httpResource` stable, `*ngIf` déprécié en 20). « C'est quoi les balises CI ? » : réponse honnête sur l'ambiguïté (tags GitLab des runners, tags Git de livraison). Textes de la page et compteurs passés de 69 à 53. Nouveau test `interview-questions.data.spec.ts` (53 questions, aucune seed, thèmes non vides, réponses de plus de 50 mots, parité de la note 2026).
@@ -11,6 +12,13 @@ Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment po
 Source des réponses : `D:/dev/_state/_briefs/ngdigest/entretien/questions.py` (génère `interview-questions.data.ts`).
 
 Statut : à relire par Sara avant fusion (contenu technique publié sous son nom).
+=======
+## Article « Quelle version d'Angular utiliser ? » publié — 4 novembre 2026 (branche `content/angular-support-pragmatique`)
+
+Réécriture FR validée par Sara le 04/11 (« je le valide comme ça, on peut le mettre en ligne ») : introduction de trois paragraphes, sans tournure dévalorisante (« Je n'ai jamais été très bonne pour faire ma veille Angular »), dates clés en `:::keyfigures`, renvoi vers l'outil de support des versions, anecdote 14 → 15 → 16 conservée. Version EN alignée section par section. Fichiers sortis du préfixe `draft-`, date 2026-11-04, `highlight` (28/11/2026), images de partage FR/EN générées, deux entrées ajoutées au sitemap. L'outil affiche maintenant le lien vers l'article (`RELATED_ARTICLE_SLUGS`).
+
+Statut : à fusionner puis vérifier en production (page prérendue, image de partage, lien depuis l'outil), puis soumettre l'URL dans Search Console.
+>>>>>>> origin/main
 
 ## Blog : graphiques, images de partage, article TJM — 3 novembre 2026 (branche `feature/blog-visuels`)
 
@@ -219,3 +227,13 @@ dans `.github/workflows/quality.yml`. Les preuves locales restent dans
 
 Toujours distinguer local, testé, fusionné, déployé et vérifié en production. Les
 hooks locaux protègent ce poste ; la protection GitHub doit être vérifiée séparément.
+
+## Article « Quelle version Angular utiliser ? » — révision du 02/11/2026
+
+Angle pragmatique et cinq sections françaises validés par Sara. Brouillons FR/EN existants révisés : choix par situation, support/LTS, dépendances, étapes de migration et contraintes de calendrier. Scènes commerciales fictives et raccourcis de migration retirés. Slugs et alternate conservés ; sources Angular officielles contrôlées le 02/11. La date de brouillon historique reste inchangée : date de publication à fixer lors de la décision de publication.
+
+Statut : local et contrôlé, contenu toujours exclu de la publication par les noms draft-. Aucun retrait de ce garde-fou ni déploiement effectué. Vérifications : 24 tests draft-gate/parité passés ; frontmatter YAML lu, rendu Markdown réussi, 6 sections et 2 liens internes résolus dans chaque langue, alternate réciproques. Preuve locale ignorée par Git : .engineering/artifacts/angular-support/check.json. Build complet et contrôle navigateur de la page publiée non réalisés sur cette passe de brouillons.
+
+Prochaine action : examiner la PR de révision, puis obtenir la décision de publication avant de retirer le statut brouillon et de fixer la date ; Quality Gate, audit et vérification du rendu restent nécessaires pour une livraison. Responsable : GPT. Chemin canonique : D:/dev/ngdigest/PLAN.md.
+Complément du 02/11 : anecdote demandée directement par Sara, intégrée FR/EN dans la partie dépendances, sans client/équipe identifiable. Elle décrit la conservation de composants Material legacy puis le retrait manuel ultérieur ; les versions exactes sont omises car le souvenir est incertain. Contenu toujours brouillon ; aucun vécu supplémentaire inventé. Source personnelle conservée hors du dépôt public.
+03/11 — précision de Sara intégrée FR/EN : Angular 14 → 15 avec imports Material legacy, puis retrait lors du passage 15 → 16 environ six mois après ; recette visuelle, modales peu visibles, navigateurs et corrections de régression. Durée de plusieurs semaines présentée avec la prise en main du projet, pas comme coût standard de migration. Annonce officielle Angular 15 vérifiée : refonte MDC stable, DOM/styles modifiés, imports legacy disponibles. La suppression du legacy en 16 est le calendrier du client, pas une obligation générale. Client toujours anonymisé ; fichiers toujours draft-.
