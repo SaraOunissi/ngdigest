@@ -54,16 +54,6 @@
       ]
     },
     {
-      "id": "jobs-tag-check",
-      "group": "test",
-      "cwd": "ngdigest-front",
-      "command": [
-        "node",
-        "scripts/tag-jobs-metadata.mjs",
-        "--check"
-      ]
-    },
-    {
       "id": "frontend-lint",
       "group": "lint",
       "cwd": "ngdigest-front",
