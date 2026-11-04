@@ -96,6 +96,8 @@
   "footer.sources": "Sources",
   "footer.github": "GitHub",
   "footer.serpapi": "Powered by SerpAPI",
+  "footer.madeBy": "A La Développeuse tool",
+  "footer.madeByLabel": "A La Développeuse tool: see how NgDigest was built",
   "footer.createdBy": "Created by",
   "about.createdBy": "Created by",
   "sources.hero.kicker": "Trusted sources · whitelist",

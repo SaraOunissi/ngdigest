@@ -26,6 +26,14 @@
       <span class="footer__separator" aria-hidden="true">&middot;</span>
       <a
         class="footer__link"
+        [href]="caseStudyUrl()"
+        target="_blank"
+        rel="noopener"
+        [attr.aria-label]="'footer.madeByLabel' | translate"
+      >{{ 'footer.madeBy' | translate }}</a>
+      <span class="footer__separator" aria-hidden="true">&middot;</span>
+      <a
+        class="footer__link"
         href="https://serpapi.com"
         target="_blank"
         rel="noopener noreferrer"
