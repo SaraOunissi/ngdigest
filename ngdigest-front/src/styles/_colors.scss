@@ -58,3 +58,6 @@ $color-score-low-bg: rgba($color-text-muted, 0.13);
 // — Erreur —
 $color-error: #ef4444;
 $color-error-light: #fca5a5;
+
+// Rayures discrètes des visuels « grand chiffre » du blog.
+$pattern-stripes: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.028) 0 12px, transparent 12px 24px);
