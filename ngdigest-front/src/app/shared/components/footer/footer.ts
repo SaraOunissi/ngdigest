@@ -23,6 +23,13 @@ export class FooterComponent {
     return ['/', lang, lang === 'fr' ? 'outils' : 'tools'];
   }
 
+  /** Étude de cas de NgDigest sur le Lab de La Développeuse (maillage entre les sites de Sara). */
+  protected caseStudyUrl(): string {
+    return this.languageService.lang() === 'fr'
+      ? 'https://ladeveloppeuse.com/lab/ngdigest'
+      : 'https://ladeveloppeuse.com/en/lab/ngdigest';
+  }
+
   protected privacyPolicyRoute(): string[] {
     const lang = this.languageService.lang();
     return ['/', lang, lang === 'fr' ? 'politique-confidentialite' : 'privacy-policy'];
