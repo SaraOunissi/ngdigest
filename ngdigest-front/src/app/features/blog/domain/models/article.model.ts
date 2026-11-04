@@ -35,6 +35,8 @@ export interface Article {
   readonly cover: string | null;
   /** Image de partage 1200×630 (`/assets/images/og/blog/<lang>/<slug>.png`), null si absente. */
   readonly ogImage: string | null;
+  /** Vignette 480×252 de l'image de partage, affichée dans la liste du blog ; null si absente. */
+  readonly ogThumb: string | null;
   /** Big editorial figure for the featured-card placeholder, or null. */
   readonly highlight: ArticleHighlight | null;
   /** When true, pins this article as the featured one on the blog list. */

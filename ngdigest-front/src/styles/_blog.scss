@@ -199,8 +199,11 @@
       inset: 0;
       display: grid;
       place-items: center;
+      align-content: center;
+      gap: 16px;
       text-align: center;
-      padding: 24px;
+      // Laisse la place au badge « À la une » au-dessus du chiffre.
+      padding: 56px 24px 24px;
 
       b {
         display: block;
@@ -322,6 +325,35 @@
 
     &:hover {
       background: linear-gradient(90deg, rgba(200, 80, 192, 0.07), transparent 70%);
+    }
+
+    // Vignette de l'image de partage : à gauche du texte, la date passe dessous sur mobile.
+    &--thumb {
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 16px;
+
+      .post-row__meta {
+        grid-column: 1 / -1;
+      }
+
+      @include respond-to($breakpoint-tablet) {
+        grid-template-columns: 208px minmax(0, 1fr) auto;
+        gap: 28px;
+
+        .post-row__meta {
+          grid-column: auto;
+        }
+      }
+    }
+
+    &__thumb {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 480 / 252;
+      object-fit: cover;
+      border-radius: $radius-sm;
+      border: 1px solid $color-border;
     }
 
     &__title {

@@ -7,7 +7,6 @@ author: Sara Ounissi
 tags: [angular, freelance, fullstack, java, marché-tech, ia]
 lang: "fr"
 alternate: "angular-frontend-fullstack-market-2026"
-featured: true
 highlight: { value: "≈ 1 000", label: "offres front pur toutes techs · vs le combo Java/Angular à lui seul" }
 cover: ""
 ---

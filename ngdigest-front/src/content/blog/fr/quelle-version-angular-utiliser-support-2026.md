@@ -8,6 +8,7 @@ tags: ["angular", "migration", "veille"]
 lang: "fr"
 alternate: "which-angular-version-to-use-support-2026"
 highlight: { value: "28/11/2026", label: "fin de tout support pour Angular 20" }
+featured: true
 ---
 
 Je n'ai jamais été très bonne pour faire ma veille Angular. Les nouveautés me tombaient dessus au moment des migrations, jamais avant. Et « jusqu'à quand ma version est supportée ? », c'est typiquement le genre de question que je découvrais en même temps que le reste.

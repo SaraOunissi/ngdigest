@@ -8,6 +8,7 @@ tags: ["angular", "migration", "tech-watch"]
 lang: "en"
 alternate: "quelle-version-angular-utiliser-support-2026"
 highlight: { value: "11/28/2026", label: "end of all support for Angular 20" }
+featured: true
 ---
 
 I've never been very good at keeping up with Angular news. New features used to land on me during upgrades, never before. And "how long is my version still supported?" was exactly the kind of question I discovered at the same time as everything else.

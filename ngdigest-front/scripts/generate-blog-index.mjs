@@ -232,6 +232,9 @@ for (const lang of ['fr', 'en']) {
       ogImage: existsSync(join(ROOT, 'public', 'assets', 'images', 'og', 'blog', frontmatter['lang'], `${frontmatter['slug']}.png`))
         ? `/assets/images/og/blog/${frontmatter['lang']}/${frontmatter['slug']}.png`
         : null,
+      ogThumb: existsSync(join(ROOT, 'public', 'assets', 'images', 'og', 'blog', frontmatter['lang'], `${frontmatter['slug']}-thumb.jpg`))
+        ? `/assets/images/og/blog/${frontmatter['lang']}/${frontmatter['slug']}-thumb.jpg`
+        : null,
       highlight: frontmatter['highlight'] ?? null,
       featured: frontmatter['featured'] === true,
     });
