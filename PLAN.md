@@ -4,6 +4,10 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Offres taguées pour l'Observatoire : contrôle remis au vert et ajouté à la CI — 4 novembre 2026 (branche `fix/tag-jobs-ci-2026-11-04`)
+
+`npm run check:tag-jobs` échouait sur `main` (constat du project-worker le 03/11, revérifié le 04/11 sur `5fb3118`) : `observatoire/data/pepites-tagged.json` datait du 02/10 (9 offres) alors que le board en compte 12 depuis le 02/11. Régénéré par `npm run tag:jobs` : 12 offres, 6 actives, 6 archivées, `generatedAt` 2026-11-02. Local : `--check` vert, 79 tests scripts et 65 tests Observatoire verts, gate `policy` vert. Statut : PR #23 ouverte, fusion par Sara. Le passage du contrôle en CI est séparé (branche `ci/jobs-tag-check-2026-11-04`) car il demande une décision de Sara : ajouter `observatoire/data/pepites-tagged.json` aux chemins `jobs` de `D:/dev/_state/publish_queue/allowlist.json` et `npm run tag:jobs` aux contrôles jobs de `publier-donnees`, sinon la prochaine actualisation des offres serait bloquée en CI.
+
 ## Blog : nouvel article à la une et vignettes visibles — 4 novembre 2026 (branche `feature/blog-images-visibles`)
 
 Retour de Sara (04/11) : le nouvel article et les images ne se voyaient pas. Les images de partage n'apparaissent que sur LinkedIn/WhatsApp. Un essai de vignettes tirées de ces images a été écarté par Sara (titre répété, pas joli). Retenu : chaque article de la liste affiche son « grand chiffre » (`highlight`) dans le style de la carte à la une, sans image ni texte répété. « Quelle version d'Angular utiliser ? » passe à la une (FR/EN). Badge « À la une » qui touchait le chiffre sur mobile : corrigé. Vérifié : lint, 225 tests, build, rendu 390 et 1440 px sans débordement. Suite possible : de vraies illustrations de couverture (prompts ChatGPT dans le style NgDigest).
@@ -206,7 +210,7 @@ Recherche ouverte : Free-Work, WTTJ, employeurs/ATS (Dougs, Agicap, N2JSoft, Ser
 Lucca, Apify, Supabase), autres annonces Angular et DevRel. Rejets : Lucca 404,
 Externatic indisponible, Data Recrutement pourvue, missions allemandes verrouillées
 par nationalité/pays ; autres pistes sans salaire, contrat ou remote FR vérifiables.
-CI complète, fusion et production restent à vérifier sur cette branche.
+Fusionné le 02/11 (PR #16) et vérifié en production (6 actives, 6 archivées).
 
 Publication novembre demandée par Sara le 02/11/2026 : lot du 01/11 repris sur
 `main` après la PR #14. Source privée : `_drafts/observatoire-snapshots/SNAPSHOT-2026-11.md`.
