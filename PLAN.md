@@ -4,6 +4,10 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Blog : nouvel article à la une et vignettes visibles — 4 novembre 2026 (branche `feature/blog-images-visibles`)
+
+Retour de Sara (04/11) : le nouvel article et les images ne se voyaient pas. Les images de partage n'apparaissent que sur LinkedIn/WhatsApp. Un essai de vignettes tirées de ces images a été écarté par Sara (titre répété, pas joli). Retenu : chaque article de la liste affiche son « grand chiffre » (`highlight`) dans le style de la carte à la une, sans image ni texte répété. « Quelle version d'Angular utiliser ? » passe à la une (FR/EN). Badge « À la une » qui touchait le chiffre sur mobile : corrigé. Vérifié : lint, 225 tests, build, rendu 390 et 1440 px sans débordement. Suite possible : de vraies illustrations de couverture (prompts ChatGPT dans le style NgDigest).
+
 ## Page Entretien : uniquement les questions réellement posées — 4 novembre 2026 (branche `feature/entretien-vraies-questions`)
 
 Demande de Sara (04/11) : garder seulement les questions qu'on lui a vraiment posées, retirer celles de l'agent, revoir toutes les réponses (justes, humaines, ni trop théoriques ni trop courtes). Source : sa liste de 53 questions (Drive, `questions-seulement.md`, mars 2026). Les 16 questions « seed » de l'agent (31/05) et les doublons ajoutés (bundler, API REST) sont retirés ; le thème Accessibilité disparaît faute de question réelle. Les 53 réponses FR/EN sont réécrites (médiane ≈ 95 mots), vérifiées sur Angular 21 et 22 (zoneless par défaut en 21, OnPush par défaut et `Eager` en 22, Vitest par défaut, `httpResource` stable, `*ngIf` déprécié en 20). « C'est quoi les balises CI ? » : réponse honnête sur l'ambiguïté (tags GitLab des runners, tags Git de livraison). Textes de la page et compteurs passés de 69 à 53. Nouveau test `interview-questions.data.spec.ts` (53 questions, aucune seed, thèmes non vides, réponses de plus de 50 mots, parité de la note 2026).

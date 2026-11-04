@@ -50,7 +50,7 @@ export const BLOG_DATA: readonly Article[] = [
       "value": "28/11/2026",
       "label": "fin de tout support pour Angular 20"
     },
-    "featured": false
+    "featured": true
   },
   {
     "slug": "which-angular-version-to-use-support-2026",
@@ -99,7 +99,7 @@ export const BLOG_DATA: readonly Article[] = [
       "value": "11/28/2026",
       "label": "end of all support for Angular 20"
     },
-    "featured": false
+    "featured": true
   },
   {
     "slug": "angular-front-fullstack-marche-2026",
@@ -155,7 +155,7 @@ export const BLOG_DATA: readonly Article[] = [
       "value": "≈ 1 000",
       "label": "offres front pur toutes techs · vs le combo Java/Angular à lui seul"
     },
-    "featured": true
+    "featured": false
   },
   {
     "slug": "angular-frontend-fullstack-market-2026",
@@ -211,7 +211,7 @@ export const BLOG_DATA: readonly Article[] = [
       "value": "≈ 1,000",
       "label": "front-only openings across all stacks · vs the Java/Angular combo alone"
     },
-    "featured": true
+    "featured": false
   },
   {
     "slug": "tjm-developpeur-angular-2026",

@@ -7,7 +7,6 @@ author: Sara Ounissi
 tags: [angular, freelance, fullstack, java, tech-market, ai]
 lang: "en"
 alternate: "angular-front-fullstack-marche-2026"
-featured: true
 highlight: { value: "≈ 1,000", label: "front-only openings across all stacks · vs the Java/Angular combo alone" }
 cover: ""
 ---

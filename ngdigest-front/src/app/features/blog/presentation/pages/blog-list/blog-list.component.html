@@ -59,8 +59,15 @@
             <a
               class="post-row"
               [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
+              [class.post-row--visual]="article.highlight"
               [attr.aria-label]="article.title"
             >
+              @if (article.highlight; as highlight) {
+                <span class="post-row__visual" aria-hidden="true">
+                  <b>{{ highlight.value }}</b>
+                  <span>{{ highlight.label }}</span>
+                </span>
+              }
               <span>
                 <h3 class="post-row__title">{{ article.title }}</h3>
                 <p class="post-row__desc">{{ article.description }}</p>

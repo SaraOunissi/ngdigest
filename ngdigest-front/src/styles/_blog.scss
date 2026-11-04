@@ -199,8 +199,11 @@
       inset: 0;
       display: grid;
       place-items: center;
+      align-content: center;
+      gap: 16px;
       text-align: center;
-      padding: 24px;
+      // Laisse la place au badge « À la une » au-dessus du chiffre.
+      padding: 56px 24px 24px;
 
       b {
         display: block;
@@ -322,6 +325,70 @@
 
     &:hover {
       background: linear-gradient(90deg, rgba(200, 80, 192, 0.07), transparent 70%);
+    }
+
+    // Visuel « grand chiffre » de l'article, dans le style de la carte à la une.
+    &--visual {
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 16px;
+
+      .post-row__meta {
+        grid-column: 1 / -1;
+      }
+
+      @include respond-to($breakpoint-tablet) {
+        grid-template-columns: 208px minmax(0, 1fr) auto;
+        gap: 28px;
+
+        .post-row__meta {
+          grid-column: auto;
+        }
+      }
+    }
+
+    &__visual {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      aspect-ratio: 16 / 10;
+      padding: 10px;
+      text-align: center;
+      border-radius: $radius-sm;
+      border: 1px solid $color-border;
+      background:
+        $pattern-stripes,
+        $gradient-hero-soft;
+
+      b {
+        font-family: $font-family-display;
+        font-weight: $font-weight-bold;
+        font-size: 19px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        background: $gradient-hero;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        @include respond-to($breakpoint-tablet) {
+          font-size: 32px;
+        }
+      }
+
+      span {
+        display: none;
+        font-family: $font-family-mono;
+        font-size: 9.5px;
+        line-height: 1.5;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $color-text-secondary;
+
+        @include respond-to($breakpoint-tablet) {
+          display: block;
+        }
+      }
     }
 
     &__title {
