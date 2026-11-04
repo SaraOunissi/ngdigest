@@ -6,7 +6,7 @@ Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
 ## Blog : nouvel article à la une et vignettes visibles — 4 novembre 2026 (branche `feature/blog-images-visibles`)
 
-Retour de Sara (04/11) : le nouvel article et les images ne se voyaient pas. Les images de partage n'apparaissaient que sur LinkedIn/WhatsApp, pas sur le site. `generate-og-images.mjs` produit maintenant aussi une vignette 480×252 (`<slug>-thumb.jpg`, ~20 Ko) ; le générateur expose `ogThumb` et la liste du blog l'affiche à gauche de chaque article. « Quelle version d'Angular utiliser ? » passe à la une (FR/EN) à la place de l'article marché. Badge « À la une » qui touchait le chiffre sur mobile : corrigé. Vérifié : lint, 225 tests, build, rendu 390 et 1440 px sans débordement.
+Retour de Sara (04/11) : le nouvel article et les images ne se voyaient pas. Les images de partage n'apparaissent que sur LinkedIn/WhatsApp. Un essai de vignettes tirées de ces images a été écarté par Sara (titre répété, pas joli). Retenu : chaque article de la liste affiche son « grand chiffre » (`highlight`) dans le style de la carte à la une, sans image ni texte répété. « Quelle version d'Angular utiliser ? » passe à la une (FR/EN). Badge « À la une » qui touchait le chiffre sur mobile : corrigé. Vérifié : lint, 225 tests, build, rendu 390 et 1440 px sans débordement. Suite possible : de vraies illustrations de couverture (prompts ChatGPT dans le style NgDigest).
 
 ## Page Entretien : uniquement les questions réellement posées — 4 novembre 2026 (branche `feature/entretien-vraies-questions`)
 

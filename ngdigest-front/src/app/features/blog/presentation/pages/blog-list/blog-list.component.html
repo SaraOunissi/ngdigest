@@ -59,19 +59,14 @@
             <a
               class="post-row"
               [routerLink]="['/', languageService.lang(), 'blog', article.slug]"
-              [class.post-row--thumb]="article.ogThumb"
+              [class.post-row--visual]="article.highlight"
               [attr.aria-label]="article.title"
             >
-              @if (article.ogThumb; as thumb) {
-                <img
-                  class="post-row__thumb"
-                  [src]="thumb"
-                  alt=""
-                  width="480"
-                  height="252"
-                  loading="lazy"
-                  decoding="async"
-                />
+              @if (article.highlight; as highlight) {
+                <span class="post-row__visual" aria-hidden="true">
+                  <b>{{ highlight.value }}</b>
+                  <span>{{ highlight.label }}</span>
+                </span>
               }
               <span>
                 <h3 class="post-row__title">{{ article.title }}</h3>

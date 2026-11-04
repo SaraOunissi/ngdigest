@@ -118,10 +118,7 @@ async function main() {
   const colors = await tokens();
   const files = await assets();
   const articles = (await publishedArticles()).filter(
-    (article) =>
-      force ||
-      !existsSync(join(OUTPUT_DIR, article.lang, `${article.slug}.png`)) ||
-      !existsSync(join(OUTPUT_DIR, article.lang, `${article.slug}-thumb.jpg`)),
+    (article) => force || !existsSync(join(OUTPUT_DIR, article.lang, `${article.slug}.png`)),
   );
   if (articles.length === 0) {
     console.log('[og] Toutes les images de partage existent déjà (--force pour régénérer).');
@@ -129,32 +126,23 @@ async function main() {
   }
   const browser = await chromium.launch();
   const tab = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  // Vignette affichée dans la liste du blog : même rendu, réduit à 480×252.
-  const thumbTab = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 0.4 });
   for (const article of articles) {
-    for (const current of [tab, thumbTab]) {
-      await current.setContent(page(article, colors, files), { waitUntil: 'load' });
-      await current.evaluate(() => document.fonts.ready);
-      // Titre aussi grand que possible sans dépasser trois lignes.
-      await current.evaluate((hasHighlight) => {
-        const title = document.getElementById('title');
-        const maxLines = hasHighlight ? 3 : 4;
-        for (let size = 66; size >= 40; size -= 2) {
-          title.style.fontSize = `${size}px`;
-          const lines = Math.round(title.getBoundingClientRect().height / (size * 1.08));
-          if (lines <= maxLines) break;
-        }
-      }, Boolean(article.highlight));
-    }
+    await tab.setContent(page(article, colors, files), { waitUntil: 'load' });
+    await tab.evaluate(() => document.fonts.ready);
+    // Titre aussi grand que possible sans dépasser trois lignes.
+    await tab.evaluate((hasHighlight) => {
+      const title = document.getElementById('title');
+      const maxLines = hasHighlight ? 3 : 4;
+      for (let size = 66; size >= 40; size -= 2) {
+        title.style.fontSize = `${size}px`;
+        const lines = Math.round(title.getBoundingClientRect().height / (size * 1.08));
+        if (lines <= maxLines) break;
+      }
+    }, Boolean(article.highlight));
     const target = join(OUTPUT_DIR, article.lang, `${article.slug}.png`);
     await mkdir(dirname(target), { recursive: true });
     await tab.screenshot({ path: target, type: 'png' });
-    await thumbTab.screenshot({
-      path: join(OUTPUT_DIR, article.lang, `${article.slug}-thumb.jpg`),
-      type: 'jpeg',
-      quality: 82,
-    });
-    console.log(`[og] ${article.lang}/${article.slug}.png (+ vignette)`);
+    console.log(`[og] ${article.lang}/${article.slug}.png`);
   }
   await browser.close();
 }

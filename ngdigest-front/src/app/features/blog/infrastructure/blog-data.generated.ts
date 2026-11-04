@@ -46,7 +46,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": null,
     "ogImage": "/assets/images/og/blog/fr/quelle-version-angular-utiliser-support-2026.png",
-    "ogThumb": "/assets/images/og/blog/fr/quelle-version-angular-utiliser-support-2026-thumb.jpg",
     "highlight": {
       "value": "28/11/2026",
       "label": "fin de tout support pour Angular 20"
@@ -96,7 +95,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": null,
     "ogImage": "/assets/images/og/blog/en/which-angular-version-to-use-support-2026.png",
-    "ogThumb": "/assets/images/og/blog/en/which-angular-version-to-use-support-2026-thumb.jpg",
     "highlight": {
       "value": "11/28/2026",
       "label": "end of all support for Angular 20"
@@ -153,7 +151,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": "",
     "ogImage": "/assets/images/og/blog/fr/angular-front-fullstack-marche-2026.png",
-    "ogThumb": "/assets/images/og/blog/fr/angular-front-fullstack-marche-2026-thumb.jpg",
     "highlight": {
       "value": "≈ 1 000",
       "label": "offres front pur toutes techs · vs le combo Java/Angular à lui seul"
@@ -210,7 +207,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": "",
     "ogImage": "/assets/images/og/blog/en/angular-frontend-fullstack-market-2026.png",
-    "ogThumb": "/assets/images/og/blog/en/angular-frontend-fullstack-market-2026-thumb.jpg",
     "highlight": {
       "value": "≈ 1,000",
       "label": "front-only openings across all stacks · vs the Java/Angular combo alone"
@@ -285,7 +281,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": null,
     "ogImage": "/assets/images/og/blog/fr/tjm-developpeur-angular-2026.png",
-    "ogThumb": "/assets/images/og/blog/fr/tjm-developpeur-angular-2026-thumb.jpg",
     "highlight": {
       "value": "480 €/j",
       "label": "TJM moyen d'un dev Angular confirmé en France en 2026"
@@ -356,7 +351,6 @@ export const BLOG_DATA: readonly Article[] = [
     ],
     "cover": null,
     "ogImage": "/assets/images/og/blog/en/angular-developer-daily-rate-2026.png",
-    "ogThumb": "/assets/images/og/blog/en/angular-developer-daily-rate-2026-thumb.jpg",
     "highlight": {
       "value": "€480/day",
       "label": "average daily rate for a mid-level Angular freelancer in France, 2026"

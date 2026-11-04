@@ -327,8 +327,8 @@
       background: linear-gradient(90deg, rgba(200, 80, 192, 0.07), transparent 70%);
     }
 
-    // Vignette de l'image de partage : à gauche du texte, la date passe dessous sur mobile.
-    &--thumb {
+    // Visuel « grand chiffre » de l'article, dans le style de la carte à la une.
+    &--visual {
       grid-template-columns: 112px minmax(0, 1fr);
       gap: 16px;
 
@@ -346,14 +346,49 @@
       }
     }
 
-    &__thumb {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 480 / 252;
-      object-fit: cover;
+    &__visual {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      aspect-ratio: 16 / 10;
+      padding: 10px;
+      text-align: center;
       border-radius: $radius-sm;
       border: 1px solid $color-border;
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.028) 0 12px, transparent 12px 24px),
+        $gradient-hero-soft;
+
+      b {
+        font-family: $font-family-display;
+        font-weight: $font-weight-bold;
+        font-size: 19px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        background: $gradient-hero;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        @include respond-to($breakpoint-tablet) {
+          font-size: 32px;
+        }
+      }
+
+      span {
+        display: none;
+        font-family: $font-family-mono;
+        font-size: 9.5px;
+        line-height: 1.5;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $color-text-secondary;
+
+        @include respond-to($breakpoint-tablet) {
+          display: block;
+        }
+      }
     }
 
     &__title {
