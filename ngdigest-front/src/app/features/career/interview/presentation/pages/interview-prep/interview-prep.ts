@@ -11,13 +11,13 @@ import { splitAnswer, stripMarkdown } from '../../../application/light-markdown'
 import { InterviewAccordionItemComponent } from '../../components/interview-accordion-item/interview-accordion-item';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Préparation entretien Angular 2026 — 69 questions FR/EN — NgDigest',
-  en: 'Angular interview prep 2026 — 69 questions FR/EN — NgDigest',
+  fr: 'Entretien Angular : 53 vraies questions et réponses — NgDigest',
+  en: 'Angular interview: 53 real questions and answers — NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'Les questions qui tombent vraiment en entretien Angular senior — réponses claires et à jour (zoneless, signals, control flow), en FR & EN. Déplie, révise, recommence.',
-  en: 'The questions that actually come up in senior Angular interviews — clear, up-to-date answers (zoneless, signals, control flow), in FR & EN. Expand, revise, repeat.',
+  fr: "Les 53 questions qu'on m'a vraiment posées en entretien Angular, avec des réponses claires et à jour 2026 (signals, zoneless, OnPush), en FR et EN.",
+  en: 'The 53 questions I was actually asked in Angular interviews, with clear answers up to date for 2026 (signals, zoneless, OnPush), in French and English.',
 };
 
 interface InterviewGroup {

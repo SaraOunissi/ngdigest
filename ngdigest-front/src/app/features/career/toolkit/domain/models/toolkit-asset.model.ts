@@ -6,7 +6,7 @@ import { LocalizedText } from '@shared/models/localized-text';
  * resume templates, application/follow-up emails and interview prep sheets.
  *
  * Distinct from /carriere/formations (external training), /carriere/certifications
- * (exams) and /carriere/entretien (the 69 Q/A to revise): here everything is a file
+ * (exams) and /carriere/entretien (the 53 real Q/A to revise): here everything is a file
  * you download, edit and send.
  *
  * Assets are plain Markdown on purpose — editable in any editor, diff-able, and
