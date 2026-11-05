@@ -4,6 +4,14 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Alertes Search Console : données structurées et canoniques — 5 novembre 2026 (branche `fix/gsc-donnees-structurees-2026-11-05`, PR #26)
+
+Mails Search Console du 02/11 (Ensembles de données : `license` manquant) et du 05/11 (Questions/Réponses : 1 critique `answerCount`, 7 non critiques).
+- Page entretien : `QAPage` → `FAQPage` (QAPage = une question de forum avec réponses de la communauté ; la page est une liste éditoriale). 53 questions balisées par langue.
+- Observatoire : `license: CC BY-NC 4.0` sur le `Dataset` — choix par défaut à confirmer par Sara (réutilisation avec attribution, usage commercial réservé).
+- Canoniques : chaque page carrière/catalogue était prérendue sous 4 URL (`/fr|en/carriere|career/…`), toutes auto-canoniques. `localizeRoutePath` (route-slugs.ts) ramène la canonique au slug de la langue de la page.
+Vérifié en local : 228 tests, build dev + prérendu de 90 routes, JSON-LD et canoniques lus dans le HTML prérendu. Après déploiement : « Valider la correction » dans la Search Console pour les deux rapports.
+
 ## Offres taguées pour l'Observatoire : contrôle remis au vert et ajouté à la CI — 4 novembre 2026 (branche `fix/tag-jobs-ci-2026-11-04`)
 
 `npm run check:tag-jobs` échouait sur `main` (constat du project-worker le 03/11, revérifié le 04/11 sur `5fb3118`) : `observatoire/data/pepites-tagged.json` datait du 02/10 (9 offres) alors que le board en compte 12 depuis le 02/11. Régénéré par `npm run tag:jobs` : 12 offres, 6 actives, 6 archivées, `generatedAt` 2026-11-02. Local : `--check` vert, 79 tests scripts et 65 tests Observatoire verts, gate `policy` vert. Statut : PR #23 ouverte, fusion par Sara. Le passage du contrôle en CI est séparé (branche `ci/jobs-tag-check-2026-11-04`) car il demande une décision de Sara : ajouter `observatoire/data/pepites-tagged.json` aux chemins `jobs` de `D:/dev/_state/publish_queue/allowlist.json` et `npm run tag:jobs` aux contrôles jobs de `publier-donnees`, sinon la prochaine actualisation des offres serait bloquée en CI.

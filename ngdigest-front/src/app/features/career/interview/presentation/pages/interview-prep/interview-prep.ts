@@ -92,7 +92,10 @@ export class InterviewPrepComponent {
       this.seoService.updateMeta(SEO_TITLES[lang], SEO_DESCRIPTIONS[lang], lang);
       this.seoService.setJsonLd('qa-jsonld', {
         '@context': 'https://schema.org',
-        '@type': 'QAPage',
+        // FAQPage, not QAPage: QAPage is for one user-asked question with
+        // community answers (requires answerCount, author, upvotes…).
+        // An editorial list of questions with one curated answer each is a FAQ.
+        '@type': 'FAQPage',
         mainEntity: INTERVIEW_QUESTIONS.map((question) => ({
           '@type': 'Question',
           name: question.q[lang],

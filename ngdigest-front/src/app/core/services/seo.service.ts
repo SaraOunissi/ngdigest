@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
-import { translateRoutePath } from '../i18n/route-slugs';
+import { localizeRoutePath, translateRoutePath } from '../i18n/route-slugs';
 
 const BASE_URL = environment.baseUrl;
 /** Image de partage par défaut (index.html) ; une page peut la remplacer via `updateImage`. */
@@ -48,7 +48,10 @@ export class SeoService {
 
     const locale = lang === 'fr' ? 'fr_FR' : 'en_US';
     const alternateLang: 'fr' | 'en' = lang === 'fr' ? 'en' : 'fr';
-    const pageUrl = `${BASE_URL}${this.doc.location.pathname}`;
+    // Canonical = the slug that matches the page language. Each career/catalog
+    // page is reachable under both slugs in both languages (/en/carriere/…,
+    // /fr/career/…); without this, Google sees four self-canonical duplicates.
+    const pageUrl = `${BASE_URL}${localizeRoutePath(this.doc.location.pathname, lang)}`;
 
     // Derive the alternate-language URL from the current path, translating the
     // slug when it differs between languages (carriere↔career, ressources↔
@@ -92,7 +95,7 @@ export class SeoService {
   /**
    * Injects or updates a JSON-LD `<script>` in `<head>` with the given id.
    * With SSR the structured data is part of the server-rendered HTML, so it is
-   * crawlable without JavaScript (e.g. QAPage for the interview page).
+   * crawlable without JavaScript (e.g. FAQPage for the interview page).
    */
   setJsonLd(id: string, data: unknown): void {
     let script = this.doc.head.querySelector<HTMLScriptElement>(
