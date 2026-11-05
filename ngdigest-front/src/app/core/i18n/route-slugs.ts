@@ -13,7 +13,7 @@
  * alternate URL to the SEO service instead.
  */
 /** [French slug, English slug] for every route whose path differs by language. */
-const ROUTE_SLUG_PAIRS: ReadonlyArray<readonly [string, string]> = [
+const ROUTE_SLUG_PAIRS: readonly (readonly [string, string])[] = [
   ['carriere', 'career'],
   ['ressources', 'resources'],
   ['carriere/guide', 'career/guide'],
