@@ -97,6 +97,7 @@ export class ObservatoireComponent {
         description: SEO_DESCRIPTIONS[lang],
         dateModified: this.snapshot.meta.collected,
         isAccessibleForFree: true,
+        license: 'https://creativecommons.org/licenses/by-nc/4.0/',
         creator: { '@type': 'Person', name: 'Sara Ounissi' },
         variableMeasured: this.snapshot.kpis.map((kpi) => ({
           '@type': 'PropertyValue',

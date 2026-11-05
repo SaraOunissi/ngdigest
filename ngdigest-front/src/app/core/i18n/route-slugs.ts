@@ -12,33 +12,43 @@
  * Per-article blog slugs are NOT here (they are dynamic); those pass an explicit
  * alternate URL to the SEO service instead.
  */
-export const ROUTE_SLUG_TRANSLATIONS: Record<string, string> = {
-  carriere: 'career',
-  career: 'carriere',
-  ressources: 'resources',
-  resources: 'ressources',
-  'carriere/guide': 'career/guide',
-  'career/guide': 'carriere/guide',
-  'carriere/certifications': 'career/certifications',
-  'career/certifications': 'carriere/certifications',
-  'carriere/formations': 'career/trainings',
-  'career/trainings': 'carriere/formations',
-  'carriere/plateformes': 'career/platforms',
-  'career/platforms': 'carriere/plateformes',
-  'carriere/entretien': 'career/interview',
-  'career/interview': 'carriere/entretien',
-  'carriere/observatoire': 'career/observatory',
-  'career/observatory': 'carriere/observatoire',
-  'carriere/toolkit': 'career/toolkit',
-  'career/toolkit': 'carriere/toolkit',
-  outils: 'tools',
-  tools: 'outils',
-  'outils/support-versions-angular': 'tools/angular-version-support',
-  'tools/angular-version-support': 'outils/support-versions-angular',
-  'mentions-legales': 'legal-notice',
-  'legal-notice': 'mentions-legales',
-  'politique-confidentialite': 'privacy-policy',
-  'privacy-policy': 'politique-confidentialite',
+/** [French slug, English slug] for every route whose path differs by language. */
+const ROUTE_SLUG_PAIRS: ReadonlyArray<readonly [string, string]> = [
+  ['carriere', 'career'],
+  ['ressources', 'resources'],
+  ['carriere/guide', 'career/guide'],
+  ['carriere/certifications', 'career/certifications'],
+  ['carriere/formations', 'career/trainings'],
+  ['carriere/plateformes', 'career/platforms'],
+  ['carriere/entretien', 'career/interview'],
+  ['carriere/observatoire', 'career/observatory'],
+  ['carriere/toolkit', 'career/toolkit'],
+  ['outils', 'tools'],
+  ['outils/support-versions-angular', 'tools/angular-version-support'],
+  ['mentions-legales', 'legal-notice'],
+  ['politique-confidentialite', 'privacy-policy'],
+];
+
+export const ROUTE_SLUG_TRANSLATIONS: Record<string, string> = Object.fromEntries(
+  ROUTE_SLUG_PAIRS.flatMap(([frenchSlug, englishSlug]) => [
+    [frenchSlug, englishSlug],
+    [englishSlug, frenchSlug],
+  ]),
+);
+
+const SLUG_BY_LANG: Record<'fr' | 'en', Record<string, string>> = {
+  fr: Object.fromEntries(
+    ROUTE_SLUG_PAIRS.flatMap(([frenchSlug, englishSlug]) => [
+      [frenchSlug, frenchSlug],
+      [englishSlug, frenchSlug],
+    ]),
+  ),
+  en: Object.fromEntries(
+    ROUTE_SLUG_PAIRS.flatMap(([frenchSlug, englishSlug]) => [
+      [frenchSlug, englishSlug],
+      [englishSlug, englishSlug],
+    ]),
+  ),
 };
 
 /**
@@ -58,4 +68,21 @@ export function translateRoutePath(url: string, targetLang: 'fr' | 'en'): string
   return translatedPath
     ? `/${targetLang}/${translatedPath}${suffix}`
     : `/${targetLang}${suffix}`;
+}
+
+/**
+ * Rewrite a `/<lang>/<path>` URL so its slug matches `lang` (e.g.
+ * `/en/carriere/entretien` → `/en/career/interview`). Used for canonical URLs:
+ * a page reachable under the other language's slug must not be self-canonical.
+ *
+ * @param url  - Current URL path
+ * @param lang - Language whose slug the URL should use
+ * @returns The URL with the language-appropriate slug, query/hash preserved
+ */
+export function localizeRoutePath(url: string, lang: 'fr' | 'en'): string {
+  const match = url.match(/^\/(?:fr|en)(?:\/([^?#]*))?([?#].*)?$/);
+  const path = (match?.[1] ?? '').replace(/\/$/, '');
+  const suffix = match?.[2] ?? '';
+  const localizedPath = SLUG_BY_LANG[lang][path] ?? path;
+  return localizedPath ? `/${lang}/${localizedPath}${suffix}` : `/${lang}${suffix}`;
 }
