@@ -4,6 +4,14 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Alertes Search Console : données structurées et canoniques — 5 novembre 2026 (branche `fix/gsc-donnees-structurees-2026-11-05`, PR #26)
+
+Mails Search Console du 02/11 (Ensembles de données : `license` manquant) et du 05/11 (Questions/Réponses : 1 critique `answerCount`, 7 non critiques).
+- Page entretien : `QAPage` → `FAQPage` (QAPage = une question de forum avec réponses de la communauté ; la page est une liste éditoriale). 53 questions balisées par langue.
+- Observatoire : `license: CC BY-NC 4.0` sur le `Dataset` — choix par défaut à confirmer par Sara (réutilisation avec attribution, usage commercial réservé).
+- Canoniques : chaque page carrière/catalogue était prérendue sous 4 URL (`/fr|en/carriere|career/…`), toutes auto-canoniques. `localizeRoutePath` (route-slugs.ts) ramène la canonique au slug de la langue de la page.
+Vérifié en local : 228 tests, build dev + prérendu de 90 routes, JSON-LD et canoniques lus dans le HTML prérendu. Après déploiement : « Valider la correction » dans la Search Console pour les deux rapports.
+
 ## Pied de page : « Un outil La Développeuse » — 4 novembre 2026 (branche `feature/footer-la-developpeuse`)
 
 Plan SEO étape 3.4 (réseau), demandé par Sara le 04/11. Le pied de page renvoie vers l'étude de cas du site sur le Lab de La Développeuse (https://ladeveloppeuse.com/lab/ngdigest, version EN pour `/en`), libellés FR/EN dans l'i18n, couleurs par jetons existants. Fichier : `ngdigest-front/src/app/shared/components/footer/footer.html`. Vérifié en local : tests et build.

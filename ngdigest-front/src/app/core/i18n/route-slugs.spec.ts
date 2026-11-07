@@ -1,4 +1,4 @@
-import { ROUTE_SLUG_TRANSLATIONS, translateRoutePath } from './route-slugs';
+import { localizeRoutePath, ROUTE_SLUG_TRANSLATIONS, translateRoutePath } from './route-slugs';
 
 describe('translateRoutePath', () => {
   it('translates the home root, swapping only the language prefix', () => {
@@ -53,5 +53,24 @@ describe('translateRoutePath', () => {
     for (const [from, to] of Object.entries(ROUTE_SLUG_TRANSLATIONS)) {
       expect(ROUTE_SLUG_TRANSLATIONS[to]).toBe(from);
     }
+  });
+});
+
+describe('localizeRoutePath', () => {
+  it('rewrites a slug from the other language to the page language', () => {
+    expect(localizeRoutePath('/en/carriere/entretien', 'en')).toBe('/en/career/interview');
+    expect(localizeRoutePath('/fr/career/observatory', 'fr')).toBe('/fr/carriere/observatoire');
+    expect(localizeRoutePath('/en/ressources', 'en')).toBe('/en/resources');
+  });
+
+  it('keeps a slug that already matches the language', () => {
+    expect(localizeRoutePath('/fr/carriere/entretien', 'fr')).toBe('/fr/carriere/entretien');
+    expect(localizeRoutePath('/en/career/interview', 'en')).toBe('/en/career/interview');
+  });
+
+  it('keeps unmapped paths and suffixes', () => {
+    expect(localizeRoutePath('/fr/blog/mon-article', 'fr')).toBe('/fr/blog/mon-article');
+    expect(localizeRoutePath('/en', 'en')).toBe('/en');
+    expect(localizeRoutePath('/en/carriere/guide#faq', 'en')).toBe('/en/career/guide#faq');
   });
 });
