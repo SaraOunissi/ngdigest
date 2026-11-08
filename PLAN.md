@@ -4,9 +4,21 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
-## Offres taguées pour l'Observatoire : contrôle remis au vert et ajouté à la CI — 4 novembre 2026 (branche `fix/tag-jobs-ci-2026-11-04`)
+## Alertes Search Console : données structurées et canoniques — 5 novembre 2026 (branche `fix/gsc-donnees-structurees-2026-11-05`, PR #26)
 
-`npm run check:tag-jobs` échouait sur `main` (constat du project-worker le 03/11, revérifié le 04/11 sur `5fb3118`) : `observatoire/data/pepites-tagged.json` datait du 02/10 (9 offres) alors que le board en compte 12 depuis le 02/11. Régénéré par `npm run tag:jobs` : 12 offres, 6 actives, 6 archivées, `generatedAt` 2026-11-02. Le contrôle `--check` entre dans `.engineering/quality.json` (`jobs-tag-check`, groupe test) : une actualisation des offres sans `npm run tag:jobs` fait désormais échouer la CI au lieu de rester rouge en silence. Local : `--check` vert, 79 tests scripts et 65 tests Observatoire verts, gate `policy` vert. Statut : PR ouverte, fusion par Sara.
+Mails Search Console du 02/11 (Ensembles de données : `license` manquant) et du 05/11 (Questions/Réponses : 1 critique `answerCount`, 7 non critiques).
+- Page entretien : `QAPage` → `FAQPage` (QAPage = une question de forum avec réponses de la communauté ; la page est une liste éditoriale). 53 questions balisées par langue.
+- Observatoire : `license: CC BY-NC 4.0` sur le `Dataset` — choix par défaut à confirmer par Sara (réutilisation avec attribution, usage commercial réservé).
+- Canoniques : chaque page carrière/catalogue était prérendue sous 4 URL (`/fr|en/carriere|career/…`), toutes auto-canoniques. `localizeRoutePath` (route-slugs.ts) ramène la canonique au slug de la langue de la page.
+Vérifié en local : 228 tests, build dev + prérendu de 90 routes, JSON-LD et canoniques lus dans le HTML prérendu. Après déploiement : « Valider la correction » dans la Search Console pour les deux rapports.
+
+## Pied de page : « Un outil La Développeuse » — 4 novembre 2026 (branche `feature/footer-la-developpeuse`)
+
+Plan SEO étape 3.4 (réseau), demandé par Sara le 04/11. Le pied de page renvoie vers l'étude de cas du site sur le Lab de La Développeuse (https://ladeveloppeuse.com/lab/ngdigest, version EN pour `/en`), libellés FR/EN dans l'i18n, couleurs par jetons existants. Fichier : `ngdigest-front/src/app/shared/components/footer/footer.html`. Vérifié en local : tests et build.
+
+## Fraîcheur des offres taguées pour l’Observatoire — 8 novembre 2026
+
+La PR #23, fusionnée, a régénéré `observatoire/data/pepites-tagged.json` à partir des 12 offres du 02/11 (6 actives et 6 archivées). La PR #24 ajoute `jobs-tag-check` au Quality Gate pour détecter un écart entre le board et les tags. Sara a validé le 08/11 l’ajout du JSON à l’allowlist des offres et sa génération par `npm run tag:jobs` avant l’empaquetage. Procédure : `D:/dev/_state/playbooks/publier-donnees.md` rév. 2. Le contrôle est une étape de CI et ne change pas le rendu du board.
 
 ## Blog : nouvel article à la une et vignettes visibles — 4 novembre 2026 (branche `feature/blog-images-visibles`)
 
