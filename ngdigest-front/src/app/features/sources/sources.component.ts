@@ -9,8 +9,8 @@ import { LanguageService } from '@core/services/language.service';
 const URL_PATTERN = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/;
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Sources Angular — NgDigest',
-  en: 'Angular Sources — NgDigest',
+  fr: 'Sources Angular | NgDigest',
+  en: 'Angular Sources | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

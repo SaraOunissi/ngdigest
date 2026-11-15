@@ -16,13 +16,13 @@ import { FORMATIONS } from '../../../infrastructure/formations.data';
 import { FormationCardComponent } from '../../components/formation-card/formation-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Formations Angular — les meilleures, triées à la main — NgDigest',
-  en: 'Angular training — the best, hand-picked — NgDigest',
+  fr: 'Formations Angular : les meilleures, triées à la main | NgDigest',
+  en: 'Angular training: the best, hand-picked | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'Mon annuaire des meilleures formations Angular — FR & EN, gratuit & payant, du tuto officiel au workshop testing. Vérifié, avec le pourquoi de chaque choix.',
-  en: 'My directory of the best Angular training — FR & EN, free & paid, from the official tutorial to the testing workshop. Verified, with the why behind each pick.',
+  fr: 'Mon annuaire des meilleures formations Angular, FR & EN, gratuit & payant, du tuto officiel au workshop testing. Vérifié, avec le pourquoi de chaque choix.',
+  en: 'My directory of the best Angular training, FR & EN, free & paid, from the official tutorial to the testing workshop. Verified, with the why behind each pick.',
 };
 
 type LangFilter = 'all' | 'fr' | 'en';

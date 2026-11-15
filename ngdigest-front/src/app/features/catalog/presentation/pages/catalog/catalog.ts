@@ -14,13 +14,13 @@ import { CATALOG_RESOURCES } from '../../../infrastructure/catalog.data';
 import { CatalogCardComponent } from '../../components/catalog-card/catalog-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Ressources Angular triées à la main — NgDigest',
-  en: 'Hand-picked Angular resources — NgDigest',
+  fr: 'Ressources Angular triées à la main | NgDigest',
+  en: 'Hand-picked Angular resources | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'Ma sélection FR & EN de créateurs, blogs, chaînes et newsletters Angular — vérifiée, avec le pourquoi de chaque entrée.',
-  en: 'My FR & EN selection of Angular creators, blogs, channels and newsletters — verified, with the why behind each pick.',
+  fr: 'Ma sélection FR & EN de créateurs, blogs, chaînes et newsletters Angular, vérifiée, avec le pourquoi de chaque entrée.',
+  en: 'My FR & EN selection of Angular creators, blogs, channels and newsletters, verified, with the why behind each pick.',
 };
 
 type LangFilter = 'all' | 'fr' | 'en';

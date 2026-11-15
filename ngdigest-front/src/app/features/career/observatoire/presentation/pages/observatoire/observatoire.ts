@@ -10,8 +10,8 @@ import { StatCardComponent } from '../../components/stat-card/stat-card';
 import { ChartBlockComponent } from '../../components/chart-block/chart-block';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Observatoire du marché front FR — les chiffres sourcés — NgDigest',
-  en: 'French front-end market observatory — sourced figures — NgDigest',
+  fr: 'Observatoire du marché front FR : les chiffres sourcés | NgDigest',
+  en: 'French front-end market observatory: sourced figures | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

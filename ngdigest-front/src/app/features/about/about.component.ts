@@ -7,8 +7,8 @@ import { LanguageService } from '@core/services/language.service';
 import { SourcesHttpRepository } from '@features/sources/infrastructure/repositories/sources-http.repository';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'À propos — NgDigest',
-  en: 'About — NgDigest',
+  fr: 'À propos | NgDigest',
+  en: 'About | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

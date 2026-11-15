@@ -54,7 +54,7 @@ export class JobDetailComponent {
 
       this.currentJob.set(job);
 
-      const title = `${job.title} — ${job.company} · NgDigest`;
+      const title = `${job.title} · ${job.company} · NgDigest`;
       const description =
         job.editorialHook ||
         `${job.title} chez ${job.company}. Offre Angular curated NgDigest.`;

@@ -10,17 +10,17 @@ import { resolveJobCompensation } from '../../../domain/models/job-compensation'
 import { JobFiltersComponent } from '../../components/job-filters/job-filters.component';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Offres Angular curated — NgDigest',
-  en: 'Curated Angular Jobs — NgDigest',
+  fr: 'Offres Angular curated | NgDigest',
+  en: 'Curated Angular Jobs | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
   fr:
     'Sélection bi-mensuelle d’offres front et DevRel 100% remote (FR/EU friendly), ' +
-    'curated humainement par Sara Ounissi — pas de fullstack déguisé.',
+    'curated humainement par Sara Ounissi, pas de fullstack déguisé.',
   en:
     'Bi-monthly hand-picked frontend & DevRel jobs, 100% remote (FR/EU friendly), ' +
-    'reviewed by Sara Ounissi — no disguised fullstack.',
+    'reviewed by Sara Ounissi, no disguised fullstack.',
 };
 
 @Component({

@@ -5,8 +5,8 @@ import { LanguageService } from '@core/services/language.service';
 import { SeoService } from '@core/services/seo.service';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Politique de confidentialité — NgDigest',
-  en: 'Privacy policy — NgDigest',
+  fr: 'Politique de confidentialité | NgDigest',
+  en: 'Privacy policy | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

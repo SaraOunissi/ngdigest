@@ -16,13 +16,13 @@ import { PLATFORMS } from '../../../infrastructure/platforms.data';
 import { PlatformCardComponent } from '../../components/platform-card/platform-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Plateformes & statut — où trouver du travail Angular — NgDigest',
-  en: 'Platforms & status — where to find Angular work — NgDigest',
+  fr: 'Plateformes & statut : où trouver du travail Angular | NgDigest',
+  en: 'Platforms & status: where to find Angular work | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'Mon annuaire des canaux pour trouver des missions freelance, un CDI ou une ESN — plus le portage salarial pour choisir ton statut. Des canaux vérifiés, pas des offres.',
-  en: 'My directory of channels to find freelance gigs, a permanent role or a consultancy — plus umbrella employment to pick your status. Verified channels, not listings.',
+  fr: 'Mon annuaire des canaux pour trouver des missions freelance, un CDI ou une ESN, plus le portage salarial pour choisir ton statut. Des canaux vérifiés, pas des offres.',
+  en: 'My directory of channels to find freelance gigs, a permanent role or a consultancy, plus umbrella employment to pick your status. Verified channels, not listings.',
 };
 
 type GeoFilter = 'all' | 'fr' | 'intl';
