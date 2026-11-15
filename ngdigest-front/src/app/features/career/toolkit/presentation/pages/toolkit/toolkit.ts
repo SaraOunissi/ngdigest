@@ -14,8 +14,8 @@ import {
 import { TOOLKIT_ASSETS, TOOLKIT_CATEGORY_ORDER } from '../../../infrastructure/toolkit.data';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Toolkit carrière dev — CV, mails, fiches de prépa à télécharger — NgDigest',
-  en: 'Developer career toolkit — resume, emails, prep sheets to download — NgDigest',
+  fr: 'Toolkit carrière dev : CV, mails, fiches de prépa à télécharger | NgDigest',
+  en: 'Developer career toolkit: resume, emails, prep sheets to download | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

@@ -46,7 +46,7 @@
 
     <blockquote class="job-detail__editorial">
       <p>{{ editorialNoteFor(job) }}</p>
-      <footer>— Sara, ngdigest</footer>
+      <footer>Sara, ngdigest</footer>
     </blockquote>
 
     <div class="job-detail__actions">
@@ -75,7 +75,7 @@
               <a
                 [routerLink]="['/', languageService.lang(), 'jobs', similar.slug]"
               >
-                {{ similar.title }} — {{ similar.company }}
+                {{ similar.title }} · {{ similar.company }}
               </a>
             </li>
           }

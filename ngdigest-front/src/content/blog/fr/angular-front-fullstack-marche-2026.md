@@ -13,7 +13,7 @@ cover: ""
 
 > *"Si tu étais fullstack, on t'aurait gardé sur le projet pendant 6 mois en attendant que les sujets front reviennent. Là, on est obligés de te libérer."*
 
-Cette phrase, je l'ai entendue sur ma dernière mission. J'ai failli craquer. Novembre 2025, agence ESN en région lyonnaise. Trois ans chez le même client (RTE), une équipe avec qui je roulais bien, une mission front Angular avec une casquette UX/UI que j'avais choisie volontairement. Et un matin, on m'annonce qu'il n'y a plus de sujet front dans le pipe avant au moins 6 mois. La porte de sortie existe, mais elle s'appelle Java. Spring Boot. Pas plus tard que demain matin si tu veux.
+Cette phrase, je l'ai entendue sur ma dernière mission. J'ai failli craquer. Novembre 2025, agence ESN en région lyonnaise. Presque trois ans chez le même client (RTE), une équipe avec qui je roulais bien, une mission front Angular avec une casquette UX/UI que j'avais choisie volontairement. Et un matin, on m'annonce qu'il n'y a plus de sujet front dans le pipe avant au moins 6 mois. La porte de sortie existe, mais elle s'appelle Java. Spring Boot. Pas plus tard que demain matin si tu veux.
 
 J'ai dit non. Et je me suis retrouvée en intercontract chez mon ESN dans la foulée. C'est une décision dont je suis fière — et que je n'aurais jamais imaginé devoir prendre il y a deux ans.
 
@@ -125,7 +125,7 @@ Le piège, à éviter à tout prix, c'est de te laisser pousser dans le moule fu
 
 ## Un mot pour finir
 
-*J'écris ça depuis Bron, en région lyonnaise, après trois ans chez RTE. C'est mon vécu et mon ressenti — pas une étude — mais les chiffres que j'ai croisés vont dans le même sens.*
+*J'écris ça depuis Bron, en région lyonnaise, après presque trois ans chez RTE. C'est mon vécu et mon ressenti — pas une étude — mais les chiffres que j'ai croisés vont dans le même sens.*
 
 Et si tu veux creuser le sujet TJM en freelance Angular, mon article précédent passe en revue les tarifs réels du marché en 2026 : [TJM développeur Angular en France : combien facturer en freelance en 2026 ?](/fr/blog/tjm-developpeur-angular-2026)
 

@@ -11,8 +11,8 @@ import { splitAnswer, stripMarkdown } from '../../../application/light-markdown'
 import { InterviewAccordionItemComponent } from '../../components/interview-accordion-item/interview-accordion-item';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Entretien Angular : 53 vraies questions et réponses — NgDigest',
-  en: 'Angular interview: 53 real questions and answers — NgDigest',
+  fr: 'Entretien Angular : 53 vraies questions et réponses | NgDigest',
+  en: 'Angular interview: 53 real questions and answers | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

@@ -31,13 +31,13 @@ const TRUSTED_SOURCES_COUNT = 35;
 const AGGREGATION_FREQUENCY_HOURS = 12;
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'NgDigest — Veille Angular FR & EN',
-  en: 'NgDigest — Angular Watch FR & EN',
+  fr: 'NgDigest | Veille Angular FR & EN',
+  en: 'NgDigest | Angular Watch FR & EN',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'NgDigest — votre veille Angular centralisée et curée. Articles FR et EN sélectionnés par pertinence.',
-  en: 'NgDigest — your curated Angular watch. FR and EN articles selected by relevance.',
+  fr: 'NgDigest : votre veille Angular centralisée et curée. Articles FR et EN sélectionnés par pertinence.',
+  en: 'NgDigest: your curated Angular watch. FR and EN articles selected by relevance.',
 };
 
 function daysAgo(days: number): Date {

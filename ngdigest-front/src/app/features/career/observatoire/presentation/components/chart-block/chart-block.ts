@@ -395,7 +395,7 @@ export class ChartBlockComponent {
         });
         break;
     }
-    return `${title} — ${parts.join(', ')}`;
+    return `${title}, ${parts.join(', ')}`;
   }
 
   private lastValue(serie: ChartSeries): number {

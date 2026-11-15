@@ -14,8 +14,8 @@ import { DecisionTreeComponent } from '../../components/decision-tree/decision-t
 import { RealityCheckItemComponent } from '../../components/reality-check-item/reality-check-item';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Guide carrière Angular — CDI, freelance, ESN, statut — NgDigest',
-  en: 'Angular career guide — permanent, freelance, consultancy, status — NgDigest',
+  fr: 'Guide carrière Angular : CDI, freelance, ESN, statut | NgDigest',
+  en: 'Angular career guide: permanent, freelance, consultancy, status | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {

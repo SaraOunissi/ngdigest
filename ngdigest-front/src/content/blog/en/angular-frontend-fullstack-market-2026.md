@@ -13,7 +13,7 @@ cover: ""
 
 > *"If you'd been fullstack, we'd have kept you on the project for six months, waiting for front-end work to come back. As it is, we have to let you go."*
 
-I heard that sentence on my last mission. I nearly broke down. November 2025, a consulting firm (ESN) in the Lyon area. Three years with the same client (RTE), a team I clicked with, an Angular front-end mission with a UX/UI hat I'd deliberately chosen. Then one morning I'm told there's no front-end work in the pipeline for at least six months. There is a way to stay — but it's called Java. Spring Boot. Starting tomorrow if you want.
+I heard that sentence on my last mission. I nearly broke down. November 2025, a consulting firm (ESN) in the Lyon area. Almost three years with the same client (RTE), a team I clicked with, an Angular front-end mission with a UX/UI hat I'd deliberately chosen. Then one morning I'm told there's no front-end work in the pipeline for at least six months. There is a way to stay — but it's called Java. Spring Boot. Starting tomorrow if you want.
 
 I said no. And I landed on the bench at my ESN right after. It's a decision I'm proud of — and one I'd never have imagined having to make two years ago.
 
@@ -125,7 +125,7 @@ The trap, to avoid at all costs, is letting yourself be pushed into the fullstac
 
 ## One last word
 
-*I'm writing this from Bron, in the Lyon area, after three years at RTE. It's my lived experience and my gut feeling — not a study — but the numbers I've cross-checked point the same way.*
+*I'm writing this from Bron, in the Lyon area, after almost three years at RTE. It's my lived experience and my gut feeling — not a study — but the numbers I've cross-checked point the same way.*
 
 And if you want to dig into freelance Angular day rates, my previous article reviews the real 2026 market rates: [Angular developer daily rate in France: how much to charge as a freelancer in 2026?](/en/blog/angular-developer-daily-rate-2026)
 

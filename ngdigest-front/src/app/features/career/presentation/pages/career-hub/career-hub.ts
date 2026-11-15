@@ -11,13 +11,13 @@ import { INTERVIEW_QUESTIONS } from '@features/career/interview/infrastructure/i
 import { CareerStep, CareerStepComponent } from '../../components/career-step/career-step';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Carrière Angular — le parcours, étape par étape — NgDigest',
-  en: 'Angular career — the path, step by step — NgDigest',
+  fr: 'Carrière Angular : le parcours, étape par étape | NgDigest',
+  en: 'Angular career: the path, step by step | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'De la montée en compétence au poste signé : un chemin clair pour avancer dans ta carrière Angular — formations, certifications, entretien, missions.',
-  en: 'From upskilling to a signed offer: a clear path to grow your Angular career — training, certifications, interview prep, gigs.',
+  fr: 'De la montée en compétence au poste signé : un chemin clair pour avancer dans ta carrière Angular : formations, certifications, entretien, missions.',
+  en: 'From upskilling to a signed offer: a clear path to grow your Angular career: training, certifications, interview prep, gigs.',
 };
 
 export interface StepDefinition {

@@ -26,13 +26,13 @@ import { EntryTileComponent, HomeEntry } from '../../components/entry-tile/entry
 import { VeilleCardComponent } from '../../components/veille-card/veille-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'NgDigest — Ton copilote carrière Angular',
-  en: 'NgDigest — Your Angular career copilot',
+  fr: 'NgDigest | Ton copilote carrière Angular',
+  en: 'NgDigest | Your Angular career copilot',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'Certifs, entretien, missions, veille — tout ce qu’il faut pour avancer dans ta carrière Angular, trié à la main par une dev qui code en prod.',
-  en: 'Certifications, interview prep, gigs, tech watch — everything to move your Angular career forward, hand-picked by a dev who ships to production.',
+  fr: 'Certifs, entretien, missions, veille : tout ce qu’il faut pour avancer dans ta carrière Angular, trié à la main par une dev qui code en prod.',
+  en: 'Certifications, interview prep, gigs, tech watch: everything to move your Angular career forward, hand-picked by a dev who ships to production.',
 };
 
 /** Hours between two aggregation runs of the tech-watch pipeline. */

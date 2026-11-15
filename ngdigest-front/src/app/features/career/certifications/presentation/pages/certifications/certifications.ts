@@ -10,13 +10,13 @@ import { ANGULAR_PREP, CERTIFICATIONS, CERT_VERDICT } from '../../../infrastruct
 import { CertCardComponent } from '../../components/cert-card/cert-card';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Certifications Angular & front — lesquelles valent le coup — NgDigest',
-  en: 'Angular & frontend certifications — which ones are worth it — NgDigest',
+  fr: 'Certifications Angular & front : lesquelles valent le coup | NgDigest',
+  en: 'Angular & frontend certifications: which ones are worth it | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
-  fr: 'La certif Angular officielle (Certificates.dev × Angular Training, 3 niveaux) et les certifs transverses qui font décoller un profil front senior — avec les vrais prix.',
-  en: 'The official Angular certification (Certificates.dev × Angular Training, 3 levels) and the cross-cutting certs that lift a senior frontend profile — with real prices.',
+  fr: 'La certif Angular officielle (Certificates.dev × Angular Training, 3 niveaux) et les certifs transverses qui font décoller un profil front senior, avec les vrais prix.',
+  en: 'The official Angular certification (Certificates.dev × Angular Training, 3 levels) and the cross-cutting certs that lift a senior frontend profile, with real prices.',
 };
 
 const CERTIFICATES_DEV_URL = 'https://certificates.dev/angular';

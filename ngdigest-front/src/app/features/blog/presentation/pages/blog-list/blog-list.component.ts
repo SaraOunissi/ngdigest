@@ -8,8 +8,8 @@ import { BlogService } from '../../../infrastructure/blog.service';
 import { Article } from '../../../domain/models/article.model';
 
 const SEO_TITLES: Record<'fr' | 'en', string> = {
-  fr: 'Blog Angular — NgDigest',
-  en: 'Angular Blog — NgDigest',
+  fr: 'Blog Angular | NgDigest',
+  en: 'Angular Blog | NgDigest',
 };
 
 const SEO_DESCRIPTIONS: Record<'fr' | 'en', string> = {
