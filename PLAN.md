@@ -4,6 +4,11 @@ Ce fichier est l’unique état d’avancement technique du dépôt. NgDigest re
 veille Angular, les contenus carrière, les offres sélectionnées et l’Observatoire.
 Le code actif se trouve dans `ngdigest-front/` et `ngdigest-back/`.
 
+## Titres des fiches offre distincts en FR et en EN — 16 novembre 2026 (branche `fix/titres-offres-fr-en`)
+
+Relevé par le gardien de prod (contrôle des sitemaps du 16/11) : `/fr/jobs/aircall-frontend-remote-france` et `/en/jobs/aircall-frontend-remote-france` avaient le même `<title>`. Le titre et la description de `JobDetailComponent` ne dépendaient pas de la langue. Correctif : `job-detail-seo.ts` (titre « Offre Angular chez … » / « Angular job at … », accroche EN quand elle existe) et son test. Fiche : [docs/incidents/2026-11-16-titres-offres-fr-en.md](docs/incidents/2026-11-16-titres-offres-fr-en.md).
+Vérifié en local : `ng test` 233/233, lint, build dev + prérendu (titres FR/EN distincts dans le HTML). Non vérifié en production. Reste : la fiche Aircall n'a pas d'accroche EN, sa description EN reste en français.
+
 ## Alertes Search Console : données structurées et canoniques — 5 novembre 2026 (branche `fix/gsc-donnees-structurees-2026-11-05`, PR #26)
 
 Mails Search Console du 02/11 (Ensembles de données : `license` manquant) et du 05/11 (Questions/Réponses : 1 critique `answerCount`, 7 non critiques).
