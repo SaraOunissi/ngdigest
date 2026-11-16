@@ -16,6 +16,7 @@ import { environment } from '../../../../../../environments/environment';
 import { GetJobsUseCase } from '../../../application/use-cases/get-jobs.use-case';
 import { Job } from '../../../domain/models/job.model';
 import { resolveJobCompensation } from '../../../domain/models/job-compensation';
+import { jobSeoDescription, jobSeoTitle } from './job-detail-seo';
 
 const BASE_URL = environment.baseUrl;
 
@@ -54,11 +55,7 @@ export class JobDetailComponent {
 
       this.currentJob.set(job);
 
-      const title = `${job.title} · ${job.company} · NgDigest`;
-      const description =
-        job.editorialHook ||
-        `${job.title} chez ${job.company}. Offre Angular curated NgDigest.`;
-      this.seoService.updateMeta(title, description, lang);
+      this.seoService.updateMeta(jobSeoTitle(job, lang), jobSeoDescription(job, lang), lang);
       this.injectJsonLd(job);
     });
   }
